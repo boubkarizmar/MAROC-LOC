@@ -1,0 +1,95 @@
+ count
+-------
+   125
+(1 row)
+
+ count
+-------
+   105
+(1 row)
+
+ERROR:  relation "user" does not exist
+LINE 1: SELECT COUNT(*) FROM "user";
+                             ^
+ count
+-------
+     6
+(1 row)
+
+ERROR:  relation "message" does not exist
+LINE 1: SELECT COUNT(*) FROM message;
+                             ^
+ERROR:  relation "favorite" does not exist
+LINE 1: SELECT COUNT(*) FROM favorite;
+                             ^
+ id |                       title                       |  city  |   price    | type | category  | bedrooms | surface |  status
+----+---------------------------------------------------+--------+------------+------+-----------+----------+---------+-----------
+ 47 | Bureau professionnel en zone affaires - Tanger 47 | Tanger | 1075800.00 | BUY  | APARTMENT |        2 |     198 | APPROVED
+ 32 | Appartement moderne avec vue sur mer - Tanger 32  | Tanger | 1894000.00 | BUY  | APARTMENT |        1 |     191 | AVAILABLE
+(2 rows)
+
+ id |                       title                        |    city    |  price   |   type   | category | bedrooms | surface |  status
+----+----------------------------------------------------+------------+----------+----------+----------+----------+---------+-----------
+ 24 | Villa luxueuse avec piscine privee - Casablanca 24 | Casablanca | 10744.00 | MORTGAGE | OFFICE   |        3 |     205 | AVAILABLE
+ 82 | Studio meuble en centre-ville - Casablanca 82      | Casablanca | 32941.00 | MORTGAGE | HOUSE    |        3 |     316 | APPROVED
+(2 rows)
+
+ id  |                       title                       | city  |   price    | type | category  | bedrooms | surface |  status
+-----+---------------------------------------------------+-------+------------+------+-----------+----------+---------+----------
+ 125 | Visit Test Property                               | Rabat |    3000.00 | RENT | APARTMENT |        1 |      60 | PENDING
+ 126 | Audit Test                                        | Rabat |    3000.00 | RENT | APARTMENT |        1 |      60 | PENDING
+ 123 | Audit Property With Names                         | Rabat |    4500.00 | RENT | APARTMENT |        2 |      85 | PENDING
+ 120 | Maison traditionnelle avec patio - Rabat 120      | Rabat |   17829.00 | RENT | APARTMENT |        1 |     167 | APPROVED
+ 103 | Bureau professionnel en zone affaires - Rabat 103 | Rabat |  893600.00 | BUY  | APARTMENT |        3 |     186 | APPROVED
+ 122 | Audit Test Property - Rabat                       | Rabat | 1500000.00 | BUY  | APARTMENT |        2 |     120 | PENDING
+(6 rows)
+
+ id  |                    title                     |   city    |  price   |   type   | category | bedrooms | surface |  status
+-----+----------------------------------------------+-----------+----------+----------+----------+----------+---------+----------
+  52 | Studio meuble en centre-ville - Marrakech 52 | Marrakech | 10143.00 | RENT     | HOUSE    |        6 |     354 | APPROVED
+ 101 | Bureau commercial bien situe - Marrakech 101 | Marrakech | 16375.00 | MORTGAGE | HOUSE    |        4 |     220 | APPROVED
+(2 rows)
+
+ id |         created_at         |      notes       | owner_id | property_id | status  | updated_at | visit_date | visit_time | visitor_email | visitor_id | visitor_phone
+----+----------------------------+------------------+----------+-------------+---------+------------+------------+------------+---------------+------------+---------------
+  6 | 2026-06-02 12:57:34.756764 |                  |        9 |           1 | PENDING |            | 2026-06-10 | 10:00:00   |               |         35 | 0612345678
+  5 | 2026-06-02 12:54:32.11468  |                  |       34 |         125 | PENDING |            | 2026-06-10 | 10:00:00   |               |         35 | 0612345678
+  4 | 2026-06-02 11:08:34.475669 | Audit visit test |        9 |           1 | PENDING |            | 2026-06-15 | 10:00:00   |               |         31 | +212600000002
+  3 | 2026-06-02 10:55:18.592546 | Visite audit     |       30 |         122 | PENDING |            | 2026-06-10 | 14:00:00   |               |         31 | +212600000002
+  2 | 2026-06-01 21:55:07.824864 |                  |        1 |         121 | PENDING |            | 2026-06-15 | 10:00:00   |               |          2 | +212612345679
+(5 rows)
+
+ERROR:  relation "message" does not exist
+LINE 1: SELECT * FROM message ORDER BY id DESC LIMIT 5;
+                      ^
+ERROR:  relation "favorite" does not exist
+LINE 1: SELECT * FROM favorite ORDER BY id DESC LIMIT 5;
+                      ^
+        table_name
+--------------------------
+ ab_experiment
+ ab_experiment_assignment
+ advertisement_payments
+ advertisements
+ ai_analytics
+ comments
+ event_log
+ favorites
+ fraud_review
+ geography_columns
+ geometry_columns
+ messages
+ owner_ratings
+ payment_transactions
+ property
+ property_ratings
+ property_visit
+ refresh_tokens
+ review_likes
+ reviews
+ spatial_ref_sys
+ user_behaviors
+ user_profile_reviews
+ users
+ viewed_properties
+(25 rows)

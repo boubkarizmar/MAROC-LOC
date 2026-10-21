@@ -1,0 +1,2465 @@
+{
+  "timestamp": "2026-06-02T22:14:04.615Z",
+  "pages": [
+    {
+      "pageName": "splash",
+      "url": "http://localhost:3000",
+      "images": [
+        {
+          "index": 0,
+          "src": "http://localhost:3000/images/logo.png",
+          "alt": "MAROC-LOC",
+          "naturalWidth": 1536,
+          "naturalHeight": 1024,
+          "complete": true,
+          "classList": [
+            "h-24",
+            "sm:h-32",
+            "md:h-40",
+            "w-auto",
+            "object-contain",
+            "drop-shadow-2xl"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative z-10",
+          "parentComponent": null,
+          "isFallback": false,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 240,
+            "height": 159.99998474121094,
+            "top": 182.89674377441406,
+            "left": 520
+          }
+        }
+      ]
+    },
+    {
+      "pageName": "home_initial",
+      "url": "http://localhost:3000/home",
+      "images": [
+        {
+          "index": 0,
+          "src": "http://localhost:3000/images/logo.png",
+          "alt": "MAROC-LOC",
+          "naturalWidth": 1536,
+          "naturalHeight": 1024,
+          "complete": true,
+          "classList": [
+            "h-10",
+            "w-auto",
+            "object-contain"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative",
+          "parentComponent": null,
+          "isFallback": false,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 60,
+            "height": 40,
+            "top": 20,
+            "left": 32
+          }
+        },
+        {
+          "index": 1,
+          "src": "http://localhost:3000/api/uploads/property_118_1.jpg",
+          "alt": "Appartement haut standing avec concierge - Agadir 119",
+          "naturalWidth": 1024,
+          "naturalHeight": 683,
+          "complete": true,
+          "classList": [
+            "h-full",
+            "w-full",
+            "object-cover",
+            "transition-transform",
+            "duration-700",
+            "hover:scale-105"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative h-[520px] overflow-hidden rounded-[1.8rem]",
+          "parentComponent": null,
+          "isFallback": false,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 562.4605712890625,
+            "height": 561.60009765625,
+            "top": -5968.2421875,
+            "left": 689.3555908203125
+          }
+        },
+        {
+          "index": 2,
+          "src": "http://localhost:3000/api/uploads/property_118_1.jpg",
+          "alt": "Appartement haut standing avec concierge - Agadir 119",
+          "naturalWidth": 1024,
+          "naturalHeight": 683,
+          "complete": true,
+          "classList": [
+            "h-full",
+            "w-full",
+            "object-cover",
+            "transition",
+            "duration-700",
+            "group-hover:scale-105"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative h-56 overflow-hidden",
+          "parentComponent": null,
+          "isFallback": false,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 387.328125,
+            "height": 224,
+            "top": -4189.125,
+            "left": 33
+          }
+        },
+        {
+          "index": 3,
+          "src": "http://localhost:3000/api/uploads/property_49_1.jpg",
+          "alt": "Duplex avec vue sur la medina - El Jadida 50",
+          "naturalWidth": 1120,
+          "naturalHeight": 1125,
+          "complete": true,
+          "classList": [
+            "h-full",
+            "w-full",
+            "object-cover",
+            "transition",
+            "duration-700",
+            "group-hover:scale-105"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative h-56 overflow-hidden",
+          "parentComponent": null,
+          "isFallback": false,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 387.328125,
+            "height": 224,
+            "top": -4189.125,
+            "left": 446.328125
+          }
+        },
+        {
+          "index": 4,
+          "src": "http://localhost:3000/api/uploads/property_99_1.jpg",
+          "alt": "Studio neuf avec cuisine equipee - Fes 100",
+          "naturalWidth": 1120,
+          "naturalHeight": 1125,
+          "complete": true,
+          "classList": [
+            "h-full",
+            "w-full",
+            "object-cover",
+            "transition",
+            "duration-700",
+            "group-hover:scale-105"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative h-56 overflow-hidden",
+          "parentComponent": null,
+          "isFallback": false,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 387.34375,
+            "height": 224,
+            "top": -4189.125,
+            "left": 859.65625
+          }
+        },
+        {
+          "index": 5,
+          "src": "http://localhost:3000/api/uploads/property_83_1.jpg",
+          "alt": "Duplex spacieux avec terrasse - Safi 84",
+          "naturalWidth": 1600,
+          "naturalHeight": 900,
+          "complete": true,
+          "classList": [
+            "h-full",
+            "w-full",
+            "object-cover",
+            "transition",
+            "duration-700",
+            "group-hover:scale-105"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative h-56 overflow-hidden",
+          "parentComponent": null,
+          "isFallback": false,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 387.328125,
+            "height": 224,
+            "top": -3730.125,
+            "left": 33
+          }
+        },
+        {
+          "index": 6,
+          "src": "http://localhost:3000/api/uploads/property_1_1.jpg",
+          "alt": "Studio meuble en centre-ville - Marrakech 2",
+          "naturalWidth": 1440,
+          "naturalHeight": 900,
+          "complete": true,
+          "classList": [
+            "h-full",
+            "w-full",
+            "object-cover",
+            "transition",
+            "duration-700",
+            "group-hover:scale-105"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative h-56 overflow-hidden",
+          "parentComponent": null,
+          "isFallback": false,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 387.328125,
+            "height": 224,
+            "top": -3730.125,
+            "left": 446.328125
+          }
+        },
+        {
+          "index": 7,
+          "src": "http://localhost:3000/api/uploads/property_65_1.jpg",
+          "alt": "Duplex spacieux avec terrasse - Settat 66",
+          "naturalWidth": 1332,
+          "naturalHeight": 1344,
+          "complete": true,
+          "classList": [
+            "h-full",
+            "w-full",
+            "object-cover",
+            "transition",
+            "duration-700",
+            "group-hover:scale-105"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative h-56 overflow-hidden",
+          "parentComponent": null,
+          "isFallback": false,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 387.34375,
+            "height": 224,
+            "top": -3730.125,
+            "left": 859.65625
+          }
+        },
+        {
+          "index": 8,
+          "src": "http://localhost:3000/images/no-image.svg",
+          "alt": "Appartement haut standing avec concierge - Agadir 119",
+          "naturalWidth": 400,
+          "naturalHeight": 300,
+          "complete": true,
+          "classList": [
+            "h-full",
+            "w-full",
+            "object-cover",
+            "transition",
+            "duration-700",
+            "group-hover:scale-105"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative h-56 overflow-hidden rounded-t-2xl",
+          "parentComponent": null,
+          "isFallback": true,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 387.328125,
+            "height": 224,
+            "top": -3059.125,
+            "left": 33
+          }
+        },
+        {
+          "index": 9,
+          "src": "http://localhost:3000/images/no-image.svg",
+          "alt": "Studio meuble en centre-ville - Marrakech 52",
+          "naturalWidth": 400,
+          "naturalHeight": 300,
+          "complete": true,
+          "classList": [
+            "h-full",
+            "w-full",
+            "object-cover",
+            "transition",
+            "duration-700",
+            "group-hover:scale-105"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative h-56 overflow-hidden rounded-t-2xl",
+          "parentComponent": null,
+          "isFallback": true,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 387.328125,
+            "height": 224,
+            "top": -3059.125,
+            "left": 446.328125
+          }
+        },
+        {
+          "index": 10,
+          "src": "http://localhost:3000/images/no-image.svg",
+          "alt": "Terrain constructible avec vue panoramique - Agadir 37",
+          "naturalWidth": 400,
+          "naturalHeight": 300,
+          "complete": true,
+          "classList": [
+            "h-full",
+            "w-full",
+            "object-cover",
+            "transition",
+            "duration-700",
+            "group-hover:scale-105"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative h-56 overflow-hidden rounded-t-2xl",
+          "parentComponent": null,
+          "isFallback": true,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 387.34375,
+            "height": 224,
+            "top": -3059.125,
+            "left": 859.65625
+          }
+        },
+        {
+          "index": 11,
+          "src": "http://localhost:3000/images/no-image.svg",
+          "alt": "Local commercial en angle de rue - Nador 33",
+          "naturalWidth": 400,
+          "naturalHeight": 300,
+          "complete": true,
+          "classList": [
+            "h-full",
+            "w-full",
+            "object-cover",
+            "transition",
+            "duration-700",
+            "group-hover:scale-105"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative h-56 overflow-hidden rounded-t-2xl",
+          "parentComponent": null,
+          "isFallback": true,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 387.328125,
+            "height": 224,
+            "top": -2618.125,
+            "left": 33
+          }
+        },
+        {
+          "index": 12,
+          "src": "http://localhost:3000/images/no-image.svg",
+          "alt": "Appartement moderne avec vue sur mer - Settat 62",
+          "naturalWidth": 400,
+          "naturalHeight": 300,
+          "complete": true,
+          "classList": [
+            "h-full",
+            "w-full",
+            "object-cover",
+            "transition",
+            "duration-700",
+            "group-hover:scale-105"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative h-56 overflow-hidden rounded-t-2xl",
+          "parentComponent": null,
+          "isFallback": true,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 387.328125,
+            "height": 224,
+            "top": -2618.125,
+            "left": 446.328125
+          }
+        },
+        {
+          "index": 13,
+          "src": "http://localhost:3000/images/no-image.svg",
+          "alt": "Studio neuf avec cuisine equipee - Fes 100",
+          "naturalWidth": 400,
+          "naturalHeight": 300,
+          "complete": true,
+          "classList": [
+            "h-full",
+            "w-full",
+            "object-cover",
+            "transition",
+            "duration-700",
+            "group-hover:scale-105"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative h-56 overflow-hidden rounded-t-2xl",
+          "parentComponent": null,
+          "isFallback": true,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 387.34375,
+            "height": 224,
+            "top": -2618.125,
+            "left": 859.65625
+          }
+        },
+        {
+          "index": 14,
+          "src": "http://localhost:3000/api/uploads/images/c5747e12-6c59-4ce2-9651-1c7668a8ff0a.jpg",
+          "alt": "Villa Test Validation MarocLoc",
+          "naturalWidth": 600,
+          "naturalHeight": 428,
+          "complete": true,
+          "classList": [
+            "h-full",
+            "w-full",
+            "object-cover",
+            "transition",
+            "duration-700",
+            "group-hover:scale-105",
+            "opacity-100"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative h-64 overflow-hidden",
+          "parentComponent": null,
+          "isFallback": false,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 387.328125,
+            "height": 256,
+            "top": -1843.9375,
+            "left": 33
+          }
+        },
+        {
+          "index": 15,
+          "src": "http://localhost:3000/api/uploads/property_99_1.jpg",
+          "alt": "Studio neuf avec cuisine equipee - Fes 100",
+          "naturalWidth": 1120,
+          "naturalHeight": 1125,
+          "complete": true,
+          "classList": [
+            "h-full",
+            "w-full",
+            "object-cover",
+            "transition",
+            "duration-700",
+            "group-hover:scale-105",
+            "opacity-100"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative h-64 overflow-hidden",
+          "parentComponent": null,
+          "isFallback": false,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 387.328125,
+            "height": 256,
+            "top": -1843.9375,
+            "left": 446.328125
+          }
+        },
+        {
+          "index": 16,
+          "src": "http://localhost:3000/api/uploads/property_112_1.jpg",
+          "alt": "Riad traditionnel renove - Ksar El Kebir 113",
+          "naturalWidth": 1500,
+          "naturalHeight": 1000,
+          "complete": true,
+          "classList": [
+            "h-full",
+            "w-full",
+            "object-cover",
+            "transition",
+            "duration-700",
+            "group-hover:scale-105",
+            "opacity-100"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative h-64 overflow-hidden",
+          "parentComponent": null,
+          "isFallback": false,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 387.34375,
+            "height": 256,
+            "top": -1843.9375,
+            "left": 859.65625
+          }
+        },
+        {
+          "index": 17,
+          "src": "http://localhost:3000/api/uploads/property_104_1.jpg",
+          "alt": "Villa avec jardin arboré - Ouarzazate 105",
+          "naturalWidth": 1500,
+          "naturalHeight": 1125,
+          "complete": false,
+          "classList": [
+            "h-full",
+            "w-full",
+            "object-cover",
+            "transition",
+            "duration-700",
+            "group-hover:scale-105",
+            "opacity-0"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative h-64 overflow-hidden",
+          "parentComponent": null,
+          "isFallback": false,
+          "isOpacityZero": true,
+          "boundingRect": {
+            "width": 387.328125,
+            "height": 256,
+            "top": -1328.9375,
+            "left": 33
+          }
+        },
+        {
+          "index": 18,
+          "src": "http://localhost:3000/api/uploads/property_118_1.jpg",
+          "alt": "Appartement haut standing avec concierge - Agadir 119",
+          "naturalWidth": 1024,
+          "naturalHeight": 683,
+          "complete": true,
+          "classList": [
+            "h-full",
+            "w-full",
+            "object-cover",
+            "transition",
+            "duration-700",
+            "group-hover:scale-105",
+            "opacity-100"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative h-64 overflow-hidden",
+          "parentComponent": null,
+          "isFallback": false,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 387.328125,
+            "height": 256,
+            "top": -1328.9375,
+            "left": 446.328125
+          }
+        },
+        {
+          "index": 19,
+          "src": "http://localhost:3000/api/uploads/property_65_1.jpg",
+          "alt": "Duplex spacieux avec terrasse - Settat 66",
+          "naturalWidth": 1332,
+          "naturalHeight": 1344,
+          "complete": true,
+          "classList": [
+            "h-full",
+            "w-full",
+            "object-cover",
+            "transition",
+            "duration-700",
+            "group-hover:scale-105",
+            "opacity-100"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative h-64 overflow-hidden",
+          "parentComponent": null,
+          "isFallback": false,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 387.34375,
+            "height": 256,
+            "top": -1328.9375,
+            "left": 859.65625
+          }
+        },
+        {
+          "index": 20,
+          "src": "http://localhost:3000/api/uploads/property_36_1.jpg",
+          "alt": "Terrain constructible avec vue panoramique - Agadir 37",
+          "naturalWidth": 612,
+          "naturalHeight": 344,
+          "complete": true,
+          "classList": [
+            "h-full",
+            "w-full",
+            "object-cover",
+            "transition",
+            "duration-700",
+            "group-hover:scale-105",
+            "opacity-100"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative h-64 overflow-hidden",
+          "parentComponent": null,
+          "isFallback": false,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 387.328125,
+            "height": 256,
+            "top": -813.9375,
+            "left": 33
+          }
+        },
+        {
+          "index": 21,
+          "src": "http://localhost:3000/api/uploads/property_55_1.jpg",
+          "alt": "Duplex spacieux avec terrasse - Rabat 56",
+          "naturalWidth": 600,
+          "naturalHeight": 406,
+          "complete": true,
+          "classList": [
+            "h-full",
+            "w-full",
+            "object-cover",
+            "transition",
+            "duration-700",
+            "group-hover:scale-105",
+            "opacity-100"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative h-64 overflow-hidden",
+          "parentComponent": null,
+          "isFallback": false,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 387.328125,
+            "height": 256,
+            "top": -813.9375,
+            "left": 446.328125
+          }
+        },
+        {
+          "index": 22,
+          "src": "http://localhost:3000/api/uploads/property_51_1.jpg",
+          "alt": "Studio meuble en centre-ville - Marrakech 52",
+          "naturalWidth": 1440,
+          "naturalHeight": 900,
+          "complete": true,
+          "classList": [
+            "h-full",
+            "w-full",
+            "object-cover",
+            "transition",
+            "duration-700",
+            "group-hover:scale-105",
+            "opacity-100"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative h-64 overflow-hidden",
+          "parentComponent": null,
+          "isFallback": false,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 387.34375,
+            "height": 256,
+            "top": -813.9375,
+            "left": 859.65625
+          }
+        },
+        {
+          "index": 23,
+          "src": "http://localhost:3000/images/logo.png",
+          "alt": "MAROC-LOC",
+          "naturalWidth": 1536,
+          "naturalHeight": 1024,
+          "complete": true,
+          "classList": [
+            "h-12",
+            "w-auto",
+            "object-contain"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "flex items-center gap-3",
+          "parentComponent": null,
+          "isFallback": false,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 72,
+            "height": 48,
+            "top": 497.0625,
+            "left": 32
+          }
+        }
+      ],
+      "screenshot": "c:\\Users\\HP\\Desktop\\pfe\\pricipaux\\MAROC-LOC\\test_results\\image_audit_screenshots\\home_initial_broken.png"
+    },
+    {
+      "pageName": "home_after_wait",
+      "url": "http://localhost:3000/home",
+      "images": [
+        {
+          "index": 0,
+          "src": "http://localhost:3000/images/logo.png",
+          "alt": "MAROC-LOC",
+          "naturalWidth": 1536,
+          "naturalHeight": 1024,
+          "complete": true,
+          "classList": [
+            "h-10",
+            "w-auto",
+            "object-contain"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative",
+          "parentComponent": null,
+          "isFallback": false,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 60,
+            "height": 40,
+            "top": 20,
+            "left": 32
+          }
+        },
+        {
+          "index": 1,
+          "src": "http://localhost:3000/api/uploads/property_118_1.jpg",
+          "alt": "Appartement haut standing avec concierge - Agadir 119",
+          "naturalWidth": 1024,
+          "naturalHeight": 683,
+          "complete": true,
+          "classList": [
+            "h-full",
+            "w-full",
+            "object-cover",
+            "transition-transform",
+            "duration-700",
+            "hover:scale-105"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative h-[520px] overflow-hidden rounded-[1.8rem]",
+          "parentComponent": null,
+          "isFallback": false,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 562.4605712890625,
+            "height": 561.60009765625,
+            "top": -5968.2421875,
+            "left": 689.3555908203125
+          }
+        },
+        {
+          "index": 2,
+          "src": "http://localhost:3000/api/uploads/property_118_1.jpg",
+          "alt": "Appartement haut standing avec concierge - Agadir 119",
+          "naturalWidth": 1024,
+          "naturalHeight": 683,
+          "complete": true,
+          "classList": [
+            "h-full",
+            "w-full",
+            "object-cover",
+            "transition",
+            "duration-700",
+            "group-hover:scale-105"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative h-56 overflow-hidden",
+          "parentComponent": null,
+          "isFallback": false,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 387.328125,
+            "height": 224,
+            "top": -4189.125,
+            "left": 33
+          }
+        },
+        {
+          "index": 3,
+          "src": "http://localhost:3000/api/uploads/property_49_1.jpg",
+          "alt": "Duplex avec vue sur la medina - El Jadida 50",
+          "naturalWidth": 1120,
+          "naturalHeight": 1125,
+          "complete": true,
+          "classList": [
+            "h-full",
+            "w-full",
+            "object-cover",
+            "transition",
+            "duration-700",
+            "group-hover:scale-105"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative h-56 overflow-hidden",
+          "parentComponent": null,
+          "isFallback": false,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 387.328125,
+            "height": 224,
+            "top": -4189.125,
+            "left": 446.328125
+          }
+        },
+        {
+          "index": 4,
+          "src": "http://localhost:3000/api/uploads/property_99_1.jpg",
+          "alt": "Studio neuf avec cuisine equipee - Fes 100",
+          "naturalWidth": 1120,
+          "naturalHeight": 1125,
+          "complete": true,
+          "classList": [
+            "h-full",
+            "w-full",
+            "object-cover",
+            "transition",
+            "duration-700",
+            "group-hover:scale-105"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative h-56 overflow-hidden",
+          "parentComponent": null,
+          "isFallback": false,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 387.34375,
+            "height": 224,
+            "top": -4189.125,
+            "left": 859.65625
+          }
+        },
+        {
+          "index": 5,
+          "src": "http://localhost:3000/api/uploads/property_83_1.jpg",
+          "alt": "Duplex spacieux avec terrasse - Safi 84",
+          "naturalWidth": 1600,
+          "naturalHeight": 900,
+          "complete": true,
+          "classList": [
+            "h-full",
+            "w-full",
+            "object-cover",
+            "transition",
+            "duration-700",
+            "group-hover:scale-105"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative h-56 overflow-hidden",
+          "parentComponent": null,
+          "isFallback": false,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 387.328125,
+            "height": 224,
+            "top": -3730.125,
+            "left": 33
+          }
+        },
+        {
+          "index": 6,
+          "src": "http://localhost:3000/api/uploads/property_1_1.jpg",
+          "alt": "Studio meuble en centre-ville - Marrakech 2",
+          "naturalWidth": 1440,
+          "naturalHeight": 900,
+          "complete": true,
+          "classList": [
+            "h-full",
+            "w-full",
+            "object-cover",
+            "transition",
+            "duration-700",
+            "group-hover:scale-105"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative h-56 overflow-hidden",
+          "parentComponent": null,
+          "isFallback": false,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 387.328125,
+            "height": 224,
+            "top": -3730.125,
+            "left": 446.328125
+          }
+        },
+        {
+          "index": 7,
+          "src": "http://localhost:3000/api/uploads/property_65_1.jpg",
+          "alt": "Duplex spacieux avec terrasse - Settat 66",
+          "naturalWidth": 1332,
+          "naturalHeight": 1344,
+          "complete": true,
+          "classList": [
+            "h-full",
+            "w-full",
+            "object-cover",
+            "transition",
+            "duration-700",
+            "group-hover:scale-105"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative h-56 overflow-hidden",
+          "parentComponent": null,
+          "isFallback": false,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 387.34375,
+            "height": 224,
+            "top": -3730.125,
+            "left": 859.65625
+          }
+        },
+        {
+          "index": 8,
+          "src": "http://localhost:3000/images/no-image.svg",
+          "alt": "Appartement haut standing avec concierge - Agadir 119",
+          "naturalWidth": 400,
+          "naturalHeight": 300,
+          "complete": true,
+          "classList": [
+            "h-full",
+            "w-full",
+            "object-cover",
+            "transition",
+            "duration-700",
+            "group-hover:scale-105"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative h-56 overflow-hidden rounded-t-2xl",
+          "parentComponent": null,
+          "isFallback": true,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 387.328125,
+            "height": 224,
+            "top": -3059.125,
+            "left": 33
+          }
+        },
+        {
+          "index": 9,
+          "src": "http://localhost:3000/images/no-image.svg",
+          "alt": "Studio meuble en centre-ville - Marrakech 52",
+          "naturalWidth": 400,
+          "naturalHeight": 300,
+          "complete": true,
+          "classList": [
+            "h-full",
+            "w-full",
+            "object-cover",
+            "transition",
+            "duration-700",
+            "group-hover:scale-105"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative h-56 overflow-hidden rounded-t-2xl",
+          "parentComponent": null,
+          "isFallback": true,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 387.328125,
+            "height": 224,
+            "top": -3059.125,
+            "left": 446.328125
+          }
+        },
+        {
+          "index": 10,
+          "src": "http://localhost:3000/images/no-image.svg",
+          "alt": "Terrain constructible avec vue panoramique - Agadir 37",
+          "naturalWidth": 400,
+          "naturalHeight": 300,
+          "complete": true,
+          "classList": [
+            "h-full",
+            "w-full",
+            "object-cover",
+            "transition",
+            "duration-700",
+            "group-hover:scale-105"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative h-56 overflow-hidden rounded-t-2xl",
+          "parentComponent": null,
+          "isFallback": true,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 387.34375,
+            "height": 224,
+            "top": -3059.125,
+            "left": 859.65625
+          }
+        },
+        {
+          "index": 11,
+          "src": "http://localhost:3000/images/no-image.svg",
+          "alt": "Local commercial en angle de rue - Nador 33",
+          "naturalWidth": 400,
+          "naturalHeight": 300,
+          "complete": true,
+          "classList": [
+            "h-full",
+            "w-full",
+            "object-cover",
+            "transition",
+            "duration-700",
+            "group-hover:scale-105"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative h-56 overflow-hidden rounded-t-2xl",
+          "parentComponent": null,
+          "isFallback": true,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 387.328125,
+            "height": 224,
+            "top": -2618.125,
+            "left": 33
+          }
+        },
+        {
+          "index": 12,
+          "src": "http://localhost:3000/images/no-image.svg",
+          "alt": "Appartement moderne avec vue sur mer - Settat 62",
+          "naturalWidth": 400,
+          "naturalHeight": 300,
+          "complete": true,
+          "classList": [
+            "h-full",
+            "w-full",
+            "object-cover",
+            "transition",
+            "duration-700",
+            "group-hover:scale-105"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative h-56 overflow-hidden rounded-t-2xl",
+          "parentComponent": null,
+          "isFallback": true,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 387.328125,
+            "height": 224,
+            "top": -2618.125,
+            "left": 446.328125
+          }
+        },
+        {
+          "index": 13,
+          "src": "http://localhost:3000/images/no-image.svg",
+          "alt": "Studio neuf avec cuisine equipee - Fes 100",
+          "naturalWidth": 400,
+          "naturalHeight": 300,
+          "complete": true,
+          "classList": [
+            "h-full",
+            "w-full",
+            "object-cover",
+            "transition",
+            "duration-700",
+            "group-hover:scale-105"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative h-56 overflow-hidden rounded-t-2xl",
+          "parentComponent": null,
+          "isFallback": true,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 387.34375,
+            "height": 224,
+            "top": -2618.125,
+            "left": 859.65625
+          }
+        },
+        {
+          "index": 14,
+          "src": "http://localhost:3000/api/uploads/images/c5747e12-6c59-4ce2-9651-1c7668a8ff0a.jpg",
+          "alt": "Villa Test Validation MarocLoc",
+          "naturalWidth": 600,
+          "naturalHeight": 428,
+          "complete": true,
+          "classList": [
+            "h-full",
+            "w-full",
+            "object-cover",
+            "transition",
+            "duration-700",
+            "group-hover:scale-105",
+            "opacity-100"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative h-64 overflow-hidden",
+          "parentComponent": null,
+          "isFallback": false,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 387.328125,
+            "height": 256,
+            "top": -1843.9375,
+            "left": 33
+          }
+        },
+        {
+          "index": 15,
+          "src": "http://localhost:3000/api/uploads/property_99_1.jpg",
+          "alt": "Studio neuf avec cuisine equipee - Fes 100",
+          "naturalWidth": 1120,
+          "naturalHeight": 1125,
+          "complete": true,
+          "classList": [
+            "h-full",
+            "w-full",
+            "object-cover",
+            "transition",
+            "duration-700",
+            "group-hover:scale-105",
+            "opacity-100"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative h-64 overflow-hidden",
+          "parentComponent": null,
+          "isFallback": false,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 387.328125,
+            "height": 256,
+            "top": -1843.9375,
+            "left": 446.328125
+          }
+        },
+        {
+          "index": 16,
+          "src": "http://localhost:3000/api/uploads/property_112_1.jpg",
+          "alt": "Riad traditionnel renove - Ksar El Kebir 113",
+          "naturalWidth": 1500,
+          "naturalHeight": 1000,
+          "complete": true,
+          "classList": [
+            "h-full",
+            "w-full",
+            "object-cover",
+            "transition",
+            "duration-700",
+            "group-hover:scale-105",
+            "opacity-100"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative h-64 overflow-hidden",
+          "parentComponent": null,
+          "isFallback": false,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 387.34375,
+            "height": 256,
+            "top": -1843.9375,
+            "left": 859.65625
+          }
+        },
+        {
+          "index": 17,
+          "src": "http://localhost:3000/api/uploads/property_104_1.jpg",
+          "alt": "Villa avec jardin arboré - Ouarzazate 105",
+          "naturalWidth": 1500,
+          "naturalHeight": 1125,
+          "complete": true,
+          "classList": [
+            "h-full",
+            "w-full",
+            "object-cover",
+            "transition",
+            "duration-700",
+            "group-hover:scale-105",
+            "opacity-100"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative h-64 overflow-hidden",
+          "parentComponent": null,
+          "isFallback": false,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 387.328125,
+            "height": 256,
+            "top": -1328.9375,
+            "left": 33
+          }
+        },
+        {
+          "index": 18,
+          "src": "http://localhost:3000/api/uploads/property_118_1.jpg",
+          "alt": "Appartement haut standing avec concierge - Agadir 119",
+          "naturalWidth": 1024,
+          "naturalHeight": 683,
+          "complete": true,
+          "classList": [
+            "h-full",
+            "w-full",
+            "object-cover",
+            "transition",
+            "duration-700",
+            "group-hover:scale-105",
+            "opacity-100"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative h-64 overflow-hidden",
+          "parentComponent": null,
+          "isFallback": false,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 387.328125,
+            "height": 256,
+            "top": -1328.9375,
+            "left": 446.328125
+          }
+        },
+        {
+          "index": 19,
+          "src": "http://localhost:3000/api/uploads/property_65_1.jpg",
+          "alt": "Duplex spacieux avec terrasse - Settat 66",
+          "naturalWidth": 1332,
+          "naturalHeight": 1344,
+          "complete": true,
+          "classList": [
+            "h-full",
+            "w-full",
+            "object-cover",
+            "transition",
+            "duration-700",
+            "group-hover:scale-105",
+            "opacity-100"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative h-64 overflow-hidden",
+          "parentComponent": null,
+          "isFallback": false,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 387.34375,
+            "height": 256,
+            "top": -1328.9375,
+            "left": 859.65625
+          }
+        },
+        {
+          "index": 20,
+          "src": "http://localhost:3000/api/uploads/property_36_1.jpg",
+          "alt": "Terrain constructible avec vue panoramique - Agadir 37",
+          "naturalWidth": 612,
+          "naturalHeight": 344,
+          "complete": true,
+          "classList": [
+            "h-full",
+            "w-full",
+            "object-cover",
+            "transition",
+            "duration-700",
+            "group-hover:scale-105",
+            "opacity-100"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative h-64 overflow-hidden",
+          "parentComponent": null,
+          "isFallback": false,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 387.328125,
+            "height": 256,
+            "top": -813.9375,
+            "left": 33
+          }
+        },
+        {
+          "index": 21,
+          "src": "http://localhost:3000/api/uploads/property_55_1.jpg",
+          "alt": "Duplex spacieux avec terrasse - Rabat 56",
+          "naturalWidth": 600,
+          "naturalHeight": 406,
+          "complete": true,
+          "classList": [
+            "h-full",
+            "w-full",
+            "object-cover",
+            "transition",
+            "duration-700",
+            "group-hover:scale-105",
+            "opacity-100"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative h-64 overflow-hidden",
+          "parentComponent": null,
+          "isFallback": false,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 387.328125,
+            "height": 256,
+            "top": -813.9375,
+            "left": 446.328125
+          }
+        },
+        {
+          "index": 22,
+          "src": "http://localhost:3000/api/uploads/property_51_1.jpg",
+          "alt": "Studio meuble en centre-ville - Marrakech 52",
+          "naturalWidth": 1440,
+          "naturalHeight": 900,
+          "complete": true,
+          "classList": [
+            "h-full",
+            "w-full",
+            "object-cover",
+            "transition",
+            "duration-700",
+            "group-hover:scale-105",
+            "opacity-100"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative h-64 overflow-hidden",
+          "parentComponent": null,
+          "isFallback": false,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 387.34375,
+            "height": 256,
+            "top": -813.9375,
+            "left": 859.65625
+          }
+        },
+        {
+          "index": 23,
+          "src": "http://localhost:3000/images/logo.png",
+          "alt": "MAROC-LOC",
+          "naturalWidth": 1536,
+          "naturalHeight": 1024,
+          "complete": true,
+          "classList": [
+            "h-12",
+            "w-auto",
+            "object-contain"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "flex items-center gap-3",
+          "parentComponent": null,
+          "isFallback": false,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 72,
+            "height": 48,
+            "top": 497.0625,
+            "left": 32
+          }
+        }
+      ]
+    },
+    {
+      "pageName": "property_details",
+      "url": "http://localhost:3000/property/1",
+      "images": [
+        {
+          "index": 0,
+          "src": "http://localhost:3000/images/logo.png",
+          "alt": "MAROC-LOC",
+          "naturalWidth": 1536,
+          "naturalHeight": 1024,
+          "complete": true,
+          "classList": [
+            "h-10",
+            "w-auto",
+            "object-contain"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative",
+          "parentComponent": null,
+          "isFallback": false,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 60,
+            "height": 40,
+            "top": 20,
+            "left": 32
+          }
+        },
+        {
+          "index": 1,
+          "src": "http://localhost:3000/api/uploads/property_0_1.jpg",
+          "alt": "Maison traditionnelle avec patio - Taza 1",
+          "naturalWidth": 600,
+          "naturalHeight": 428,
+          "complete": true,
+          "classList": [
+            "h-full",
+            "w-full",
+            "object-cover",
+            "cursor-pointer",
+            "transition-transform",
+            "duration-500",
+            "group-hover:scale-105"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative h-96 overflow-hidden bg-slate-100 group",
+          "parentComponent": null,
+          "isFallback": false,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 800,
+            "height": 384,
+            "top": -1228.40625,
+            "left": 32
+          }
+        },
+        {
+          "index": 2,
+          "src": "http://localhost:3000/api/uploads/property_0_1.jpg",
+          "alt": "",
+          "naturalWidth": 600,
+          "naturalHeight": 428,
+          "complete": true,
+          "classList": [
+            "h-full",
+            "w-full",
+            "object-cover"
+          ],
+          "parentTag": "BUTTON",
+          "parentClass": "relative h-20 w-20 flex-shrink-0 overflow-hidden rounded-lg transition-all ring-2 ring-morocco-gold scale-95",
+          "parentComponent": null,
+          "isFallback": false,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 76,
+            "height": 76,
+            "top": -826.40625,
+            "left": 50
+          }
+        },
+        {
+          "index": 3,
+          "src": "http://localhost:3000/api/uploads/property_0_2.jpg",
+          "alt": "",
+          "naturalWidth": 347,
+          "naturalHeight": 280,
+          "complete": true,
+          "classList": [
+            "h-full",
+            "w-full",
+            "object-cover"
+          ],
+          "parentTag": "BUTTON",
+          "parentClass": "relative h-20 w-20 flex-shrink-0 overflow-hidden rounded-lg transition-all opacity-70 hover:opacity-100",
+          "parentComponent": null,
+          "isFallback": false,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 80,
+            "height": 80,
+            "top": -828.40625,
+            "left": 136
+          }
+        },
+        {
+          "index": 4,
+          "src": "http://localhost:3000/api/uploads/property_0_3.jpg",
+          "alt": "",
+          "naturalWidth": 800,
+          "naturalHeight": 560,
+          "complete": true,
+          "classList": [
+            "h-full",
+            "w-full",
+            "object-cover"
+          ],
+          "parentTag": "BUTTON",
+          "parentClass": "relative h-20 w-20 flex-shrink-0 overflow-hidden rounded-lg transition-all opacity-70 hover:opacity-100",
+          "parentComponent": null,
+          "isFallback": false,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 80,
+            "height": 80,
+            "top": -828.40625,
+            "left": 224
+          }
+        },
+        {
+          "index": 5,
+          "src": "http://localhost:3000/images/logo.png",
+          "alt": "MAROC-LOC",
+          "naturalWidth": 1536,
+          "naturalHeight": 1024,
+          "complete": true,
+          "classList": [
+            "h-12",
+            "w-auto",
+            "object-contain"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "flex items-center gap-3",
+          "parentComponent": null,
+          "isFallback": false,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 72,
+            "height": 48,
+            "top": 497.375,
+            "left": 32
+          }
+        }
+      ]
+    },
+    {
+      "pageName": "search_results",
+      "url": "http://localhost:3000/home",
+      "images": [
+        {
+          "index": 0,
+          "src": "http://localhost:3000/images/logo.png",
+          "alt": "MAROC-LOC",
+          "naturalWidth": 1536,
+          "naturalHeight": 1024,
+          "complete": true,
+          "classList": [
+            "h-10",
+            "w-auto",
+            "object-contain"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative",
+          "parentComponent": null,
+          "isFallback": false,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 60,
+            "height": 40,
+            "top": 20,
+            "left": 32
+          }
+        },
+        {
+          "index": 1,
+          "src": "http://localhost:3000/api/uploads/property_118_1.jpg",
+          "alt": "Appartement haut standing avec concierge - Agadir 119",
+          "naturalWidth": 1024,
+          "naturalHeight": 683,
+          "complete": true,
+          "classList": [
+            "h-full",
+            "w-full",
+            "object-cover",
+            "transition-transform",
+            "duration-700",
+            "hover:scale-105"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative h-[520px] overflow-hidden rounded-[1.8rem]",
+          "parentComponent": null,
+          "isFallback": false,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 562.4605712890625,
+            "height": 561.60009765625,
+            "top": -3888.2421875,
+            "left": 689.3555908203125
+          }
+        },
+        {
+          "index": 2,
+          "src": "http://localhost:3000/api/uploads/property_118_1.jpg",
+          "alt": "Appartement haut standing avec concierge - Agadir 119",
+          "naturalWidth": 1024,
+          "naturalHeight": 683,
+          "complete": true,
+          "classList": [
+            "h-full",
+            "w-full",
+            "object-cover",
+            "transition",
+            "duration-700",
+            "group-hover:scale-105"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative h-56 overflow-hidden",
+          "parentComponent": null,
+          "isFallback": false,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 387.328125,
+            "height": 224,
+            "top": -2109.125,
+            "left": 33
+          }
+        },
+        {
+          "index": 3,
+          "src": "http://localhost:3000/api/uploads/property_49_1.jpg",
+          "alt": "Duplex avec vue sur la medina - El Jadida 50",
+          "naturalWidth": 1120,
+          "naturalHeight": 1125,
+          "complete": true,
+          "classList": [
+            "h-full",
+            "w-full",
+            "object-cover",
+            "transition",
+            "duration-700",
+            "group-hover:scale-105"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative h-56 overflow-hidden",
+          "parentComponent": null,
+          "isFallback": false,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 387.328125,
+            "height": 224,
+            "top": -2109.125,
+            "left": 446.328125
+          }
+        },
+        {
+          "index": 4,
+          "src": "http://localhost:3000/api/uploads/property_99_1.jpg",
+          "alt": "Studio neuf avec cuisine equipee - Fes 100",
+          "naturalWidth": 1120,
+          "naturalHeight": 1125,
+          "complete": true,
+          "classList": [
+            "h-full",
+            "w-full",
+            "object-cover",
+            "transition",
+            "duration-700",
+            "group-hover:scale-105"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative h-56 overflow-hidden",
+          "parentComponent": null,
+          "isFallback": false,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 387.34375,
+            "height": 224,
+            "top": -2109.125,
+            "left": 859.65625
+          }
+        },
+        {
+          "index": 5,
+          "src": "http://localhost:3000/api/uploads/property_83_1.jpg",
+          "alt": "Duplex spacieux avec terrasse - Safi 84",
+          "naturalWidth": 1600,
+          "naturalHeight": 900,
+          "complete": true,
+          "classList": [
+            "h-full",
+            "w-full",
+            "object-cover",
+            "transition",
+            "duration-700",
+            "group-hover:scale-105"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative h-56 overflow-hidden",
+          "parentComponent": null,
+          "isFallback": false,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 387.328125,
+            "height": 224,
+            "top": -1650.125,
+            "left": 33
+          }
+        },
+        {
+          "index": 6,
+          "src": "http://localhost:3000/api/uploads/property_1_1.jpg",
+          "alt": "Studio meuble en centre-ville - Marrakech 2",
+          "naturalWidth": 1440,
+          "naturalHeight": 900,
+          "complete": true,
+          "classList": [
+            "h-full",
+            "w-full",
+            "object-cover",
+            "transition",
+            "duration-700",
+            "group-hover:scale-105"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative h-56 overflow-hidden",
+          "parentComponent": null,
+          "isFallback": false,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 387.328125,
+            "height": 224,
+            "top": -1650.125,
+            "left": 446.328125
+          }
+        },
+        {
+          "index": 7,
+          "src": "http://localhost:3000/api/uploads/property_65_1.jpg",
+          "alt": "Duplex spacieux avec terrasse - Settat 66",
+          "naturalWidth": 1332,
+          "naturalHeight": 1344,
+          "complete": true,
+          "classList": [
+            "h-full",
+            "w-full",
+            "object-cover",
+            "transition",
+            "duration-700",
+            "group-hover:scale-105"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative h-56 overflow-hidden",
+          "parentComponent": null,
+          "isFallback": false,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 387.34375,
+            "height": 224,
+            "top": -1650.125,
+            "left": 859.65625
+          }
+        },
+        {
+          "index": 8,
+          "src": "http://localhost:3000/images/no-image.svg",
+          "alt": "Appartement haut standing avec concierge - Agadir 119",
+          "naturalWidth": 400,
+          "naturalHeight": 300,
+          "complete": true,
+          "classList": [
+            "h-full",
+            "w-full",
+            "object-cover",
+            "transition",
+            "duration-700",
+            "group-hover:scale-105"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative h-56 overflow-hidden rounded-t-2xl",
+          "parentComponent": null,
+          "isFallback": true,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 387.328125,
+            "height": 224,
+            "top": -979.125,
+            "left": 33
+          }
+        },
+        {
+          "index": 9,
+          "src": "http://localhost:3000/images/no-image.svg",
+          "alt": "Studio meuble en centre-ville - Marrakech 52",
+          "naturalWidth": 400,
+          "naturalHeight": 300,
+          "complete": true,
+          "classList": [
+            "h-full",
+            "w-full",
+            "object-cover",
+            "transition",
+            "duration-700",
+            "group-hover:scale-105"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative h-56 overflow-hidden rounded-t-2xl",
+          "parentComponent": null,
+          "isFallback": true,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 387.328125,
+            "height": 224,
+            "top": -979.125,
+            "left": 446.328125
+          }
+        },
+        {
+          "index": 10,
+          "src": "http://localhost:3000/images/no-image.svg",
+          "alt": "Terrain constructible avec vue panoramique - Agadir 37",
+          "naturalWidth": 400,
+          "naturalHeight": 300,
+          "complete": true,
+          "classList": [
+            "h-full",
+            "w-full",
+            "object-cover",
+            "transition",
+            "duration-700",
+            "group-hover:scale-105"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative h-56 overflow-hidden rounded-t-2xl",
+          "parentComponent": null,
+          "isFallback": true,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 387.34375,
+            "height": 224,
+            "top": -979.125,
+            "left": 859.65625
+          }
+        },
+        {
+          "index": 11,
+          "src": "http://localhost:3000/images/no-image.svg",
+          "alt": "Local commercial en angle de rue - Nador 33",
+          "naturalWidth": 400,
+          "naturalHeight": 300,
+          "complete": true,
+          "classList": [
+            "h-full",
+            "w-full",
+            "object-cover",
+            "transition",
+            "duration-700",
+            "group-hover:scale-105"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative h-56 overflow-hidden rounded-t-2xl",
+          "parentComponent": null,
+          "isFallback": true,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 387.328125,
+            "height": 224,
+            "top": -538.125,
+            "left": 33
+          }
+        },
+        {
+          "index": 12,
+          "src": "http://localhost:3000/images/no-image.svg",
+          "alt": "Appartement moderne avec vue sur mer - Settat 62",
+          "naturalWidth": 400,
+          "naturalHeight": 300,
+          "complete": true,
+          "classList": [
+            "h-full",
+            "w-full",
+            "object-cover",
+            "transition",
+            "duration-700",
+            "group-hover:scale-105"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative h-56 overflow-hidden rounded-t-2xl",
+          "parentComponent": null,
+          "isFallback": true,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 387.328125,
+            "height": 224,
+            "top": -538.125,
+            "left": 446.328125
+          }
+        },
+        {
+          "index": 13,
+          "src": "http://localhost:3000/images/no-image.svg",
+          "alt": "Studio neuf avec cuisine equipee - Fes 100",
+          "naturalWidth": 400,
+          "naturalHeight": 300,
+          "complete": true,
+          "classList": [
+            "h-full",
+            "w-full",
+            "object-cover",
+            "transition",
+            "duration-700",
+            "group-hover:scale-105"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative h-56 overflow-hidden rounded-t-2xl",
+          "parentComponent": null,
+          "isFallback": true,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 387.34375,
+            "height": 224,
+            "top": -538.125,
+            "left": 859.65625
+          }
+        },
+        {
+          "index": 14,
+          "src": "http://localhost:3000/api/uploads/property_112_1.jpg",
+          "alt": "Riad traditionnel renove - Ksar El Kebir 113",
+          "naturalWidth": 1500,
+          "naturalHeight": 1000,
+          "complete": true,
+          "classList": [
+            "h-full",
+            "w-full",
+            "object-cover",
+            "transition",
+            "duration-700",
+            "group-hover:scale-105",
+            "opacity-100"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative h-64 overflow-hidden",
+          "parentComponent": null,
+          "isFallback": false,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 387.328125,
+            "height": 256,
+            "top": 236.0625,
+            "left": 33
+          }
+        },
+        {
+          "index": 15,
+          "src": "http://localhost:3000/api/uploads/property_104_1.jpg",
+          "alt": "Villa avec jardin arboré - Ouarzazate 105",
+          "naturalWidth": 1500,
+          "naturalHeight": 1125,
+          "complete": true,
+          "classList": [
+            "h-full",
+            "w-full",
+            "object-cover",
+            "transition",
+            "duration-700",
+            "group-hover:scale-105",
+            "opacity-100"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative h-64 overflow-hidden",
+          "parentComponent": null,
+          "isFallback": false,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 387.328125,
+            "height": 256,
+            "top": 236.0625,
+            "left": 446.328125
+          }
+        },
+        {
+          "index": 16,
+          "src": "http://localhost:3000/api/uploads/property_55_1.jpg",
+          "alt": "Duplex spacieux avec terrasse - Rabat 56",
+          "naturalWidth": 600,
+          "naturalHeight": 406,
+          "complete": true,
+          "classList": [
+            "h-full",
+            "w-full",
+            "object-cover",
+            "transition",
+            "duration-700",
+            "group-hover:scale-105",
+            "opacity-100"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative h-64 overflow-hidden",
+          "parentComponent": null,
+          "isFallback": false,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 387.34375,
+            "height": 256,
+            "top": 236.0625,
+            "left": 859.65625
+          }
+        },
+        {
+          "index": 17,
+          "src": "http://localhost:3000/api/uploads/property_51_1.jpg",
+          "alt": "Studio meuble en centre-ville - Marrakech 52",
+          "naturalWidth": 1440,
+          "naturalHeight": 900,
+          "complete": true,
+          "classList": [
+            "h-full",
+            "w-full",
+            "object-cover",
+            "transition",
+            "duration-700",
+            "group-hover:scale-105",
+            "opacity-100"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative h-64 overflow-hidden",
+          "parentComponent": null,
+          "isFallback": false,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 387.328125,
+            "height": 256,
+            "top": 751.0625,
+            "left": 33
+          }
+        },
+        {
+          "index": 18,
+          "src": "http://localhost:3000/api/uploads/property_106_1.jpg",
+          "alt": "Appartement moderne avec vue sur mer - Kenitra 107",
+          "naturalWidth": 2310,
+          "naturalHeight": 1298,
+          "complete": true,
+          "classList": [
+            "h-full",
+            "w-full",
+            "object-cover",
+            "transition",
+            "duration-700",
+            "group-hover:scale-105",
+            "opacity-100"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative h-64 overflow-hidden",
+          "parentComponent": null,
+          "isFallback": false,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 406.6945495605469,
+            "height": 268.800048828125,
+            "top": 744.6624755859375,
+            "left": 436.6449279785156
+          }
+        },
+        {
+          "index": 19,
+          "src": "http://localhost:3000/api/uploads/property_84_1.jpg",
+          "alt": "Villa luxueuse avec piscine privee - Settat 85",
+          "naturalWidth": 800,
+          "naturalHeight": 560,
+          "complete": true,
+          "classList": [
+            "h-full",
+            "w-full",
+            "object-cover",
+            "transition",
+            "duration-700",
+            "group-hover:scale-105",
+            "opacity-100"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative h-64 overflow-hidden",
+          "parentComponent": null,
+          "isFallback": false,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 387.34375,
+            "height": 256,
+            "top": 751.0625,
+            "left": 859.65625
+          }
+        },
+        {
+          "index": 20,
+          "src": "http://localhost:3000/api/uploads/property_71_1.jpg",
+          "alt": "Bureau commercial bien situe - Safi 72",
+          "naturalWidth": 1300,
+          "naturalHeight": 1045,
+          "complete": true,
+          "classList": [
+            "h-full",
+            "w-full",
+            "object-cover",
+            "transition",
+            "duration-700",
+            "group-hover:scale-105",
+            "opacity-100"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative h-64 overflow-hidden",
+          "parentComponent": null,
+          "isFallback": false,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 387.328125,
+            "height": 256,
+            "top": 1266.0625,
+            "left": 33
+          }
+        },
+        {
+          "index": 21,
+          "src": "http://localhost:3000/api/uploads/property_38_1.jpg",
+          "alt": "Duplex spacieux avec terrasse - Settat 39",
+          "naturalWidth": 1200,
+          "naturalHeight": 667,
+          "complete": true,
+          "classList": [
+            "h-full",
+            "w-full",
+            "object-cover",
+            "transition",
+            "duration-700",
+            "group-hover:scale-105",
+            "opacity-100"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative h-64 overflow-hidden",
+          "parentComponent": null,
+          "isFallback": false,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 387.328125,
+            "height": 256,
+            "top": 1266.0625,
+            "left": 446.328125
+          }
+        },
+        {
+          "index": 22,
+          "src": "http://localhost:3000/api/uploads/property_76_1.jpg",
+          "alt": "Villa luxueuse avec piscine privee - Marrakech 77",
+          "naturalWidth": 728,
+          "naturalHeight": 408,
+          "complete": true,
+          "classList": [
+            "h-full",
+            "w-full",
+            "object-cover",
+            "transition",
+            "duration-700",
+            "group-hover:scale-105",
+            "opacity-100"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "relative h-64 overflow-hidden",
+          "parentComponent": null,
+          "isFallback": false,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 387.34375,
+            "height": 256,
+            "top": 1266.0625,
+            "left": 859.65625
+          }
+        },
+        {
+          "index": 23,
+          "src": "http://localhost:3000/images/logo.png",
+          "alt": "MAROC-LOC",
+          "naturalWidth": 1536,
+          "naturalHeight": 1024,
+          "complete": true,
+          "classList": [
+            "h-12",
+            "w-auto",
+            "object-contain"
+          ],
+          "parentTag": "DIV",
+          "parentClass": "flex items-center gap-3",
+          "parentComponent": null,
+          "isFallback": false,
+          "isOpacityZero": false,
+          "boundingRect": {
+            "width": 72,
+            "height": 48,
+            "top": 2577.0625,
+            "left": 32
+          }
+        }
+      ]
+    }
+  ],
+  "brokenImages": [
+    {
+      "src": "http://localhost:3000/api/uploads/property_104_1.jpg",
+      "alt": "Villa avec jardin arboré - Ouarzazate 105",
+      "page": "home_initial",
+      "pageUrl": "http://localhost:3000/home",
+      "parentTag": "DIV",
+      "parentClass": "relative h-64 overflow-hidden",
+      "parentComponent": null,
+      "naturalWidth": 1500,
+      "naturalHeight": 1125,
+      "complete": false,
+      "isFallback": false,
+      "isOpacityZero": true,
+      "fileExists": true,
+      "diskPath": "c:\\Users\\HP\\Desktop\\pfe\\pricipaux\\MAROC-LOC\\backend\\uploads\\property_104_1.jpg"
+    }
+  ],
+  "fallbackImages": [
+    {
+      "src": "http://localhost:3000/images/no-image.svg",
+      "alt": "Appartement haut standing avec concierge - Agadir 119",
+      "page": "home_initial",
+      "pageUrl": "http://localhost:3000/home",
+      "parentTag": "DIV",
+      "parentClass": "relative h-56 overflow-hidden rounded-t-2xl"
+    },
+    {
+      "src": "http://localhost:3000/images/no-image.svg",
+      "alt": "Studio meuble en centre-ville - Marrakech 52",
+      "page": "home_initial",
+      "pageUrl": "http://localhost:3000/home",
+      "parentTag": "DIV",
+      "parentClass": "relative h-56 overflow-hidden rounded-t-2xl"
+    },
+    {
+      "src": "http://localhost:3000/images/no-image.svg",
+      "alt": "Terrain constructible avec vue panoramique - Agadir 37",
+      "page": "home_initial",
+      "pageUrl": "http://localhost:3000/home",
+      "parentTag": "DIV",
+      "parentClass": "relative h-56 overflow-hidden rounded-t-2xl"
+    },
+    {
+      "src": "http://localhost:3000/images/no-image.svg",
+      "alt": "Local commercial en angle de rue - Nador 33",
+      "page": "home_initial",
+      "pageUrl": "http://localhost:3000/home",
+      "parentTag": "DIV",
+      "parentClass": "relative h-56 overflow-hidden rounded-t-2xl"
+    },
+    {
+      "src": "http://localhost:3000/images/no-image.svg",
+      "alt": "Appartement moderne avec vue sur mer - Settat 62",
+      "page": "home_initial",
+      "pageUrl": "http://localhost:3000/home",
+      "parentTag": "DIV",
+      "parentClass": "relative h-56 overflow-hidden rounded-t-2xl"
+    },
+    {
+      "src": "http://localhost:3000/images/no-image.svg",
+      "alt": "Studio neuf avec cuisine equipee - Fes 100",
+      "page": "home_initial",
+      "pageUrl": "http://localhost:3000/home",
+      "parentTag": "DIV",
+      "parentClass": "relative h-56 overflow-hidden rounded-t-2xl"
+    },
+    {
+      "src": "http://localhost:3000/images/no-image.svg",
+      "alt": "Appartement haut standing avec concierge - Agadir 119",
+      "page": "home_after_wait",
+      "pageUrl": "http://localhost:3000/home",
+      "parentTag": "DIV",
+      "parentClass": "relative h-56 overflow-hidden rounded-t-2xl"
+    },
+    {
+      "src": "http://localhost:3000/images/no-image.svg",
+      "alt": "Studio meuble en centre-ville - Marrakech 52",
+      "page": "home_after_wait",
+      "pageUrl": "http://localhost:3000/home",
+      "parentTag": "DIV",
+      "parentClass": "relative h-56 overflow-hidden rounded-t-2xl"
+    },
+    {
+      "src": "http://localhost:3000/images/no-image.svg",
+      "alt": "Terrain constructible avec vue panoramique - Agadir 37",
+      "page": "home_after_wait",
+      "pageUrl": "http://localhost:3000/home",
+      "parentTag": "DIV",
+      "parentClass": "relative h-56 overflow-hidden rounded-t-2xl"
+    },
+    {
+      "src": "http://localhost:3000/images/no-image.svg",
+      "alt": "Local commercial en angle de rue - Nador 33",
+      "page": "home_after_wait",
+      "pageUrl": "http://localhost:3000/home",
+      "parentTag": "DIV",
+      "parentClass": "relative h-56 overflow-hidden rounded-t-2xl"
+    },
+    {
+      "src": "http://localhost:3000/images/no-image.svg",
+      "alt": "Appartement moderne avec vue sur mer - Settat 62",
+      "page": "home_after_wait",
+      "pageUrl": "http://localhost:3000/home",
+      "parentTag": "DIV",
+      "parentClass": "relative h-56 overflow-hidden rounded-t-2xl"
+    },
+    {
+      "src": "http://localhost:3000/images/no-image.svg",
+      "alt": "Studio neuf avec cuisine equipee - Fes 100",
+      "page": "home_after_wait",
+      "pageUrl": "http://localhost:3000/home",
+      "parentTag": "DIV",
+      "parentClass": "relative h-56 overflow-hidden rounded-t-2xl"
+    },
+    {
+      "src": "http://localhost:3000/images/no-image.svg",
+      "alt": "Appartement haut standing avec concierge - Agadir 119",
+      "page": "search_results",
+      "pageUrl": "http://localhost:3000/home",
+      "parentTag": "DIV",
+      "parentClass": "relative h-56 overflow-hidden rounded-t-2xl"
+    },
+    {
+      "src": "http://localhost:3000/images/no-image.svg",
+      "alt": "Studio meuble en centre-ville - Marrakech 52",
+      "page": "search_results",
+      "pageUrl": "http://localhost:3000/home",
+      "parentTag": "DIV",
+      "parentClass": "relative h-56 overflow-hidden rounded-t-2xl"
+    },
+    {
+      "src": "http://localhost:3000/images/no-image.svg",
+      "alt": "Terrain constructible avec vue panoramique - Agadir 37",
+      "page": "search_results",
+      "pageUrl": "http://localhost:3000/home",
+      "parentTag": "DIV",
+      "parentClass": "relative h-56 overflow-hidden rounded-t-2xl"
+    },
+    {
+      "src": "http://localhost:3000/images/no-image.svg",
+      "alt": "Local commercial en angle de rue - Nador 33",
+      "page": "search_results",
+      "pageUrl": "http://localhost:3000/home",
+      "parentTag": "DIV",
+      "parentClass": "relative h-56 overflow-hidden rounded-t-2xl"
+    },
+    {
+      "src": "http://localhost:3000/images/no-image.svg",
+      "alt": "Appartement moderne avec vue sur mer - Settat 62",
+      "page": "search_results",
+      "pageUrl": "http://localhost:3000/home",
+      "parentTag": "DIV",
+      "parentClass": "relative h-56 overflow-hidden rounded-t-2xl"
+    },
+    {
+      "src": "http://localhost:3000/images/no-image.svg",
+      "alt": "Studio neuf avec cuisine equipee - Fes 100",
+      "page": "search_results",
+      "pageUrl": "http://localhost:3000/home",
+      "parentTag": "DIV",
+      "parentClass": "relative h-56 overflow-hidden rounded-t-2xl"
+    }
+  ],
+  "opacityZeroImages": [
+    {
+      "src": "http://localhost:3000/api/uploads/property_104_1.jpg",
+      "alt": "Villa avec jardin arboré - Ouarzazate 105",
+      "page": "home_initial",
+      "pageUrl": "http://localhost:3000/home",
+      "complete": false,
+      "naturalWidth": 1500,
+      "boundingRect": {
+        "width": 387.328125,
+        "height": 256,
+        "top": -1328.9375,
+        "left": 33
+      }
+    }
+  ],
+  "diskCheck": [
+    {
+      "src": "http://localhost:3000/images/logo.png",
+      "exists": true,
+      "diskPath": "c:\\Users\\HP\\Desktop\\pfe\\pricipaux\\MAROC-LOC\\frontend\\public\\images\\logo.png"
+    },
+    {
+      "src": "http://localhost:3000/api/uploads/property_118_1.jpg",
+      "exists": true,
+      "diskPath": "c:\\Users\\HP\\Desktop\\pfe\\pricipaux\\MAROC-LOC\\backend\\uploads\\property_118_1.jpg"
+    },
+    {
+      "src": "http://localhost:3000/api/uploads/property_49_1.jpg",
+      "exists": true,
+      "diskPath": "c:\\Users\\HP\\Desktop\\pfe\\pricipaux\\MAROC-LOC\\backend\\uploads\\property_49_1.jpg"
+    },
+    {
+      "src": "http://localhost:3000/api/uploads/property_99_1.jpg",
+      "exists": true,
+      "diskPath": "c:\\Users\\HP\\Desktop\\pfe\\pricipaux\\MAROC-LOC\\backend\\uploads\\property_99_1.jpg"
+    },
+    {
+      "src": "http://localhost:3000/api/uploads/property_83_1.jpg",
+      "exists": true,
+      "diskPath": "c:\\Users\\HP\\Desktop\\pfe\\pricipaux\\MAROC-LOC\\backend\\uploads\\property_83_1.jpg"
+    },
+    {
+      "src": "http://localhost:3000/api/uploads/property_1_1.jpg",
+      "exists": true,
+      "diskPath": "c:\\Users\\HP\\Desktop\\pfe\\pricipaux\\MAROC-LOC\\backend\\uploads\\property_1_1.jpg"
+    },
+    {
+      "src": "http://localhost:3000/api/uploads/property_65_1.jpg",
+      "exists": true,
+      "diskPath": "c:\\Users\\HP\\Desktop\\pfe\\pricipaux\\MAROC-LOC\\backend\\uploads\\property_65_1.jpg"
+    },
+    {
+      "src": "http://localhost:3000/images/no-image.svg",
+      "exists": true,
+      "diskPath": "c:\\Users\\HP\\Desktop\\pfe\\pricipaux\\MAROC-LOC\\frontend\\public\\images\\no-image.svg"
+    },
+    {
+      "src": "http://localhost:3000/api/uploads/images/c5747e12-6c59-4ce2-9651-1c7668a8ff0a.jpg",
+      "exists": true,
+      "diskPath": "c:\\Users\\HP\\Desktop\\pfe\\pricipaux\\MAROC-LOC\\backend\\uploads\\images\\c5747e12-6c59-4ce2-9651-1c7668a8ff0a.jpg"
+    },
+    {
+      "src": "http://localhost:3000/api/uploads/property_112_1.jpg",
+      "exists": true,
+      "diskPath": "c:\\Users\\HP\\Desktop\\pfe\\pricipaux\\MAROC-LOC\\backend\\uploads\\property_112_1.jpg"
+    },
+    {
+      "src": "http://localhost:3000/api/uploads/property_104_1.jpg",
+      "exists": true,
+      "diskPath": "c:\\Users\\HP\\Desktop\\pfe\\pricipaux\\MAROC-LOC\\backend\\uploads\\property_104_1.jpg"
+    },
+    {
+      "src": "http://localhost:3000/api/uploads/property_36_1.jpg",
+      "exists": true,
+      "diskPath": "c:\\Users\\HP\\Desktop\\pfe\\pricipaux\\MAROC-LOC\\backend\\uploads\\property_36_1.jpg"
+    },
+    {
+      "src": "http://localhost:3000/api/uploads/property_55_1.jpg",
+      "exists": true,
+      "diskPath": "c:\\Users\\HP\\Desktop\\pfe\\pricipaux\\MAROC-LOC\\backend\\uploads\\property_55_1.jpg"
+    },
+    {
+      "src": "http://localhost:3000/api/uploads/property_51_1.jpg",
+      "exists": true,
+      "diskPath": "c:\\Users\\HP\\Desktop\\pfe\\pricipaux\\MAROC-LOC\\backend\\uploads\\property_51_1.jpg"
+    },
+    {
+      "src": "http://localhost:3000/api/uploads/property_0_1.jpg",
+      "exists": true,
+      "diskPath": "c:\\Users\\HP\\Desktop\\pfe\\pricipaux\\MAROC-LOC\\backend\\uploads\\property_0_1.jpg"
+    },
+    {
+      "src": "http://localhost:3000/api/uploads/property_0_2.jpg",
+      "exists": true,
+      "diskPath": "c:\\Users\\HP\\Desktop\\pfe\\pricipaux\\MAROC-LOC\\backend\\uploads\\property_0_2.jpg"
+    },
+    {
+      "src": "http://localhost:3000/api/uploads/property_0_3.jpg",
+      "exists": true,
+      "diskPath": "c:\\Users\\HP\\Desktop\\pfe\\pricipaux\\MAROC-LOC\\backend\\uploads\\property_0_3.jpg"
+    },
+    {
+      "src": "http://localhost:3000/api/uploads/property_106_1.jpg",
+      "exists": true,
+      "diskPath": "c:\\Users\\HP\\Desktop\\pfe\\pricipaux\\MAROC-LOC\\backend\\uploads\\property_106_1.jpg"
+    },
+    {
+      "src": "http://localhost:3000/api/uploads/property_84_1.jpg",
+      "exists": true,
+      "diskPath": "c:\\Users\\HP\\Desktop\\pfe\\pricipaux\\MAROC-LOC\\backend\\uploads\\property_84_1.jpg"
+    },
+    {
+      "src": "http://localhost:3000/api/uploads/property_71_1.jpg",
+      "exists": true,
+      "diskPath": "c:\\Users\\HP\\Desktop\\pfe\\pricipaux\\MAROC-LOC\\backend\\uploads\\property_71_1.jpg"
+    },
+    {
+      "src": "http://localhost:3000/api/uploads/property_38_1.jpg",
+      "exists": true,
+      "diskPath": "c:\\Users\\HP\\Desktop\\pfe\\pricipaux\\MAROC-LOC\\backend\\uploads\\property_38_1.jpg"
+    },
+    {
+      "src": "http://localhost:3000/api/uploads/property_76_1.jpg",
+      "exists": true,
+      "diskPath": "c:\\Users\\HP\\Desktop\\pfe\\pricipaux\\MAROC-LOC\\backend\\uploads\\property_76_1.jpg"
+    }
+  ],
+  "summary": {
+    "totalImagesAudited": 79,
+    "brokenImagesCount": 1,
+    "fallbackImagesCount": 18,
+    "opacityZeroImagesCount": 1,
+    "pagesAudited": 5,
+    "uniqueSrcsChecked": 22,
+    "filesMissingOnDisk": 0
+  }
+}

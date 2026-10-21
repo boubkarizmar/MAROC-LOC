@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MAROC-LOC — Système RAG et IA</title>
+<style>
+  :root {
+    --bg: #0a0e27;
+    --surface: rgba(255,255,255,0.03);
+    --surface-hover: rgba(255,255,255,0.06);
+    --text: #f1f5f9;
+    --text-muted: #94a3b8;
+    --border: rgba(255,255,255,0.08);
+    --border-strong: rgba(255,255,255,0.14);
+    --accent-blue: #3b82f6;
+    --accent-purple: #8b5cf6;
+    --accent-teal: #2dd4bf;
+    --accent-amber: #fbbf24;
+    --accent-rose: #f472b6;
+    --card-shadow: 0 8px 32px rgba(0,0,0,0.35);
+    --font-body: system-ui, -apple-system, Segoe UI, Roboto, Inter, sans-serif;
+    --font-mono: "JetBrains Mono", "Fira Code", Consolas, monospace;
+  }
+  [data-theme="light"] {
+    --bg: #f8fafc;
+    --surface: rgba(255,255,255,0.65);
+    --surface-hover: rgba(255,255,255,0.9);
+    --text: #0f172a;
+    --text-muted: #64748b;
+    --border: rgba(15,23,42,0.10);
+    --border-strong: rgba(15,23,42,0.18);
+    --card-shadow: 0 8px 32px rgba(0,0,0,0.08);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    transition: background .3s, color .3s;
+  }
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: rgba(139,92,246,0.35); border-radius: 4px; }
+  /* Layout */
+  .app { display: grid; grid-template-columns: 260px 1fr; min-height: 100vh; }
+  @media (max-width: 900px) { .app { grid-template-columns: 1fr; } }
+  /* Sidebar */
+  .sidebar {
+    position: sticky; top: 0; height: 100vh;
+    border-right: 1px solid var(--border);
+    background: linear-gradient(180deg, rgba(59,130,246,0.06), transparent 60%);
+    padding: 24px 16px;
+    overflow-y: auto;
+    z-index: 50;
+  }
+  .sidebar-header {
+    display: flex; align-items: center; gap: 10px;
+    font-weight: 700; font-size: 1.05rem;
+    margin-bottom: 20px;
+    background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .nav { list-style: none; }
+  .nav li { margin-bottom: 4px; }
+  .nav a {
+    display: block; padding: 8px 12px; border-radius: 8px;
+    color: var(--text-muted); text-decoration: none; font-size: .88rem;
+    transition: all .2s;
+  }
+  .nav a:hover, .nav a.active { background: var(--surface-hover); color: var(--text); }
+  .theme-btn {
+    margin-top: 18px; width: 100%; padding: 10px;
+    border-radius: 10px; border: 1px solid var(--border);
+    background: var(--surface); color: var(--text);
+    cursor: pointer; font-family: var(--font-body); font-size: .85rem;
+    backdrop-filter: blur(8px); transition: all .2s;
+  }
+  .theme-btn:hover { background: var(--surface-hover); }
+  /* Mobile nav */
+  .mobile-bar {
+    display: none; align-items: center; justify-content: space-between;
+    padding: 14px 18px; border-bottom: 1px solid var(--border);
+    background: var(--bg); position: sticky; top: 0; z-index: 60;
+  }
+  .mobile-bar .logo {
+    font-weight: 800; font-size: 1.1rem;
+    background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .hamburger {
+    width: 32px; height: 32px; display: flex; flex-direction: column; justify-content: center; gap: 5px;
+    background: none; border: none; cursor: pointer;
+  }
+  .hamburger span { display: block; height: 2px; background: var(--text); border-radius: 2px; transition: .3s; }
+  .hamburger span:nth-child(1) { width: 20px; }
+  .hamburger span:nth-child(2) { width: 14px; }
+  .hamburger span:nth-child(3) { width: 20px; }
+  @media (max-width: 900px) {
+    .sidebar { position: fixed; left: -280px; top: 0; width: 260px; transition: left .3s; background: var(--bg); }
+    .sidebar.open { left: 0; }
+    .mobile-bar { display: flex; }
+    .overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 40; }
+    .overlay.open { display: block; }
+  }
+  /* Main */
+  .main { padding: 32px 28px; max-width: 1100px; margin: 0 auto; }
+  @media (max-width: 600px) { .main { padding: 20px 16px; } }
+  /* Hero */
+  .hero {
+    text-align: center; padding: 56px 20px 44px;
+    border-bottom: 1px solid var(--border); margin-bottom: 36px;
+  }
+  .hero h1 {
+    font-size: clamp(1.6rem, 4vw, 2.6rem); font-weight: 800; line-height: 1.15;
+    background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple), var(--accent-rose));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    margin-bottom: 12px;
+  }
+  .hero p { color: var(--text-muted); font-size: 1.05rem; max-width: 640px; margin: 0 auto; }
+  /* Cards */
+  .card {
+    background: var(--surface);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 24px;
+    box-shadow: var(--card-shadow);
+    transition: transform .25s, box-shadow .25s, border-color .25s;
+  }
+  .card:hover { transform: translateY(-3px); box-shadow: 0 16px 48px rgba(0,0,0,0.45); border-color: var(--border-strong); }
+  [data-theme="light"] .card:hover { box-shadow: 0 16px 48px rgba(0,0,0,0.12); }
+  .card-title {
+    font-size: 1.15rem; font-weight: 700; margin-bottom: 16px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .card-title .icon { width: 22px; height: 22px; flex-shrink: 0; }
+  /* Section label */
+  .section-label {
+    display: inline-block; padding: 4px 12px; border-radius: 20px;
+    font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em;
+    background: linear-gradient(90deg, rgba(59,130,246,0.15), rgba(139,92,246,0.15));
+    color: var(--accent-blue); border: 1px solid rgba(59,130,246,0.25);
+    margin-bottom: 10px;
+  }
+  /* Pipeline flow */
+  .pipeline {
+    display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: center;
+  }
+  .pipe-step {
+    background: linear-gradient(135deg, rgba(59,130,246,0.12), rgba(139,92,246,0.12));
+    border: 1px solid rgba(139,92,246,0.25);
+    border-radius: 10px;
+    padding: 14px 18px;
+    min-width: 160px;
+    text-align: center;
+    position: relative;
+    font-size: .9rem;
+    font-weight: 600;
+    transition: transform .2s;
+  }
+  .pipe-step:hover { transform: scale(1.03); }
+  .pipe-step small {
+    display: block; font-weight: 400; color: var(--text-muted); font-size: .78rem; margin-top: 4px; font-family: var(--font-mono);
+  }
+  .pipe-arrow {
+    width: 0; height: 0;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left: 10px solid var(--accent-purple);
+    opacity: .6;
+  }
+  @media (max-width: 700px) {
+    .pipeline { flex-direction: column; }
+    .pipe-arrow { transform: rotate(90deg); }
+  }
+  /* Dual retrieval boxes */
+  .dual-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0;
+  }
+  @media (max-width: 640px) { .dual-grid { grid-template-columns: 1fr; } }
+  .sub-card {
+    border: 1px dashed var(--border-strong); border-radius: 10px; padding: 16px;
+    background: rgba(139,92,246,0.04);
+  }
+  .sub-card h4 { font-size: .92rem; margin-bottom: 8px; color: var(--accent-purple); }
+  .sub-card code { font-family: var(--font-mono); font-size: .78rem; color: var(--text-muted); display: block; margin-top: 4px; }
+  /* Model cards */
+  .model-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+  .model-card {
+    border: 1px solid var(--border); border-radius: 10px; padding: 18px;
+    background: linear-gradient(180deg, rgba(59,130,246,0.06), transparent);
+    transition: transform .2s, border-color .2s;
+  }
+  .model-card:hover { transform: translateY(-3px); border-color: var(--accent-blue); }
+  .model-card h4 { font-size: .95rem; margin-bottom: 10px; }
+  .model-card .badges { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .badge {
+    font-size: .72rem; padding: 3px 10px; border-radius: 20px;
+    background: rgba(255,255,255,0.06); border: 1px solid var(--border);
+    font-family: var(--font-mono); color: var(--text-muted);
+  }
+  /* Equation card */
+  .equation {
+    font-family: var(--font-mono); font-size: .88rem; line-height: 1.9;
+    background: rgba(0,0,0,0.2); padding: 20px; border-radius: 10px;
+    border-left: 3px solid var(--accent-purple); overflow-x: auto;
+  }
+  [data-theme="light"] .equation { background: rgba(15,23,42,0.04); }
+  .equation .var { color: var(--accent-amber); }
+  .equation .op { color: var(--accent-rose); }
+  .equation .num { color: var(--accent-teal); }
+  /* Chatbot flow cards */
+  .chat-flow { display: flex; flex-direction: column; gap: 14px; }
+  .chat-bubble {
+    max-width: 82%; padding: 14px 18px; border-radius: 14px;
+    font-size: .92rem; position: relative; animation: fadeIn .5s ease both;
+  }
+  .chat-bubble.user {
+    align-self: flex-end;
+    background: linear-gradient(135deg, rgba(59,130,246,0.18), rgba(139,92,246,0.18));
+    border: 1px solid rgba(139,92,246,0.25);
+    border-bottom-right-radius: 4px;
+  }
+  .chat-bubble.bot {
+    align-self: flex-start;
+    background: var(--surface-hover); border: 1px solid var(--border);
+    border-bottom-left-radius: 4px;
+  }
+  .chat-bubble .meta { font-size: .72rem; color: var(--text-muted); margin-bottom: 4px; font-family: var(--font-mono); }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  /* Voice flow */
+  .voice-flow { display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; }
+  .voice-card {
+    width: 120px; height: 120px; border-radius: 14px;
+    border: 1px solid var(--border); background: var(--surface-hover);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+    transition: transform .25s, border-color .25s;
+  }
+  .voice-card:hover { transform: translateY(-4px); border-color: var(--accent-purple); }
+  .voice-card svg { width: 32px; height: 32px; }
+  .voice-card span { font-size: .8rem; font-weight: 600; }
+  .voice-arrow { color: var(--accent-purple); opacity: .7; }
+  /* Tables */
+  table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+  th, td { padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--border); }
+  th {
+    background: linear-gradient(90deg, rgba(59,130,246,0.12), rgba(139,92,246,0.12));
+    font-weight: 700; font-size: .82rem; text-transform: uppercase; letter-spacing: .04em;
+  }
+  tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+  [data-theme="light"] tr:nth-child(even) { background: rgba(15,23,42,0.03); }
+  tr:hover { background: rgba(255,255,255,0.04); }
+  /* Code block */
+  pre {
+    background: rgba(0,0,0,0.25); border: 1px solid var(--border); border-radius: 10px;
+    padding: 16px; overflow-x: auto; font-family: var(--font-mono); font-size: .82rem;
+    line-height: 1.6; color: #c7d2fe;
+  }
+  [data-theme="light"] pre { background: #0f172a; color: #c7d2fe; }
+  /* Embedding layers */
+  .layer-stack { display: flex; flex-direction: column; gap: 10px; }
+  .layer {
+    padding: 14px 18px; border-radius: 10px; border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    background: linear-gradient(90deg, rgba(59,130,246,0.08), rgba(139,92,246,0.08));
+    transition: transform .2s;
+  }
+  .layer:hover { transform: translateX(6px); }
+  .layer .label { font-weight: 600; font-size: .92rem; }
+  .layer .detail { font-family: var(--font-mono); font-size: .78rem; color: var(--text-muted); }
+  /* Footer */
+  .doc-footer { text-align: center; padding: 30px; color: var(--text-muted); font-size: .82rem; border-top: 1px solid var(--border); margin-top: 20px; }
+</style>
+</head>
+<body>
+<div class="overlay" id="overlay" onclick="toggleNav()"></div>
+<div class="app">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+      MAROC-LOC
+    </div>
+    <ul class="nav">
+      <li><a href="#overview" class="active">Vue d'ensemble</a></li>
+      <li><a href="#pipeline">Pipeline RAG</a></li>
+      <li><a href="#recommendation">Moteur de Recommandation</a></li>
+      <li><a href="#chatbot">Architecture Chatbot</a></li>
+      <li><a href="#scoring">Système de Scoring</a></li>
+      <li><a href="#models">Modèles d'IA</a></li>
+      <li><a href="#vectorstore">Vector Store</a></li>
+      <li><a href="#conversation">Exemple Conversation</a></li>
+      <li><a href="#voice">Voice Pipeline</a></li>
+    </ul>
+    <button class="theme-btn" onclick="toggleTheme()" id="themeBtn">🌙 Mode sombre</button>
+  </aside>
+
+  <div>
+    <div class="mobile-bar">
+      <div class="logo">MAROC-LOC</div>
+      <button class="hamburger" onclick="toggleNav()" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+    <main class="main">
+      <section class="hero">
+        <h1>MAROC-LOC — Système RAG et IA</h1>
+        <p>Architecture hybride combinant retrieval sémantique, génération multilingue, mémoire conversationnelle et scoring avancé.</p>
+      </section>
+
+      <section id="overview" class="card">
+        <div class="section-label">Vue d'ensemble</div>
+        <div class="card-title">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          Architecture RAG Hybride
+        </div>
+        <p style="margin-bottom:14px; color: var(--text-muted);">MAROC-LOC utilise une architecture <strong>RAG hybride</strong> combinant :</p>
+        <ul style="padding-left: 20px; color: var(--text-muted); line-height: 2;">
+          <li><strong>Retrieval sémantique</strong> — ChromaDB + embeddings MiniLM</li>
+          <li><strong>Retrieval structuré</strong> — PostgreSQL avec filtres SQL</li>
+          <li><strong>Génération multilingue</strong> — FLAN-T5 + NLLB-200</li>
+          <li><strong>Mémoire conversationnelle</strong> — Redis (short-term) + PostgreSQL (long-term)</li>
+        </ul>
+      </section>
+
+      <section id="pipeline" class="card">
+        <div class="section-label">Pipeline</div>
+        <div class="card-title">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          Pipeline RAG Complet — 10 Étapes
+        </div>
+        <div class="pipeline">
+          <div class="pipe-step">1. User Query<small>Texte / Voix</small></div>
+          <div class="pipe-arrow"></div>
+          <div class="pipe-step">2. Lang Detect<small>LangID / FastText</small></div>
+          <div class="pipe-arrow"></div>
+          <div class="pipe-step">3. Translate<small>NLLB-200 → EN</small></div>
+          <div class="pipe-arrow"></div>
+          <div class="pipe-step">4. Intent CLS<small>BART Zero-Shot</small></div>
+          <div class="pipe-arrow"></div>
+          <div class="pipe-step">5. Extract Entities<small>spaCy + Regex</small></div>
+          <div class="pipe-arrow"></div>
+          <div class="pipe-step">6. Dual Retrieval<small>ChromaDB + PostgreSQL</small></div>
+          <div class="pipe-arrow"></div>
+          <div class="pipe-step">7. Merge &amp; Re-rank<small>Dedup + MMR</small></div>
+          <div class="pipe-arrow"></div>
+          <div class="pipe-step">8. PG Validation<small>Exist + APPROVED</small></div>
+          <div class="pipe-arrow"></div>
+          <div class="pipe-step">9. Response Gen<small>FLAN-T5 Multilingue</small></div>
+          <div class="pipe-arrow"></div>
+          <div class="pipe-step">10. Output<small>Cards + Liens</small></div>
+        </div>
+
+        <div class="dual-grid" style="margin-top: 22px;">
+          <div class="sub-card">
+            <h4>🔍 Semantic Search (ChromaDB)</h4>
+            <p style="font-size:.85rem; color:var(--text-muted);">Query Embedding via MiniLM-L12 → Vector Search (cosine similarity) → Top-k=10</p>
+          </div>
+          <div class="sub-card">
+            <h4>🗄️ Structured Search (PostgreSQL)</h4>
+            <code>SELECT * FROM property<br>WHERE city = 'Casa'<br>  AND type = 'RENT'<br>  AND price BETWEEN 5000 AND 8000<br>  AND rooms >= 2</code>
+          </div>
+        </div>
+      </section>
+
+      <section id="recommendation" class="card">
+        <div class="section-label">Recommandation</div>
+        <div class="card-title">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          Moteur de Recommandation RAG-Based
+        </div>
+        <div class="layer-stack">
+          <div class="layer"><span class="label">Data Ingestion</span><span class="detail">Property + Behavior + History + Reviews</span></div>
+          <div class="layer"><span class="label">Embedding Generation</span><span class="detail">Property Embedder / Query Embedder (MiniLM-L12-v2)</span></div>
+          <div class="layer"><span class="label">Vector Storage</span><span class="detail">ChromaDB — collections: properties, user_profiles</span></div>
+          <div class="layer"><span class="label">Retrieval System</span><span class="detail">Semantic Search + Structured Search (PG) → Hybrid Merger</span></div>
+          <div class="layer"><span class="label">Ranking System</span><span class="detail">Content + Collaborative + Quality + MMR Diversity</span></div>
+          <div class="layer"><span class="label">Output</span><span class="detail">Personalized Feed · Similar Properties · Trending · Geo-Nearby</span></div>
+        </div>
+      </section>
+
+      <section id="chatbot" class="card">
+        <div class="section-label">Chatbot</div>
+        <div class="card-title">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Architecture du Chatbot RAG
+        </div>
+        <div class="dual-grid">
+          <div class="sub-card">
+            <h4 style="color:var(--accent-blue)">Frontend — React Widget</h4>
+            <ul style="font-size:.85rem; color:var(--text-muted); padding-left:16px; line-height:1.8;">
+              <li>Input Field (Text)</li>
+              <li>Voice Rec (Media API)</li>
+              <li>Language Select (fr/ar/darija)</li>
+              <li>useAIChat Hook (State Mgmt)</li>
+            </ul>
+          </div>
+          <div class="sub-card">
+            <h4 style="color:var(--accent-teal)">Backend — Spring Boot</h4>
+            <ul style="font-size:.85rem; color:var(--text-muted); padding-left:16px; line-height:1.8;">
+              <li><code>/smart/chat</code> (role-aware)</li>
+              <li><code>/rag/chat</code> (full RAG)</li>
+              <li><code>/voice/chat</code> (STT + RAG)</li>
+            </ul>
+          </div>
+        </div>
+        <div style="margin-top:16px; padding:16px; border:1px dashed var(--border-strong); border-radius:10px; background:rgba(139,92,246,0.04);">
+          <h4 style="color:var(--accent-purple); margin-bottom:10px;">AI Service — FastAPI</h4>
+          <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap:10px; font-size:.82rem; color:var(--text-muted);">
+            <div>1. Lang Detection → LangID</div>
+            <div>2. Translation → NLLB-200</div>
+            <div>3. Intent CLS → BART Zero-Shot</div>
+            <div>4. Entity Extract → spaCy</div>
+            <div>5. Vector Search → ChromaDB</div>
+            <div>6. PG Validation → PostgreSQL</div>
+            <div>7. Response Gen → FLAN-T5</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="scoring" class="card">
+        <div class="section-label">Scoring</div>
+        <div class="card-title">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          Système de Scoring
+        </div>
+
+        <p style="font-weight:700; margin-bottom:10px; font-size:.95rem;">Score de Qualité de Propriété</p>
+        <div class="equation">
+<span class="var">QualityScore</span> =<br>
+&nbsp;&nbsp;<span class="var">ListingCompleteness</span>&nbsp;&nbsp;&nbsp;<span class="op">×</span> <span class="num">0.15</span>  <span class="op">+</span><br>
+&nbsp;&nbsp;<span class="var">MediaQuality</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="op">×</span> <span class="num">0.15</span>  <span class="op">+</span><br>
+&nbsp;&nbsp;<span class="var">DescriptionQuality</span>&nbsp;&nbsp;&nbsp;<span class="op">×</span> <span class="num">0.10</span>  <span class="op">+</span><br>
+&nbsp;&nbsp;<span class="var">PriceCompetitiveness</span>&nbsp;<span class="op">×</span> <span class="num">0.20</span>  <span class="op">+</span><br>
+&nbsp;&nbsp;<span class="var">EngagementVelocity</span>&nbsp;&nbsp;&nbsp;<span class="op">×</span> <span class="num">0.15</span>  <span class="op">+</span><br>
+&nbsp;&nbsp;<span class="var">TrustScore</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="op">×</span> <span class="num">0.10</span>  <span class="op">+</span><br>
+&nbsp;&nbsp;<span class="var">Freshness</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="op">×</span> <span class="num">0.10</span>  <span class="op">+</span><br>
+&nbsp;&nbsp;<span class="var">LocationPremium</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="op">×</span> <span class="num">0.05</span>
+        </div>
+
+        <p style="font-weight:700; margin:22px 0 10px; font-size:.95rem;">Score Hybride de Recommandation</p>
+        <div class="equation">
+<span class="var">TotalScore</span> =<br>
+&nbsp;&nbsp;<span class="var">Collaborative</span> <span class="op">×</span> <span class="num">0.25</span> <span class="op">+</span><br>
+&nbsp;&nbsp;<span class="var">Content</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="op">×</span> <span class="num">0.25</span> <span class="op">+</span><br>
+&nbsp;&nbsp;<span class="var">Popularity</span>&nbsp;&nbsp;&nbsp; <span class="op">×</span> <span class="num">0.20</span> <span class="op">+</span><br>
+&nbsp;&nbsp;<span class="var">Recency</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="op">×</span> <span class="num">0.10</span> <span class="op">+</span><br>
+&nbsp;&nbsp;<span class="var">Geo</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="op">×</span> <span class="num">0.10</span> <span class="op">+</span><br>
+&nbsp;&nbsp;<span class="var">Trust</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="op">×</span> <span class="num">0.10</span> <span class="op">+</span><br>
+&nbsp;&nbsp;<span class="var">Quality</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="op">×</span> <span class="num">0.10</span><br><br>
+<span class="var">Collaborative_decayed</span> = <span class="var">Collaborative</span> <span class="op">×</span> exp(-days / <span class="num">30</span>)
+        </div>
+
+        <p style="font-weight:700; margin:22px 0 10px; font-size:.95rem;">MMR — Maximal Marginal Relevance</p>
+        <div class="equation">
+<span class="var">MMR_score</span> = λ <span class="op">×</span> <span class="var">relevance_score</span> - (1-λ) <span class="op">×</span> <span class="var">max_similarity_to_selected</span><br><br>
+λ = <span class="num">0.75</span> (relevance vs diversity)
+        </div>
+      </section>
+
+      <section id="models" class="card">
+        <div class="section-label">Modèles</div>
+        <div class="card-title">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          Modèles d'IA Utilisés
+        </div>
+        <div class="model-grid">
+          <div class="model-card">
+            <h4>sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2</h4>
+            <div class="badges"><span class="badge">~120MB</span><span class="badge">Embeddings</span><span class="badge">fr, ar, en, +50</span></div>
+          </div>
+          <div class="model-card">
+            <h4>google/flan-t5-base</h4>
+            <div class="badges"><span class="badge">~250MB</span><span class="badge">Génération RAG</span><span class="badge">en (traduit)</span></div>
+          </div>
+          <div class="model-card">
+            <h4>facebook/bart-large-mnli</h4>
+            <div class="badges"><span class="badge">~400MB</span><span class="badge">Intent CLS</span><span class="badge">en</span></div>
+          </div>
+          <div class="model-card">
+            <h4>facebook/nllb-200-distilled-600M</h4>
+            <div class="badges"><span class="badge">~600MB</span><span class="badge">Traduction</span><span class="badge">200+ langues</span></div>
+          </div>
+          <div class="model-card">
+            <h4>openai/whisper-base</h4>
+            <div class="badges"><span class="badge">~150MB</span><span class="badge">Speech-to-Text</span><span class="badge">fr, ar, en</span></div>
+          </div>
+          <div class="model-card">
+            <h4>cross-encoder/ms-marco-MiniLM-L-6-v2</h4>
+            <div class="badges"><span class="badge">~80MB</span><span class="badge">Re-ranking</span><span class="badge">en</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="vectorstore" class="card">
+        <div class="section-label">Vector Store</div>
+        <div class="card-title">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+          Schéma ChromaDB
+        </div>
+        <p style="font-weight:700; font-size:.9rem; margin-bottom:8px;">Collection: properties</p>
+        <pre>{
+  "id": "prop_12345",
+  "embedding": [0.023, -0.156, ..., 0.089],  <span style="color:#64748b">// 384-dim MiniLM</span>
+  "document": "Appartement moderne 2 chambres Casablanca Maarif 8000 MAD",
+  "metadata": {
+    "property_id": 12345, "title": "Appartement moderne",
+    "city": "Casablanca", "neighborhood": "Maarif",
+    "price": 8000, "bedrooms": 2,
+    "category": "APARTMENT", "type": "RENT", "language": "french"
+  }
+}</pre>
+        <p style="font-weight:700; font-size:.9rem; margin:18px 0 8px;">Collection: user_profiles</p>
+        <pre>{
+  "id": "user_987",
+  "embedding": [0.045, -0.023, ..., 0.112],
+  "document": "User preferences: Casablanca, Apartment, 6000-10000 MAD",
+  "metadata": {
+    "user_id": 987,
+    "preferred_cities": ["Casablanca", "Rabat"],
+    "preferred_categories": ["APARTMENT", "VILLA"],
+    "budget_range": [6000, 10000]
+  }
+}</pre>
+      </section>
+
+      <section id="conversation" class="card">
+        <div class="section-label">Conversation</div>
+        <div class="card-title">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Exemple de Conversation Chatbot
+        </div>
+        <div class="chat-flow">
+          <div class="chat-bubble user">
+            <div class="meta">Utilisateur — Darija (Moroccan Arabic)</div>
+            بغيت شي دار فمراكش ب 3 ديال البيوت و حمام سباحة
+          </div>
+          <div class="chat-bubble bot" style="animation-delay:.15s">
+            <div class="meta">Pipeline Interne</div>
+            <div style="font-size:.85rem; color:var(--text-muted); line-height:1.7;">
+              [1] Lang Detection: <strong>Darija</strong><br>
+              [2] Translation: "I want a house in Marrakech with 3 bedrooms and swimming pool"<br>
+              [3] Intent: <strong>SEARCH_PROPERTY</strong> (confidence: 0.94)<br>
+              [4] Entities: city=Marrakech · category=HOUSE · bedrooms=3 · amenity=pool<br>
+              [5] Vector Search → Top 5 properties from ChromaDB<br>
+              [6] PG Validation: All 5 exist and are AVAILABLE
+            </div>
+          </div>
+          <div class="chat-bubble bot" style="animation-delay:.3s">
+            <div class="meta">Réponse — FLAN-T5 + Property Cards</div>
+            لقيت ليك 5 ديال الديور فمراكش<br>
+            <span style="color:var(--text-muted); font-size:.85rem;">(J'ai trouvé 5 maisons à Marrakech pour vous)</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="voice" class="card">
+        <div class="section-label">Voice</div>
+        <div class="card-title">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+          Voice Pipeline
+        </div>
+        <div class="voice-flow">
+          <div class="voice-card">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg>
+            <span>Audio</span>
+            <small style="font-size:.7rem; color:var(--text-muted)">mp3/wav/webm</small>
+          </div>
+          <svg class="voice-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          <div class="voice-card">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 10v3"/><path d="M6 6v11"/><path d="M10 3v18"/><path d="M14 8v7"/><path d="M18 5v13"/><path d="M22 10v3"/></svg>
+            <span>Whisper</span>
+            <small style="font-size:.7rem; color:var(--text-muted)">~150MB</small>
+          </div>
+          <svg class="voice-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          <div class="voice-card">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>
+            <span>Text</span>
+            <small style="font-size:.7rem; color:var(--text-muted)">Darija→Arabic token</small>
+          </div>
+          <svg class="voice-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          <div class="voice-card">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            <span>RAG Response</span>
+            <small style="font-size:.7rem; color:var(--text-muted)">Multilingue</small>
+          </div>
+        </div>
+
+        <div style="margin-top:22px; padding:16px; border:1px dashed var(--border-strong); border-radius:10px; background:rgba(139,92,246,0.04);">
+          <h4 style="color:var(--accent-purple); margin-bottom:10px;">Conversation Memory</h4>
+          <div class="dual-grid" style="margin:0;">
+            <div class="sub-card" style="background:rgba(59,130,246,0.06);">
+              <h4 style="color:var(--accent-blue)">Short-term</h4>
+              <p style="font-size:.85rem; color:var(--text-muted);">Redis — session TTL: 1h</p>
+            </div>
+            <div class="sub-card" style="background:rgba(45,212,191,0.06);">
+              <h4 style="color:var(--accent-teal)">Long-term</h4>
+              <p style="font-size:.85rem; color:var(--text-muted);">PostgreSQL — conversation_history</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="doc-footer">
+        Document généré le 24 Mai 2026 — Version 1.0 · MAROC-LOC Architecture RAG
+      </div>
+    </main>
+  </div>
+</div>
+
+<script>
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.getElementById('overlay');
+  function toggleNav() {
+    sidebar.classList.toggle('open');
+    overlay.classList.toggle('open');
+  }
+  function toggleTheme() {
+    const root = document.documentElement;
+    const btn = document.getElementById('themeBtn');
+    if (root.getAttribute('data-theme') === 'light') {
+      root.removeAttribute('data-theme');
+      btn.textContent = '🌙 Mode sombre';
+      localStorage.setItem('theme', 'dark');
+    } else {
+      root.setAttribute('data-theme', 'light');
+      btn.textContent = '☀️ Mode clair';
+      localStorage.setItem('theme', 'light');
+    }
+  }
+  (function init() {
+    const saved = localStorage.getItem('theme');
+    if (saved === 'light') { document.documentElement.setAttribute('data-theme','light'); document.getElementById('themeBtn').textContent='☀️ Mode clair'; }
+  })();
+  // Active link on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav a');
+  window.addEventListener('scroll', () => {
+    let cur = '';
+    sections.forEach(s => { if (scrollY >= s.offsetTop - 120) cur = s.getAttribute('id'); });
+    navLinks.forEach(a => { a.classList.remove('active'); if (a.getAttribute('href') === '#' + cur) a.classList.add('active'); });
+  });
+</script>
+</body>
+</html>

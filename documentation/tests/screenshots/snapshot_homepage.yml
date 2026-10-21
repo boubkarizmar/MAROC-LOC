@@ -1,0 +1,17 @@
+- generic [ref=e161]:
+  - link "Aller au contenu principal" [ref=e162] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic [ref=e163]:
+    - banner:
+      - navigation [ref=e164]
+    - main [ref=e185]:
+      - generic [ref=e187]
+    - contentinfo [ref=e1266]:
+      - generic [ref=e1269]
+  - button "Open assistant" [ref=e1346] [cursor=pointer]:
+    - img [ref=e1348]
+    - img [ref=e1351]
+  - generic [ref=e62]:
+    - img [ref=e64]
+    - button "Open Tanstack query devtools" [ref=e112] [cursor=pointer]:
+      - img [ref=e113]

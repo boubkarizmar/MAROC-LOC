@@ -1,0 +1,164 @@
+{
+  "timestamp": "2026-06-02T21:51:21.138Z",
+  "baseUrl": "http://localhost:3000",
+  "dashboard": {
+    "url": "http://localhost:3000/dashboard",
+    "screenshot": "c:\\Users\\HP\\Desktop\\pfe\\pricipaux\\MAROC-LOC\\audit_20260602_221346\\screenshots\\dashboard_authenticated.png",
+    "authenticated": true,
+    "userId": 41,
+    "charts": {
+      "canvasCount": 0,
+      "svgCount": 53,
+      "chartDivCount": 3,
+      "canvasDetails": []
+    },
+    "cardMetrics": [],
+    "uiNumbers": [
+      {
+        "text": "MAROC-LOCTROUVEZ. LOUEZ. VIVEZ.AccueilRechercherFavorisMessagesFRPublier une annonceDDash Test",
+        "tag": "DIV",
+        "className": "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+      },
+      {
+        "text": "MAROC-LOCTROUVEZ. LOUEZ. VIVEZ.AccueilRechercherFavorisMessagesFRPublier une annonceDDash Test",
+        "tag": "DIV",
+        "className": "flex items-center justify-between h-16 lg:h-20"
+      },
+      {
+        "text": "MAROC-LOCTROUVEZ. LOUEZ. VIVEZ.",
+        "tag": "DIV",
+        "className": "hidden sm:flex flex-col"
+      },
+      {
+        "text": "TROUVEZ. LOUEZ. VIVEZ.",
+        "tag": "SPAN",
+        "className": "text-[10px] font-medium tracking-[0.2em] leading-none mt-0.5 text-[color:var(--c"
+      },
+      {
+        "text": "Propriétés0Vues0Favoris0Demandes0Note0/5Boosts0",
+        "tag": "DIV",
+        "className": "grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mt-6"
+      },
+      {
+        "text": "Propriétés0",
+        "tag": "DIV",
+        "className": ""
+      },
+      {
+        "text": "Propriétés0",
+        "tag": "DIV",
+        "className": "rounded-2xl bg-white border border-slate-100 p-5 shadow-sm cursor-pointer"
+      },
+      {
+        "text": "Propriétés0",
+        "tag": "DIV",
+        "className": "flex items-center justify-between"
+      },
+      {
+        "text": "Propriétés0",
+        "tag": "DIV",
+        "className": ""
+      },
+      {
+        "text": "0",
+        "tag": "P",
+        "className": "text-2xl font-black text-slate-900 dark:text-slate-50 mt-1"
+      },
+      {
+        "text": "0",
+        "tag": "SPAN",
+        "className": ""
+      },
+      {
+        "text": "Vues0",
+        "tag": "DIV",
+        "className": ""
+      },
+      {
+        "text": "Vues0",
+        "tag": "DIV",
+        "className": "rounded-2xl bg-white border border-slate-100 p-5 shadow-sm "
+      },
+      {
+        "text": "Vues0",
+        "tag": "DIV",
+        "className": "flex items-center justify-between"
+      },
+      {
+        "text": "Vues0",
+        "tag": "DIV",
+        "className": ""
+      },
+      {
+        "text": "0",
+        "tag": "P",
+        "className": "text-2xl font-black text-slate-900 dark:text-slate-50 mt-1"
+      },
+      {
+        "text": "0",
+        "tag": "SPAN",
+        "className": ""
+      },
+      {
+        "text": "Favoris0",
+        "tag": "DIV",
+        "className": ""
+      },
+      {
+        "text": "Favoris0",
+        "tag": "DIV",
+        "className": "rounded-2xl bg-white border border-slate-100 p-5 shadow-sm "
+      },
+      {
+        "text": "Favoris0",
+        "tag": "DIV",
+        "className": "flex items-center justify-between"
+      }
+    ],
+    "sections": {
+      "analytics": true,
+      "statistics": false,
+      "overview": false,
+      "properties": false,
+      "bookings": false,
+      "revenue": false,
+      "messages": true,
+      "profile": false,
+      "settings": false,
+      "dashboard": false,
+      "visites": true,
+      "propriétés": true,
+      "réservations": false
+    },
+    "apiData": {
+      "/api/v1/analytics": {
+        "status": 401,
+        "error": "{\"success\":false,\"message\":\"Authentification requise\",\"errorCode\":\"AUTH_REQUIRED\"}"
+      },
+      "/api/v1/admin/analytics": {
+        "status": 401,
+        "error": "{\"success\":false,\"message\":\"Authentification requise\",\"errorCode\":\"AUTH_REQUIRED\"}"
+      },
+      "/api/v1/stats": {
+        "status": 401,
+        "error": "{\"success\":false,\"message\":\"Authentification requise\",\"errorCode\":\"AUTH_REQUIRED\"}"
+      },
+      "/api/v1/ads/my": {
+        "status": 500,
+        "error": "{\"success\":false,\"message\":\"Une erreur interne s'est produite\",\"errorCode\":\"INTERNAL_ERROR\",\"path\":\"/api/v1/ads/my\",\"timestamp\":\"2026-06-02T21:51:20\",\"traceId\":\"d9a20b29\",\"suggestion\":\"Veuillez réessayer dans quelques instants. Si le problème persiste, contactez le support.\"}"
+      },
+      "/api/v1/bookings": {
+        "status": 401,
+        "error": "{\"success\":false,\"message\":\"Authentification requise\",\"errorCode\":\"AUTH_REQUIRED\"}"
+      }
+    },
+    "overflow": {
+      "scrollWidth": 1920,
+      "clientWidth": 1920,
+      "innerWidth": 1920,
+      "hasHorizontalScrollbar": false,
+      "overflowPixels": 0
+    },
+    "consoleLogs": []
+  }
+}

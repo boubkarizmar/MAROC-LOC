@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"><title>Nouveau message</title></head>
+<body style="margin:0;padding:0;background:#f5f5f0;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;">
+    <table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td align="center" style="padding:24px 0;">
+    <table width="600" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;width:100%;background:#fff;border-radius:12px;overflow:hidden;">
+        <tr>
+            <td style="background:linear-gradient(135deg,#00695C 0%,#004D40 100%);padding:40px 24px;text-align:center;">
+                <h1 style="color:#fff;margin:0;font-size:26px;letter-spacing:2px;">💬 Nouveau message</h1>
+            </td>
+        </tr>
+        <tr><td style="padding:32px 24px;">
+            <p style="color:#444;line-height:1.7;">
+                Vous avez reçu un nouveau message concernant votre annonce :
+            </p>
+            <div style="background:#f8f9fa;border-left:4px solid #D4AF37;padding:16px 20px;margin:20px 0;border-radius:0 8px 8px 0;">
+                <p style="margin:0 0 8px;color:#333;"><strong>De :</strong> <span th:text="${senderName}">Acheteur</span></p>
+                <p style="margin:0 0 8px;color:#333;"><strong>Bien :</strong> <span th:text="${propertyTitle}">Appartement</span></p>
+            </div>
+            <table cellpadding="0" cellspacing="0" border="0" style="margin:24px 0;"><tr><td>
+                <a th:href="${frontendUrl} + '/messages'" style="display:inline-block;padding:14px 32px;background:linear-gradient(135deg,#00695C 0%,#004D40 100%);color:#fff;text-decoration:none;border-radius:8px;font-weight:600;">Répondre</a>
+            </td></tr></table>
+            <p style="font-size:12px;color:#888;">
+                Ne perdez pas de temps — une réponse rapide augmente vos chances de conclure une transaction.
+            </p>
+        </td></tr>
+        <tr><td style="background:#f0f0eb;padding:24px;text-align:center;font-size:12px;color:#666;">
+            <p style="margin:0;">© 2026 MAROC-LOC · Casablanca, Maroc</p>
+        </td></tr>
+    </table>
+    </td></tr></table>
+</body>
+</html>

@@ -1,0 +1,167 @@
+# Environment
+.env
+.env.local
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+ai-service/venv/
+ai-service/.env
+ai-service/.pytest_cache/
+
+# Node
+node_modules/
+frontend/dist/
+
+# Java
+backend/target/
+backend/logs/
+*.jar
+
+# Flutter / Mobile
+mobile-app/.dart_tool/
+mobile-app/build/
+mobile-app/.flutter-plugins-dependencies
+
+# IDE
+.vscode/
+.idea/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Docker artifacts
+blobs/
+manifests/
+
+# Backup / Merge artifacts
+*.bak
+*.orig
+*.rej
+
+# Stale renamed directories
+marocloc-ai-service/
+
+# Temporary
+tmp/
+temp/
+*.tmp
+
+# Playwright MCP logs
+.playwright-mcp/
+
+# Generated uploads / model weights / local DBs
+backend/uploads/
+ai-service/model_weights/
+ai-service/chroma_db/
+mobile-app/.flutter-plugins
+
+# Release artifacts
+release/
+
+# MAROC-LOC GitHub release safety rules
+**/.env.development
+**/.env.production
+k8s/**/secret*.yaml
+documentation/audit/**/token*.txt
+documentation/audit/**/buyer_token.txt
+documentation/audit/**/owner_token.txt
+**/refresh_token.txt
+
+# Local secrets and test credentials - do not publish
+.env
+.env.*
+!.env.example
+admin_login.json
+refresh_resp.json
+refresh_token.txt
+
+# Local API test payloads
+create_prop.json
+prop.json
+prop2.json
+property_complete.json
+test_property_video.json
+
+# Accidental terminal output
+tatus*
+
+# Exclude all Markdown files from GitHub release
+*.md
+
+# Exclude all Markdown files from the public release
+*.md
+
+# Exclude large local release artifacts
+/release/
+
+# Exclude test results and local runtime evidence
+/test_results/
+/frontend/test-results/
+
+# Exclude all Markdown files as requested
+*.md
+
+# Local test credentials and API payloads
+admin_login.json
+create_prop.json
+prop.json
+prop2.json
+refresh_resp.json
+refresh_token.txt
+*_token.txt
+runtime-*-console.json
+
+# Local environment configuration; keep examples
+.env
+.env.*
+!.env.example
+**/.env.example
+
+# Test output, runtime logs, screenshots and temporary audio
+test_results/
+test_results/**
+test_results/**/*
+test_results/
+test-results/
+**/test-results/
+coverage/
+playwright-report/
+allure-results/
+.playwright-mcp/
+**/.playwright-mcp/
+**/logs/
+*.log
+dummy.wav
+
+# Large release artifacts
+/release/
+*.jar
+
+# Accidental terminal output
+/tatus*
+
+# Allow safe environment templates in all project directories
+!.env.example
+!**/.env.example
+/simulate_stripe_webhook.py.local-backup
+/property119_error.png
+/property119_fixed.png
+/property119_prod_fixed.png
+/runtime-01-home.png
+/runtime-02-property50.png
+/runtime-03-property50-fresh.png
+/test_upload.png
+
+# Local safety backups - never publish
+*.local-backup
+
+# Local audit evidence and test logs - review before public release
+/documentation/audit/audit_proof/

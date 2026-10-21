@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: marocloc-config
+  namespace: marocloc
+data:
+  SPRING_PROFILES_ACTIVE: "prod"
+  SERVER_PORT: "8080"
+  AI_SERVICE_URL: "http://ai-service:8000"
+  KAFKA_BOOTSTRAP_SERVERS: "kafka:9092"
+  REDIS_HOST: "redis"
+  REDIS_PORT: "6379"
+  CORS_ALLOWED_ORIGINS: "https://marocloc.ma,https://app.marocloc.ma"
+  LOG_LEVEL: "INFO"
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ai-service-config
+  namespace: marocloc
+data:
+  DEVICE: "cpu"
+  CHROMA_DB_PATH: "/app/data/chroma"
+  EMBEDDING_MODEL: "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
+  LLM_MODEL: "google/flan-t5-base"
+  WHISPER_MODEL: "openai/whisper-base"
+  MLFLOW_TRACKING_URI: "file:///app/mlflow"
+  KAFKA_BROKER: "kafka:9092"

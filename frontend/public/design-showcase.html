@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MAROC-LOC — نظام التصميم الكامل</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            gold: { 400: '#D4AF37', 500: '#C8A96B', 600: '#A68B4B' },
+            primary: { 500: '#0D9488', 600: '#0F766E' },
+            dark: { bg: '#0A0F1C', surface: '#141B2D', elevated: '#1E2740' }
+          },
+          fontFamily: {
+            cairo: ['Cairo', 'sans-serif'],
+            inter: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'Cairo', sans-serif; background: #0A0F1C; }
+    .glass { background: rgba(255,255,255,0.05); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.08); }
+    .gold-gradient { background: linear-gradient(135deg, #D4AF37 0%, #C8A96B 100%); }
+    .text-gold-gradient { background: linear-gradient(135deg, #D4AF37, #C8A96B); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .phone-frame { border: 8px solid #1E2740; border-radius: 32px; overflow: hidden; background: #0A0F1C; position: relative; }
+    .phone-frame::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 40%; height: 20px; background: #1E2740; border-bottom-left-radius: 12px; border-bottom-right-radius: 12px; z-index: 10; }
+    .screen-mock { aspect-ratio: 9/19; background: linear-gradient(180deg, #141B2D 0%, #0A0F1C 100%); }
+    .pattern-bg { background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23D4AF37' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); }
+  </style>
+</head>
+<body class="min-h-screen text-white pattern-bg">
+
+  <!-- Header -->
+  <header class="py-8 px-6 text-center">
+    <div class="flex items-center justify-center gap-4 mb-4">
+      <img src="/images/logo.png" alt="MAROC-LOC" class="h-16 w-auto">
+      <div class="text-right">
+        <h1 class="text-2xl font-black tracking-wider">MAROC-LOC</h1>
+        <p class="text-xs text-gold-400 tracking-[0.2em]">TROUVEZ. LOUEZ. VIVEZ.</p>
+      </div>
+    </div>
+    <h2 class="text-3xl md:text-4xl font-black mt-4">نظام التصميم الكامل</h2>
+    <p class="text-white/50 mt-2">Modern Luxury Minimal — منصة عقارية مغربية حديثة</p>
+  </header>
+
+  <!-- Color System -->
+  <section class="max-w-6xl mx-auto px-6 py-8">
+    <h3 class="text-xl font-bold text-gold-400 mb-6 text-center">نظام الألوان</h3>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div class="glass rounded-2xl p-4 text-center">
+        <div class="w-full h-16 rounded-xl bg-gradient-to-br from-primary-500 to-primary-600 mb-3"></div>
+        <p class="text-sm font-bold">Primary Teal</p>
+        <p class="text-xs text-white/40">#0D9488</p>
+      </div>
+      <div class="glass rounded-2xl p-4 text-center">
+        <div class="w-full h-16 rounded-xl gold-gradient mb-3"></div>
+        <p class="text-sm font-bold">Luxury Gold</p>
+        <p class="text-xs text-white/40">#D4AF37</p>
+      </div>
+      <div class="glass rounded-2xl p-4 text-center">
+        <div class="w-full h-16 rounded-xl bg-dark-surface mb-3 border border-white/10"></div>
+        <p class="text-sm font-bold">Dark Surface</p>
+        <p class="text-xs text-white/40">#141B2D</p>
+      </div>
+      <div class="glass rounded-2xl p-4 text-center">
+        <div class="w-full h-16 rounded-xl bg-terracotta-500 mb-3"></div>
+        <p class="text-sm font-bold">Terracotta</p>
+        <p class="text-xs text-white/40">#B65F3C</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Screen Mockups -->
+  <section class="max-w-6xl mx-auto px-6 py-8">
+    <h3 class="text-xl font-bold text-gold-400 mb-6 text-center">الشاشات الرئيسية</h3>
+
+    <!-- Web Screens Row -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+      <!-- Splash Screen Mock -->
+      <div class="glass rounded-3xl p-6">
+        <p class="text-sm font-bold text-gold-400 mb-3">Splash Screen</p>
+        <div class="relative rounded-2xl overflow-hidden aspect-video bg-gradient-to-br from-dark-bg via-[#0D1525] to-[#111A2E]">
+          <div class="absolute inset-0 flex flex-col items-center justify-center">
+            <img src="/images/logo.png" class="h-20 w-auto mb-4" style="filter: drop-shadow(0 0 30px rgba(212,176,55,0.3));">
+            <p class="text-2xl font-black"><span class="text-white">MAROC</span><span class="text-gold-400">LOC</span></p>
+            <p class="text-xs text-white/40 mt-2 tracking-widest">L'IMMOBILIER INTELLIGENT DU MAROC</p>
+            <div class="mt-6 w-32 h-1 rounded-full bg-white/10 overflow-hidden">
+              <div class="h-full w-3/4 gold-gradient"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Home Screen Mock -->
+      <div class="glass rounded-3xl p-6">
+        <p class="text-sm font-bold text-gold-400 mb-3">Home Page</p>
+        <div class="relative rounded-2xl overflow-hidden aspect-video bg-gradient-to-br from-slate-900/90 to-teal-950/80">
+          <div class="absolute inset-0 bg-[url('/images/hero-bg.jpeg')] bg-cover bg-center opacity-40"></div>
+          <div class="absolute inset-0 bg-gradient-to-b from-black/60 to-transparent"></div>
+          <div class="relative p-6 h-full flex flex-col justify-between">
+            <div class="flex items-center gap-2">
+              <span class="px-3 py-1 rounded-full bg-gold-400/20 border border-gold-400/30 text-gold-300 text-xs font-bold">✦ Premium</span>
+            </div>
+            <div>
+              <h2 class="text-2xl font-black text-white leading-tight">L'art de vivre<br><span class="text-gold-400">marocain</span></h2>
+              <div class="mt-3 glass rounded-xl p-3 flex gap-2">
+                <div class="flex-1 h-8 bg-white/10 rounded-lg"></div>
+                <div class="w-20 h-8 gold-gradient rounded-lg"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Screens Row -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <!-- Mobile Home -->
+      <div class="flex flex-col items-center">
+        <p class="text-xs font-bold text-gold-400 mb-2">Mobile Home</p>
+        <div class="phone-frame w-full max-w-[200px]">
+          <div class="screen-mock p-3 flex flex-col">
+            <div class="flex items-center justify-between mb-3">
+              <img src="/images/logo.png" class="h-6 w-auto">
+              <div class="w-6 h-6 rounded-full bg-gold-400/20"></div>
+            </div>
+            <div class="text-lg font-black leading-tight">ابحث عن<br><span class="text-gold-400">بيتك</span></div>
+            <div class="mt-2 h-8 bg-white/10 rounded-lg"></div>
+            <div class="mt-3 grid grid-cols-2 gap-2">
+              <div class="aspect-square rounded-xl bg-white/5"></div>
+              <div class="aspect-square rounded-xl bg-white/5"></div>
+            </div>
+            <div class="mt-auto flex justify-around py-2 border-t border-white/10">
+              <div class="w-5 h-5 rounded bg-gold-400/30"></div>
+              <div class="w-5 h-5 rounded bg-white/10"></div>
+              <div class="w-5 h-5 rounded bg-white/10"></div>
+              <div class="w-5 h-5 rounded bg-white/10"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile Search -->
+      <div class="flex flex-col items-center">
+        <p class="text-xs font-bold text-gold-400 mb-2">Search & Filter</p>
+        <div class="phone-frame w-full max-w-[200px]">
+          <div class="screen-mock p-3 flex flex-col">
+            <div class="h-8 bg-white/10 rounded-lg mb-3"></div>
+            <div class="flex gap-2 mb-3">
+              <div class="h-6 flex-1 rounded-full gold-gradient"></div>
+              <div class="h-6 flex-1 rounded-full bg-white/10"></div>
+            </div>
+            <div class="space-y-2">
+              <div class="h-20 rounded-xl bg-white/5 flex gap-2 p-2">
+                <div class="w-16 h-full rounded-lg bg-white/10"></div>
+                <div class="flex-1 space-y-1">
+                  <div class="h-3 w-20 bg-white/20 rounded"></div>
+                  <div class="h-2 w-12 bg-gold-400/30 rounded"></div>
+                </div>
+              </div>
+              <div class="h-20 rounded-xl bg-white/5 flex gap-2 p-2">
+                <div class="w-16 h-full rounded-lg bg-white/10"></div>
+                <div class="flex-1 space-y-1">
+                  <div class="h-3 w-20 bg-white/20 rounded"></div>
+                  <div class="h-2 w-12 bg-gold-400/30 rounded"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile Property Detail -->
+      <div class="flex flex-col items-center">
+        <p class="text-xs font-bold text-gold-400 mb-2">Property Details</p>
+        <div class="phone-frame w-full max-w-[200px]">
+          <div class="screen-mock flex flex-col">
+            <div class="h-32 bg-gradient-to-b from-white/10 to-transparent relative">
+              <div class="absolute top-2 left-2 px-2 py-0.5 rounded-full bg-gold-400 text-dark-bg text-[10px] font-bold">مميز</div>
+            </div>
+            <div class="p-3 flex-1">
+              <div class="h-3 w-24 bg-white/20 rounded mb-2"></div>
+              <div class="h-4 w-32 bg-white/30 rounded mb-2"></div>
+              <div class="flex gap-3 mt-2">
+                <div class="h-2 w-8 bg-white/10 rounded"></div>
+                <div class="h-2 w-8 bg-white/10 rounded"></div>
+                <div class="h-2 w-8 bg-white/10 rounded"></div>
+              </div>
+              <div class="mt-4 h-8 gold-gradient rounded-lg"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile Dashboard -->
+      <div class="flex flex-col items-center">
+        <p class="text-xs font-bold text-gold-400 mb-2">Dashboard</p>
+        <div class="phone-frame w-full max-w-[200px]">
+          <div class="screen-mock p-3 flex flex-col">
+            <p class="text-sm font-bold mb-3">لوحة التحكم</p>
+            <div class="grid grid-cols-2 gap-2 mb-3">
+              <div class="p-2 rounded-xl bg-white/5 text-center">
+                <div class="text-lg font-black text-gold-400">24</div>
+                <div class="text-[10px] text-white/40">عقار</div>
+              </div>
+              <div class="p-2 rounded-xl bg-white/5 text-center">
+                <div class="text-lg font-black text-gold-400">156</div>
+                <div class="text-[10px] text-white/40">مشاهدة</div>
+              </div>
+            </div>
+            <div class="flex-1 rounded-xl bg-white/5 p-2">
+              <div class="h-2 w-16 bg-white/20 rounded mb-2"></div>
+              <div class="space-y-1">
+                <div class="h-8 rounded-lg bg-white/5"></div>
+                <div class="h-8 rounded-lg bg-white/5"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Typography & Components -->
+  <section class="max-w-6xl mx-auto px-6 py-8">
+    <h3 class="text-xl font-bold text-gold-400 mb-6 text-center">المكونات والطباعة</h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="glass rounded-2xl p-6">
+        <h4 class="text-sm font-bold text-white/60 mb-4">Typography Scale</h4>
+        <div class="space-y-3">
+          <p class="text-3xl font-black">عنوان رئيسي Hero</p>
+          <p class="text-2xl font-bold">عنوان فرعي H1</p>
+          <p class="text-xl font-semibold">عنوان قسم H2</p>
+          <p class="text-base">نص عادي — محتوى الوصف والتفاصيل</p>
+          <p class="text-sm text-white/60">نص صغير — التسميات والملاحظات</p>
+        </div>
+      </div>
+      <div class="glass rounded-2xl p-6">
+        <h4 class="text-sm font-bold text-white/60 mb-4">Buttons & Badges</h4>
+        <div class="space-y-3">
+          <div class="flex gap-2 flex-wrap">
+            <button class="px-6 py-2.5 rounded-xl gold-gradient text-dark-bg font-bold text-sm">Primary Gold</button>
+            <button class="px-6 py-2.5 rounded-xl bg-primary-500 text-white font-bold text-sm">Primary Teal</button>
+          </div>
+          <div class="flex gap-2 flex-wrap">
+            <button class="px-6 py-2.5 rounded-xl bg-white/10 text-white font-semibold text-sm border border-white/10">Secondary</button>
+            <button class="px-4 py-2 rounded-lg text-gold-400 font-medium text-sm hover:bg-gold-400/10 transition">Ghost</button>
+          </div>
+          <div class="flex gap-2 flex-wrap">
+            <span class="px-3 py-1 rounded-full bg-gold-400/10 text-gold-300 text-xs font-bold border border-gold-400/20">✦ Premium</span>
+            <span class="px-3 py-1 rounded-full bg-green-500/10 text-green-400 text-xs font-bold border border-green-500/20">✓ Vérifié</span>
+            <span class="px-3 py-1 rounded-full bg-primary-500/10 text-primary-400 text-xs font-bold border border-primary-500/20">Nouveau</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- UX Flow -->
+  <section class="max-w-6xl mx-auto px-6 py-8 mb-12">
+    <h3 class="text-xl font-bold text-gold-400 mb-6 text-center">رحلة المستخدم</h3>
+    <div class="glass rounded-2xl p-6 overflow-x-auto">
+      <div class="flex items-center gap-4 min-w-max">
+        <div class="text-center px-4 py-3 rounded-xl bg-white/5 border border-white/10">
+          <div class="text-2xl mb-1">🏠</div>
+          <p class="text-xs font-bold">Splash</p>
+        </div>
+        <div class="text-gold-400">→</div>
+        <div class="text-center px-4 py-3 rounded-xl bg-white/5 border border-white/10">
+          <div class="text-2xl mb-1">🔍</div>
+          <p class="text-xs font-bold">Home / Search</p>
+        </div>
+        <div class="text-gold-400">→</div>
+        <div class="text-center px-4 py-3 rounded-xl bg-white/5 border border-white/10">
+          <div class="text-2xl mb-1">🏡</div>
+          <p class="text-xs font-bold">Property</p>
+        </div>
+        <div class="text-gold-400">→</div>
+        <div class="text-center px-4 py-3 rounded-xl bg-white/5 border border-white/10">
+          <div class="text-2xl mb-1">📅</div>
+          <p class="text-xs font-bold">Schedule Visit</p>
+        </div>
+        <div class="text-gold-400">→</div>
+        <div class="text-center px-4 py-3 rounded-xl bg-gold-400/10 border border-gold-400/30">
+          <div class="text-2xl mb-1">✓</div>
+          <p class="text-xs font-bold text-gold-300">Confirmed</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-white/10 py-8 text-center">
+    <div class="flex items-center justify-center gap-3 mb-3">
+      <img src="/images/logo.png" class="h-8 w-auto">
+      <span class="font-black tracking-wider">MAROC-LOC</span>
+    </div>
+    <p class="text-xs text-white/40">© 2026 — تصميم وتطوير منصة عقارية مغربية حديثة</p>
+  </footer>
+
+</body>
+</html>

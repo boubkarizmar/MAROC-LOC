@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="fr" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MAROC-LOC — UX/UI Design System</title>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --surface-elevated: #ffffff;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --border-subtle: #f1f5f9;
+      --primary: #0d9488;
+      --primary-hover: #0f766e;
+      --primary-light: #ccfbf1;
+      --accent: #f59e0b;
+      --accent-light: #fffbeb;
+      --gold: #d97706;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --error: #ef4444;
+      --info: #3b82f6;
+      --radius-sm: 6px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-xl: 24px;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
+      --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
+      --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.1);
+      --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+    .dark {
+      --bg: #0a0e27;
+      --surface: rgba(255,255,255,0.03);
+      --surface-elevated: rgba(255,255,255,0.05);
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --border: rgba(255,255,255,0.08);
+      --border-subtle: rgba(255,255,255,0.04);
+      --primary: #2dd4bf;
+      --primary-hover: #5eead4;
+      --primary-light: #115e59;
+      --accent: #fbbf24;
+      --accent-light: #78350f;
+      --gold: #fbbf24;
+      --success: #34d399;
+      --warning: #fbbf24;
+      --error: #f87171;
+      --info: #60a5fa;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.3);
+      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.4);
+      --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.5);
+      --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.6);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      transition: background 0.3s, color 0.3s;
+    }
+    .dark body {
+      background: radial-gradient(ellipse at 20% 0%, rgba(59,130,246,0.08) 0%, transparent 50%),
+                  radial-gradient(ellipse at 80% 100%, rgba(139,92,246,0.06) 0%, transparent 50%),
+                  var(--bg);
+    }
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+    /* Top Nav */
+    .topnav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      background: rgba(10,14,39,0.7);
+      border-bottom: 1px solid var(--border);
+      height: 64px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 24px;
+    }
+    .topnav .logo {
+      display: flex; align-items: center; gap: 12px;
+      font-weight: 800; font-size: 18px; letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .topnav .logo svg { width: 28px; height: 28px; flex-shrink: 0; }
+    .topnav .logo svg path { fill: url(#logoGrad); }
+    .nav-links { display: none; gap: 28px; align-items: center; }
+    .nav-links a {
+      color: var(--text-muted); text-decoration: none; font-size: 14px; font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-actions { display: flex; align-items: center; gap: 12px; }
+    .theme-btn {
+      width: 40px; height: 40px; border-radius: 10px;
+      border: 1px solid var(--border); background: var(--surface);
+      color: var(--text); cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s;
+    }
+    .theme-btn:hover { background: var(--surface-elevated); transform: translateY(-1px); }
+    .hamburger {
+      width: 40px; height: 40px; border-radius: 10px;
+      border: 1px solid var(--border); background: var(--surface);
+      color: var(--text); cursor: pointer; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 4px;
+    }
+    .hamburger span { display: block; width: 18px; height: 2px; background: var(--text); border-radius: 2px; transition: 0.3s; }
+    .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(4px, 4px); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(4px, -4px); }
+    .mobile-menu {
+      position: fixed; top: 64px; left: 0; right: 0; bottom: 0;
+      background: var(--bg); z-index: 999; padding: 24px;
+      transform: translateX(100%); transition: transform 0.3s ease;
+      overflow-y: auto;
+    }
+    .mobile-menu.open { transform: translateX(0); }
+    .mobile-menu a {
+      display: block; padding: 14px 0; color: var(--text); text-decoration: none;
+      font-size: 16px; font-weight: 600; border-bottom: 1px solid var(--border);
+    }
+    .mobile-menu a:hover { color: var(--primary); }
+
+    /* Layout */
+    .layout { display: flex; margin-top: 64px; }
+    .sidebar {
+      position: fixed; top: 64px; left: 0; bottom: 0; width: 260px;
+      border-right: 1px solid var(--border); padding: 24px 16px;
+      overflow-y: auto; display: none;
+      background: var(--bg);
+    }
+    .sidebar-title {
+      font-size: 11px; font-weight: 800; text-transform: uppercase;
+      letter-spacing: 0.15em; color: var(--text-muted); margin-bottom: 16px; padding: 0 12px;
+    }
+    .sidebar a {
+      display: block; padding: 8px 12px; border-radius: 8px;
+      color: var(--text-muted); text-decoration: none; font-size: 13px; font-weight: 500;
+      margin-bottom: 2px; transition: all 0.15s;
+    }
+    .sidebar a:hover, .sidebar a.active { background: var(--surface-elevated); color: var(--text); }
+    .main { flex: 1; padding: 40px 20px; max-width: 1200px; margin: 0 auto; }
+
+    /* Hero */
+    .hero {
+      text-align: center; padding: 60px 20px 48px;
+      border-radius: var(--radius-lg); border: 1px solid var(--border);
+      background: var(--surface);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      margin-bottom: 40px; position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+      background: radial-gradient(circle at 50% 50%, rgba(59,130,246,0.12), transparent 60%);
+      pointer-events: none;
+    }
+    .hero h1 {
+      font-size: clamp(28px, 5vw, 48px); font-weight: 900; line-height: 1.1; letter-spacing: -0.02em;
+      margin-bottom: 16px; position: relative;
+    }
+    .hero h1 .grad {
+      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .hero p { font-size: 18px; color: var(--text-muted); max-width: 600px; margin: 0 auto; position: relative; }
+    .hero-meta { margin-top: 24px; display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; position: relative; }
+    .badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 6px 14px; border-radius: 999px; font-size: 12px; font-weight: 600;
+      border: 1px solid var(--border); background: var(--surface-elevated);
+      color: var(--text-muted);
+    }
+
+    /* Cards */
+    .card {
+      border-radius: var(--radius-md); border: 1px solid var(--border);
+      background: var(--surface);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      padding: 24px; margin-bottom: 24px;
+      transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), box-shadow 0.3s;
+    }
+    .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+    .card-header {
+      display: flex; align-items: center; gap: 12px; margin-bottom: 20px;
+    }
+    .card-header .icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, rgba(59,130,246,0.15), rgba(139,92,246,0.15));
+      color: var(--primary); flex-shrink: 0;
+    }
+    .card-header h2 { font-size: 20px; font-weight: 800; letter-spacing: -0.01em; }
+    .card-header h2 span { color: var(--text-muted); font-weight: 400; font-size: 14px; display: block; margin-top: 2px; }
+
+    /* Tables */
+    .table-wrap { overflow-x: auto; border-radius: var(--radius-sm); border: 1px solid var(--border); }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th, td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); }
+    th {
+      background: linear-gradient(180deg, rgba(59,130,246,0.08), rgba(139,92,246,0.04));
+      font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em;
+      color: var(--text-muted); white-space: nowrap;
+    }
+    tr:nth-child(even) { background: var(--border-subtle); }
+    tr:hover { background: var(--surface-elevated); }
+    code {
+      font-family: var(--font-mono); font-size: 12px; padding: 2px 6px;
+      border-radius: 4px; background: var(--border-subtle); color: var(--primary);
+    }
+
+    /* Color Swatches */
+    .swatch-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; }
+    .swatch {
+      border-radius: var(--radius-md); border: 1px solid var(--border); overflow: hidden;
+      background: var(--surface); transition: transform 0.2s;
+    }
+    .swatch:hover { transform: scale(1.03); }
+    .swatch-color { height: 80px; position: relative; }
+    .swatch-info { padding: 12px; }
+    .swatch-name { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+    .swatch-hex { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); }
+
+    /* Typography samples */
+    .type-sample { padding: 16px 0; border-bottom: 1px solid var(--border); }
+    .type-sample:last-child { border-bottom: none; }
+    .type-label {
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--text-muted); margin-bottom: 8px;
+    }
+    .type-hero { font-size: clamp(32px, 5vw, 56px); font-weight: 900; line-height: 1.1; letter-spacing: -0.02em; }
+    .type-h1 { font-size: clamp(28px, 4vw, 40px); font-weight: 800; line-height: 1.2; letter-spacing: -0.02em; }
+    .type-h2 { font-size: clamp(24px, 3vw, 32px); font-weight: 800; line-height: 1.2; letter-spacing: -0.01em; }
+    .type-h3 { font-size: clamp(20px, 2.5vw, 24px); font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
+    .type-h4 { font-size: clamp(18px, 2vw, 20px); font-weight: 700; line-height: 1.4; }
+    .type-body { font-size: 16px; font-weight: 400; line-height: 1.6; }
+    .type-body-sm { font-size: 14px; font-weight: 400; line-height: 1.5; }
+    .type-caption { font-size: 12px; font-weight: 500; line-height: 1.4; letter-spacing: 0.01em; color: var(--text-muted); }
+    .type-overline { font-size: 11px; font-weight: 800; line-height: 1.2; letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-muted); }
+
+    /* Spacing rulers */
+    .ruler { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; }
+    .ruler-block {
+      background: linear-gradient(135deg, rgba(59,130,246,0.2), rgba(139,92,246,0.2));
+      border-radius: 4px; border: 1px solid rgba(59,130,246,0.3);
+      flex-shrink: 0;
+    }
+    .ruler-label { font-family: var(--font-mono); font-size: 12px; color: var(--text-muted); min-width: 80px; }
+
+    /* Component gallery */
+    .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; }
+    .comp-card {
+      border-radius: var(--radius-md); border: 1px solid var(--border);
+      background: var(--surface); padding: 20px; text-align: center;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .comp-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+    .comp-card-title { font-size: 12px; font-weight: 700; color: var(--text-muted); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.08em; }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      height: 44px; padding: 0 24px; border-radius: var(--radius-md);
+      font-size: 14px; font-weight: 600; border: none; cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.4,0,0.2,1);
+    }
+    .btn-primary { background: linear-gradient(135deg, var(--primary), var(--primary-hover)); color: #fff; }
+    .btn-primary:hover { transform: scale(1.02); box-shadow: 0 0 20px rgba(13,148,136,0.25); }
+    .btn-secondary { background: transparent; color: var(--primary); border: 1px solid var(--primary); }
+    .btn-secondary:hover { background: var(--primary-light); }
+    .btn-ghost { background: transparent; color: var(--primary); }
+    .btn-ghost:hover { background: var(--border-subtle); }
+    .btn-accent { background: linear-gradient(135deg, var(--accent), var(--gold)); color: #fff; }
+    .btn-accent:hover { transform: scale(1.02); box-shadow: 0 0 20px rgba(245,158,11,0.25); }
+    .btn-danger { background: linear-gradient(135deg, #ef4444, #dc2626); color: #fff; }
+    .btn-danger:hover { transform: scale(1.02); box-shadow: 0 0 20px rgba(239,68,68,0.25); }
+    .btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none !important; box-shadow: none !important; }
+
+    /* Inputs */
+    .input {
+      width: 100%; height: 48px; padding: 0 16px; border-radius: var(--radius-md);
+      border: 1px solid var(--border); background: var(--surface); color: var(--text);
+      font-size: 14px; transition: all 0.2s;
+    }
+    .input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-light); }
+    .input-wrap { position: relative; margin-bottom: 12px; }
+    .input-label { display: block; font-size: 12px; font-weight: 600; color: var(--text-muted); margin-bottom: 6px; text-align: left; }
+    .input-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--text-muted); pointer-events: none; }
+    .input.with-icon { padding-left: 40px; }
+    .input-error { border-color: var(--error) !important; }
+    .input-error-msg { font-size: 12px; color: var(--error); text-align: left; margin-top: 4px; }
+
+    /* Badges */
+    .badge-sm {
+      display: inline-flex; align-items: center; gap: 4px;
+      padding: 4px 10px; border-radius: 999px; font-size: 11px; font-weight: 600;
+    }
+    .badge-teal { background: var(--primary-light); color: var(--primary); }
+    .badge-amber { background: var(--accent-light); color: var(--gold); }
+    .badge-red { background: rgba(239,68,68,0.15); color: var(--error); }
+    .badge-green { background: rgba(16,185,129,0.15); color: var(--success); }
+    .badge-blue { background: rgba(59,130,246,0.15); color: var(--info); }
+
+    /* Property Card Demo */
+    .prop-card {
+      border-radius: var(--radius-lg); border: 1px solid var(--border);
+      background: var(--surface); overflow: hidden; text-align: left;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .prop-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-xl); }
+    .prop-img {
+      height: 140px; background: linear-gradient(135deg, #1e293b, #334155);
+      position: relative; display: flex; align-items: flex-start; justify-content: space-between; padding: 12px;
+    }
+    .prop-img .overlay-badges { display: flex; gap: 8px; }
+    .prop-body { padding: 16px; }
+    .prop-title { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+    .prop-loc { font-size: 12px; color: var(--text-muted); margin-bottom: 12px; display: flex; align-items: center; gap: 4px; }
+    .prop-footer { display: flex; justify-content: space-between; align-items: center; padding-top: 12px; border-top: 1px solid var(--border); }
+    .prop-price { font-size: 18px; font-weight: 900; color: var(--primary); }
+    .prop-price span { font-size: 12px; font-weight: 500; color: var(--text-muted); }
+
+    /* Feature pills */
+    .pills { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+    .pill {
+      display: inline-flex; align-items: center; gap: 4px;
+      height: 28px; padding: 0 12px; border-radius: 999px;
+      background: var(--surface-elevated); border: 1px solid var(--border);
+      font-size: 12px; font-weight: 500; color: var(--text);
+    }
+    .pill svg { width: 14px; height: 14px; color: var(--primary); }
+
+    /* Dark mode demo */
+    .demo-frame {
+      border-radius: var(--radius-lg); border: 1px solid var(--border); overflow: hidden;
+      background: var(--surface); margin-top: 16px;
+    }
+    .demo-frame-header {
+      padding: 12px 16px; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .demo-frame-body { padding: 24px; }
+
+    /* RTL Demo */
+    .rtl-section { direction: rtl; }
+    .rtl-section .card-header, .rtl-section .ruler, .rtl-section .prop-footer { flex-direction: row-reverse; }
+    .rtl-section .table-wrap th, .rtl-section .table-wrap td { text-align: right; }
+    .rtl-section .input-wrap { text-align: right; }
+    .rtl-section .pills { justify-content: flex-end; }
+
+    /* Animation tokens */
+    .motion-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
+    .motion-card {
+      border-radius: var(--radius-md); border: 1px solid var(--border);
+      background: var(--surface); padding: 20px; text-align: center;
+    }
+    .motion-visual {
+      width: 48px; height: 48px; border-radius: 10px;
+      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      margin: 0 auto 12px;
+    }
+    .motion-card:hover .motion-visual { animation: bounce 0.6s ease infinite alternate; }
+    @keyframes bounce { from { transform: translateY(0); } to { transform: translateY(-8px); } }
+    .motion-card:hover .spin { animation: spin 1s linear infinite; }
+    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    .motion-card:hover .pulse { animation: pulse 1.5s ease infinite; }
+    @keyframes pulse { 0%,100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.1); opacity: 0.7; } }
+    .motion-card:hover .slide { animation: slide 0.8s ease infinite alternate; }
+    @keyframes slide { from { transform: translateX(-10px); } to { transform: translateX(10px); } }
+
+    /* Mobile Nav Bottom */
+    .mob-nav-demo {
+      display: flex; align-items: center; justify-content: space-around;
+      height: 64px; border-top: 1px solid var(--border); background: var(--surface);
+      backdrop-filter: blur(12px); margin-top: 16px;
+    }
+    .mob-nav-item { display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 10px; color: var(--text-muted); }
+    .mob-nav-item.active { color: var(--primary); }
+    .mob-nav-item svg { width: 20px; height: 20px; }
+    .fab {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--primary-hover));
+      color: #fff; display: flex; align-items: center; justify-content: center;
+      box-shadow: var(--shadow-xl); margin-top: -20px; border: 3px solid var(--bg);
+      cursor: pointer; transition: transform 0.2s;
+    }
+    .fab:hover { transform: scale(1.1); }
+
+    /* Responsive */
+    @media (min-width: 1024px) {
+      .sidebar { display: block; }
+      .main { margin-left: 260px; padding: 48px; }
+      .nav-links { display: flex; }
+      .hamburger { display: none; }
+      .mobile-menu { display: none !important; }
+    }
+    @media (max-width: 640px) {
+      .hero { padding: 40px 16px 32px; }
+      .card { padding: 16px; }
+      .swatch-grid { grid-template-columns: repeat(2, 1fr); }
+      .gallery { grid-template-columns: 1fr; }
+      .motion-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    /* Gradients for swatches */
+    .grad-primary { background: linear-gradient(135deg, #0d9488, #0f766e); }
+    .grad-accent { background: linear-gradient(135deg, #f59e0b, #d97706); }
+    .grad-hero { background: linear-gradient(180deg, rgba(13,148,136,0.15), transparent); }
+
+    /* TOC sticky for mobile */
+    .toc-bar {
+      position: sticky; top: 64px; z-index: 50;
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      background: rgba(10,14,39,0.8);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 0; overflow-x: auto;
+      display: flex; gap: 8px; margin-bottom: 24px;
+    }
+    .toc-bar a {
+      white-space: nowrap; padding: 6px 14px; border-radius: 8px;
+      font-size: 12px; font-weight: 600; color: var(--text-muted);
+      text-decoration: none; border: 1px solid var(--border); background: var(--surface);
+    }
+    .toc-bar a:hover { color: var(--text); }
+    @media (min-width: 1024px) { .toc-bar { display: none; } }
+
+    /* Code blocks */
+    pre {
+      background: var(--surface-elevated); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); padding: 16px; overflow-x: auto;
+      font-family: var(--font-mono); font-size: 12px; line-height: 1.6; color: var(--text);
+      margin: 12px 0;
+    }
+    .code-block { position: relative; }
+    .code-label {
+      position: absolute; top: 8px; right: 12px; font-size: 10px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted);
+    }
+
+    /* Section anchors */
+    section[id] { scroll-margin-top: 80px; }
+  </style>
+</head>
+<body>
+  <svg width="0" height="0" style="position:absolute;">
+    <defs>
+      <linearGradient id="logoGrad" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#3b82f6"/>
+        <stop offset="100%" stop-color="#8b5cf6"/>
+      </linearGradient>
+    </defs>
+  </svg>
+
+  <!-- Top Nav -->
+  <nav class="topnav">
+    <div class="logo">
+      <svg viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="8" fill="url(#logoGrad)"/><path d="M8 20V12l6-4 6 4v8h-3v-5h-6v5H8z" fill="#fff" opacity="0.9"/></svg>
+      MAROC-LOC
+    </div>
+    <div class="nav-links">
+      <a href="#palette">Palette</a>
+      <a href="#typography">Typographie</a>
+      <a href="#spacing">Espacement</a>
+      <a href="#components">Composants</a>
+      <a href="#darkmode">Dark Mode</a>
+      <a href="#rtl">RTL</a>
+      <a href="#animation">Animation</a>
+    </div>
+    <div class="nav-actions">
+      <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">
+        <svg id="sunIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        <svg id="moonIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#palette" onclick="closeMenu()">Palette de Couleurs</a>
+    <a href="#typography" onclick="closeMenu()">Typographie</a>
+    <a href="#spacing" onclick="closeMenu()">Espacement</a>
+    <a href="#components" onclick="closeMenu()">Composants UI</a>
+    <a href="#darkmode" onclick="closeMenu()">Dark Mode</a>
+    <a href="#rtl" onclick="closeMenu()">RTL Demo</a>
+    <a href="#animation" onclick="closeMenu()">Animation System</a>
+    <a href="#realestate" onclick="closeMenu()">Composants Immobilier</a>
+  </div>
+
+  <div class="layout">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-title">Navigation</div>
+      <a href="#palette" class="nav-link">Palette de Couleurs</a>
+      <a href="#typography" class="nav-link">Typographie</a>
+      <a href="#spacing" class="nav-link">Espacement</a>
+      <a href="#components" class="nav-link">Composants UI</a>
+      <a href="#darkmode" class="nav-link">Dark Mode</a>
+      <a href="#rtl" class="nav-link">RTL Demo</a>
+      <a href="#animation" class="nav-link">Animation System</a>
+      <a href="#realestate" class="nav-link">Composants Immobilier</a>
+      <a href="#responsive" class="nav-link">Responsive</a>
+    </aside>
+
+    <!-- Main -->
+    <main class="main">
+      <!-- Hero -->
+      <div class="hero">
+        <h1>MAROC-LOC — <span class="grad">UX/UI Design System</span></h1>
+        <p>L'architecture visuelle de la plateforme immobilière intelligente du Maroc. Inspirée du zellige, des riads et de la modernité glassmorphique.</p>
+        <div class="hero-meta">
+          <span class="badge">v1.0</span>
+          <span class="badge">24 Mai 2026</span>
+          <span class="badge">Dark First</span>
+          <span class="badge">RTL Ready</span>
+        </div>
+      </div>
+
+      <!-- TOC Bar Mobile -->
+      <div class="toc-bar">
+        <a href="#palette">Palette</a>
+        <a href="#typography">Typo</a>
+        <a href="#spacing">Space</a>
+        <a href="#components">UI</a>
+        <a href="#darkmode">Theme</a>
+        <a href="#rtl">RTL</a>
+        <a href="#animation">Motion</a>
+      </div>
+
+      <!-- Philosophy -->
+      <section class="card" id="philosophy">
+        <div class="card-header">
+          <div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+          <h2>Philosophie <span>Zellige · Riad · Souks · Modernité</span></h2>
+        </div>
+        <div class="gallery">
+          <div class="comp-card">
+            <div class="comp-card-title">Zellige</div>
+            <p class="type-body-sm" style="color:var(--text-muted)">Patterns géométriques subtils et motifs répétitifs dans les bordures et backgrounds.</p>
+          </div>
+          <div class="comp-card">
+            <div class="comp-card-title">Riad</div>
+            <p class="type-body-sm" style="color:var(--text-muted)">Espaces ouverts, hiérarchie claire, lumière naturelle simulée par les gradients.</p>
+          </div>
+          <div class="comp-card">
+            <div class="comp-card-title">Souks</div>
+            <p class="type-body-sm" style="color:var(--text-muted)">Couleurs chaudes (or, ambre), textures riches, accents premium.</p>
+          </div>
+          <div class="comp-card">
+            <div class="comp-card-title">Modernité</div>
+            <p class="type-body-sm" style="color:var(--text-muted)">Lignes épurées, glassmorphism, typographies sans-serif, espaces aérés.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Color Palette -->
+      <section class="card" id="palette">
+        <div class="card-header">
+          <div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg></div>
+          <h2>Palette de Couleurs <span>Tokens &amp; Usage</span></h2>
+        </div>
+
+        <h3 style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin-bottom:16px;">Primaires</h3>
+        <div class="swatch-grid" style="margin-bottom:24px;">
+          <div class="swatch"><div class="swatch-color" style="background:#0d9488;"></div><div class="swatch-info"><div class="swatch-name">Primary</div><div class="swatch-hex">#0d9488</div></div></div>
+          <div class="swatch"><div class="swatch-color" style="background:#0f766e;"></div><div class="swatch-info"><div class="swatch-name">Primary Hover</div><div class="swatch-hex">#0f766e</div></div></div>
+          <div class="swatch"><div class="swatch-color" style="background:#ccfbf1;"></div><div class="swatch-info"><div class="swatch-name">Primary Light</div><div class="swatch-hex">#ccfbf1</div></div></div>
+        </div>
+
+        <h3 style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin-bottom:16px;">Accent — Or Marocain</h3>
+        <div class="swatch-grid" style="margin-bottom:24px;">
+          <div class="swatch"><div class="swatch-color" style="background:#f59e0b;"></div><div class="swatch-info"><div class="swatch-name">Accent</div><div class="swatch-hex">#f59e0b</div></div></div>
+          <div class="swatch"><div class="swatch-color" style="background:#fffbeb;"></div><div class="swatch-info"><div class="swatch-name">Accent Light</div><div class="swatch-hex">#fffbeb</div></div></div>
+          <div class="swatch"><div class="swatch-color" style="background:#d97706;"></div><div class="swatch-info"><div class="swatch-name">Gold</div><div class="swatch-hex">#d97706</div></div></div>
+        </div>
+
+        <h3 style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin-bottom:16px;">Neutres</h3>
+        <div class="swatch-grid" style="margin-bottom:24px;">
+          <div class="swatch"><div class="swatch-color" style="background:#0f172a;border:1px solid var(--border);"></div><div class="swatch-info"><div class="swatch-name">Background</div><div class="swatch-hex">#0f172a</div></div></div>
+          <div class="swatch"><div class="swatch-color" style="background:#1e293b;"></div><div class="swatch-info"><div class="swatch-name">Surface</div><div class="swatch-hex">#1e293b</div></div></div>
+          <div class="swatch"><div class="swatch-color" style="background:#334155;"></div><div class="swatch-info"><div class="swatch-name">Elevated</div><div class="swatch-hex">#334155</div></div></div>
+          <div class="swatch"><div class="swatch-color" style="background:#f1f5f9;"></div><div class="swatch-info"><div class="swatch-name">Text</div><div class="swatch-hex">#f1f5f9</div></div></div>
+          <div class="swatch"><div class="swatch-color" style="background:#94a3b8;"></div><div class="swatch-info"><div class="swatch-name">Text Muted</div><div class="swatch-hex">#94a3b8</div></div></div>
+          <div class="swatch"><div class="swatch-color" style="background:#334155;border:1px solid var(--border);"></div><div class="swatch-info"><div class="swatch-name">Border</div><div class="swatch-hex">#334155</div></div></div>
+        </div>
+
+        <h3 style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin-bottom:16px;">Sémantiques</h3>
+        <div class="swatch-grid" style="margin-bottom:24px;">
+          <div class="swatch"><div class="swatch-color" style="background:#10b981;"></div><div class="swatch-info"><div class="swatch-name">Success</div><div class="swatch-hex">#10b981</div></div></div>
+          <div class="swatch"><div class="swatch-color" style="background:#f59e0b;"></div><div class="swatch-info"><div class="swatch-name">Warning</div><div class="swatch-hex">#f59e0b</div></div></div>
+          <div class="swatch"><div class="swatch-color" style="background:#ef4444;"></div><div class="swatch-info"><div class="swatch-name">Error</div><div class="swatch-hex">#ef4444</div></div></div>
+          <div class="swatch"><div class="swatch-color" style="background:#3b82f6;"></div><div class="swatch-info"><div class="swatch-name">Info</div><div class="swatch-hex">#3b82f6</div></div></div>
+        </div>
+
+        <h3 style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin-bottom:16px;">Gradients</h3>
+        <div class="swatch-grid">
+          <div class="swatch"><div class="swatch-color grad-primary"></div><div class="swatch-info"><div class="swatch-name">Primary Grad</div><div class="swatch-hex">135deg teal</div></div></div>
+          <div class="swatch"><div class="swatch-color grad-accent"></div><div class="swatch-info"><div class="swatch-name">Accent Grad</div><div class="swatch-hex">135deg amber</div></div></div>
+          <div class="swatch"><div class="swatch-color grad-hero"></div><div class="swatch-info"><div class="swatch-name">Hero Grad</div><div class="swatch-hex">180deg subtle</div></div></div>
+        </div>
+      </section>
+
+      <!-- Typography -->
+      <section class="card" id="typography">
+        <div class="card-header">
+          <div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7V4h16v3M9 20h6M12 4v16"/></svg></div>
+          <h2>Système Typographique <span>Inter &middot; Noto Sans Arabic &middot; JetBrains Mono</span></h2>
+        </div>
+        <div class="type-sample">
+          <div class="type-label"><span>text-hero</span><span>32px/56px · 900 · -0.02em</span></div>
+          <div class="type-hero">Trouvez votre chez-vous</div>
+        </div>
+        <div class="type-sample">
+          <div class="type-label"><span>text-h1</span><span>28px/40px · 800 · -0.02em</span></div>
+          <div class="type-h1">Appartements à Casablanca</div>
+        </div>
+        <div class="type-sample">
+          <div class="type-label"><span>text-h2</span><span>24px/32px · 800 · -0.01em</span></div>
+          <div class="type-h2">Recommandations personnalisées</div>
+        </div>
+        <div class="type-sample">
+          <div class="type-label"><span>text-h3</span><span>20px/24px · 700 · -0.01em</span></div>
+          <div class="type-h3">Filtres de recherche avancés</div>
+        </div>
+        <div class="type-sample">
+          <div class="type-label"><span>text-h4</span><span>18px/20px · 700</span></div>
+          <div class="type-h4">Détails de la propriété</div>
+        </div>
+        <div class="type-sample">
+          <div class="type-label"><span>text-body</span><span>16px · 400 · 1.6</span></div>
+          <div class="type-body">MAROC-LOC est la plateforme immobilière intelligente qui révolutionne la recherche de logements au Maroc grâce à l'IA et aux données enrichies.</div>
+        </div>
+        <div class="type-sample">
+          <div class="type-label"><span>text-body-sm</span><span>14px · 400 · 1.5</span></div>
+          <div class="type-body-sm">Les résultats sont triés selon votre profil comportemental, vos favoris et les tendances du marché local.</div>
+        </div>
+        <div class="type-sample">
+          <div class="type-label"><span>text-caption</span><span>12px · 500 · 1.4 · 0.01em</span></div>
+          <div class="type-caption">Mis à jour il y a 2 heures · 245 vues</div>
+        </div>
+        <div class="type-sample">
+          <div class="type-label"><span>text-overline</span><span>11px/12px · 800 · 0.22em</span></div>
+          <div class="type-overline">Premium Selection</div>
+        </div>
+      </section>
+
+      <!-- Spacing -->
+      <section class="card" id="spacing">
+        <div class="card-header">
+          <div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h.01M6 14h.01"/></svg></div>
+          <h2>Système d'Espacement <span>8-point grid · Layout tokens</span></h2>
+        </div>
+        <div class="ruler"><div class="ruler-label">space-1</div><div class="ruler-block" style="width:4px;height:4px;"></div><code style="margin-left:auto">4px</code></div>
+        <div class="ruler"><div class="ruler-label">space-2</div><div class="ruler-block" style="width:8px;height:8px;"></div><code style="margin-left:auto">8px</code></div>
+        <div class="ruler"><div class="ruler-label">space-3</div><div class="ruler-block" style="width:12px;height:12px;"></div><code style="margin-left:auto">12px</code></div>
+        <div class="ruler"><div class="ruler-label">space-4</div><div class="ruler-block" style="width:16px;height:16px;"></div><code style="margin-left:auto">16px</code></div>
+        <div class="ruler"><div class="ruler-label">space-5</div><div class="ruler-block" style="width:20px;height:20px;"></div><code style="margin-left:auto">20px</code></div>
+        <div class="ruler"><div class="ruler-label">space-6</div><div class="ruler-block" style="width:24px;height:24px;"></div><code style="margin-left:auto">24px</code></div>
+        <div class="ruler"><div class="ruler-label">space-8</div><div class="ruler-block" style="width:32px;height:32px;"></div><code style="margin-left:auto">32px</code></div>
+        <div class="ruler"><div class="ruler-label">space-10</div><div class="ruler-block" style="width:40px;height:40px;"></div><code style="margin-left:auto">40px</code></div>
+        <div class="ruler"><div class="ruler-label">space-12</div><div class="ruler-block" style="width:48px;height:48px;"></div><code style="margin-left:auto">48px</code></div>
+        <div class="ruler"><div class="ruler-label">space-16</div><div class="ruler-block" style="width:64px;height:32px;"></div><code style="margin-left:auto">64px</code></div>
+        <div class="ruler"><div class="ruler-label">space-20</div><div class="ruler-block" style="width:80px;height:32px;"></div><code style="margin-left:auto">80px</code></div>
+        <div class="ruler"><div class="ruler-label">space-24</div><div class="ruler-block" style="width:96px;height:32px;"></div><code style="margin-left:auto">96px</code></div>
+
+        <h3 style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin:24px 0 16px;">Layout Tokens</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Token</th><th>Valeur</th></tr></thead>
+            <tbody>
+              <tr><td><code>--container-max</code></td><td>1280px</td></tr>
+              <tr><td><code>--container-padding</code></td><td>16px (mobile)</td></tr>
+              <tr><td><code>--container-padding-lg</code></td><td>48px (desktop)</td></tr>
+              <tr><td><code>--radius-sm</code></td><td>6px</td></tr>
+              <tr><td><code>--radius-md</code></td><td>12px</td></tr>
+              <tr><td><code>--radius-lg</code></td><td>16px</td></tr>
+              <tr><td><code>--radius-xl</code></td><td>24px</td></tr>
+              <tr><td><code>--radius-full</code></td><td>9999px</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Components -->
+      <section class="card" id="components">
+        <div class="card-header">
+          <div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
+          <h2>Composants UI <span>Boutons · Inputs · Badges · Cartes</span></h2>
+        </div>
+
+        <h3 style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin-bottom:16px;">Boutons</h3>
+        <div class="gallery" style="margin-bottom:24px;">
+          <div class="comp-card">
+            <div class="comp-card-title">Primary</div>
+            <button class="btn btn-primary">Rechercher</button>
+          </div>
+          <div class="comp-card">
+            <div class="comp-card-title">Secondary</div>
+            <button class="btn btn-secondary">Annuler</button>
+          </div>
+          <div class="comp-card">
+            <div class="comp-card-title">Ghost</div>
+            <button class="btn btn-ghost">Plus d'infos</button>
+          </div>
+          <div class="comp-card">
+            <div class="comp-card-title">Accent</div>
+            <button class="btn btn-accent">Premium</button>
+          </div>
+          <div class="comp-card">
+            <div class="comp-card-title">Danger</div>
+            <button class="btn btn-danger">Supprimer</button>
+          </div>
+          <div class="comp-card">
+            <div class="comp-card-title">Loading</div>
+            <button class="btn btn-primary" disabled>Chargement...</button>
+          </div>
+        </div>
+
+        <h3 style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin-bottom:16px;">Inputs</h3>
+        <div class="gallery" style="margin-bottom:24px; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));">
+          <div class="comp-card" style="text-align:left;">
+            <div class="comp-card-title">Default</div>
+            <div class="input-wrap">
+              <label class="input-label">Adresse</label>
+              <input class="input" type="text" placeholder="Entrez une adresse..."/>
+            </div>
+          </div>
+          <div class="comp-card" style="text-align:left;">
+            <div class="comp-card-title">With Icon</div>
+            <div class="input-wrap">
+              <label class="input-label">Recherche</label>
+              <div style="position:relative;">
+                <span class="input-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span>
+                <input class="input with-icon" type="text" placeholder="Rechercher..."/>
+              </div>
+            </div>
+          </div>
+          <div class="comp-card" style="text-align:left;">
+            <div class="comp-card-title">Valid</div>
+            <div class="input-wrap">
+              <label class="input-label">Email</label>
+              <input class="input" type="text" value="user@example.com" style="border-color:var(--success);"/>
+            </div>
+          </div>
+          <div class="comp-card" style="text-align:left;">
+            <div class="comp-card-title">Error</div>
+            <div class="input-wrap">
+              <label class="input-label">Téléphone</label>
+              <input class="input input-error" type="text" value="abc"/>
+              <div class="input-error-msg">Numéro invalide</div>
+            </div>
+          </div>
+        </div>
+
+        <h3 style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin-bottom:16px;">Badges</h3>
+        <div style="display:flex; gap:10px; flex-wrap: wrap; margin-bottom:24px;">
+          <span class="badge-sm badge-teal">Nouveau</span>
+          <span class="badge-sm badge-amber">Premium</span>
+          <span class="badge-sm badge-red">Urgent</span>
+          <span class="badge-sm badge-green">Vérifié</span>
+          <span class="badge-sm badge-blue">Info</span>
+        </div>
+
+        <h3 style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin-bottom:16px;">Carte Propriété</h3>
+        <div style="max-width:320px;">
+          <div class="prop-card">
+            <div class="prop-img">
+              <div class="overlay-badges">
+                <span class="badge-sm badge-teal">85% match</span>
+                <span class="badge-sm badge-amber">Hybrid</span>
+              </div>
+            </div>
+            <div class="prop-body">
+              <div class="prop-title">Appartement moderne Maarif</div>
+              <div class="prop-loc">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Casablanca, Maarif
+              </div>
+              <div class="pills">
+                <span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 20h20M5 20v-8h3v8M11 20v-12h3v12M17 20V8h3v12"/></svg> 2 ch.</span>
+                <span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16M4 12v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-6M6 12V8a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v4"/></svg> 2 sdb</span>
+                <span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg> 85m²</span>
+              </div>
+              <div class="prop-footer">
+                <div class="prop-price">8,500 <span>MAD/mois</span></div>
+                <span class="badge-sm badge-green">Négociable</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Dark Mode -->
+      <section class="card" id="darkmode">
+        <div class="card-header">
+          <div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></div>
+          <h2>Dark Mode Strategy <span>Auto-detect &middot; Manual toggle &middot; localStorage</span></h2>
+        </div>
+        <p style="color:var(--text-muted); margin-bottom:16px;">Le toggle en haut à droite de cette page est fonctionnel. Essayez-le pour voir la bascule entre les deux thèmes en temps réel.</p>
+        <div class="demo-frame">
+          <div class="demo-frame-header">
+            <span style="font-size:12px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;">Theme Provider (React)</span>
+            <span class="badge-sm badge-blue">TSX</span>
+          </div>
+          <div class="demo-frame-body">
+            <pre>const ThemeProvider = () =&gt; {
+  const [theme, setTheme] = useState(() =&gt; {
+    const saved = localStorage.getItem('theme');
+    if (saved) return saved;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches
+      ? 'dark' : 'light';
+  });
+
+  useEffect(() =&gt; {
+    document.documentElement.classList.toggle('dark', theme === 'dark');
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  return &lt;ThemeContext.Provider value={{ theme, setTheme }}&gt;...&lt;/ThemeContext.Provider&gt;;
+};</pre>
+          </div>
+        </div>
+        <h3 style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin:24px 0 16px;">Mapping Couleurs</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Element</th><th>Light</th><th>Dark</th></tr></thead>
+            <tbody>
+              <tr><td>Page background</td><td><code>#ffffff</code></td><td><code>#0f172a</code></td></tr>
+              <tr><td>Card background</td><td><code>#f8fafc</code></td><td><code>#1e293b</code></td></tr>
+              <tr><td>Card hover</td><td><code>#ffffff</code></td><td><code>#334155</code></td></tr>
+              <tr><td>Text primary</td><td><code>#0f172a</code></td><td><code>#f1f5f9</code></td></tr>
+              <tr><td>Text secondary</td><td><code>#64748b</code></td><td><code>#94a3b8</code></td></tr>
+              <tr><td>Border</td><td><code>#e2e8f0</code></td><td><code>#334155</code></td></tr>
+              <tr><td>Primary button</td><td><code>bg-teal-600</code></td><td><code>bg-teal-500</code></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- RTL -->
+      <section class="card" id="rtl">
+        <div class="card-header">
+          <div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16M4 12l4-4m-4 4 4 4"/></svg></div>
+          <h2>RTL Demo <span>Right-to-left layout pour l'arabe</span></h2>
+        </div>
+        <p style="color:var(--text-muted); margin-bottom:16px;">Cette section démontre le support RTL complet avec direction, alignement et icônes inversées.</p>
+        <div class="demo-frame rtl-section">
+          <div class="demo-frame-header" style="flex-direction:row-reverse;">
+            <span style="font-size:12px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;">واجهة المستخدم</span>
+            <span class="badge-sm badge-teal">RTL</span>
+          </div>
+          <div class="demo-frame-body">
+            <h3 style="font-size:20px;font-weight:800;margin-bottom:8px;">ابحث عن منزلك</h3>
+            <p style="color:var(--text-muted);margin-bottom:16px;">منصة MAROC-LOC توفر لك تجربة بحث ذكية ومخصصة بالكامل.</p>
+            <div class="input-wrap">
+              <label class="input-label">المدينة</label>
+              <div style="position:relative;">
+                <span class="input-icon" style="left:auto;right:14px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span>
+                <input class="input with-icon" type="text" placeholder="الدار البيضاء..." style="padding-left:16px;padding-right:40px;"/>
+              </div>
+            </div>
+            <div class="pills">
+              <span class="pill">شقة</span>
+              <span class="pill">فيلا</span>
+              <span class="pill">رياض</span>
+              <span class="pill">ستوديو</span>
+            </div>
+            <div class="prop-footer" style="margin-top:16px;">
+              <button class="btn btn-primary">ابحث الآن</button>
+              <div class="prop-price">8,500 <span>درهم/شهر</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Animation -->
+      <section class="card" id="animation">
+        <div class="card-header">
+          <div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg></div>
+          <h2>Animation System <span>Timing · Easing · Motion patterns</span></h2>
+        </div>
+
+        <h3 style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin-bottom:16px;">Timing Functions</h3>
+        <div class="code-block" style="margin-bottom:24px;">
+          <pre>--ease-out: cubic-bezier(0.4, 0, 0.2, 1);
+--ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+--ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+--ease-smooth: cubic-bezier(0.45, 0.05, 0.55, 0.95);</pre>
+        </div>
+
+        <h3 style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin-bottom:16px;">Standard Durations</h3>
+        <div class="table-wrap" style="margin-bottom:24px;">
+          <table>
+            <thead><tr><th>Token</th><th>Durée</th><th>Usage</th></tr></thead>
+            <tbody>
+              <tr><td><code>--duration-fast</code></td><td>150ms</td><td>Hover states, toggles</td></tr>
+              <tr><td><code>--duration-normal</code></td><td>300ms</td><td>Transitions, modals</td></tr>
+              <tr><td><code>--duration-slow</code></td><td>500ms</td><td>Page transitions</td></tr>
+              <tr><td><code>--duration-slower</code></td><td>700ms</td><td>Complex animations</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin-bottom:16px;">Motion Patterns</h3>
+        <div class="motion-grid">
+          <div class="motion-card">
+            <div class="motion-visual"></div>
+            <div style="font-size:13px;font-weight:700;margin-bottom:4px;">Page Transition</div>
+            <div style="font-size:11px;color:var(--text-muted);">opacity + y:20 &rarr; y:0</div>
+          </div>
+          <div class="motion-card">
+            <div class="motion-visual bounce"></div>
+            <div style="font-size:13px;font-weight:700;margin-bottom:4px;">Card Hover</div>
+            <div style="font-size:11px;color:var(--text-muted);">y:-4 + scale(1.01)</div>
+          </div>
+          <div class="motion-card">
+            <div class="motion-visual pulse"></div>
+            <div style="font-size:13px;font-weight:700;margin-bottom:4px;">Stagger</div>
+            <div style="font-size:11px;color:var(--text-muted);">staggerChildren: 0.08</div>
+          </div>
+          <div class="motion-card">
+            <div class="motion-visual slide"></div>
+            <div style="font-size:13px;font-weight:700;margin-bottom:4px;">Spring</div>
+            <div style="font-size:11px;color:var(--text-muted);">stiffness:400 damping:25</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Real Estate Components -->
+      <section class="card" id="realestate">
+        <div class="card-header">
+          <div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V7l8-4 8 4v14M8 21v-5a2 2 0 0 1 4 0v5"/></svg></div>
+          <h2>Composants Spécifiques Immobilier <span>Price badge · Pills · Map pin</span></h2>
+        </div>
+
+        <div class="gallery" style="margin-bottom:24px;">
+          <div class="comp-card">
+            <div class="comp-card-title">Price Badge</div>
+            <div style="font-size:20px;font-weight:900;color:var(--primary);">8,500 MAD<span style="font-size:12px;font-weight:500;color:var(--text-muted);">/mois</span></div>
+            <div style="width:40px;height:3px;background:var(--primary);margin:8px auto;border-radius:2px;"></div>
+            <span class="badge-sm badge-green">Négociable &check;</span>
+          </div>
+          <div class="comp-card">
+            <div class="comp-card-title">Map Pin</div>
+            <div style="display:inline-flex;flex-direction:column;align-items:center;gap:4px;">
+              <div style="background:var(--primary);color:#fff;padding:6px 10px;border-radius:8px;font-size:12px;font-weight:700;">DH 8.5k</div>
+              <svg width="12" height="8" viewBox="0 0 12 8"><path d="M6 8L0 0h12z" fill="var(--primary)"/></svg>
+            </div>
+          </div>
+          <div class="comp-card">
+            <div class="comp-card-title">Navigation Mobile</div>
+            <div class="mob-nav-demo" style="position:relative; border-radius: var(--radius-md); overflow:hidden;">
+              <div class="mob-nav-item active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Accueil</div>
+              <div class="mob-nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>Recherche</div>
+              <div class="fab"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></div>
+              <div class="mob-nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Chat</div>
+              <div class="mob-nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Profil</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Responsive -->
+      <section class="card" id="responsive">
+        <div class="card-header">
+          <div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M12 18h.01"/></svg></div>
+          <h2>Responsive Breakpoints <span>Mobile-first · Grid adaptations</span></h2>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Token</th><th>Width</th><th>Usage</th></tr></thead>
+            <tbody>
+              <tr><td><code>sm</code></td><td>640px</td><td>Small tablets</td></tr>
+              <tr><td><code>md</code></td><td>768px</td><td>Tablets</td></tr>
+              <tr><td><code>lg</code></td><td>1024px</td><td>Small laptops</td></tr>
+              <tr><td><code>xl</code></td><td>1280px</td><td>Desktops</td></tr>
+              <tr><td><code>2xl</code></td><td>1536px</td><td>Large screens</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin:24px 0 16px;">Grid Adaptations</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Component</th><th>Mobile</th><th>Tablet</th><th>Desktop</th></tr></thead>
+            <tbody>
+              <tr><td>Property cards</td><td>1 column</td><td>2 columns</td><td>3 columns</td></tr>
+              <tr><td>Recommendation</td><td>1 column</td><td>2 columns</td><td>3 columns</td></tr>
+              <tr><td>Search results</td><td>1 column</td><td>2 columns</td><td>2 columns + map</td></tr>
+              <tr><td>Property detail</td><td>Stacked</td><td>Stacked</td><td>Gallery + info side</td></tr>
+              <tr><td>Dashboard</td><td>1 column</td><td>2 columns</td><td>3 columns</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <footer style="text-align:center; padding: 40px 0; color: var(--text-muted); font-size: 12px;">
+        Document généré le 24 Mai 2026 — Version 1.0 — MAROC-LOC Design System
+      </footer>
+    </main>
+  </div>
+
+  <script>
+    // Theme toggle
+    const themeToggle = document.getElementById('themeToggle');
+    const sunIcon = document.getElementById('sunIcon');
+    const moonIcon = document.getElementById('moonIcon');
+    const html = document.documentElement;
+
+    function updateIcons() {
+      if (html.classList.contains('dark')) {
+        sunIcon.style.display = 'none';
+        moonIcon.style.display = 'block';
+      } else {
+        sunIcon.style.display = 'block';
+        moonIcon.style.display = 'none';
+      }
+    }
+    updateIcons();
+
+    themeToggle.addEventListener('click', () => {
+      html.classList.toggle('dark');
+      updateIcons();
+    });
+
+    // Mobile menu
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      mobileMenu.classList.toggle('open');
+    });
+    function closeMenu() {
+      hamburger.classList.remove('active');
+      mobileMenu.classList.remove('open');
+    }
+
+    // Active sidebar link on scroll
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-link, .nav-links a');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        if (scrollY >= sectionTop - 120) current = section.getAttribute('id');
+      });
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>

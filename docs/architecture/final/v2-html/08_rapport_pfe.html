@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MAROC-LOC — Rapport PFE</title>
+<style>
+  :root {
+    --bg: #0a0e27;
+    --bg-elevated: #0f1635;
+    --bg-card: rgba(255,255,255,0.03);
+    --border: rgba(255,255,255,0.08);
+    --text: #e2e8f0;
+    --text-secondary: #94a3b8;
+    --accent-blue: #3b82f6;
+    --accent-purple: #8b5cf6;
+    --accent-gradient: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    --font-body: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    --radius: 12px;
+    --shadow: 0 4px 24px rgba(0,0,0,0.3);
+    --shadow-hover: 0 12px 40px rgba(0,0,0,0.4);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  [data-theme="light"] {
+    --bg: #f8fafc;
+    --bg-elevated: #ffffff;
+    --bg-card: rgba(255,255,255,0.7);
+    --border: rgba(0,0,0,0.08);
+    --text: #0f172a;
+    --text-secondary: #64748b;
+    --shadow: 0 4px 24px rgba(0,0,0,0.08);
+    --shadow-hover: 0 12px 40px rgba(0,0,0,0.12);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    transition: background 0.3s, color 0.3s;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3 { font-weight: 700; letter-spacing: -0.02em; }
+  h1 { font-size: clamp(2rem, 5vw, 3.5rem); }
+  h2 { font-size: clamp(1.25rem, 3vw, 1.75rem); margin-top: 2.5rem; margin-bottom: 1rem; display:flex; align-items:center; gap:0.5rem; }
+  h2 .num { background: var(--accent-gradient); color:#fff; width:32px; height:32px; border-radius:8px; display:inline-flex; align-items:center; justify-content:center; font-size:0.875rem; font-family:var(--font-mono); flex-shrink:0; }
+  h3 { font-size: 1.125rem; margin-top: 1.5rem; margin-bottom: 0.75rem; }
+  p { margin-bottom: 1rem; color: var(--text-secondary); font-size: 0.9375rem; }
+  ul, ol { margin-bottom: 1rem; padding-left: 1.25rem; color: var(--text-secondary); }
+  li { margin-bottom: 0.35rem; }
+  a { color: var(--accent-blue); text-decoration: none; }
+  code, pre { font-family: var(--font-mono); font-size: 0.875rem; }
+  blockquote { border-left: 3px solid var(--accent-blue); padding-left: 1rem; color: var(--text-secondary); font-style: italic; margin-bottom: 1rem; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+  .main-grid { display: grid; grid-template-columns: 240px 1fr; gap: 2rem; padding: 2rem 1.5rem; max-width: 1200px; margin: 0 auto; }
+  @media (max-width: 900px) { .main-grid { grid-template-columns: 1fr; padding: 1rem; } }
+  .sidebar { position: sticky; top: 80px; height: calc(100vh - 100px); overflow-y: auto; display: none; }
+  @media (min-width: 900px) { .sidebar { display: block; } }
+  .sidebar-title { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-secondary); margin-bottom: 1rem; font-weight: 700; }
+  .sidebar ul { list-style: none; }
+  .sidebar li { margin-bottom: 0.25rem; }
+  .sidebar a { display: block; padding: 0.4rem 0.6rem; border-radius: 6px; color: var(--text-secondary); font-size: 0.8125rem; transition: var(--transition); border: 1px solid transparent; }
+  .sidebar a:hover, .sidebar a.active { background: var(--bg-card); color: var(--text); border-color: var(--border); }
+  .header { position: sticky; top: 0; z-index: 50; background: rgba(10,14,39,0.8); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+  [data-theme="light"] .header { background: rgba(248,250,252,0.8); }
+  .header-inner { display: flex; align-items: center; justify-content: space-between; max-width: 1200px; margin: 0 auto; padding: 0.875rem 1.5rem; }
+  .logo { font-weight: 800; background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 1.125rem; letter-spacing: -0.02em; }
+  .nav-links { display: none; gap: 1.25rem; }
+  @media (min-width: 900px) { .nav-links { display: flex; } }
+  .nav-links a { color: var(--text-secondary); font-size: 0.875rem; font-weight: 500; }
+  .nav-links a:hover { color: var(--text); }
+  .hamburger { display: block; background: none; border: none; color: var(--text); cursor: pointer; padding: 0.25rem; }
+  @media (min-width: 900px) { .hamburger { display: none; } }
+  .mobile-nav { display: none; position: fixed; inset: 0; background: var(--bg); z-index: 40; padding: 5rem 1.5rem; flex-direction: column; gap: 0; }
+  .mobile-nav.open { display: flex; }
+  .mobile-nav a { display: block; padding: 1rem 0; font-size: 1.25rem; border-bottom: 1px solid var(--border); color: var(--text); }
+  .hero { padding: 4rem 1.5rem 3rem; text-align: center; border-bottom: 1px solid var(--border); }
+  .hero h1 { background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 0.75rem; }
+  .hero p { max-width: 640px; margin: 0 auto; font-size: 1.125rem; }
+  .toc-bar { position: sticky; top: 57px; z-index: 30; background: var(--bg-elevated); border-bottom: 1px solid var(--border); overflow-x: auto; }
+  .toc-bar-inner { display: flex; gap: 1rem; padding: 0.75rem 1.5rem; max-width: 1200px; margin: 0 auto; white-space: nowrap; }
+  .toc-bar a { font-size: 0.8125rem; color: var(--text-secondary); font-weight: 500; }
+  .toc-bar a:hover { color: var(--text); }
+  .card {
+    background: var(--bg-card);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+  }
+  .card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); border-color: rgba(255,255,255,0.15); }
+  [data-theme="light"] .card:hover { border-color: rgba(0,0,0,0.15); }
+  .card h3 { margin-top: 0; }
+  .badge { display: inline-block; padding: 0.2rem 0.5rem; border-radius: 6px; background: rgba(59,130,246,0.12); color: var(--accent-blue); font-size: 0.6875rem; font-weight: 700; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
+  .badge-purple { background: rgba(139,92,246,0.12); color: var(--accent-purple); }
+  .table-wrap { overflow-x: auto; border-radius: var(--radius); border: 1px solid var(--border); margin-bottom: 1.5rem; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
+  th, td { padding: 0.65rem 0.875rem; text-align: left; border-bottom: 1px solid var(--border); }
+  th { background: var(--accent-gradient); color: #fff; font-weight: 600; text-transform: uppercase; font-size: 0.6875rem; letter-spacing: 0.08em; white-space: nowrap; }
+  tr:last-child td { border-bottom: none; }
+  tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+  [data-theme="light"] tr:nth-child(even) { background: rgba(0,0,0,0.02); }
+  .theme-toggle { background: var(--bg-card); border: 1px solid var(--border); color: var(--text); border-radius: 8px; padding: 0.5rem; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+  .footer { text-align: center; padding: 3rem 1.5rem; color: var(--text-secondary); font-size: 0.8125rem; border-top: 1px solid var(--border); margin-top: 2rem; }
+  .academic-header { text-align:center; padding:2rem 1.5rem; border-bottom:2px solid var(--border); margin-bottom:2rem; }
+  .academic-header .label { font-size:0.75rem; text-transform:uppercase; letter-spacing:0.15em; color:var(--text-secondary); margin-bottom:0.5rem; }
+  .academic-header h1 { margin-bottom:0.5rem; }
+  .academic-header .subtitle { font-size:1.125rem; color:var(--text-secondary); max-width:720px; margin:0 auto 1.5rem; }
+  .academic-meta { display:flex; justify-content:center; gap:2rem; flex-wrap:wrap; font-size:0.875rem; color:var(--text-secondary); }
+  .layer-stack { display:flex; flex-direction:column; border-radius:var(--radius); overflow:hidden; border:1px solid var(--border); margin:1.5rem 0; }
+  .layer { padding:1rem 1.25rem; border-bottom:1px solid var(--border); background: var(--bg-card); }
+  .layer:last-child { border-bottom:none; }
+  .layer-title { font-family:var(--font-mono); font-size:0.75rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--accent-blue); margin-bottom:0.25rem; }
+  .flow-container { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0.5rem; margin: 1.5rem 0; }
+  .flow-step {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1rem 1.25rem;
+    min-width: 140px;
+    max-width: 260px;
+    text-align: center;
+    font-size: 0.875rem;
+    font-weight: 600;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+  }
+  .flow-step:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); border-color: var(--accent-blue); }
+  .flow-step .step-meta { font-family: var(--font-mono); font-size: 0.6875rem; color: var(--text-secondary); margin-bottom: 0.25rem; text-transform: uppercase; letter-spacing: 0.05em; }
+  .arrow { display: flex; align-items: center; justify-content: center; color: var(--accent-blue); flex-shrink: 0; }
+  .arrow svg { width: 22px; height: 22px; }
+  .k8s-grid { display:grid; grid-template-columns: repeat(3, 1fr); gap:1rem; margin:1rem 0; }
+  @media (max-width:600px) { .k8s-grid { grid-template-columns:1fr; } }
+  .k8s-box { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); padding:1rem; text-align:center; font-size:0.875rem; }
+  .checklist { display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:1rem; margin:1rem 0; }
+  .checklist-item { display:flex; align-items:flex-start; gap:0.75rem; background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); padding:1rem; }
+  .checklist-item svg { flex-shrink:0; margin-top:0.15rem; }
+  .timeline { display:flex; flex-direction:column; gap:1.5rem; position:relative; padding-left:1.5rem; margin:1.5rem 0; }
+  .timeline::before { content:''; position:absolute; left:0; top:0; bottom:0; width:2px; background: var(--accent-gradient); }
+  .timeline-item { position:relative; }
+  .timeline-item::before { content:''; position:absolute; left:-1.65rem; top:0.4rem; width:10px; height:10px; border-radius:50%; background:var(--accent-blue); }
+  .timeline-title { font-weight:700; margin-bottom:0.5rem; }
+  .formula { background:rgba(0,0,0,0.2); border:1px solid var(--border); border-radius:var(--radius); padding:1rem; font-family:var(--font-mono); font-size:0.875rem; margin:1rem 0; overflow-x:auto; color:var(--text); }
+  [data-theme="light"] .formula { background:rgba(0,0,0,0.04); }
+  .tree { font-family:var(--font-mono); font-size:0.8125rem; line-height:1.7; color:var(--text-secondary); background:rgba(0,0,0,0.2); border:1px solid var(--border); border-radius:var(--radius); padding:1rem; overflow-x:auto; }
+  [data-theme="light"] .tree { background:rgba(0,0,0,0.04); }
+  .biblio { list-style:none; padding:0; counter-reset: bib; }
+  .biblio li { counter-increment: bib; margin-bottom:0.75rem; padding-left:2rem; position:relative; color:var(--text-secondary); font-size:0.9375rem; }
+  .biblio li::before { content: '[' counter(bib) ']'; position:absolute; left:0; color:var(--accent-blue); font-weight:600; font-family:var(--font-mono); }
+  pre {
+    background: rgba(0,0,0,0.3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1rem;
+    overflow-x: auto;
+    color: var(--text);
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    margin-bottom: 1rem;
+  }
+  [data-theme="light"] pre { background: rgba(0,0,0,0.05); }
+</style>
+</head>
+<body>
+<svg style="display:none;">
+  <defs>
+    <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke="#22c55e" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2" fill="none"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  </defs>
+</svg>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="logo">MAROC-LOC</div>
+    <nav class="nav-links">
+      <a href="#introduction">Introduction</a>
+      <a href="#analyse">Analyse</a>
+      <a href="#conception">Conception</a>
+      <a href="#base-de-donnees">Base de Données</a>
+      <a href="#rag">RAG &amp; IA</a>
+      <a href="#implementation">Implémentation</a>
+      <a href="#tests">Tests</a>
+      <a href="#devops">DevOps</a>
+      <a href="#conclusion">Conclusion</a>
+    </nav>
+    <div style="display:flex; gap:0.5rem; align-items:center;">
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+        <svg width="20" height="20"><use href="#i-sun"/></svg>
+      </button>
+      <button class="hamburger" id="menu-btn" aria-label="Menu">
+        <svg width="24" height="24"><use href="#i-menu"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-nav" id="mobile-nav">
+  <button class="hamburger" id="close-nav" style="position:absolute; top:1rem; right:1.5rem;" aria-label="Close menu">
+    <svg width="24" height="24"><use href="#i-close"/></svg>
+  </button>
+  <a href="#introduction">Introduction</a>
+  <a href="#analyse">Analyse et Spécification</a>
+  <a href="#conception">Conception Architecturale</a>
+  <a href="#base-de-donnees">Conception Base de Données</a>
+  <a href="#rag">Architecture RAG et IA</a>
+  <a href="#implementation">Implémentation</a>
+  <a href="#tests">Tests et Validation</a>
+  <a href="#devops">Déploiement et DevOps</a>
+  <a href="#conclusion">Conclusion et Perspectives</a>
+  <a href="#bibliographie">Bibliographie</a>
+</div>
+
+<section class="hero">
+  <h1>MAROC-LOC — Rapport PFE</h1>
+  <p>Conception et Développement d'une Plateforme PropTech Intelligente pour le Marché Immobilier Marocain basée sur les Systèmes RAG et l'Apprentissage Automatique</p>
+</section>
+
+<div class="toc-bar">
+  <div class="toc-bar-inner">
+    <a href="#introduction">1. Introduction</a>
+    <a href="#analyse">2. Analyse</a>
+    <a href="#conception">3. Conception</a>
+    <a href="#base-de-donnees">4. Base de Données</a>
+    <a href="#rag">5. RAG &amp; IA</a>
+    <a href="#implementation">6. Implémentation</a>
+    <a href="#tests">7. Tests</a>
+    <a href="#devops">8. DevOps</a>
+    <a href="#conclusion">9. Conclusion</a>
+    <a href="#bibliographie">Bibliographie</a>
+  </div>
+</div>
+
+<div class="main-grid">
+  <aside class="sidebar">
+    <div class="sidebar-title">Table des Matières</div>
+    <ul>
+      <li><a href="#introduction">1. Introduction Générale</a></li>
+      <li><a href="#analyse">2. Analyse et Spécification</a></li>
+      <li><a href="#conception">3. Conception Architecturale</a></li>
+      <li><a href="#base-de-donnees">4. Conception Base de Données</a></li>
+      <li><a href="#rag">5. Architecture RAG et IA</a></li>
+      <li><a href="#implementation">6. Implémentation</a></li>
+      <li><a href="#tests">7. Tests et Validation</a></li>
+      <li><a href="#devops">8. Déploiement et DevOps</a></li>
+      <li><a href="#conclusion">9. Conclusion et Perspectives</a></li>
+      <li><a href="#bibliographie">Bibliographie</a></li>
+      <li><a href="#annexes">Annexes</a></li>
+    </ul>
+  </aside>
+
+  <main>
+    <div class="card academic-header">
+      <div class="label">Rapport de Projet de Fin d'Études (PFE)</div>
+      <h1 style="font-size:2rem;">MAROC-LOC</h1>
+      <div class="subtitle">Plateforme Intelligente de Recherche Immobilière au Maroc avec Intelligence Artificielle Générative (RAG)</div>
+      <div class="academic-meta">
+        <div><strong>Spécialité</strong><br>Ingénierie Informatique — IA &amp; SI</div>
+        <div><strong>Date</strong><br>24 Mai 2026</div>
+      </div>
+    </div>
+
+    <section id="abstract" class="card">
+      <h3>Résumé (Abstract)</h3>
+      <p>Le marché immobilier marocain fait face à des défis majeurs en matière d'accès à l'information, de transparence des prix, et de personnalisation de l'expérience utilisateur. Ce projet présente <strong>MAROC-LOC</strong>, une plateforme PropTech (Property Technology) fullstack intégrant une intelligence artificielle de pointe basée sur l'architecture <strong>RAG (Retrieval-Augmented Generation)</strong> pour offrir des recommandations immobilières personnalisées, un chatbot multilingue (français, arabe, darija marocaine), et un moteur de scoring dynamique.</p>
+      <p>L'architecture technique repose sur un <strong>monolithe modulaire</strong> backend (Spring Boot 3, Java 17), un frontend moderne (React 18, Vite, Tailwind CSS), une application mobile cross-platform (Flutter), et un service d'IA dédié (FastAPI, PyTorch, Transformers). Le système traite plus de 40 dimensions de données par propriété et utilise des embeddings sémantiques multilingues pour une compréhension contextuelle des requêtes utilisateurs.</p>
+      <p><strong>Mots-clés</strong> : PropTech, RAG, Recommandation Immobilière, Traitement du Langage Naturel, Darija, Spring Boot, React, Flutter, ChromaDB, Embeddings Sémantiques</p>
+    </section>
+
+    <section id="introduction" class="card">
+      <h2><span class="num">1</span> Introduction Générale</h2>
+      <h3>1.1 Contexte du Projet</h3>
+      <p>Le secteur immobilier au Maroc représente un pilier fondamental de l'économie nationale, contribuant significativement au PIB et à l'emploi. Cependant, le marché fait face à plusieurs dysfonctionnements structurels :</p>
+      <ul>
+        <li><strong>Fragmentation de l'information</strong> : Les annonces sont dispersées sur multiples plateformes (Avito, Mubawab, pages Facebook) sans standardisation</li>
+        <li><strong>Manque de transparence</strong> : Les prix affichés ne reflètent pas toujours la réalité du marché</li>
+        <li><strong>Barrière linguistique</strong> : La darija marocaine, langue dominante des interactions quotidiennes, est peu prise en charge par les plateformes existantes</li>
+        <li><strong>Absence de personnalisation</strong> : Les recherches sont basiques (ville + prix) sans compréhension des préférences utilisateurs</li>
+        <li><strong>Fraude et annonces douteuses</strong> : Vérification limitée des annonceurs et des biens</li>
+      </ul>
+      <h3>1.2 Problématique</h3>
+      <blockquote>Comment concevoir une plateforme immobilière intelligente capable de comprendre les besoins multilingues des utilisateurs marocains, de fournir des recommandations personnalisées basées sur le comportement réel, et d'assurer la qualité et la sécurité des transactions ?</blockquote>
+      <h3>1.3 Objectifs du Projet</h3>
+      <p><strong>Objectifs fonctionnels :</strong></p>
+      <ol>
+        <li>Plateforme de publication et recherche de biens immobiliers avec géolocalisation (PostGIS)</li>
+        <li>Moteur de recommandation hybride (collaboratif + content-based + comportemental)</li>
+        <li>Chatbot IA multilingue avec RAG pour assistance en temps réel</li>
+        <li>Système de scoring dynamique des propriétés et des annonceurs</li>
+        <li>Paiement intégré via CMI (Centre Monétique Interbancaire)</li>
+        <li>Application mobile native iOS/Android</li>
+      </ol>
+      <p><strong>Objectifs techniques :</strong></p>
+      <ol>
+        <li>Architecture scalable supportant 100k+ utilisateurs simultanés</li>
+        <li>Temps de réponse API &lt; 200ms (p95)</li>
+        <li>Précision des recommandations &gt; 75% (clicks / impressions)</li>
+        <li>Support natif du français, arabe classique, et darija marocaine</li>
+        <li>Taux de disponibilité système &gt; 99.9%</li>
+      </ol>
+    </section>
+
+    <section id="analyse" class="card">
+      <h2><span class="num">2</span> Analyse et Spécification des Besoins</h2>
+      <h3>2.1 Acteurs du Système</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Acteur</th><th>Description</th><th>Permissions</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Visiteur</strong></td><td>Utilisateur non authentifié</td><td>Consultation, recherche, chatbot</td></tr>
+            <tr><td><strong>Locataire</strong></td><td>Cherche un bien à louer/acheter</td><td>+ Favoris, messages, visites, avis</td></tr>
+            <tr><td><strong>Propriétaire</strong></td><td>Publie des annonces</td><td>+ CRUD biens, analytics, paiements</td></tr>
+            <tr><td><strong>Administrateur</strong></td><td>Gère la plateforme</td><td>+ Modération, stats, configuration IA</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h3>2.2 Besoins Fonctionnels</h3>
+      <p><strong>BF1 — Gestion des Biens</strong></p>
+      <ul>
+        <li>CRUD propriété avec 40+ attributs (surface, équipements, orientation, etc.)</li>
+        <li>Upload multi-images avec compression et drag-and-drop</li>
+        <li>Géocodage automatique (adresse → lat/lng)</li>
+        <li>Statuts : PENDING, APPROVED, AVAILABLE, RENTED, SOLD</li>
+      </ul>
+      <p><strong>BF2 — Recherche Intelligente</strong></p>
+      <ul>
+        <li>Recherche textuelle avec full-text search (PostgreSQL)</li>
+        <li>Filtres avancés : prix, surface, chambres, équipements, proximité</li>
+        <li>Recherche géographique (rayon autour d'un point)</li>
+        <li>Recherche vocale (Whisper STT)</li>
+      </ul>
+      <p><strong>BF3 — Recommandation Personnalisée</strong></p>
+      <ul>
+        <li>Recommandations basées sur l'historique utilisateur</li>
+        <li>Propriétés similaires à un bien consulté</li>
+        <li>Tendances (trending) par période</li>
+        <li>Recommandations géographiques</li>
+      </ul>
+      <p><strong>BF4 — Chatbot IA</strong></p>
+      <ul>
+        <li>Compréhension multilingue (fr, ar, darija)</li>
+        <li>Réponses basées sur les données réelles (RAG)</li>
+        <li>Historique de conversation persistant</li>
+        <li>Suggestions rapides contextuelles</li>
+      </ul>
+      <p><strong>BF5 — Système de Confiance</strong></p>
+      <ul>
+        <li>Vérification d'identité (CIN, téléphone)</li>
+        <li>Notation des propriétaires et biens</li>
+        <li>Signalement de contenu abusif</li>
+        <li>Détection de fraude (anomalies de prix/comportement)</li>
+      </ul>
+      <h3>2.3 Besoins Non-Fonctionnels</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Catégorie</th><th>Exigence</th><th>Métrique</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Performance</td><td>Temps de réponse API</td><td>&lt; 200ms (p95)</td></tr>
+            <tr><td>Disponibilité</td><td>Uptime système</td><td>&gt; 99.9%</td></tr>
+            <tr><td>Scalabilité</td><td>Utilisateurs simultanés</td><td>100,000+</td></tr>
+            <tr><td>Sécurité</td><td>Chiffrement données sensibles</td><td>AES-256</td></tr>
+            <tr><td>Accessibilité</td><td>Conformité WCAG</td><td>Niveau AA</td></tr>
+            <tr><td>i18n</td><td>Langues supportées</td><td>fr, ar, darija</td></tr>
+            <tr><td>Compatibilité</td><td>Navigateurs supportés</td><td>Chrome, Firefox, Safari, Edge</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>

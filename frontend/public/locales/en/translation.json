@@ -1,0 +1,1100 @@
+{
+  "common": {
+    "appName": "MAROC-LOC",
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "create": "Create",
+    "search": "Search",
+    "submit": "Submit",
+    "close": "Close",
+    "yes": "Yes",
+    "no": "No",
+    "confirm": "Confirm",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "of": "of",
+    "results": "results",
+    "noResults": "No results found",
+    "required": "This field is required",
+    "optional": "Optional",
+    "more": "See more",
+    "less": "See less",
+    "price": "Price",
+    "location": "Location",
+    "type": "Type",
+    "category": "Category",
+    "city": "City",
+    "description": "Description",
+    "features": "Features",
+    "contact": "Contact",
+    "viewDetails": "View details",
+    "addToFavorites": "Add to favorites",
+    "removeFromFavorites": "Remove from favorites",
+    "share": "Share",
+    "report": "Report",
+    "availability": "Availability",
+    "negotiable": "Negotiable",
+    "immediate": "Immediate",
+    "from": "From",
+    "to": "To",
+    "perMonth": "per month",
+    "perYear": "per year",
+    "currency": "MAD",
+    "surface": "Area",
+    "rooms": "rooms",
+    "bedrooms": "Bedrooms",
+    "bathrooms": "Bathrooms",
+    "constructionYear": "Construction year",
+    "condition": "Condition",
+    "furnished": "Furnished",
+    "unfurnished": "Unfurnished",
+    "pricePerSquareMeter": "Price per m²",
+    "squareMeter": "m²",
+    "fromOwner": "Direct from owner",
+    "add": "Add",
+    "retry": "Retry",
+    "all": "All",
+    "allFeminine": "All",
+    "unlimited": "Unlimited",
+    "linkCopied": "Link copied",
+    "deleteError": "Delete error"
+  },
+  "nav": {
+    "main": "Main navigation",
+    "home": "Home",
+    "properties": "Properties",
+    "cities": "Cities",
+    "contact": "Contact",
+    "account": "Account",
+    "menu": "Menu",
+    "postListing": "Post listing",
+    "tagline": "Morocco PropTech",
+    "search": "Search",
+    "favorites": "Favorites",
+    "messages": "Messages"
+  },
+  "auth": {
+    "logout": "Sign out",
+    "login": {
+      "title": "Welcome back",
+      "subtitle": "Sign in to your account",
+      "email": "Email address",
+      "emailPlaceholder": "Enter your email",
+      "password": "Password",
+      "passwordPlaceholder": "Enter your password",
+      "loading": "Signing in...",
+      "submit": "Sign in",
+      "noAccount": "Don't have an account?",
+      "registerLink": "Sign up",
+      "error": "Login failed"
+    },
+    "sessionExpiredTitle": "Session expired",
+    "sessionExpiredMessage": "Your session has expired or you are not authenticated. Please sign in again."
+  },
+  "register": {
+    "title": "Create your account",
+    "subtitle": "Join MAROC-LOC and start your journey",
+    "firstName": "First name",
+    "firstNamePlaceholder": "John",
+    "lastName": "Last name",
+    "lastNamePlaceholder": "Doe",
+    "fullName": "Full name",
+    "fullNamePlaceholder": "John Doe",
+    "fullNameHint": "Auto-generated from first and last name, but you can adjust it",
+    "city": "City",
+    "selectCity": "Select a city",
+    "enterCity": "Enter your city",
+    "userType": "User type",
+    "locataire": "Tenant",
+    "proprietaire": "Owner",
+    "phone": "Phone",
+    "phonePlaceholder": "+2126XXXXXXXX or 06XXXXXXXX",
+    "email": "Email",
+    "emailPlaceholder": "you@example.com",
+    "password": "Password",
+    "passwordPlaceholder": "Create a strong password",
+    "hidePassword": "Hide password",
+    "showPassword": "Show password",
+    "loading": "Creating account...",
+    "submit": "Create account",
+    "hasAccount": "Already have an account?",
+    "loginLink": "Sign in",
+    "fix_errors": "Please fix the highlighted fields",
+    "success": "Registration successful. Redirecting...",
+    "network_error": "Network error. Please check your connection.",
+    "correct_fields": "Please correct the highlighted registration fields",
+    "failed": "Registration failed. Please try again."
+  },
+  "validation": {
+    "required": "This field is required",
+    "email": "Please enter a valid email",
+    "email_invalid": "Enter a valid email address",
+    "email_disposable": "Disposable email addresses are not allowed",
+    "password_min": "Password must be at least 6 characters",
+    "password_weak": "Password must include upper and lower letters, a number, and a special character",
+    "firstName_min": "First name must contain at least 2 letters",
+    "firstName_invalid": "First name may only include letters, spaces, apostrophes or hyphens",
+    "lastName_min": "Last name must contain at least 2 letters",
+    "lastName_invalid": "Last name may only include letters, spaces, apostrophes or hyphens",
+    "fullName_min": "Full name must be at least 5 characters",
+    "fullName_mismatch": "Full name must include both first and last name",
+    "city_invalid": "Please enter a valid city name",
+    "phone_invalid": "Phone must be a valid Moroccan number (+2126 or 06...)"
+  },
+  "password": {
+    "strength": "Password strength",
+    "weak": "Weak",
+    "fair": "Fair",
+    "strong": "Strong",
+    "chars": "8+ chars",
+    "uppercase": "Uppercase",
+    "lowercase": "Lowercase",
+    "number": "Number",
+    "special": "Special"
+  },
+  "property": {
+    "types": {
+      "RENT": "Rent",
+      "BUY": "Buy",
+      "MORTGAGE": "Rahn"
+    },
+    "categories": {
+      "CAFE": "Café",
+      "GYM": "Gym",
+      "SHOP": "Shop",
+      "OFFICE": "Office",
+      "HOUSE": "House",
+      "APARTMENT": "Apartment",
+      "OTHER": "Other",
+      "LAND": "Land",
+      "RIAD": "Traditional riad"
+    },
+    "status": {
+      "PENDING": "Pending",
+      "APPROVED": "Approved",
+      "AVAILABLE": "Available",
+      "REJECTED": "Rejected",
+      "RESERVED": "Reserved",
+      "RENTED": "Rented",
+      "VERIFIED": "Verified"
+    },
+    "conditions": {
+      "NEW": "New",
+      "GOOD": "Good condition",
+      "RENOVATION_NEEDED": "Needs renovation",
+      "TO_RENOVATE": "To renovate"
+    },
+    "features": {
+      "elevator": "Elevator",
+      "parking": "Parking",
+      "pool": "Pool",
+      "garden": "Garden",
+      "airConditioning": "Air conditioning",
+      "internet": "Internet",
+      "security": "Security",
+      "furnished": "Furnished"
+    },
+    "title": "Properties",
+    "subtitle": "Find your ideal home",
+    "verified": "Verified",
+    "basePrice": "Base price",
+    "fees": "Additional fees",
+    "discount": "Discount",
+    "finalPrice": "Total price",
+    "image": "Image",
+    "publishedAt": "Published on",
+    "owner": "Owner",
+    "search": {
+      "title": "Search properties",
+      "city": "City",
+      "cityPlaceholder": "All cities",
+      "minPrice": "Min price (MAD)",
+      "maxPrice": "Max price (MAD)",
+      "keyword": "Keywords",
+      "keywordPlaceholder": "Apartment, villa, modern riad...",
+      "submit": "Search",
+      "filters": "Filters",
+      "clear": "Clear filters",
+      "propertyType": "Property type",
+      "propertyTypeAny": "Any type",
+      "propertyTypeApartment": "Apartment",
+      "propertyTypeVilla": "Villa",
+      "propertyTypeStudio": "Studio",
+      "propertyTypeCommercial": "Commercial",
+      "minSurface": "Min surface (m²)",
+      "maxSurface": "Max surface (m²)",
+      "minRooms": "Min rooms",
+      "maxRooms": "Max rooms",
+      "furnished": "Furnished",
+      "parking": "Parking",
+      "pool": "Pool",
+      "elevator": "Elevator",
+      "airConditioning": "Air conditioning",
+      "error": "Search unavailable",
+      "advancedTitle": "Advanced search",
+      "allCities": "All cities",
+      "majorCities": "Major cities",
+      "otherCities": "Other cities",
+      "otherCity": "Other city...",
+      "otherCityPlaceholder": "Enter the city name",
+      "availableCities": "{{count}} city available",
+      "availableCities_plural": "{{count}} cities available",
+      "transactionType": "Transaction type",
+      "showAdvanced": "Show advanced filters",
+      "hideAdvanced": "Hide advanced filters",
+      "searching": "Searching..."
+    },
+    "card": {
+      "surface": "Area",
+      "rooms": "Rooms",
+      "pricePerM2": "MAD/m²",
+      "perMonth": "/month",
+      "viewDetails": "View details",
+      "owner": "Owner",
+      "location": "Location",
+      "previewUnavailable": "Preview unavailable",
+      "bedroomsShort": "br."
+    },
+    "details": {
+      "title": "Property details",
+      "description": "Description",
+      "price": "Price",
+      "location": "Location",
+      "address": "Address",
+      "city": "City",
+      "owner": "Owner",
+      "publishedAt": "Published on",
+      "contactOwner": "Contact owner",
+      "addToFavorites": "Add to favorites",
+      "removeFromFavorites": "Remove from favorites",
+      "reviews": "Reviews",
+      "noReviews": "No reviews yet",
+      "writeReview": "Write a review",
+      "similarProperties": "Similar properties",
+      "characteristics": "Characteristics",
+      "equipments": "Amenities",
+      "viewDetails": "View details",
+      "alreadyInComparison": "Already in comparison",
+      "maxComparison": "Maximum 3 properties to compare",
+      "addedToComparison": "Added to comparison",
+      "inComparison": "In comparison",
+      "compare": "Compare"
+    },
+    "create": {
+      "title": "New property",
+      "subtitle": "Add your property",
+      "titleLabel": "Listing title",
+      "description": "Description",
+      "price": "Price (MAD)",
+      "city": "City",
+      "address": "Full address",
+      "coordinates": "GPS coordinates",
+      "latitude": "Latitude",
+      "longitude": "Longitude",
+      "images": "images",
+      "submit": "Create listing",
+      "success": "Property created successfully",
+      "error": "Error creating property",
+      "propertyType": "Transaction type",
+      "category": "Category",
+      "surface": "Area (m²)",
+      "rooms": "Number of rooms",
+      "bedrooms": "Bedrooms",
+      "bathrooms": "Bathrooms",
+      "constructionYear": "Construction year",
+      "condition": "Condition",
+      "furnished": "Furnished",
+      "equipments": "Amenities",
+      "parking": "Parking",
+      "pool": "Pool",
+      "elevator": "Elevator",
+      "garden": "Garden",
+      "airConditioning": "Air conditioning",
+      "internet": "Internet",
+      "security": "Security",
+      "contactInfo": "Contact information",
+      "phoneNumber": "Phone number",
+      "whatsappNumber": "WhatsApp number",
+      "step": {
+        "info": "Information",
+        "features": "Features",
+        "equipments": "Amenities",
+        "environment": "Environment",
+        "views": "Area & Views",
+        "payment": "Payment",
+        "media": "Media"
+      },
+      "fixErrors": "Please correct the errors",
+      "ownerRequired": "You must be logged in as an owner",
+      "paymentMethod": "Payment method",
+      "discount": "Discount (%)",
+      "geocoding": "Geocoding in progress...",
+      "geocodingBtn": "Geocoding...",
+      "refreshCoords": "Refresh coordinates",
+      "videoOptional": "Video (optional)",
+      "videoHint": "Click to add a video (MP4, max 50MB)",
+      "firstNameArabic": "First name (Arabic)",
+      "lastNameArabic": "Last name (Arabic)",
+      "firstNameLatin": "First name (Latin)",
+      "lastNameLatin": "Last name (Latin)",
+      "cin": "ID card",
+      "publishing": "Publishing {{progress}}%",
+      "validationErrors": "Validation errors",
+      "cityAdded": "City \"{{city}}\" added successfully",
+      "enterCityFirst": "Please enter a city first",
+      "geoError": "Unable to locate \"{{city}}\". Please check the name or enter coordinates manually.",
+      "gpsSuccess": "GPS coordinates retrieved automatically",
+      "gpsHint": "💡 GPS coordinates update automatically",
+      "noCityFound": "No city found for \"{{city}}\"",
+      "addCity": "Add \"{{city}}\"",
+      "cityPlaceholder": "Search or enter a city...",
+      "titlePlaceholder": "Ex: Modern villa with pool",
+      "descPlaceholder": "Describe your property in detail (min 50 characters)",
+      "addressPlaceholder": "Ex: Zerktouni Boulevard",
+      "south": "South",
+      "north": "North",
+      "east": "East",
+      "west": "West",
+      "bankTransfer": "Bank transfer",
+      "cash": "Cash",
+      "mapLocation": "Location on map",
+      "basedOn": "Based on:",
+      "gpsManual": "Coordinates could not be retrieved automatically. Click on the map or enter manually.",
+      "errTitleRequired": "Title required",
+      "errDescMin": "Description: minimum 50 characters",
+      "errPriceMin": "Minimum price 1000 MAD",
+      "errCityRequired": "City required",
+      "errAddressRequired": "Address required",
+      "errSurfaceMin": "Minimum area 10 m²",
+      "errRoomsRequired": "Number of rooms required",
+      "errPhoneRequired": "Phone required",
+      "errGpsRequired": "GPS coordinates required - Please check the entered city",
+      "errImageRequired": "At least 1 image required",
+      "errFirstNameArRequired": "Arabic first name required",
+      "errLastNameArRequired": "Arabic last name required",
+      "errFirstNameLatRequired": "Latin first name required",
+      "errLastNameLatRequired": "Latin last name required",
+      "errCinRequired": "ID card required",
+      "dropImages": "Drop images here",
+      "dragOrClick": "Drag and drop or click to add",
+      "max": "Max",
+      "tooLarge": "Too large",
+      "ready": "Ready",
+      "processing": "Processing...",
+      "setPrimary": "Set as primary",
+      "primaryHint": "The image with the star is the primary photo. Drag to rearrange.",
+      "equip": {
+        "ac": "Air conditioning",
+        "balcony": "Balcony / Terrace"
+      },
+      "env": {
+        "cityCenter": "City center",
+        "school": "School nearby",
+        "university": "University nearby",
+        "mosque": "Mosque nearby",
+        "hospital": "Hospital nearby",
+        "market": "Market / Souk",
+        "bus": "Bus stop",
+        "tram": "Tram",
+        "train": "Train station"
+      },
+      "area": {
+        "popular": "Popular area",
+        "modern": "Modern area",
+        "quiet": "Quiet area",
+        "family": "Family area",
+        "gardenView": "Garden view",
+        "streetView": "Street view",
+        "seaView": "Sea view"
+      },
+      "orientation": "Orientation",
+      "card": "Credit card",
+      "check": "Check",
+      "videoTypeError": "File must be a video.",
+      "videoSizeError": "Video is too large (max 50MB).",
+      "networkError": "Network error"
+    },
+    "edit": {
+      "title": "Edit property",
+      "submit": "Save changes",
+      "success": "Property updated",
+      "error": "Update error"
+    },
+    "delete": {
+      "confirm": "Are you sure you want to delete this property?",
+      "success": "Property deleted",
+      "error": "Delete error"
+    },
+    "errors": {
+      "notFound": "Property not found",
+      "unauthorized": "Not authorized",
+      "invalidPrice": "Invalid price",
+      "requiredField": "Required field missing",
+      "invalidSurface": "Area must be greater than 0",
+      "invalidRooms": "Rooms must be between 1 and 20"
+    },
+    "priceBasedOnFinal": "Based on the final price",
+    "new": "New"
+  },
+  "dashboard": {
+    "title": "My dashboard",
+    "subtitle": "Manage your properties",
+    "stats": {
+      "totalProperties": "Total properties",
+      "totalViews": "Total views",
+      "totalInquiries": "Inquiries received",
+      "favorites": "Favorites",
+      "avgPrice": "Average price"
+    },
+    "actions": {
+      "addProperty": "Add property"
+    },
+    "properties": {
+      "title": "My properties",
+      "empty": "You don't have any properties yet.",
+      "emptyMessage": "Add your first property to get started.",
+      "addFirst": "Add my first property",
+      "edit": "Edit",
+      "delete": "Delete",
+      "view": "View",
+      "totalCount": "{{count}} property total",
+      "totalCount_plural": "{{count}} properties total"
+    },
+    "checklist": {
+      "addProperty": "Add your first property"
+    }
+  },
+  "admin": {
+    "title": "Administration",
+    "subtitle": "Platform management",
+    "stats": {
+      "messages": "Messages",
+      "favorites": "Favorites",
+      "visits": "Visits",
+      "totalRevenue": "Total Revenue",
+      "revenueThisMonth": "This Month",
+      "paid": "Paid",
+      "failed": "Failed",
+      "newUsers": "New Users",
+      "newProperties": "New Properties",
+      "activeAds": "Active Ads",
+      "avgRating": "Avg Rating",
+      "uniqueUsers": "Unique Users (7d)",
+      "totalEvents": "Events (7d)",
+      "sessions": "Sessions (7d)",
+      "revenue": "Revenue",
+      "reviews": "Reviews"
+    },
+    "users": {
+      "title": "Users",
+      "id": "ID",
+      "name": "Name",
+      "email": "Email",
+      "role": "Role",
+      "actions": "Actions",
+      "delete": "Delete",
+      "confirmDelete": "Delete this user?",
+      "roles": {
+        "ADMIN": "Admin",
+        "LOCATAIRE": "Tenant",
+        "PROPRIETAIRE": "Owner"
+      },
+      "deleteError": "Error while deleting the user"
+    },
+    "recentActivity": "Recent activity",
+    "tab": {
+      "dashboard": "Dashboard",
+      "properties": "Properties",
+      "ads": "Ads",
+      "users": "Users",
+      "reviews": "Reviews",
+      "transactions": "Transactions",
+      "analytics": "Analytics",
+      "trust": "Trust & Security",
+      "settings": "Settings"
+    },
+    "header": {
+      "properties": "Property Management",
+      "ads": "Ad Management",
+      "users": "User Management",
+      "reviews": "Review Moderation",
+      "transactions": "Transactions",
+      "analytics": "Advanced Analytics",
+      "trust": "Trust & Security",
+      "settings": "System Settings"
+    },
+    "status": {
+      "pending": "Pending",
+      "approved": "Approved",
+      "available": "Available",
+      "rejected": "Rejected",
+      "reserved": "Reserved",
+      "rented": "Rented",
+      "active": "Active",
+      "paused": "Paused",
+      "paid": "Paid",
+      "failed": "Failed",
+      "refunded": "Refunded",
+      "flagged": "Flagged"
+    },
+    "chart": {
+      "distribution": "Property Distribution",
+      "topCities": "Top Cities",
+      "usersByRole": "Users by Role",
+      "conversion": "Conversion Rate",
+      "conversionLabel": "Visits → Contacts",
+      "dau": "Daily Active Users (30d)",
+      "propertyViews": "Property Views",
+      "revenue": "Revenue",
+      "daily": "Daily Publications (30 days)",
+      "topViewed": "Most Viewed Properties (7d)",
+      "others": "Others",
+      "monthly": "Monthly Trends",
+      "yearly": "Yearly Trends"
+    },
+    "table": {
+      "property": "Property",
+      "city": "City",
+      "price": "Price",
+      "status": "Status",
+      "views": "Views",
+      "owner": "Owner",
+      "actions": "Actions",
+      "title": "Title",
+      "type": "Type",
+      "plan": "Plan",
+      "budget": "Budget",
+      "clicks": "Clicks",
+      "name": "Name",
+      "role": "Role",
+      "verified": "Verified",
+      "amount": "Amount",
+      "user": "User",
+      "date": "Date",
+      "time": "Time",
+      "device": "Device"
+    },
+    "search": {
+      "property": "Search property, city, owner...",
+      "user": "Search user..."
+    },
+    "filter": {
+      "all": "All statuses"
+    },
+    "action": {
+      "approve": "Approve",
+      "reject": "Reject",
+      "view": "View",
+      "delete": "Delete",
+      "verify": "Verify",
+      "flag": "Flag",
+      "refund": "Refund"
+    },
+    "empty": {
+      "properties": "No properties found",
+      "users": "No users found",
+      "ads": "No ads",
+      "reviews": "No reviews to moderate",
+      "payments": "No payments",
+      "data": "No data"
+    },
+    "reviews": {
+      "pending": "Pending Reviews",
+      "flagged": "Flagged Reviews",
+      "signals": "{{count}} reports"
+    },
+    "ads": {
+      "pending": "Pending Ads",
+      "all": "All Ads"
+    },
+    "payments": {
+      "title": "Payments"
+    },
+    "error": {
+      "load": "Error loading admin",
+      "generic": "Error"
+    },
+    "confirm": {
+      "delete": "Delete permanently?",
+      "deleteUser": "Delete this user?"
+    },
+    "deleted": "Deleted",
+    "property": {
+      "approved": "Property approved",
+      "rejectReason": "Rejection reason?",
+      "rejected": "Property rejected",
+      "classified": "Classified"
+    },
+    "user": {
+      "verified": "User verified",
+      "deleted": "User deleted"
+    },
+    "ad": {
+      "approved": "Ad approved",
+      "rejectReason": "Rejection reason?",
+      "rejected": "Ad rejected"
+    },
+    "review": {
+      "moderated": "Review moderated"
+    },
+    "payment": {
+      "refundReason": "Refund reason?",
+      "refunded": "Refunded"
+    },
+    "activityLog": "Activity Log",
+    "entries": "entries",
+    "fraud": {
+      "title": "Fraud Detection",
+      "description": "Automatically analyze suspicious properties. The system detects abnormal prices, duplicates, and suspicious accounts.",
+      "analyses": "Analyses performed",
+      "mediumAlerts": "Medium alerts",
+      "highAlerts": "High alerts"
+    },
+    "settings": {
+      "maintenance": "Maintenance Mode",
+      "maintenanceDesc": "Make the site inaccessible to visitors",
+      "saved": "Settings saved",
+      "saveError": "Save error",
+      "features": "Features",
+      "aiChat": "AI Chatbot",
+      "aiChatDesc": "Intelligent assistant for visitors",
+      "voiceSearch": "Voice Search",
+      "voiceSearchDesc": "Search by voice command",
+      "ads": "Ad System",
+      "adsDesc": "Advertisements and promotions",
+      "reviews": "Review System",
+      "reviewsDesc": "Property reviews and ratings",
+      "payments": "Online Payments",
+      "paymentsDesc": "CMI and Stripe",
+      "api": "API Configuration"
+    },
+    "refresh": "Refresh",
+    "pagination": {
+      "range": "{{start}}-{{end}} of {{total}} {{label}}",
+      "items": "items",
+      "prev": "Previous",
+      "next": "Next",
+      "page": "Page {{page}} / {{total}}"
+    },
+    "trend": {
+      "up": "Increasing",
+      "down": "Decreasing",
+      "stable": "Stable"
+    },
+    "badge": {
+      "normal": "Normal"
+    },
+    "topViewed": {
+      "property": "Property #{{id}}",
+      "views": "{{count}} views"
+    },
+    "label": {
+      "properties": "properties",
+      "ads": "ads",
+      "users": "users",
+      "reviews": "reviews"
+    }
+  },
+  "chatbot": {
+    "title": "MAROC-LOC assistant",
+    "greeting": "Hello! I am your MAROC-LOC assistant. How can I help?",
+    "placeholder": "Type a message...",
+    "placeholderDarija": "كتب شي حاجة...",
+    "placeholderArabic": "اكتب رسالتك...",
+    "send": "Send",
+    "typing": "Assistant is typing...",
+    "suggestions": {
+      "search": "I am looking for an apartment",
+      "price": "What is the average price?",
+      "help": "How does the platform work?"
+    },
+    "fallback": "I can help you search properties, compare prices, or understand a listing.",
+    "unavailable": "Assistant temporarily unavailable. Please try again shortly.",
+    "open": "Open assistant",
+    "subtitle": "Search, prices and recommendations",
+    "quick": {
+      "apartment": "Apartment near tram",
+      "budget": "Affordable studio",
+      "quiet": "Quiet neighborhood"
+    },
+    "messageLabel": "Message",
+    "close": "Close",
+    "newConversation": "New conversation",
+    "voiceSearch": "Voice search",
+    "role": {
+      "guest": "Visitor",
+      "buyer": "Buyer",
+      "locataire": "Tenant",
+      "proprietaire": "Owner",
+      "admin": "Admin"
+    },
+    "welcomeTitle": "How can I help you?",
+    "welcomeSubtitle": "I speak French, Arabic and Darija. Ask me your questions about real estate in Morocco.",
+    "disclaimer": "AI can sometimes make mistakes. Please verify important information.",
+    "propertiesFound": "{{count}} properties found",
+    "propertyFound": "{{count}} property found",
+    "copy": "Copy",
+    "copied": "Copied!",
+    "useful": "Useful",
+    "notUseful": "Not useful",
+    "microphoneDenied": "Please allow microphone access",
+    "microphoneNotFound": "No microphone detected",
+    "recordingFailed": "Recording error",
+    "quickPrompts": {
+      "search": "Find an apartment in Casablanca",
+      "price": "What is the average price in Marrakech?",
+      "neighborhood": "Best neighborhoods in Rabat",
+      "contact": "How to contact an owner?"
+    },
+    "quickReplies": {
+      "search": "Search a property",
+      "mortgage": "Simulate a loan",
+      "explore": "Explore properties"
+    }
+  },
+  "home": {
+    "hero": {
+      "title": "Find your dream property",
+      "subtitle": "Morocco's premium real estate platform",
+      "searchPlaceholder": "Search properties...",
+      "searchButton": "Search",
+      "description": "Explore villas, apartments, riads and professional spaces carefully selected with a digital experience inspired by contemporary Moroccan luxury.",
+      "featured": "Selection of the moment",
+      "featuredFallback": "Modern riad, Marrakech",
+      "featuredDesc": "Artisanal architecture, hotel comfort, digital management.",
+      "badge": "Smart real estate for a new generation."
+    },
+    "filter": {
+      "title": "Filter properties",
+      "keyword": "Keyword",
+      "keywordPlaceholder": "Apartment, villa, office...",
+      "category": "Category",
+      "categoryPlaceholder": "Choose a category",
+      "customCategory": "Custom category",
+      "customCategoryPlaceholder": "Specify your category",
+      "transactionType": "Transaction type",
+      "transactionTypePlaceholder": "Rent, buy, rahn",
+      "city": "City",
+      "cityPlaceholder": "Casablanca, Rabat, Marrakech...",
+      "priceRange": "Price range",
+      "minPrice": "Min price",
+      "maxPrice": "Max price",
+      "clearFilters": "Clear filters",
+      "searching": "Searching...",
+      "noResults": "No properties found",
+      "noResultsMessage": "Try adjusting your filters",
+      "surface": "Area (m²)",
+      "rooms": "Rooms",
+      "equipments": "Amenities"
+    },
+    "categories": {
+      "title": "Explore by category",
+      "subtitle": "Find properties in your favorite category",
+      "loading": "Loading categories...",
+      "listings": "{{count}} listing",
+      "listings_plural": "{{count}} listings",
+      "addCustom": "Add custom",
+      "addCustomTitle": "Add custom category",
+      "customPlaceholder": "e.g. Studio, warehouse, penthouse...",
+      "adding": "Adding...",
+      "addCustomDesc": "Create a custom category for your property"
+    },
+    "properties": {
+      "title": "Available properties",
+      "loading": "Loading properties...",
+      "empty": "No properties found",
+      "emptyMessage": "No properties match your current criteria.",
+      "featured": "Featured"
+    },
+    "results": {
+      "title": "result",
+      "title_plural": "results",
+      "subtitle": "Carefully selected properties",
+      "page": "Page"
+    },
+    "footer": {
+      "brand": {
+        "name": "MAROC-LOC",
+        "description": "Morocco's modern platform for renting, buying and investing."
+      },
+      "navigation": {
+        "title": "Navigation",
+        "about": "About",
+        "blog": "Blog",
+        "terms": "Terms",
+        "privacy": "Privacy"
+      },
+      "cities": {
+        "title": "Cities",
+        "casablanca": "Casablanca",
+        "rabat": "Rabat",
+        "marrakech": "Marrakech",
+        "fes": "Fes"
+      },
+      "newsletter": {
+        "title": "Newsletter",
+        "placeholder": "Email address",
+        "subscribe": "Subscribe"
+      }
+    },
+    "aiSearch": {
+      "title": "Smart search",
+      "placeholder": "Describe your ideal property..."
+    },
+    "map": {
+      "list": "List",
+      "map": "Map"
+    }
+  },
+  "market_insights": {
+    "title": "Moroccan real estate market insights",
+    "select_city": "Select city",
+    "total_cities": "Total cities",
+    "avg_price": "Average price/m²",
+    "market_status": "Market status",
+    "city_insights": "City insights",
+    "city_info": "Basic information",
+    "population": "Population",
+    "location_score": "Location score",
+    "market_trend": "Market trend",
+    "attractions": "Attractions",
+    "market_analysis": "Market analysis",
+    "current_price": "Current price",
+    "price_trend": "Price trend",
+    "market_demand": "Market demand",
+    "investment_potential": "Investment potential",
+    "recommendations": "Recommendations"
+  },
+  "language": {
+    "title": "Language",
+    "fr": "Français",
+    "en": "English",
+    "ar": "العربية",
+    "switch": "Change language"
+  },
+  "ads": {
+    "sponsored": "Sponsored",
+    "sponsoredListings": "Sponsored listings",
+    "promotedProperties": "Promoted properties",
+    "promotedSubtitle": "Hand-picked premium placements for relevant rentals.",
+    "subtitle": "Sponsored",
+    "title": "Partner listings"
+  },
+  "splash": {
+    "tagline": "Your gateway to Moroccan real estate",
+    "descriptionPrefix": "Discover your ideal home in Morocco with ease —",
+    "descriptionSearch": "elegant search",
+    "descriptionListings": "curated listings",
+    "and": "and",
+    "descriptionNavigation": "smart navigation",
+    "badges": {
+      "geolocation": "Geolocation",
+      "premium": "Premium listings",
+      "ai": "Smart AI"
+    },
+    "explore": "Explore listings",
+    "instantAccess": "Instant access to premium rentals",
+    "redirecting": "Automatic redirect...",
+    "footer": "© 2026 MAROC-LOC — Real estate reinvented",
+    "feature1": "Premium properties",
+    "feature2": "Integrated AI",
+    "feature3": "Verified",
+    "feature4": "All over Morocco",
+    "unmute": "Unmute",
+    "mute": "Mute",
+    "skip": "Skip"
+  },
+  "footer": {
+    "privacy": "Privacy",
+    "description": "Moroccan PropTech platform for renting, buying and valuing premium properties with a fast, clear and international experience.",
+    "explore": "Explore",
+    "legal": "Legal",
+    "rights": "All rights reserved."
+  },
+  "cities": {
+    "subtitle": "Premium Morocco",
+    "title": "Signature cities",
+    "description": "A selection inspired by the most beautiful cities in Morocco."
+  },
+  "feed": {
+    "subtitle": "Marketplace",
+    "title": "properties available",
+    "description": "Responsive selection with filters, quick cards and essential information to compare without friction.",
+    "noResults": "No property found"
+  },
+  "recommendations": {
+    "subtitle": "For you",
+    "title": "Personalized recommendations",
+    "seeAll": "See all",
+    "discoverTitle": "Discover our properties",
+    "discoverSubtitle": "Selected for you"
+  },
+  "rec": {
+    "collaborative": "Similar",
+    "content": "Your criteria",
+    "trending": "Trending",
+    "geo": "Nearby",
+    "trust": "Trust",
+    "hybrid": "Recommended",
+    "discover": "Discover",
+    "recent": "New",
+    "explore": "Explore",
+    "match": "match"
+  },
+  "topRanked": {
+    "subtitle": "Ranking",
+    "title": "Top properties",
+    "description": "The best-rated properties according to our scoring algorithm."
+  },
+  "trust": {
+    "verified": "Verified properties",
+    "verifiedDesc": "Quality control and validated owners",
+    "premium": "Premium selection",
+    "premiumDesc": "Riads, villas and high-end apartments",
+    "support": "Local support",
+    "supportDesc": "Human support in Morocco",
+    "ai": "AI search",
+    "aiDesc": "Quick filters and useful recommendations"
+  },
+  "empty": {
+    "action": {
+      "explore": "Explore",
+      "retry": "Retry",
+      "browse": "Browse listings",
+      "addProperty": "Add a property",
+      "clearSearch": "See all properties"
+    },
+    "properties": {
+      "title": "No properties",
+      "description": "No properties match your search."
+    },
+    "search": {
+      "title": "No results",
+      "description": "Try other keywords, a different city, or let our AI help you find."
+    },
+    "favorites": {
+      "title": "Your selection is empty",
+      "description": "Save the properties you like by tapping the heart. Find them here anytime."
+    },
+    "messages": {
+      "title": "No messages yet",
+      "description": "Contact an owner from a property page. Your conversations will appear here."
+    },
+    "dashboard": {
+      "title": "Start publishing",
+      "description": "Your properties will appear here. Add your first listing and reach thousands of tenants and buyers."
+    },
+    "notifications": {
+      "title": "No notifications",
+      "description": "You will be notified of new listings and messages."
+    },
+    "map": {
+      "title": "No location",
+      "description": "Location information is not available for this property."
+    },
+    "reviews": {
+      "title": "No reviews",
+      "description": "Be the first to share your experience."
+    },
+    "generic": {
+      "title": "Nothing to display",
+      "description": "Come back later."
+    },
+    "aiSuggestion": {
+      "search": "Try: 'Villa with pool in Marrakech' or 'Modern apartment Casablanca'",
+      "favorites": "AI can suggest properties similar to those you have viewed",
+      "dashboard": "Listings with professional photos receive 5x more contacts"
+    }
+  },
+  "notifications": {
+    "title": "Notifications",
+    "adminTitle": "Notification center",
+    "markAllRead": "Mark all as read",
+    "searchPlaceholder": "Search notifications...",
+    "status": {
+      "all": "All",
+      "unread": "Unread",
+      "read": "Read",
+      "archived": "Archived"
+    },
+    "types": {
+      "ALL": "All types",
+      "NEW_MESSAGE": "New message",
+      "RESERVATION_CREATED": "Reservation created",
+      "PURCHASE_CREATED": "Purchase created",
+      "PROPERTY_APPROVED": "Property approved",
+      "PROPERTY_REJECTED": "Property rejected",
+      "VISIT_SCHEDULED": "Visit scheduled",
+      "VISIT_CONFIRMED": "Visit confirmed",
+      "ADVERTISEMENT_APPROVED": "Advertisement approved",
+      "PAYMENT_CMI_SUCCESS": "CMI payment successful",
+      "PAYMENT_STRIPE_SUCCESS": "Stripe payment successful",
+      "PAYMENT_FAILED": "Payment failed",
+      "AI_RECOMMENDATION": "AI recommendation",
+      "SYSTEM_ANNOUNCEMENT": "System announcement"
+    },
+    "total": "Total",
+    "unread": "Unread",
+    "read": "Read",
+    "empty": "No notifications",
+    "loadMore": "Load more",
+    "markAsRead": "Mark as read",
+    "delete": "Delete",
+    "seeAll": "See all",
+    "disconnected": "Disconnected"
+  },
+  "search": {
+    "noResultsFor": "No results for \"{{term}}\"",
+    "placeholder": "Search for a property, city, neighborhood...",
+    "recent": "Recent",
+    "trending": "Trending",
+    "city": "City",
+    "neighborhood": "Neighborhood",
+    "type": "Type",
+    "aiSearch": "AI Search: \"{{query}}\"",
+    "aiPowered": "AI Powered",
+    "recentSearches": "Recent searches",
+    "clear": "Clear",
+    "noSuggestions": "No suggestions. Press Enter to search.",
+    "keyboardNav": "Press",
+    "keyboardNavSuffix": "to navigate",
+    "enter": "Enter",
+    "keyboardSelect": "to select",
+    "aiResultsFor": "AI Results for \"{{query}}\"",
+    "noResults": "No results found. Try different keywords.",
+    "bedroomsShort": "br."
+  },
+  "inbox": {
+    "title": "Messages",
+    "online": "Online",
+    "offline": "Offline",
+    "reconnecting": "Reconnecting...",
+    "pollingMode": "Offline mode: messages will sync when reconnected",
+    "selectConversation": "Select a conversation",
+    "selectContact": "Choose a contact to start chatting",
+    "searchPlaceholder": "Search conversations...",
+    "messagePlaceholder": "Write a message...",
+    "typing": "{{name}} is typing...",
+    "loadMore": "Scroll to load more",
+    "roleAdmin": "Admin",
+    "roleOwner": "Owner",
+    "roleTenant": "Tenant",
+    "reTo": "Re: {{title}}",
+    "today": "Today",
+    "yesterday": "Yesterday",
+    "messageSent": "Message sent successfully",
+    "sendError": "Error sending message",
+    "deleteSuccess": "Message deleted",
+    "deleteError": "Delete failed",
+    "confirmDelete": "Delete this message?"
+  },
+  "reviews": {
+    "published": "Review published",
+    "publishError": "Error publishing review"
+  }
+}

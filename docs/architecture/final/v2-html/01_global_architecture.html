@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MAROC-LOC — Architecture Système Globale</title>
+<style>
+  :root {
+    --bg-deep: #0a0e27;
+    --bg-card: rgba(255,255,255,0.03);
+    --bg-card-hover: rgba(255,255,255,0.06);
+    --border: rgba(255,255,255,0.08);
+    --text-primary: #f1f5f9;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    --accent-blue: #3b82f6;
+    --accent-purple: #8b5cf6;
+    --accent-cyan: #06b6d4;
+    --accent-green: #10b981;
+    --accent-amber: #f59e0b;
+    --accent-red: #ef4444;
+    --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+    --shadow: 0 4px 24px rgba(0,0,0,0.35);
+    --shadow-hover: 0 12px 40px rgba(0,0,0,0.5);
+    --glass: rgba(255,255,255,0.03);
+    --glass-border: rgba(255,255,255,0.08);
+  }
+  [data-theme="light"] {
+    --bg-deep: #f8fafc;
+    --bg-card: rgba(255,255,255,0.7);
+    --bg-card-hover: rgba(255,255,255,0.9);
+    --border: rgba(15,23,42,0.1);
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-muted: #94a3b8;
+    --shadow: 0 4px 24px rgba(0,0,0,0.08);
+    --shadow-hover: 0 12px 40px rgba(0,0,0,0.12);
+    --glass: rgba(255,255,255,0.6);
+    --glass-border: rgba(15,23,42,0.1);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body {
+    font-family: var(--font-body);
+    background: var(--bg-deep);
+    color: var(--text-primary);
+    line-height:1.6;
+    transition: background .3s, color .3s;
+  }
+  ::-webkit-scrollbar { width:8px; }
+  ::-webkit-scrollbar-track { background:transparent; }
+  ::-webkit-scrollbar-thumb { background:rgba(255,255,255,0.15); border-radius:4px; }
+  [data-theme="light"] ::-webkit-scrollbar-thumb { background:rgba(0,0,0,0.15); }
+
+  /* Toggle */
+  .theme-toggle {
+    position:fixed; top:20px; right:20px; z-index:1000;
+    width:44px; height:44px; border-radius:12px;
+    background:var(--glass); border:1px solid var(--glass-border);
+    backdrop-filter:blur(12px); cursor:pointer; display:flex; align-items:center; justify-content:center;
+    transition:all .3s; box-shadow:var(--shadow);
+  }
+  .theme-toggle:hover { transform:translateY(-2px); box-shadow:var(--shadow-hover); }
+  .theme-toggle svg { width:20px; height:20px; fill:none; stroke:var(--text-primary); stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+
+  /* Layout */
+  .layout { display:flex; max-width:1400px; margin:0 auto; padding:0 24px; gap:32px; }
+  .sidebar {
+    position:sticky; top:24px; width:260px; height:fit-content; flex-shrink:0;
+    display:none;
+  }
+  @media(min-width:1024px){ .sidebar{display:block;} }
+  .sidebar-inner {
+    background:var(--glass); border:1px solid var(--glass-border); border-radius:16px;
+    backdrop-filter:blur(16px); padding:20px; box-shadow:var(--shadow);
+  }
+  .sidebar h3 { font-size:12px; text-transform:uppercase; letter-spacing:1px; color:var(--text-muted); margin-bottom:12px; }
+  .sidebar a {
+    display:block; padding:8px 12px; border-radius:8px; color:var(--text-secondary);
+    text-decoration:none; font-size:13px; transition:all .2s; margin-bottom:2px;
+  }
+  .sidebar a:hover, .sidebar a.active { background:rgba(59,130,246,0.12); color:var(--accent-blue); }
+
+  /* Mobile nav */
+  .mobile-nav { display:none; }
+  @media(max-width:1023px){
+    .mobile-nav {
+      display:flex; align-items:center; justify-content:space-between;
+      padding:16px 20px; position:sticky; top:0; z-index:900;
+      background:var(--bg-deep); border-bottom:1px solid var(--border);
+    }
+    .mobile-nav .logo { font-weight:700; font-size:16px; background:linear-gradient(135deg,var(--accent-blue),var(--accent-purple)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+    .hamburger { width:36px; height:36px; border-radius:8px; background:var(--glass); border:1px solid var(--glass-border); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; cursor:pointer; }
+    .hamburger span { display:block; width:16px; height:2px; background:var(--text-primary); border-radius:1px; transition:.3s; }
+    .mobile-menu {
+      position:fixed; top:0; left:0; width:100%; height:100vh; z-index:950;
+      background:var(--bg-deep); padding:80px 24px 24px; transform:translateX(-100%); transition:.3s;
+    }
+    .mobile-menu.open { transform:translateX(0); }
+    .mobile-menu a { display:block; padding:14px 0; border-bottom:1px solid var(--border); color:var(--text-primary); text-decoration:none; font-size:15px; }
+    .mobile-menu .close { position:absolute; top:20px; right:20px; width:36px; height:36px; border-radius:8px; background:var(--glass); border:1px solid var(--glass-border); display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:20px; color:var(--text-primary); }
+  }
+
+  main { flex:1; min-width:0; padding-bottom:80px; }
+
+  /* Hero */
+  .hero {
+    text-align:center; padding:80px 20px 60px;
+    position:relative; overflow:hidden;
+  }
+  .hero::before {
+    content:''; position:absolute; top:-50%; left:50%; transform:translateX(-50%);
+    width:800px; height:800px; border-radius:50%;
+    background:radial-gradient(circle, rgba(59,130,246,0.12) 0%, transparent 70%);
+    pointer-events:none;
+  }
+  .hero h1 {
+    font-size:clamp(28px,5vw,52px); font-weight:800; line-height:1.1; margin-bottom:16px;
+    background:linear-gradient(135deg, #60a5fa, #a78bfa, #c084fc);
+    -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+    position:relative; z-index:1;
+  }
+  .hero p { font-size:clamp(14px,2vw,18px); color:var(--text-secondary); max-width:600px; margin:0 auto; position:relative; z-index:1; }
+  .hero-badge {
+    display:inline-flex; align-items:center; gap:8px; padding:6px 16px; border-radius:999px;
+    background:rgba(59,130,246,0.1); border:1px solid rgba(59,130,246,0.2);
+    color:var(--accent-blue); font-size:12px; font-weight:600; letter-spacing:.5px;
+    margin-bottom:20px; position:relative; z-index:1;
+  }
+
+  /* Cards */
+  .card {
+    background:var(--bg-card); border:1px solid var(--border); border-radius:16px;
+    backdrop-filter:blur(12px); padding:28px; margin-bottom:28px;
+    box-shadow:var(--shadow); transition:all .35s cubic-bezier(.4,0,.2,1);
+    position:relative; overflow:hidden;
+  }
+  .card::before {
+    content:''; position:absolute; top:0; left:0; right:0; height:1px;
+    background:linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  }
+  .card:hover { transform:translateY(-4px); box-shadow:var(--shadow-hover); background:var(--bg-card-hover); }
+  .card-header { display:flex; align-items:center; gap:12px; margin-bottom:20px; }
+  .card-icon {
+    width:40px; height:40px; border-radius:10px; display:flex; align-items:center; justify-content:center;
+    background:linear-gradient(135deg, rgba(59,130,246,0.2), rgba(139,92,246,0.2));
+    border:1px solid rgba(59,130,246,0.15); flex-shrink:0;
+  }
+  .card-icon svg { width:20px; height:20px; }
+  .card h2 { font-size:20px; font-weight:700; }
+  .card h3 { font-size:16px; font-weight:600; margin:20px 0 10px; color:var(--text-primary); }
+  .card p, .card li { color:var(--text-secondary); font-size:14px; }
+  .card ul { padding-left:18px; }
+  .card li { margin-bottom:6px; }
+
+  /* Section title */
+  .section-title {
+    font-size:clamp(20px,3vw,28px); font-weight:700; margin:48px 0 24px;
+    display:flex; align-items:center; gap:12px;
+  }
+  .section-title .line {
+    flex:1; height:1px; background:linear-gradient(90deg, var(--border), transparent);
+  }
+
+  /* Architecture Layers */
+  .layer-stack { display:flex; flex-direction:column; gap:16px; position:relative; }
+  .layer {
+    background:linear-gradient(135deg, rgba(59,130,246,0.06), rgba(139,92,246,0.06));
+    border:1px solid var(--border); border-radius:16px; padding:24px;
+    position:relative; transition:all .3s;
+  }
+  .layer:hover { border-color:rgba(59,130,246,0.25); }
+  .layer-label {
+    font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1.5px;
+    color:var(--accent-blue); margin-bottom:16px; display:flex; align-items:center; gap:8px;
+  }
+  .layer-label .dot { width:6px; height:6px; border-radius:50%; background:var(--accent-blue); box-shadow:0 0 8px var(--accent-blue); }
+  .layer-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(140px, 1fr)); gap:12px; }
+  .layer-box {
+    background:var(--glass); border:1px solid var(--glass-border); border-radius:12px;
+    padding:16px; text-align:center; font-size:13px; font-weight:600;
+    transition:all .3s; position:relative;
+  }
+  .layer-box:hover { background:rgba(59,130,246,0.08); transform:translateY(-2px); }
+  .layer-box .sub { font-size:11px; font-weight:400; color:var(--text-muted); margin-top:4px; font-family:var(--font-mono); }
+  .layer-arrow {
+    display:flex; justify-content:center; margin:4px 0;
+  }
+  .layer-arrow svg { width:24px; height:24px; stroke:var(--text-muted); stroke-width:2; fill:none; }
+
+  /* Data Flow */
+  .flow { display:flex; flex-direction:column; gap:0; margin:20px 0; }
+  .flow-step {
+    display:flex; align-items:center; gap:16px; padding:16px 20px;
+    background:var(--glass); border:1px solid var(--glass-border); border-radius:12px;
+    margin-bottom:12px; position:relative; transition:all .3s;
+  }
+  .flow-step:hover { background:rgba(59,130,246,0.05); }
+  .flow-step .num {
+    width:32px; height:32px; border-radius:50%; flex-shrink:0;
+    background:linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+    color:#fff; font-size:13px; font-weight:700; display:flex; align-items:center; justify-content:center;
+  }
+  .flow-step .body { flex:1; }
+  .flow-step .label { font-size:13px; font-weight:600; color:var(--text-primary); }
+  .flow-step .desc { font-size:12px; color:var(--text-muted); font-family:var(--font-mono); }
+  .flow-connector {
+    width:2px; height:16px; background:linear-gradient(180deg, var(--accent-blue), var(--accent-purple));
+    margin-left:35px; margin-top:-12px; margin-bottom:4px; opacity:.5;
+  }
+
+  /* Tables */
+  .data-table { width:100%; border-collapse:collapse; font-size:13px; margin-top:12px; }
+  .data-table thead th {
+    background:linear-gradient(135deg, rgba(59,130,246,0.15), rgba(139,92,246,0.15));
+    color:var(--text-primary); font-weight:600; text-align:left; padding:12px 16px;
+    border-bottom:1px solid var(--border); font-size:12px; text-transform:uppercase; letter-spacing:.5px;
+  }
+  .data-table tbody td { padding:12px 16px; border-bottom:1px solid var(--border); color:var(--text-secondary); }
+  .data-table tbody tr:nth-child(even){ background:rgba(255,255,255,0.02); }
+  [data-theme="light"] .data-table tbody tr:nth-child(even){ background:rgba(0,0,0,0.02); }
+  .data-table tbody tr:hover { background:rgba(59,130,246,0.05); }
+
+  /* Badges */
+  .badge { display:inline-flex; align-items:center; padding:3px 10px; border-radius:6px; font-size:11px; font-weight:700; font-family:var(--font-mono); letter-spacing:.3px; }
+  .badge-get { background:rgba(16,185,129,0.15); color:var(--accent-green); }
+  .badge-post { background:rgba(59,130,246,0.15); color:var(--accent-blue); }
+  .badge-put { background:rgba(245,158,11,0.15); color:var(--accent-amber); }
+  .badge-delete { background:rgba(239,68,68,0.15); color:var(--accent-red); }
+
+  /* Metric cards */
+  .metrics { display:grid; grid-template-columns:repeat(auto-fit, minmax(160px, 1fr)); gap:16px; margin-top:16px; }
+  .metric {
+    background:var(--glass); border:1px solid var(--glass-border); border-radius:12px;
+    padding:20px; text-align:center; transition:all .3s;
+  }
+  .metric:hover { transform:translateY(-3px); border-color:rgba(59,130,246,0.25); }
+  .metric-value { font-size:28px; font-weight:800; background:linear-gradient(135deg, var(--accent-blue), var(--accent-purple)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+  .metric-label { font-size:12px; color:var(--text-muted); margin-top:4px; text-transform:uppercase; letter-spacing:.5px; }
+
+  /* Security model */
+  .security-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:16px; margin-top:16px; }
+  .security-item {
+    background:var(--glass); border:1px solid var(--glass-border); border-radius:12px;
+    padding:20px; display:flex; align-items:flex-start; gap:12px; transition:all .3s;
+  }
+  .security-item:hover { border-color:rgba(16,185,129,0.3); background:rgba(16,185,129,0.04); }
+  .security-icon { width:36px; height:36px; border-radius:10px; background:rgba(16,185,129,0.1); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .security-icon svg { width:18px; height:18px; stroke:var(--accent-green); stroke-width:2; fill:none; }
+  .security-title { font-size:13px; font-weight:600; color:var(--text-primary); }
+  .security-desc { font-size:12px; color:var(--text-muted); margin-top:2px; }
+
+  /* PlantUML placeholder */
+  .uml-block {
+    background:#0d1117; border:1px solid var(--border); border-radius:12px; padding:20px;
+    font-family:var(--font-mono); font-size:12px; color:var(--text-secondary); overflow-x:auto; white-space:pre;
+  }
+  [data-theme="light"] .uml-block { background:#f1f5f9; }
+
+  /* Footer */
+  .doc-footer { text-align:center; padding:40px 20px; color:var(--text-muted); font-size:12px; }
+
+  /* Responsive */
+  @media(max-width:640px){
+    .layer-grid { grid-template-columns:1fr 1fr; }
+    .metrics { grid-template-columns:1fr 1fr; }
+    .security-grid { grid-template-columns:1fr; }
+    .card { padding:20px; }
+  }
+</style>
+</head>
+<body>
+
+<button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+  <svg id="sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+  <svg id="moon" viewBox="0 0 24 24" style="display:none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+</button>
+
+<div class="mobile-nav">
+  <div class="logo">MAROC-LOC</div>
+  <div class="hamburger" onclick="document.querySelector('.mobile-menu').classList.add('open')">
+    <span></span><span></span><span></span>
+  </div>
+</div>
+<div class="mobile-menu" id="mobileMenu">
+  <div class="close" onclick="document.querySelector('.mobile-menu').classList.remove('open')">&times;</div>
+  <a href="#overview" onclick="closeMenu()">Vue d'ensemble</a>
+  <a href="#layers" onclick="closeMenu()">Couches Architecture</a>
+  <a href="#flows" onclick="closeMenu()">Flux de Données</a>
+  <a href="#auth" onclick="closeMenu()">Authentification</a>
+  <a href="#comm" onclick="closeMenu()">Communication</a>
+  <a href="#scale" onclick="closeMenu()">Scalabilité</a>
+</div>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+      <h3>Sommaire</h3>
+      <a href="#overview" class="nav-link">Vue d'ensemble</a>
+      <a href="#layers" class="nav-link">Couches Architecture</a>
+      <a href="#flows" class="nav-link">Flux de Données</a>
+      <a href="#auth" class="nav-link">Authentification</a>
+      <a href="#comm" class="nav-link">Communication</a>
+      <a href="#scale" class="nav-link">Scalabilité</a>
+    </div>
+  </aside>
+
+  <main>
+    <section class="hero">
+      <div class="hero-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        Architecture Documentation v1.0
+      </div>
+      <h1>MAROC-LOC — Architecture Système Globale</h1>
+      <p>Plateforme PropTech fullstack dédiée au marché immobilier marocain avec intelligence artificielle avancée (RAG), chatbot multilingue et moteur de scoring dynamique.</p>
+    </section>
+
+    <section id="overview" class="card">
+      <div class="card-header">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+        </div>
+        <h2>Vue d'ensemble</h2>
+      </div>
+      <p>MAROC-LOC est une plateforme <strong>PropTech (Property Technology)</strong> fullstack dédiée au marché immobilier marocain. Elle intègre une intelligence artificielle avancée (RAG) pour offrir :</p>
+      <ul style="margin-top:12px;">
+        <li>Recommandations personnalisées basées sur le comportement utilisateur</li>
+        <li>Chatbot multilingue (français, arabe, darija) avec compréhension contextuelle</li>
+        <li>Moteur de scoring dynamique pour les propriétés et les utilisateurs</li>
+        <li>Recherche sémantique et géospatiale via PostGIS</li>
+      </ul>
+      <div class="metrics" style="margin-top:20px;">
+        <div class="metric"><div class="metric-value">5</div><div class="metric-label">Layers</div></div>
+        <div class="metric"><div class="metric-value">6</div><div class="metric-label">Services</div></div>
+        <div class="metric"><div class="metric-value">7</div><div class="metric-label">Data Stores</div></div>
+        <div class="metric"><div class="metric-value">3</div><div class="metric-label">Clients</div></div>
+      </div>
+    </section>
+
+    <div class="section-title" id="layers">
+      <span>Couches Architecture</span>
+      <span class="line"></span>
+    </div>
+
+    <section class="card">
+      <div class="layer-stack">
+        <!-- Presentation Layer -->
+        <div class="layer">
+          <div class="layer-label"><span class="dot"></span>Presentation Layer</div>
+          <div class="layer-grid">
+            <div class="layer-box">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2" style="margin-bottom:6px;"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>
+              <div>React Web</div>
+              <div class="sub">Vite + Tailwind</div>
+            </div>
+            <div class="layer-box">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2" style="margin-bottom:6px;"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
+              <div>Flutter App</div>
+              <div class="sub">Mobile</div>
+            </div>
+            <div class="layer-box">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="2" style="margin-bottom:6px;"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+              <div>Chatbot</div>
+              <div class="sub">Widget</div>
+            </div>
+            <div class="layer-box">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" style="margin-bottom:6px;"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+              <div>Admin Dashboard</div>
+              <div class="sub">Future</div>
+            </div>
+          </div>
+        </div>
+        <div class="layer-arrow"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M12 19l-4-4"/><path d="M12 19l4-4"/></svg></div>
+
+        <!-- API Gateway -->
+        <div class="layer">
+          <div class="layer-label"><span class="dot" style="background:var(--accent-purple);box-shadow:0 0 8px var(--accent-purple);"></span>API Gateway Layer</div>
+          <div class="layer-grid" style="grid-template-columns:1fr;">
+            <div class="layer-box" style="display:flex; align-items:center; justify-content:center; gap:12px; padding:20px;">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><path d="M4 22v-7"/></svg>
+              <div style="text-align:left;">
+                <div style="font-weight:700;">Nginx Reverse Proxy</div>
+                <div class="sub">SSL/TLS termination · Rate limiting · Load balancing · CORS handling · Request routing</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="layer-arrow"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M12 19l-4-4"/><path d="M12 19l4-4"/></svg></div>
+
+        <!-- Backend Services -->
+        <div class="layer">
+          <div class="layer-label"><span class="dot" style="background:var(--accent-cyan);box-shadow:0 0 8px var(--accent-cyan);"></span>Backend Services Layer</div>
+          <div class="layer-grid">
+            <div class="layer-box">
+              <div>Auth Service</div>
+              <div class="sub">JWT / OAuth2</div>
+            </div>
+            <div class="layer-box">
+              <div>Property Service</div>
+              <div class="sub">CRUD / Search</div>
+            </div>
+            <div class="layer-box">
+              <div>Chat Service</div>
+              <div class="sub">WebSocket</div>
+            </div>
+            <div class="layer-box">
+              <div>Recommendation Engine</div>
+              <div class="sub">Hybrid AI</div>
+            </div>
+            <div class="layer-box">
+              <div>Analytics Service</div>
+              <div class="sub">Kafka / ClickHouse</div>
+            </div>
+            <div class="layer-box">
+              <div>Payment</div>
+              <div class="sub">CMI Integration</div>
+            </div>
+          </div>
+          <div class="sub" style="text-align:center;margin-top:12px;color:var(--text-muted);">Spring Boot 3.2.4 | Java 17/21 | Modular Monolith with service separation</div>
+        </div>
+        <div class="layer-arrow"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M12 19l-4-4"/><path d="M12 19l4-4"/></svg></div>
+
+        <!-- AI Layer -->
+        <div class="layer">
+          <div class="layer-label"><span class="dot" style="background:var(--accent-green);box-shadow:0 0 8px var(--accent-green);"></span>AI Layer (RAG Systems)</div>
+          <div class="layer-grid">
+            <div class="layer-box">
+              <div>RAG Pipeline</div>
+              <div class="sub">Retrieval</div>
+            </div>
+            <div class="layer-box">
+              <div>Smart Chat</div>
+              <div class="sub">Intent + Generation</div>
+            </div>
+            <div class="layer-box">
+              <div>Voice Engine</div>
+              <div class="sub">Whisper STT</div>
+            </div>
+            <div class="layer-box">
+              <div>Recommendation AI</div>
+              <div class="sub">Embeddings</div>
+            </div>
+            <div class="layer-box">
+              <div>Fraud Detect</div>
+              <div class="sub">Anomaly</div>
+            </div>
+            <div class="layer-box">
+              <div>Sentiment Analysis</div>
+              <div class="sub">NLP</div>
+            </div>
+          </div>
+          <div class="sub" style="text-align:center;margin-top:12px;color:var(--text-muted);">FastAPI | Python 3.11 | PyTorch | Transformers | ChromaDB | Whisper</div>
+        </div>
+        <div class="layer-arrow"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M12 19l-4-4"/><path d="M12 19l4-4"/></svg></div>
+
+        <!-- Data Layer -->
+        <div class="layer">
+          <div class="layer-label"><span class="dot" style="background:var(--accent-amber);box-shadow:0 0 8px var(--accent-amber);"></span>Data Layer</div>
+          <div class="layer-grid">
+            <div class="layer-box">
+              <div>PostgreSQL + PostGIS</div>
+              <div class="sub">Primary / Spatial</div>
+            </div>
+            <div class="layer-box">
+              <div>Redis</div>
+              <div class="sub">Cache / Session</div>
+            </div>
+            <div class="layer-box">
+              <div>ChromaDB</div>
+              <div class="sub">Vectors / Semantic</div>
+            </div>
+            <div class="layer-box">
+              <div>ClickHouse</div>
+              <div class="sub">Analytics / Events</div>
+            </div>
+            <div class="layer-box">
+              <div>Kafka</div>
+              <div class="sub">Event Bus</div>
+            </div>
+            <div class="layer-box">
+              <div>MinIO / S3</div>
+              <div class="sub">Files / Objects</div>
+            </div>
+            <div class="layer-box">
+              <div>Prometheus + Grafana</div>
+              <div class="sub">Monitoring</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-title" id="flows">
+      <span>Flux de Données End-to-End</span>
+      <span class="line"></span>
+    </div>
+
+    <section class="card">
+      <div class="card-header">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        </div>
+        <h2>1. Recherche de Propriété (with AI)</h2>
+      </div>
+      <div class="flow">
+        <div class="flow-step"><div class="num">1</div><div class="body"><div class="label">Utilisateur → Frontend</div><div class="desc">Query "appartement Casablanca 2 chambres"</div></div></div>
+        <div class="flow-connector"></div>
+        <div class="flow-step"><div class="num">2</div><div class="body"><div class="label">Frontend → Backend</div><div class="desc">POST /v2/properties/search</div></div></div>
+        <div class="flow-connector"></div>
+        <div class="flow-step"><div class="num">3</div><div class="body"><div class="label">Backend → PostgreSQL + AI Service</div><div class="desc">3a. PostgreSQL full-text search · 3b. Vector similarity search</div></div></div>
+        <div class="flow-connector"></div>
+        <div class="flow-step"><div class="num">4</div><div class="body"><div class="label">AI Service → Models</div><div class="desc">4a. Intent classification (FLAN-T5) · 4b. Entity extraction (spaCy/Regex) · 4c. Vector search (ChromaDB)</div></div></div>
+        <div class="flow-connector"></div>
+        <div class="flow-step"><div class="num">5</div><div class="body"><div class="label">AI Service → PostgreSQL</div><div class="desc">PG validation + re-ranking</div></div></div>
+        <div class="flow-connector"></div>
+        <div class="flow-step"><div class="num">6</div><div class="body"><div class="label">Backend → Response</div><div class="desc">Merge + score + paginate</div></div></div>
+        <div class="flow-connector"></div>
+        <div class="flow-step"><div class="num">7</div><div class="body"><div class="label">Frontend → UI</div><div class="desc">Render results + track impressions</div></div></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="card-header">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </div>
+        <h2>2. Recommandation Personnalisée</h2>
+      </div>
+      <div class="flow">
+        <div class="flow-step"><div class="num">1</div><div class="body"><div class="label">Utilisateur → Frontend</div><div class="desc">Load homepage</div></div></div>
+        <div class="flow-connector"></div>
+        <div class="flow-step"><div class="num">2</div><div class="body"><div class="label">Frontend → Backend</div><div class="desc">GET /recommendations/personalized</div></div></div>
+        <div class="flow-connector"></div>
+        <div class="flow-step"><div class="num">3</div><div class="body"><div class="label">Backend → Data Sources</div><div class="desc">3a. Build user profile (PostgreSQL) · 3b. Find similar users · 3c. Compute property scores (In-memory)</div></div></div>
+        <div class="flow-connector"></div>
+        <div class="flow-step"><div class="num">4</div><div class="body"><div class="label">Backend → Algorithm</div><div class="desc">Apply MMR diversity re-ranking</div></div></div>
+        <div class="flow-connector"></div>
+        <div class="flow-step"><div class="num">5</div><div class="body"><div class="label">Backend → Redis</div><div class="desc">Cache result</div></div></div>
+        <div class="flow-connector"></div>
+        <div class="flow-step"><div class="num">6</div><div class="body"><div class="label">Frontend → UI</div><div class="desc">Render cards + track impressions</div></div></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="card-header">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        </div>
+        <h2>3. Chatbot Conversation (RAG)</h2>
+      </div>
+      <div class="flow">
+        <div class="flow-step"><div class="num">1</div><div class="body"><div class="label">Utilisateur → Frontend</div><div class="desc">Voice/Text query "chrit dar f Marrakech"</div></div></div>
+        <div class="flow-connector"></div>
+        <div class="flow-step"><div class="num">2</div><div class="body"><div class="label">Frontend → Backend</div><div class="desc">POST /ai/voice/chat OR /ai/rag/chat</div></div></div>
+        <div class="flow-connector"></div>
+        <div class="flow-step"><div class="num">3</div><div class="body"><div class="label">Backend → AI Service</div><div class="desc">Forward to AI Service</div></div></div>
+        <div class="flow-connector"></div>
+        <div class="flow-step"><div class="num">4</div><div class="body"><div class="label">AI Service → Models &amp; DB</div><div class="desc">4a. Language detection (LangID) · 4b. Translate (NLLB-200) · 4c. Intent classification (BART-ZeroShot) · 4d. Vector search (top-k=10) · 4e. PG validation · 4f. Generate response (FLAN-T5)</div></div></div>
+        <div class="flow-connector"></div>
+        <div class="flow-step"><div class="num">5</div><div class="body"><div class="label">AI Service → Backend</div><div class="desc">Multilingual response</div></div></div>
+        <div class="flow-connector"></div>
+        <div class="flow-step"><div class="num">6</div><div class="body"><div class="label">Backend → Redis</div><div class="desc">Store conversation</div></div></div>
+        <div class="flow-connector"></div>
+        <div class="flow-step"><div class="num">7</div><div class="body"><div class="label">Frontend → UI</div><div class="desc">Display response + property cards</div></div></div>
+      </div>
+    </section>
+
+    <div class="section-title" id="auth">
+      <span>Flux d'Authentification</span>
+      <span class="line"></span>
+    </div>
+
+    <section class="card">
+      <div class="card-header">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </div>
+        <h2>JWT Authentication Flow</h2>
+      </div>
+      <div class="flow">
+        <div class="flow-step"><div class="num">1</div><div class="body"><div class="label">Utilisateur</div><div class="desc">Credentials → POST /v1/auth/login</div></div></div>
+        <div class="flow-connector"></div>
+        <div class="flow-step"><div class="num">2</div><div class="body"><div class="label">Backend Validation</div><div class="desc">PasswordEncoder (BCrypt)</div></div></div>
+        <div class="flow-connector"></div>
+        <div class="flow-step"><div class="num">3</div><div class="body"><div class="label">Generate Tokens</div><div class="desc">JWT (access: 15min, refresh: 7d)</div></div></div>
+        <div class="flow-connector"></div>
+        <div class="flow-step"><div class="num">4</div><div class="body"><div class="label">Store Refresh</div><div class="desc">Redis (rotation)</div></div></div>
+        <div class="flow-connector"></div>
+        <div class="flow-step"><div class="num">5</div><div class="body"><div class="label">Response</div><div class="desc">access + refresh tokens</div></div></div>
+        <div class="flow-connector"></div>
+        <div class="flow-step"><div class="num">6</div><div class="body"><div class="label">Frontend Storage</div><div class="desc">localStorage (access) + httpOnly cookie (refresh)</div></div></div>
+        <div class="flow-connector"></div>
+        <div class="flow-step"><div class="num">7</div><div class="body"><div class="label">API Calls</div><div class="desc">Axios interceptor (auto-attach Bearer)</div></div></div>
+        <div class="flow-connector"></div>
+        <div class="flow-step"><div class="num">8</div><div class="body"><div class="label">Backend Validate</div><div class="desc">JWT filter (check exp + signature)</div></div></div>
+        <div class="flow-connector"></div>
+        <div class="flow-step"><div class="num">9</div><div class="body"><div class="label">Authorization</div><div class="desc">@PreAuthorize (role check)</div></div></div>
+      </div>
+
+      <h3 style="margin-top:28px;">Security Model</h3>
+      <div class="security-grid">
+        <div class="security-item">
+          <div class="security-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+          <div><div class="security-title">Password Hashing</div><div class="security-desc">BCrypt with salt rounds</div></div>
+        </div>
+        <div class="security-item">
+          <div class="security-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg></div>
+          <div><div class="security-title">Token Rotation</div><div class="security-desc">Redis-backed refresh rotation</div></div>
+        </div>
+        <div class="security-item">
+          <div class="security-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <div><div class="security-title">Role-based Access</div><div class="security-desc">@PreAuthorize annotations</div></div>
+        </div>
+        <div class="security-item">
+          <div class="security-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+          <div><div class="security-title">Session Expiry</div><div class="security-desc">Access 15min / Refresh 7d</div></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-title" id="comm">
+      <span>Communication Inter-Services</span>
+      <span class="line"></span>
+    </div>
+
+    <section class="card">
+      <div class="card-header">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        </div>
+        <h2>Protocoles &amp; Connexions</h2>
+      </div>
+      <div style="overflow-x:auto;">
+        <table class="data-table">
+          <thead><tr><th>Source</th><th>Destination</th><th>Protocole</th><th>Usage</th></tr></thead>
+          <tbody>
+            <tr><td>Frontend</td><td>Backend</td><td><span class="badge badge-get">HTTPS/REST</span></td><td>CRUD, Auth, Search</td></tr>
+            <tr><td>Frontend</td><td>Backend</td><td><span class="badge badge-post">WebSocket</span></td><td>Chat temps réel</td></tr>
+            <tr><td>Backend</td><td>AI Service</td><td><span class="badge badge-get">HTTP/REST</span></td><td>RAG, Recommendations</td></tr>
+            <tr><td>Backend</td><td>PostgreSQL</td><td><span class="badge badge-post">JDBC</span></td><td>Données principales</td></tr>
+            <tr><td>Backend</td><td>Redis</td><td><span class="badge badge-put">Lettuce</span></td><td>Cache, Sessions, Tokens</td></tr>
+            <tr><td>Backend</td><td>Kafka</td><td><span class="badge badge-delete">Producer</span></td><td>Événements analytics</td></tr>
+            <tr><td>AI Service</td><td>ChromaDB</td><td><span class="badge badge-get">HTTP</span></td><td>Recherche sémantique</td></tr>
+            <tr><td>AI Service</td><td>PostgreSQL</td><td><span class="badge badge-post">psycopg2</span></td><td>Validation RAG</td></tr>
+            <tr><td>Kafka</td><td>ClickHouse</td><td><span class="badge badge-put">Consumer</span></td><td>Analytics temps réel</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <div class="section-title" id="scale">
+      <span>Matrice de Scalabilité</span>
+      <span class="line"></span>
+    </div>
+
+    <section class="card">
+      <div class="card-header">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M2 12h20"/><path d="M4.93 4.93l14.14 14.14M19.07 4.93L4.93 19.07"/></svg>
+        </div>
+        <h2>Stratégies de Scalabilité</h2>
+      </div>
+      <div style="overflow-x:auto;">
+        <table class="data-table">
+          <thead><tr><th>Composant</th><th>Stratégie</th><th>Outil</th></tr></thead>
+          <tbody>
+            <tr><td>Frontend Web</td><td>CDN + Static hosting</td><td>CloudFront / CloudFlare</td></tr>
+            <tr><td>Backend API</td><td>Horizontal pods</td><td>Kubernetes HPA</td></tr>
+            <tr><td>AI Service</td><td>GPU nodes + Queue</td><td>Celery + Redis</td></tr>
+            <tr><td>PostgreSQL</td><td>Read replicas + Sharding</td><td>Patroni + PgBouncer</td></tr>
+            <tr><td>Redis</td><td>Cluster mode</td><td>Redis Cluster</td></tr>
+            <tr><td>ChromaDB</td><td>Distributed</td><td>Chroma Server</td></tr>
+            <tr><td>Kafka</td><td>Partition scaling</td><td>Kafka Streams</td></tr>
+            <tr><td>ClickHouse</td><td>Shard + Replicate</td><td>CH Cluster</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="metrics" style="margin-top:24px;">
+        <div class="metric"><div class="metric-value">10k+</div><div class="metric-label">RPS Target</div></div>
+        <div class="metric"><div class="metric-value">&lt;200ms</div><div class="metric-label">P95 Latency</div></div>
+        <div class="metric"><div class="metric-value">99.9%</div><div class="metric-label">Uptime SLA</div></div>
+        <div class="metric"><div class="metric-value">3</div><div class="metric-label">Regions</div></div>
+      </div>
+    </section>
+
+    <div class="doc-footer">
+      Document généré le 24 Mai 2026 — Version 1.0 — MAROC-LOC Architecture Globale
+    </div>
+  </main>
+</div>
+
+<script>
+  function toggleTheme(){
+    const html = document.documentElement;
+    const current = html.getAttribute('data-theme');
+    const next = current === 'light' ? 'dark' : 'light';
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+    document.getElementById('sun').style.display = next === 'light' ? 'block' : 'none';
+    document.getElementById('moon').style.display = next === 'light' ? 'none' : 'block';
+  }
+  (function(){
+    const saved = localStorage.getItem('theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', saved);
+    document.getElementById('sun').style.display = saved === 'light' ? 'block' : 'none';
+    document.getElementById('moon').style.display = saved === 'light' ? 'none' : 'block';
+  })();
+  function closeMenu(){ document.querySelector('.mobile-menu').classList.remove('open'); }
+  // Active nav link on scroll
+  const sections = document.querySelectorAll('section[id], .section-title[id]');
+  const navLinks = document.querySelectorAll('.nav-link');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(sec => { if(scrollY >= sec.offsetTop - 120) current = sec.getAttribute('id'); });
+    navLinks.forEach(link => {
+      link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+    });
+  });
+</script>
+</body>
+</html>

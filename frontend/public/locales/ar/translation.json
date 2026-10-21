@@ -1,0 +1,1100 @@
+{
+  "common": {
+    "appName": "MAROC-LOC",
+    "loading": "جار التحميل...",
+    "error": "حدث خطأ",
+    "save": "حفظ",
+    "cancel": "إلغاء",
+    "delete": "حذف",
+    "edit": "تعديل",
+    "create": "إنشاء",
+    "search": "بحث",
+    "submit": "إرسال",
+    "close": "إغلاق",
+    "yes": "نعم",
+    "no": "لا",
+    "confirm": "تأكيد",
+    "back": "رجوع",
+    "next": "التالي",
+    "previous": "السابق",
+    "of": "من",
+    "results": "نتائج",
+    "noResults": "لم يتم العثور على نتائج",
+    "required": "هذا الحقل مطلوب",
+    "optional": "اختياري",
+    "more": "عرض المزيد",
+    "less": "عرض أقل",
+    "price": "السعر",
+    "location": "الموقع",
+    "type": "النوع",
+    "category": "الفئة",
+    "city": "المدينة",
+    "description": "الوصف",
+    "features": "المميزات",
+    "contact": "التواصل",
+    "viewDetails": "عرض التفاصيل",
+    "addToFavorites": "إضافة إلى المفضلة",
+    "removeFromFavorites": "إزالة من المفضلة",
+    "share": "مشاركة",
+    "report": "تبليغ",
+    "availability": "التوفر",
+    "negotiable": "قابل للتفاوض",
+    "immediate": "فوري",
+    "from": "من",
+    "to": "إلى",
+    "perMonth": "شهريا",
+    "perYear": "سنويا",
+    "currency": "درهم",
+    "surface": "المساحة",
+    "rooms": "غرف",
+    "bedrooms": "غرف النوم",
+    "bathrooms": "الحمامات",
+    "constructionYear": "سنة البناء",
+    "condition": "الحالة",
+    "furnished": "مفروش",
+    "unfurnished": "غير مفروش",
+    "pricePerSquareMeter": "السعر لكل متر مربع",
+    "squareMeter": "م²",
+    "fromOwner": "مباشرة من المالك",
+    "add": "إضافة",
+    "retry": "إعادة المحاولة",
+    "all": "الكل",
+    "allFeminine": "الكل",
+    "unlimited": "غير محدود",
+    "linkCopied": "تم نسخ الرابط",
+    "deleteError": "خطأ في الحذف"
+  },
+  "nav": {
+    "main": "التنقل الرئيسي",
+    "home": "الرئيسية",
+    "properties": "العقارات",
+    "cities": "المدن",
+    "contact": "اتصل بنا",
+    "account": "الحساب",
+    "menu": "القائمة",
+    "postListing": "نشر إعلان",
+    "tagline": "بروبتك المغرب",
+    "search": "بحث",
+    "favorites": "المفضلة",
+    "messages": "الرسائل"
+  },
+  "auth": {
+    "logout": "تسجيل الخروج",
+    "login": {
+      "title": "مرحبا بعودتك",
+      "subtitle": "سجل الدخول إلى حسابك",
+      "email": "البريد الإلكتروني",
+      "emailPlaceholder": "أدخل بريدك الإلكتروني",
+      "password": "كلمة المرور",
+      "passwordPlaceholder": "أدخل كلمة المرور",
+      "loading": "جاري تسجيل الدخول...",
+      "submit": "تسجيل الدخول",
+      "noAccount": "ليس لديك حساب؟",
+      "registerLink": "إنشاء حساب",
+      "error": "فشل تسجيل الدخول"
+    },
+    "sessionExpiredTitle": "انتهت الجلسة",
+    "sessionExpiredMessage": "انتهت جلستك أو لم يتم تسجيل الدخول. يرجى تسجيل الدخول من جديد."
+  },
+  "register": {
+    "title": "إنشاء حساب",
+    "subtitle": "انضم إلى MAROC-LOC وابدأ رحلتك",
+    "firstName": "الاسم الشخصي",
+    "firstNamePlaceholder": "محمد",
+    "lastName": "الاسم العائلي",
+    "lastNamePlaceholder": "علي",
+    "fullName": "الاسم الكامل",
+    "fullNamePlaceholder": "محمد علي",
+    "fullNameHint": "يتم توليده تلقائيا ويمكنك تعديله",
+    "city": "المدينة",
+    "selectCity": "اختر مدينة",
+    "enterCity": "أدخل مدينتك",
+    "userType": "نوع المستخدم",
+    "locataire": "مستأجر",
+    "proprietaire": "مالك",
+    "phone": "الهاتف",
+    "phonePlaceholder": "+2126XXXXXXXX أو 06XXXXXXXX",
+    "email": "البريد الإلكتروني",
+    "emailPlaceholder": "you@example.com",
+    "password": "كلمة المرور",
+    "passwordPlaceholder": "أنشئ كلمة مرور قوية",
+    "hidePassword": "إخفاء كلمة المرور",
+    "showPassword": "إظهار كلمة المرور",
+    "loading": "جاري إنشاء الحساب...",
+    "submit": "إنشاء الحساب",
+    "hasAccount": "لديك حساب بالفعل؟",
+    "loginLink": "تسجيل الدخول",
+    "fix_errors": "يرجى تصحيح الحقول المحددة",
+    "success": "تم التسجيل بنجاح. جاري التحويل...",
+    "network_error": "خطأ في الشبكة. تحقق من الاتصال.",
+    "correct_fields": "يرجى تصحيح حقول التسجيل",
+    "failed": "فشل التسجيل. حاول مرة أخرى."
+  },
+  "validation": {
+    "required": "هذا الحقل مطلوب",
+    "email": "يرجى إدخال بريد إلكتروني صالح",
+    "email_invalid": "أدخل بريدا إلكترونيا صالحا",
+    "email_disposable": "البريد المؤقت غير مسموح",
+    "password_min": "كلمة المرور يجب أن تتكون من 6 أحرف على الأقل",
+    "password_weak": "يجب أن تحتوي كلمة المرور على حرف كبير وصغير ورقم ورمز",
+    "firstName_min": "الاسم الشخصي يجب أن يحتوي على حرفين على الأقل",
+    "firstName_invalid": "الاسم الشخصي يقبل الحروف والمسافات فقط",
+    "lastName_min": "الاسم العائلي يجب أن يحتوي على حرفين على الأقل",
+    "lastName_invalid": "الاسم العائلي يقبل الحروف والمسافات فقط",
+    "fullName_min": "الاسم الكامل يجب أن يحتوي على 5 أحرف على الأقل",
+    "fullName_mismatch": "الاسم الكامل يجب أن يتضمن الاسم الشخصي والعائلي",
+    "city_invalid": "يرجى إدخال مدينة صحيحة",
+    "phone_invalid": "الهاتف يجب أن يكون رقما مغربيا صالحا"
+  },
+  "password": {
+    "strength": "قوة كلمة المرور",
+    "weak": "ضعيفة",
+    "fair": "متوسطة",
+    "strong": "قوية",
+    "chars": "8+ أحرف",
+    "uppercase": "حرف كبير",
+    "lowercase": "حرف صغير",
+    "number": "رقم",
+    "special": "رمز"
+  },
+  "property": {
+    "types": {
+      "RENT": "كراء",
+      "BUY": "شراء",
+      "MORTGAGE": "رهن"
+    },
+    "categories": {
+      "CAFE": "مقهى",
+      "GYM": "صالة رياضية",
+      "SHOP": "محل",
+      "OFFICE": "مكتب",
+      "HOUSE": "منزل",
+      "APARTMENT": "شقة",
+      "OTHER": "آخر",
+      "LAND": "أرض",
+      "RIAD": "رياض تقليدي"
+    },
+    "status": {
+      "PENDING": "في الانتظار",
+      "APPROVED": "مقبول",
+      "AVAILABLE": "متاح",
+      "REJECTED": "مرفوض",
+      "RESERVED": "محجوز",
+      "RENTED": "مكترى",
+      "VERIFIED": "موثق"
+    },
+    "conditions": {
+      "NEW": "جديد",
+      "GOOD": "حالة جيدة",
+      "RENOVATION_NEEDED": "يحتاج إلى ترميم",
+      "TO_RENOVATE": "يحتاج تجديد"
+    },
+    "features": {
+      "elevator": "مصعد",
+      "parking": "موقف سيارات",
+      "pool": "مسبح",
+      "garden": "حديقة",
+      "airConditioning": "تكييف",
+      "internet": "إنترنت",
+      "security": "حراسة",
+      "furnished": "مفروش"
+    },
+    "title": "العقارات",
+    "subtitle": "ابحث عن منزلك المثالي",
+    "verified": "موثق",
+    "basePrice": "السعر الأساسي",
+    "fees": "رسوم إضافية",
+    "discount": "خصم",
+    "finalPrice": "السعر الإجمالي",
+    "image": "صورة",
+    "publishedAt": "نشر في",
+    "owner": "المالك",
+    "search": {
+      "title": "البحث عن عقار",
+      "city": "المدينة",
+      "cityPlaceholder": "كل المدن",
+      "minPrice": "السعر الأدنى (درهم)",
+      "maxPrice": "السعر الأقصى (درهم)",
+      "keyword": "كلمات مفتاحية",
+      "keywordPlaceholder": "شقة، فيلا، رياض عصري...",
+      "submit": "بحث",
+      "filters": "الفلاتر",
+      "clear": "مسح الفلاتر",
+      "propertyType": "نوع العقار",
+      "propertyTypeAny": "أي نوع",
+      "propertyTypeApartment": "شقة",
+      "propertyTypeVilla": "فيلا",
+      "propertyTypeStudio": "ستوديو",
+      "propertyTypeCommercial": "تجاري",
+      "minSurface": "المساحة الدنيا (م²)",
+      "maxSurface": "المساحة القصوى (م²)",
+      "minRooms": "أقل عدد غرف",
+      "maxRooms": "أكبر عدد غرف",
+      "furnished": "مفروش",
+      "parking": "موقف سيارات",
+      "pool": "مسبح",
+      "elevator": "مصعد",
+      "airConditioning": "تكييف",
+      "error": "البحث غير متاح",
+      "advancedTitle": "بحث متقدم",
+      "allCities": "كل المدن",
+      "majorCities": "المدن الكبرى",
+      "otherCities": "مدن أخرى",
+      "otherCity": "مدينة أخرى...",
+      "otherCityPlaceholder": "أدخل اسم المدينة",
+      "availableCities": "{{count}} مدينة متاحة",
+      "availableCities_plural": "{{count}} مدن متاحة",
+      "transactionType": "نوع العملية",
+      "showAdvanced": "إظهار الفلاتر المتقدمة",
+      "hideAdvanced": "إخفاء الفلاتر المتقدمة",
+      "searching": "جاري البحث..."
+    },
+    "card": {
+      "surface": "المساحة",
+      "rooms": "الغرف",
+      "pricePerM2": "درهم/م²",
+      "perMonth": "/شهر",
+      "viewDetails": "عرض التفاصيل",
+      "owner": "المالك",
+      "location": "الموقع",
+      "previewUnavailable": "المعاينة غير متاحة",
+      "bedroomsShort": "غ.ن"
+    },
+    "details": {
+      "title": "تفاصيل العقار",
+      "description": "الوصف",
+      "price": "السعر",
+      "location": "الموقع",
+      "address": "العنوان",
+      "city": "المدينة",
+      "owner": "المالك",
+      "publishedAt": "نشر في",
+      "contactOwner": "تواصل مع المالك",
+      "addToFavorites": "إضافة للمفضلة",
+      "removeFromFavorites": "إزالة من المفضلة",
+      "reviews": "التقييمات",
+      "noReviews": "لا توجد تقييمات",
+      "writeReview": "اكتب تقييما",
+      "similarProperties": "عقارات مشابهة",
+      "characteristics": "الخصائص",
+      "equipments": "التجهيزات",
+      "viewDetails": "عرض التفاصيل",
+      "alreadyInComparison": "موجود بالفعل في المقارنة",
+      "maxComparison": "الحد الأقصى 3 عقارات للمقارنة",
+      "addedToComparison": "تمت الإضافة إلى المقارنة",
+      "inComparison": "في المقارنة",
+      "compare": "قارن"
+    },
+    "create": {
+      "title": "عقار جديد",
+      "subtitle": "أضف عقارك",
+      "titleLabel": "عنوان الإعلان",
+      "description": "الوصف",
+      "price": "السعر (درهم)",
+      "city": "المدينة",
+      "address": "العنوان الكامل",
+      "coordinates": "إحداثيات GPS",
+      "latitude": "خط العرض",
+      "longitude": "خط الطول",
+      "images": "صور",
+      "submit": "إنشاء الإعلان",
+      "success": "تم إنشاء العقار بنجاح",
+      "error": "حدث خطأ أثناء إنشاء العقار",
+      "propertyType": "نوع المعاملة",
+      "category": "الفئة",
+      "surface": "المساحة (م²)",
+      "rooms": "عدد الغرف",
+      "bedrooms": "غرف النوم",
+      "bathrooms": "الحمامات",
+      "constructionYear": "سنة البناء",
+      "condition": "الحالة العامة",
+      "furnished": "مفروش",
+      "equipments": "التجهيزات",
+      "parking": "موقف سيارات",
+      "pool": "مسبح",
+      "elevator": "مصعد",
+      "garden": "حديقة",
+      "airConditioning": "تكييف",
+      "internet": "إنترنت",
+      "security": "حراسة",
+      "contactInfo": "معلومات التواصل",
+      "phoneNumber": "رقم الهاتف",
+      "whatsappNumber": "رقم واتساب",
+      "step": {
+        "info": "معلومات",
+        "features": "الميزات",
+        "equipments": "التجهيزات",
+        "environment": "البيئة",
+        "views": "الحي والإطلالات",
+        "payment": "الدفع",
+        "media": "الوسائط"
+      },
+      "fixErrors": "يرجى تصحيح الأخطاء",
+      "ownerRequired": "يجب تسجيل الدخول كمالك",
+      "paymentMethod": "طريقة الدفع",
+      "discount": "خصم (%)",
+      "geocoding": "جاري استرداد الإحداثيات...",
+      "geocodingBtn": "تحديد الإحداثيات...",
+      "refreshCoords": "تحديث الإحداثيات",
+      "videoOptional": "فيديو (اختياري)",
+      "videoHint": "انقر لإضافة فيديو (MP4، بحد أقصى 50 ميجابايت)",
+      "firstNameArabic": "الاسم الأول (عربي)",
+      "lastNameArabic": "الاسم العائلي (عربي)",
+      "firstNameLatin": "الاسم الأول (لاتيني)",
+      "lastNameLatin": "الاسم العائلي (لاتيني)",
+      "cin": "بطاقة الهوية",
+      "publishing": "جاري النشر {{progress}}%",
+      "validationErrors": "أخطاء في التحقق",
+      "cityAdded": "تمت إضافة المدينة \"{{city}}\" بنجاح",
+      "enterCityFirst": "يرجى إدخال المدينة أولاً",
+      "geoError": "تعذر تحديد موقع \"{{city}}\". يرجى التحقق من الاسم أو إدخال الإحداثيات يدوياً.",
+      "gpsSuccess": "تم استرداد إحداثيات GPS تلقائياً",
+      "gpsHint": "💡 يتم تحديث إحداثيات GPS تلقائياً",
+      "noCityFound": "لم يتم العثور على مدينة لـ \"{{city}}\"",
+      "addCity": "إضافة \"{{city}}\"",
+      "cityPlaceholder": "ابحث عن مدينة أو أدخلها...",
+      "titlePlaceholder": "مثال: فيلا حديثة مع مسبح",
+      "descPlaceholder": "صف عقارك بالتفصيل (50 حرفًا كحد أدنى)",
+      "addressPlaceholder": "مثال: شارع زرقطوني",
+      "south": "جنوب",
+      "north": "شمال",
+      "east": "شرق",
+      "west": "غرب",
+      "bankTransfer": "تحويل بنكي",
+      "cash": "نقداً",
+      "mapLocation": "الموقع على الخريطة",
+      "basedOn": "استناداً إلى:",
+      "gpsManual": "تعذر استرداد الإحداثيات تلقائياً. انقر على الخريطة أو أدخلها يدوياً.",
+      "errTitleRequired": "العنوان مطلوب",
+      "errDescMin": "الوصف: 50 حرفًا كحد أدنى",
+      "errPriceMin": "الحد الأدنى للسعر 1000 درهم",
+      "errCityRequired": "المدينة مطلوبة",
+      "errAddressRequired": "العنوان مطلوب",
+      "errSurfaceMin": "الحد الأدنى للمساحة 10 م²",
+      "errRoomsRequired": "عدد الغرف مطلوب",
+      "errPhoneRequired": "الهاتف مطلوب",
+      "errGpsRequired": "إحداثيات GPS مطلوبة - يرجى التحقق من المدينة المدخلة",
+      "errImageRequired": "مطلوب صورة واحدة على الأقل",
+      "errFirstNameArRequired": "الاسم الأول بالعربية مطلوب",
+      "errLastNameArRequired": "الاسم العائلي بالعربية مطلوب",
+      "errFirstNameLatRequired": "الاسم الأول باللاتينية مطلوب",
+      "errLastNameLatRequired": "الاسم العائلي باللاتينية مطلوب",
+      "errCinRequired": "بطاقة الهوية مطلوبة",
+      "dropImages": "أسقط الصور هنا",
+      "dragOrClick": "اسحب وأفلت أو انقر للإضافة",
+      "max": "حد أقصى",
+      "tooLarge": "كبير جداً",
+      "ready": "جاهز",
+      "processing": "جاري المعالجة...",
+      "setPrimary": "تعيين كصورة رئيسية",
+      "primaryHint": "الصورة التي تحمل النجمة هي الصورة الرئيسية. اسحب لإعادة الترتيب.",
+      "equip": {
+        "ac": "تكييف",
+        "balcony": "شرفة / تراس"
+      },
+      "env": {
+        "cityCenter": "وسط المدينة",
+        "school": "مدرسة قريبة",
+        "university": "جامعة قريبة",
+        "mosque": "مسجد قريب",
+        "hospital": "مستشفى قريب",
+        "market": "سوق",
+        "bus": "محطة حافلات",
+        "tram": "ترام",
+        "train": "محطة القطار"
+      },
+      "area": {
+        "popular": "حي شعبي",
+        "modern": "حي عصري",
+        "quiet": "منطقة هادئة",
+        "family": "حي عائلي",
+        "gardenView": "إطلالة حديقة",
+        "streetView": "إطلالة شارع",
+        "seaView": "إطلالة بحر"
+      },
+      "orientation": "التوجيه",
+      "card": "بطاقة بنكية",
+      "check": "شيك",
+      "videoTypeError": "يجب أن يكون الملف فيديو.",
+      "videoSizeError": "الفيديو كبير جداً (بحد أقصى 50 ميجابايت).",
+      "networkError": "خطأ في الشبكة"
+    },
+    "edit": {
+      "title": "تعديل العقار",
+      "submit": "حفظ التغييرات",
+      "success": "تم تحديث العقار",
+      "error": "خطأ في التحديث"
+    },
+    "delete": {
+      "confirm": "هل تريد حذف هذا العقار؟",
+      "success": "تم حذف العقار",
+      "error": "خطأ في الحذف"
+    },
+    "errors": {
+      "notFound": "العقار غير موجود",
+      "unauthorized": "غير مصرح",
+      "invalidPrice": "السعر غير صالح",
+      "requiredField": "حقل مطلوب",
+      "invalidSurface": "المساحة يجب أن تكون أكبر من 0",
+      "invalidRooms": "عدد الغرف يجب أن يكون بين 1 و20"
+    },
+    "priceBasedOnFinal": "بناءً على السعر النهائي",
+    "new": "جديد"
+  },
+  "dashboard": {
+    "title": "لوحة التحكم",
+    "subtitle": "إدارة عقاراتك",
+    "stats": {
+      "totalProperties": "إجمالي العقارات",
+      "totalViews": "إجمالي المشاهدات",
+      "totalInquiries": "الطلبات المستلمة",
+      "favorites": "المفضلة",
+      "avgPrice": "متوسط السعر"
+    },
+    "actions": {
+      "addProperty": "إضافة عقار"
+    },
+    "properties": {
+      "title": "عقاراتي",
+      "empty": "ليس لديك أي عقارات بعد.",
+      "emptyMessage": "أضف أول عقار للبدء.",
+      "addFirst": "أضف أول عقار",
+      "edit": "تعديل",
+      "delete": "حذف",
+      "view": "عرض",
+      "totalCount": "{{count}} عقار إجمالاً",
+      "totalCount_plural": "{{count}} عقارات إجمالاً"
+    },
+    "checklist": {
+      "addProperty": "أضف عقارك الأول"
+    }
+  },
+  "admin": {
+    "title": "الإدارة",
+    "subtitle": "إدارة المنصة",
+    "stats": {
+      "messages": "الرسائل",
+      "favorites": "المفضلة",
+      "visits": "الزيارات",
+      "totalRevenue": "إجمالي الإيرادات",
+      "revenueThisMonth": "هذا الشهر",
+      "paid": "مدفوع",
+      "failed": "فاشل",
+      "newUsers": "مستخدمون جدد",
+      "newProperties": "عقارات جديدة",
+      "activeAds": "إعلانات نشطة",
+      "avgRating": "متوسط التقييم",
+      "uniqueUsers": "مستخدمون فريدون (7 أيام)",
+      "totalEvents": "الأحداث (7 أيام)",
+      "sessions": "الجلسات (7 أيام)",
+      "revenue": "الإيرادات",
+      "reviews": "التقييمات"
+    },
+    "users": {
+      "title": "المستخدمون",
+      "id": "المعرف",
+      "name": "الاسم",
+      "email": "البريد الإلكتروني",
+      "role": "الدور",
+      "actions": "الإجراءات",
+      "delete": "حذف",
+      "confirmDelete": "هل تريد حذف هذا المستخدم؟",
+      "roles": {
+        "ADMIN": "مدير",
+        "LOCATAIRE": "مستأجر",
+        "PROPRIETAIRE": "مالك"
+      },
+      "deleteError": "حدث خطأ أثناء حذف المستخدم"
+    },
+    "recentActivity": "النشاط الأخير",
+    "tab": {
+      "dashboard": "لوحة التحكم",
+      "properties": "العقارات",
+      "ads": "الإعلانات",
+      "users": "المستخدمون",
+      "reviews": "التقييمات",
+      "transactions": "المعاملات",
+      "analytics": "التحليلات",
+      "trust": "الثقة والأمان",
+      "settings": "الإعدادات"
+    },
+    "header": {
+      "properties": "إدارة العقارات",
+      "ads": "إدارة الإعلانات",
+      "users": "إدارة المستخدمين",
+      "reviews": "إشراف التقييمات",
+      "transactions": "المعاملات",
+      "analytics": "التحليلات المتقدمة",
+      "trust": "الثقة والأمان",
+      "settings": "إعدادات النظام"
+    },
+    "status": {
+      "pending": "قيد الانتظار",
+      "approved": "تمت الموافقة",
+      "available": "متاح",
+      "rejected": "مرفوض",
+      "reserved": "محجوز",
+      "rented": "مؤجر",
+      "active": "نشط",
+      "paused": "متوقف مؤقتاً",
+      "paid": "مدفوع",
+      "failed": "فاشل",
+      "refunded": "مسترد",
+      "flagged": "مبلغ عنه"
+    },
+    "chart": {
+      "distribution": "توزيع العقارات",
+      "topCities": "أفضل المدن",
+      "usersByRole": "المستخدمون حسب الدور",
+      "conversion": "معدل التحويل",
+      "conversionLabel": "زيارات → اتصالات",
+      "dau": "المستخدمون النشطون يومياً (30 يوم)",
+      "propertyViews": "مشاهدات العقارات",
+      "revenue": "الإيرادات",
+      "daily": "المنشورات اليومية (30 يوم)",
+      "topViewed": "العقارات الأكثر مشاهدة (7 أيام)",
+      "others": "أخرى",
+      "monthly": "الاتجاهات الشهرية",
+      "yearly": "الاتجاهات السنوية"
+    },
+    "table": {
+      "property": "العقار",
+      "city": "المدينة",
+      "price": "السعر",
+      "status": "الحالة",
+      "views": "المشاهدات",
+      "owner": "المالك",
+      "actions": "الإجراءات",
+      "title": "العنوان",
+      "type": "النوع",
+      "plan": "الخطة",
+      "budget": "الميزانية",
+      "clicks": "النقرات",
+      "name": "الاسم",
+      "role": "الدور",
+      "verified": "تم التحقق",
+      "amount": "المبلغ",
+      "user": "المستخدم",
+      "date": "التاريخ",
+      "time": "الوقت",
+      "device": "الجهاز"
+    },
+    "search": {
+      "property": "ابحث عن عقار، مدينة، مالك...",
+      "user": "ابحث عن مستخدم..."
+    },
+    "filter": {
+      "all": "جميع الحالات"
+    },
+    "action": {
+      "approve": "اعتماد",
+      "reject": "رفض",
+      "view": "عرض",
+      "delete": "حذف",
+      "verify": "تحقق",
+      "flag": "إبلاغ",
+      "refund": "استرداد"
+    },
+    "empty": {
+      "properties": "لم يتم العثور على عقارات",
+      "users": "لم يتم العثور على مستخدمين",
+      "ads": "لا توجد إعلانات",
+      "reviews": "لا توجد تقييمات للإشراف",
+      "payments": "لا توجد مدفوعات",
+      "data": "لا توجد بيانات"
+    },
+    "reviews": {
+      "pending": "تقييمات معلقة",
+      "flagged": "تقييمات مبلغ عنها",
+      "signals": "{{count}} بلاغات"
+    },
+    "ads": {
+      "pending": "إعلانات معلقة",
+      "all": "جميع الإعلانات"
+    },
+    "payments": {
+      "title": "المدفوعات"
+    },
+    "error": {
+      "load": "خطأ في تحميل الإدارة",
+      "generic": "خطأ"
+    },
+    "confirm": {
+      "delete": "حذف نهائي؟",
+      "deleteUser": "حذف هذا المستخدم؟"
+    },
+    "deleted": "تم الحذف",
+    "property": {
+      "approved": "تم اعتماد العقار",
+      "rejectReason": "سبب الرفض؟",
+      "rejected": "تم رفض العقار",
+      "classified": "تم التصنيف"
+    },
+    "user": {
+      "verified": "تم التحقق من المستخدم",
+      "deleted": "تم حذف المستخدم"
+    },
+    "ad": {
+      "approved": "تم اعتماد الإعلان",
+      "rejectReason": "سبب الرفض؟",
+      "rejected": "تم رفض الإعلان"
+    },
+    "review": {
+      "moderated": "تم الإشراف على التقييم"
+    },
+    "payment": {
+      "refundReason": "سبب الاسترداد؟",
+      "refunded": "تم الاسترداد"
+    },
+    "activityLog": "سجل النشاط",
+    "entries": "إدخالات",
+    "fraud": {
+      "title": "كشف الاحتيال",
+      "description": "تحليل العقارات المشبوهة تلقائياً. يكشف النظام الأسعار غير الطبيعية والتكرارات والحسابات المشبوهة.",
+      "analyses": "التحاليل المنجزة",
+      "mediumAlerts": "تنبيهات متوسطة",
+      "highAlerts": "تنبيهات عالية"
+    },
+    "settings": {
+      "maintenance": "وضع الصيانة",
+      "maintenanceDesc": "جعل الموقع غير متاح للزوار",
+      "saved": "تم حفظ الإعدادات",
+      "saveError": "خطأ في الحفظ",
+      "features": "الميزات",
+      "aiChat": "روبوت الدردشة الذكي",
+      "aiChatDesc": "مساعد ذكي للزوار",
+      "voiceSearch": "البحث الصوتي",
+      "voiceSearchDesc": "البحث بأوامر صوتية",
+      "ads": "نظام الإعلانات",
+      "adsDesc": "الإعلانات والعروض الترويجية",
+      "reviews": "نظام التقييمات",
+      "reviewsDesc": "تقييمات العقارات والتقييم",
+      "payments": "المدفوعات الإلكترونية",
+      "paymentsDesc": "CMI و Stripe",
+      "api": "إعدادات API"
+    },
+    "refresh": "تحديث",
+    "pagination": {
+      "range": "{{start}}-{{end}} من {{total}} {{label}}",
+      "items": "عناصر",
+      "prev": "السابق",
+      "next": "التالي",
+      "page": "صفحة {{page}} / {{total}}"
+    },
+    "trend": {
+      "up": "في ارتفاع",
+      "down": "في انخفاض",
+      "stable": "مستقر"
+    },
+    "badge": {
+      "normal": "عادي"
+    },
+    "topViewed": {
+      "property": "عقار #{{id}}",
+      "views": "{{count}} مشاهدة"
+    },
+    "label": {
+      "properties": "عقارات",
+      "ads": "إعلانات",
+      "users": "مستخدمين",
+      "reviews": "تقييمات"
+    }
+  },
+  "chatbot": {
+    "title": "مساعد MAROC-LOC",
+    "greeting": "مرحبا! أنا مساعد MAROC-LOC. كيف يمكنني مساعدتك؟",
+    "placeholder": "اكتب رسالتك...",
+    "placeholderDarija": "كتب شي حاجة...",
+    "placeholderArabic": "اكتب رسالتك...",
+    "send": "إرسال",
+    "typing": "المساعد يكتب...",
+    "suggestions": {
+      "search": "أبحث عن شقة",
+      "price": "ما هو متوسط السعر؟",
+      "help": "كيف تعمل المنصة؟"
+    },
+    "fallback": "يمكنني مساعدتك في البحث عن عقار، مقارنة الأسعار أو فهم إعلان.",
+    "unavailable": "المساعد غير متاح مؤقتاً. حاول مرة أخرى بعد قليل.",
+    "open": "فتح المساعد",
+    "subtitle": "بحث وأسعار وتوصيات",
+    "quick": {
+      "apartment": "شقة قريبة من الطرام",
+      "budget": "ستوديو اقتصادي",
+      "quiet": "حي هادئ"
+    },
+    "messageLabel": "رسالة",
+    "close": "إغلاق",
+    "newConversation": "محادثة جديدة",
+    "voiceSearch": "بحث صوتي",
+    "role": {
+      "guest": "زائر",
+      "buyer": "مشتري",
+      "locataire": "مستأجر",
+      "proprietaire": "مالك",
+      "admin": "مسؤول"
+    },
+    "welcomeTitle": "كيف يمكنني مساعدتك؟",
+    "welcomeSubtitle": "أتحدث الفرنسية والعربية والدارجة. اسألني عن العقارات في المغرب.",
+    "disclaimer": "قد تخطئ الذكاء الاصطناعي أحياناً. يرجى التحقق من المعلومات المهمة.",
+    "propertiesFound": "{{count}} عقارات وجدت",
+    "propertyFound": "{{count}} عقار وجد",
+    "copy": "نسخ",
+    "copied": "تم النسخ!",
+    "useful": "مفيد",
+    "notUseful": "غير مفيد",
+    "microphoneDenied": "يرجى السماح بالوصول إلى الميكروفون",
+    "microphoneNotFound": "لم يتم العثور على ميكروفون",
+    "recordingFailed": "خطأ في التسجيل",
+    "quickPrompts": {
+      "search": "ابحث عن شقة في الدار البيضاء",
+      "price": "ما هو متوسط السعر في مراكش؟",
+      "neighborhood": "أفضل الأحياء في الرباط",
+      "contact": "كيفية التواصل مع المالك؟"
+    },
+    "quickReplies": {
+      "search": "البحث عن عقار",
+      "mortgage": "محاكاة قرض",
+      "explore": "استكشاف العقارات"
+    }
+  },
+  "home": {
+    "hero": {
+      "title": "ابحث عن عقار أحلامك",
+      "subtitle": "منصة عقارية مغربية متميزة",
+      "searchPlaceholder": "ابحث عن العقارات...",
+      "searchButton": "بحث",
+      "description": "استكشف الفيلات والشقق والرياض والمساحات المهنية المختارة بعناية بتجربة رقمية مستوحاة من الرفاهية المغربية المعاصرة.",
+      "featured": "اختيار اللحظة",
+      "featuredFallback": "رياض عصري، مراكش",
+      "featuredDesc": "هندسة تقليدية، راحة فندقية، إدارة رقمية.",
+      "badge": "العقار الذكي لجيل جديد."
+    },
+    "filter": {
+      "title": "تصفية العقارات",
+      "keyword": "كلمة مفتاحية",
+      "keywordPlaceholder": "شقة، فيلا، مكتب...",
+      "category": "الفئة",
+      "categoryPlaceholder": "اختر فئة",
+      "customCategory": "فئة مخصصة",
+      "customCategoryPlaceholder": "حدد فئتك",
+      "transactionType": "نوع المعاملة",
+      "transactionTypePlaceholder": "كراء، شراء، رهن",
+      "city": "المدينة",
+      "cityPlaceholder": "الدار البيضاء، الرباط، مراكش...",
+      "priceRange": "نطاق السعر",
+      "minPrice": "أقل سعر",
+      "maxPrice": "أعلى سعر",
+      "clearFilters": "مسح الفلاتر",
+      "searching": "جاري البحث...",
+      "noResults": "لم يتم العثور على عقارات",
+      "noResultsMessage": "حاول تعديل الفلاتر",
+      "surface": "المساحة (م²)",
+      "rooms": "الغرف",
+      "equipments": "التجهيزات"
+    },
+    "categories": {
+      "title": "استكشف حسب الفئة",
+      "subtitle": "اعثر على عقارات حسب الفئة المناسبة لك",
+      "loading": "جاري تحميل الفئات...",
+      "listings": "{{count}} إعلان",
+      "listings_plural": "{{count}} إعلانات",
+      "addCustom": "إضافة مخصصة",
+      "addCustomTitle": "إضافة فئة مخصصة",
+      "customPlaceholder": "مثال: ستوديو، مستودع، بنتهاوس...",
+      "adding": "جاري الإضافة...",
+      "addCustomDesc": "أنشئ فئة مخصصة لعقارك"
+    },
+    "properties": {
+      "title": "العقارات المتاحة",
+      "loading": "جاري تحميل العقارات...",
+      "empty": "لم يتم العثور على عقارات",
+      "emptyMessage": "لا توجد عقارات تطابق معاييرك.",
+      "featured": "مميز"
+    },
+    "results": {
+      "title": "نتيجة",
+      "title_plural": "نتائج",
+      "subtitle": "عقارات مختارة بعناية",
+      "page": "صفحة"
+    },
+    "footer": {
+      "brand": {
+        "name": "MAROC-LOC",
+        "description": "المنصة العقارية الحديثة في المغرب للكراء والشراء والاستثمار."
+      },
+      "navigation": {
+        "title": "التنقل",
+        "about": "من نحن",
+        "blog": "المدونة",
+        "terms": "الشروط",
+        "privacy": "الخصوصية"
+      },
+      "cities": {
+        "title": "المدن",
+        "casablanca": "الدار البيضاء",
+        "rabat": "الرباط",
+        "marrakech": "مراكش",
+        "fes": "فاس"
+      },
+      "newsletter": {
+        "title": "النشرة الإخبارية",
+        "placeholder": "البريد الإلكتروني",
+        "subscribe": "اشتراك"
+      }
+    },
+    "aiSearch": {
+      "title": "بحث ذكي",
+      "placeholder": "صف عقارك المثالي..."
+    },
+    "map": {
+      "list": "قائمة",
+      "map": "خريطة"
+    }
+  },
+  "market_insights": {
+    "title": "تحليل السوق العقاري المغربي",
+    "select_city": "اختر المدينة",
+    "total_cities": "عدد المدن",
+    "avg_price": "متوسط السعر/م²",
+    "market_status": "حالة السوق",
+    "city_insights": "معلومات المدينة",
+    "city_info": "معلومات أساسية",
+    "population": "السكان",
+    "location_score": "درجة الموقع",
+    "market_trend": "اتجاه السوق",
+    "attractions": "معالم",
+    "market_analysis": "تحليل السوق",
+    "current_price": "السعر الحالي",
+    "price_trend": "اتجاه السعر",
+    "market_demand": "الطلب في السوق",
+    "investment_potential": "إمكانية الاستثمار",
+    "recommendations": "التوصيات"
+  },
+  "language": {
+    "title": "اللغة",
+    "fr": "Français",
+    "en": "English",
+    "ar": "العربية",
+    "switch": "تغيير اللغة"
+  },
+  "ads": {
+    "sponsored": "ممول",
+    "sponsoredListings": "إعلانات ممولة",
+    "promotedProperties": "عقارات مميزة",
+    "promotedSubtitle": "مواضع Premium منتقاة بعناية لكراءات مناسبة.",
+    "subtitle": "ممول",
+    "title": "إعلانات الشركاء"
+  },
+  "splash": {
+    "tagline": "بوابتك إلى العقار المغربي",
+    "descriptionPrefix": "اكتشف بيتك المثالي في المغرب بسهولة —",
+    "descriptionSearch": "بحث أنيق",
+    "descriptionListings": "إعلانات منتقاة",
+    "and": "و",
+    "descriptionNavigation": "تصفح ذكي",
+    "badges": {
+      "geolocation": "تحديد الموقع",
+      "premium": "إعلانات مميزة",
+      "ai": "ذكاء اصطناعي"
+    },
+    "explore": "استكشاف الإعلانات",
+    "instantAccess": "وصول فوري إلى كراءات مميزة",
+    "redirecting": "إعادة توجيه تلقائية...",
+    "footer": "© 2026 MAROC-LOC — العقار بأسلوب جديد",
+    "feature1": "عقارات متميزة",
+    "feature2": "ذكاء اصطناعي متكامل",
+    "feature3": "موثق",
+    "feature4": "في جميع أنحاء المغرب",
+    "unmute": "تشغيل الصوت",
+    "mute": "كتم الصوت",
+    "skip": "تخطي"
+  },
+  "footer": {
+    "privacy": "الخصوصية",
+    "description": "منصة PropTech مغربية للكراء والشراء وتقييم العقارات المتميزة بتجربة سريعة وواضحة ودولية.",
+    "explore": "استكشاف",
+    "legal": "قانوني",
+    "rights": "جميع الحقوق محفوظة."
+  },
+  "cities": {
+    "subtitle": "المغرب المتميز",
+    "title": "مدن مميزة",
+    "description": "اختيار مستوحى من أجمل مدن المغرب."
+  },
+  "feed": {
+    "subtitle": "السوق",
+    "title": "عقارات متاحة",
+    "description": "اختيار متجاوب مع فلاتر وبطاقات سريعة ومعلومات أساسية للمقارنة بسلاسة.",
+    "noResults": "لم يتم العثور على عقار"
+  },
+  "recommendations": {
+    "subtitle": "من أجلك",
+    "title": "توصيات مخصصة",
+    "seeAll": "عرض الكل",
+    "discoverTitle": "اكتشف عقاراتنا",
+    "discoverSubtitle": "مختارة لك"
+  },
+  "rec": {
+    "collaborative": "مشابه",
+    "content": "معاييرك",
+    "trending": "الشائع",
+    "geo": "قريب",
+    "trust": "ثقة",
+    "hybrid": "موصى به",
+    "discover": "اكتشف",
+    "recent": "جديد",
+    "explore": "استكشاف",
+    "match": "تطابق"
+  },
+  "topRanked": {
+    "subtitle": "التصنيف",
+    "title": "أفضل العقارات",
+    "description": "أفضل العقارات تقييماً حسب خوارزمية التقييم لدينا."
+  },
+  "trust": {
+    "verified": "عقارات موثقة",
+    "verifiedDesc": "مراقبة الجودة ومالكين تم التحقق منهم",
+    "premium": "اختيار مميز",
+    "premiumDesc": "رياض وفيلات وشقق راقية",
+    "support": "دعم محلي",
+    "supportDesc": "دعم بشري في المغرب",
+    "ai": "بحث ذكي",
+    "aiDesc": "فلاتر سريعة وتوصيات مفيدة"
+  },
+  "empty": {
+    "action": {
+      "explore": "استكشاف",
+      "retry": "إعادة المحاولة",
+      "browse": "تصفح الإعلانات",
+      "addProperty": "أضف عقاراً",
+      "clearSearch": "عرض كل العقارات"
+    },
+    "properties": {
+      "title": "لا توجد عقارات",
+      "description": "لا توجد عقارات تطابق بحثك."
+    },
+    "search": {
+      "title": "لا توجد نتائج",
+      "description": "جرب كلمات مفتاحية أخرى أو مدينة مختلفة أو دع ذكاءنا الاصطناعي يساعدك في البحث."
+    },
+    "favorites": {
+      "title": "اختيارك فارغ",
+      "description": "احفظ العقارات التي تعجبك بالضغط على القلب. اعثر عليها هنا في أي وقت."
+    },
+    "messages": {
+      "title": "لا توجد رسائل بعد",
+      "description": "تواصل مع مالك من صفحة عقار. ستظهر محادثاتك هنا."
+    },
+    "dashboard": {
+      "title": "ابدأ النشر",
+      "description": "ستظهر عقاراتك هنا. أضف إعلانك الأول وتواصل مع آلاف المستأجرين والمشترين."
+    },
+    "notifications": {
+      "title": "لا توجد إشعارات",
+      "description": "سيتم إخطارك بالإعلانات والرسائل الجديدة."
+    },
+    "map": {
+      "title": "لا يوجد موقع",
+      "description": "معلومات الموقع غير متاحة لهذا العقار."
+    },
+    "reviews": {
+      "title": "لا توجد تقييمات",
+      "description": "كن أول من يشارك تجربته."
+    },
+    "generic": {
+      "title": "لا يوجد شيء لعرضه",
+      "description": "عد لاحقاً."
+    },
+    "aiSuggestion": {
+      "search": "جرب: 'فيلا بمسبح في مراكش' أو 'شقة عصرية في الدار البيضاء'",
+      "favorites": "يمكن للذكاء الاصطناعي اقتراح عقارات مشابهة لتلك التي شاهدتها",
+      "dashboard": "الإعلانات ذات الصور الاحترافية تحصل على 5 أضعاف التواصل"
+    }
+  },
+  "notifications": {
+    "title": "الإشعارات",
+    "adminTitle": "مركز الإشعارات",
+    "markAllRead": "تحديد الكل كمقروء",
+    "searchPlaceholder": "البحث في الإشعارات...",
+    "status": {
+      "all": "الكل",
+      "unread": "غير مقروء",
+      "read": "مقروء",
+      "archived": "مؤرشف"
+    },
+    "types": {
+      "ALL": "جميع الأنواع",
+      "NEW_MESSAGE": "رسالة جديدة",
+      "RESERVATION_CREATED": "طلب حجز جديد",
+      "PURCHASE_CREATED": "طلب شراء جديد",
+      "PROPERTY_APPROVED": "تمت الموافقة على العقار",
+      "PROPERTY_REJECTED": "تم رفض العقار",
+      "VISIT_SCHEDULED": "تم تحديد موعد زيارة",
+      "VISIT_CONFIRMED": "تم تأكيد الزيارة",
+      "ADVERTISEMENT_APPROVED": "تمت الموافقة على الإعلان",
+      "PAYMENT_CMI_SUCCESS": "نجح الدفع عبر CMI",
+      "PAYMENT_STRIPE_SUCCESS": "نجح الدفع عبر Stripe",
+      "PAYMENT_FAILED": "فشل الدفع",
+      "AI_RECOMMENDATION": "توصية الذكاء الاصطناعي",
+      "SYSTEM_ANNOUNCEMENT": "إعلان النظام"
+    },
+    "total": "الإجمالي",
+    "unread": "غير مقروء",
+    "read": "مقروء",
+    "empty": "لا توجد إشعارات",
+    "loadMore": "تحميل المزيد",
+    "markAsRead": "تحديد كمقروء",
+    "delete": "حذف",
+    "seeAll": "عرض الكل",
+    "disconnected": "غير متصل"
+  },
+  "search": {
+    "placeholder": "ابحث عن عقار أو مدينة أو حي...",
+    "recent": "الأخيرة",
+    "trending": "الشائعة",
+    "city": "مدينة",
+    "neighborhood": "حي",
+    "type": "النوع",
+    "aiSearch": "بحث ذكي: \"{{query}}\"",
+    "aiPowered": "مدعوم بالذكاء الاصطناعي",
+    "recentSearches": "عمليات البحث الأخيرة",
+    "clear": "مسح",
+    "noSuggestions": "لا توجد اقتراحات. اضغط Enter للبحث.",
+    "keyboardNav": "اضغط",
+    "keyboardNavSuffix": "للتنقل",
+    "enter": "Enter",
+    "keyboardSelect": "للاختيار",
+    "aiResultsFor": "نتائج الذكاء الاصطناعي لـ \"{{query}}\"",
+    "noResults": "لم يتم العثور على نتائج. جرّب كلمات مفتاحية أخرى.",
+    "bedroomsShort": "غ.ن.",
+    "noResultsFor": "لا توجد نتائج لـ \"{{term}}\""
+  },
+  "inbox": {
+    "title": "الرسائل",
+    "online": "متصل",
+    "offline": "غير متصل",
+    "reconnecting": "إعادة الاتصال...",
+    "pollingMode": "وضع غير متصل: ستتم مزامنة الرسائل عند إعادة الاتصال",
+    "selectConversation": "حدد محادثة",
+    "selectContact": "اختر جهة اتصال للبدء في الدردشة",
+    "searchPlaceholder": "البحث في المحادثات...",
+    "messagePlaceholder": "اكتب رسالة...",
+    "typing": "{{name}} يكتب...",
+    "loadMore": "مرر لتحميل المزيد",
+    "roleAdmin": "مسؤول",
+    "roleOwner": "مالك",
+    "roleTenant": "مستأجر",
+    "reTo": "رد: {{title}}",
+    "today": "اليوم",
+    "yesterday": "أمس",
+    "messageSent": "تم إرسال الرسالة بنجاح",
+    "sendError": "خطأ في إرسال الرسالة",
+    "deleteSuccess": "تم حذف الرسالة",
+    "deleteError": "فشل الحذف",
+    "confirmDelete": "حذف هذه الرسالة؟"
+  },
+  "reviews": {
+    "published": "تم نشر التقييم",
+    "publishError": "خطأ في نشر التقييم"
+  }
+}

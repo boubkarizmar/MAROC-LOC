@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/images/logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MAROC-LOC - Location au Maroc</title>
+    <style>
+      /* Prevent white flash before React hydrates */
+      html, body { background-color: #020617; }
+      body { margin: 0; min-height: 100vh; }
+      /* Minimal loader while JS chunks download */
+      #root:empty::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        background: #020617;
+        z-index: 9999;
+      }
+    </style>
+    <script>
+      // Polyfill for sockjs-client with Vite
+      if (typeof global === 'undefined') {
+        window.global = window;
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

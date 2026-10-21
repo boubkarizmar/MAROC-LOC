@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"><title>Bienvenue</title></head>
+<body style="margin:0;padding:0;background:#f5f5f0;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;">
+    <table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td align="center" style="padding:24px 0;">
+    <table width="600" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;width:100%;background:#fff;border-radius:12px;overflow:hidden;">
+        <tr>
+            <td style="background:linear-gradient(135deg,#00695C 0%,#004D40 100%);padding:40px 24px;text-align:center;">
+                <h1 style="color:#fff;margin:0;font-size:26px;letter-spacing:2px;">🏠 MAROC-LOC</h1>
+                <p style="color:rgba(255,255,255,0.85);margin:8px 0 0;font-size:14px;">Immobilier au Maroc, simplifié</p>
+            </td>
+        </tr>
+        <tr><td style="padding:32px 24px;">
+            <h2 style="color:#00695C;margin-top:0;">Bienvenue, <span th:text="${userName}">Utilisateur</span> !</h2>
+            <p style="color:#444;line-height:1.7;">
+                Votre compte MAROC-LOC a été créé avec succès. Vous faites désormais partie de la première plateforme immobilière intelligente au Maroc.
+            </p>
+            <div style="background:#f8f9fa;border-left:4px solid #00695C;padding:16px 20px;margin:20px 0;border-radius:0 8px 8px 0;">
+                <p style="margin:0;color:#333;"><strong>Ce que vous pouvez faire :</strong></p>
+                <ul style="margin:8px 0 0;padding-left:20px;color:#555;">
+                    <li>Rechercher des biens à Casablanca, Rabat, Marrakech et plus</li>
+                    <li>Contacter directement les propriétaires</li>
+                    <li>Utiliser notre assistant IA pour trouver votre bien idéal</li>
+                    <li>Sauvegarder vos favoris et recevoir des alertes</li>
+                </ul>
+            </div>
+            <table cellpadding="0" cellspacing="0" border="0" style="margin:24px 0;"><tr><td>
+                <a th:href="${frontendUrl} + '/home'" style="display:inline-block;padding:14px 32px;background:linear-gradient(135deg,#00695C 0%,#004D40 100%);color:#fff;text-decoration:none;border-radius:8px;font-weight:600;">Explorer les annonces</a>
+            </td></tr></table>
+            <p class="small" style="font-size:12px;color:#888;">
+                Si vous n'avez pas créé ce compte, veuillez ignorer cet email ou
+                <a th:href="${frontendUrl} + '/contact'" style="color:#00695C;">nous contacter</a>.
+            </p>
+        </td></tr>
+        <tr><td style="background:#f0f0eb;padding:24px;text-align:center;font-size:12px;color:#666;">
+            <p style="margin:0;">© 2026 MAROC-LOC · Casablanca, Maroc</p>
+            <p style="margin:8px 0 0;"><a href="mailto:support@marocloc.ma" style="color:#00695C;text-decoration:none;">support@marocloc.ma</a></p>
+        </td></tr>
+    </table>
+    </td></tr></table>
+</body>
+</html>

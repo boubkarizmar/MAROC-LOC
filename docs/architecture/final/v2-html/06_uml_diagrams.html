@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+<html lang="fr" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MAROC-LOC — Diagrammes UML</title>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --surface-elevated: #ffffff;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --border-subtle: #f1f5f9;
+      --primary: #0d9488;
+      --primary-hover: #0f766e;
+      --primary-light: #ccfbf1;
+      --accent: #f59e0b;
+      --accent-light: #fffbeb;
+      --gold: #d97706;
+      --success: #10b981;
+      --info: #3b82f6;
+      --error: #ef4444;
+      --radius-sm: 6px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-xl: 24px;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
+      --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
+      --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.1);
+      --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+    .dark {
+      --bg: #0a0e27;
+      --surface: rgba(255,255,255,0.03);
+      --surface-elevated: rgba(255,255,255,0.05);
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --border: rgba(255,255,255,0.08);
+      --border-subtle: rgba(255,255,255,0.04);
+      --primary: #2dd4bf;
+      --primary-hover: #5eead4;
+      --primary-light: #115e59;
+      --accent: #fbbf24;
+      --accent-light: #78350f;
+      --gold: #fbbf24;
+      --success: #34d399;
+      --info: #60a5fa;
+      --error: #f87171;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.3);
+      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.4);
+      --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.5);
+      --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.6);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      transition: background 0.3s, color 0.3s;
+    }
+    .dark body {
+      background: radial-gradient(ellipse at 20% 0%, rgba(59,130,246,0.08) 0%, transparent 50%),
+                  radial-gradient(ellipse at 80% 100%, rgba(139,92,246,0.06) 0%, transparent 50%),
+                  var(--bg);
+    }
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+    /* Nav */
+    .topnav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      background: rgba(10,14,39,0.7);
+      border-bottom: 1px solid var(--border);
+      height: 64px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 24px;
+    }
+    .topnav .logo {
+      display: flex; align-items: center; gap: 12px;
+      font-weight: 800; font-size: 18px; letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .topnav .logo svg { width: 28px; height: 28px; flex-shrink: 0; }
+    .nav-links { display: none; gap: 28px; align-items: center; }
+    .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-actions { display: flex; align-items: center; gap: 12px; }
+    .theme-btn {
+      width: 40px; height: 40px; border-radius: 10px;
+      border: 1px solid var(--border); background: var(--surface);
+      color: var(--text); cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s;
+    }
+    .theme-btn:hover { background: var(--surface-elevated); transform: translateY(-1px); }
+    .hamburger {
+      width: 40px; height: 40px; border-radius: 10px;
+      border: 1px solid var(--border); background: var(--surface);
+      color: var(--text); cursor: pointer; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 4px;
+    }
+    .hamburger span { display: block; width: 18px; height: 2px; background: var(--text); border-radius: 2px; transition: 0.3s; }
+    .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(4px, 4px); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(4px, -4px); }
+    .mobile-menu {
+      position: fixed; top: 64px; left: 0; right: 0; bottom: 0;
+      background: var(--bg); z-index: 999; padding: 24px;
+      transform: translateX(100%); transition: transform 0.3s ease;
+      overflow-y: auto;
+    }
+    .mobile-menu.open { transform: translateX(0); }
+    .mobile-menu a { display: block; padding: 14px 0; color: var(--text); text-decoration: none; font-size: 16px; font-weight: 600; border-bottom: 1px solid var(--border); }
+    .mobile-menu a:hover { color: var(--primary); }
+
+    .layout { display: flex; margin-top: 64px; }
+    .sidebar {
+      position: fixed; top: 64px; left: 0; bottom: 0; width: 260px;
+      border-right: 1px solid var(--border); padding: 24px 16px;
+      overflow-y: auto; display: none; background: var(--bg);
+    }
+    .sidebar-title { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.15em; color: var(--text-muted); margin-bottom: 16px; padding: 0 12px; }
+    .sidebar a { display: block; padding: 8px 12px; border-radius: 8px; color: var(--text-muted); text-decoration: none; font-size: 13px; font-weight: 500; margin-bottom: 2px; transition: all 0.15s; }
+    .sidebar a:hover, .sidebar a.active { background: var(--surface-elevated); color: var(--text); }
+    .main { flex: 1; padding: 40px 20px; max-width: 1200px; margin: 0 auto; }
+
+    /* Hero */
+    .hero { text-align: center; padding: 60px 20px 48px; border-radius: var(--radius-lg); border: 1px solid var(--border); background: var(--surface); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); margin-bottom: 40px; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle at 50% 50%, rgba(139,92,246,0.12), transparent 60%); pointer-events: none; }
+    .hero h1 { font-size: clamp(28px, 5vw, 48px); font-weight: 900; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 16px; position: relative; }
+    .hero h1 .grad { background: linear-gradient(135deg, #3b82f6, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero p { font-size: 18px; color: var(--text-muted); max-width: 600px; margin: 0 auto; position: relative; }
+    .hero-meta { margin-top: 24px; display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; position: relative; }
+    .badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 999px; font-size: 12px; font-weight: 600; border: 1px solid var(--border); background: var(--surface-elevated); color: var(--text-muted); }
+
+    /* Cards */
+    .card { border-radius: var(--radius-md); border: 1px solid var(--border); background: var(--surface); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); padding: 24px; margin-bottom: 24px; transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), box-shadow 0.3s; }
+    .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+    .card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+    .card-header .icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, rgba(59,130,246,0.15), rgba(139,92,246,0.15)); color: var(--primary); flex-shrink: 0; }
+    .card-header h2 { font-size: 20px; font-weight: 800; letter-spacing: -0.01em; }
+    .card-header h2 span { color: var(--text-muted); font-weight: 400; font-size: 14px; display: block; margin-top: 2px; }
+
+    /* Toggle button */
+    .toggle-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 16px; border-radius: var(--radius-sm);
+      border: 1px solid var(--border); background: var(--surface-elevated);
+      color: var(--text); font-size: 12px; font-weight: 600; cursor: pointer;
+      transition: all 0.2s; margin-bottom: 16px;
+    }
+    .toggle-btn:hover { background: var(--border); }
+    .toggle-btn svg { width: 14px; height: 14px; }
+    .plantuml-source { display: none; margin-top: 16px; }
+    .plantuml-source.open { display: block; }
+    pre {
+      background: var(--surface-elevated); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); padding: 16px; overflow-x: auto;
+      font-family: var(--font-mono); font-size: 11px; line-height: 1.6; color: var(--text);
+    }
+
+    /* Diagram containers */
+    .diagram-wrap { position: relative; border: 1px solid var(--border); border-radius: var(--radius-md); overflow: hidden; background: rgba(255,255,255,0.01); }
+    .diagram-svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+    .diagram-layer { position: relative; z-index: 2; }
+
+    /* Actors */
+    .actor { display: flex; flex-direction: column; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; color: var(--text-muted); text-align: center; }
+    .actor-fig { width: 32px; height: 48px; position: relative; }
+    .actor-fig::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 10px; height: 10px; border-radius: 50%; border: 2px solid var(--text-muted); }
+    .actor-fig::after { content: ''; position: absolute; top: 14px; left: 50%; transform: translateX(-50%); width: 2px; height: 18px; background: var(--text-muted); border-radius: 2px; box-shadow: -8px 8px 0 0 var(--text-muted), 8px 8px 0 0 var(--text-muted), 0 16px 0 0 var(--text-muted); }
+
+    /* Use case boxes */
+    .usecase-box {
+      background: var(--surface-elevated); border: 1px solid var(--border);
+      border-radius: 999px; padding: 8px 16px; font-size: 11px; font-weight: 600;
+      color: var(--text); text-align: center; white-space: nowrap;
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* Class diagram */
+    .class-box {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); min-width: 180px; overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+    .class-name { padding: 8px 12px; font-weight: 800; font-size: 12px; text-align: center; border-bottom: 1px solid var(--border); background: linear-gradient(180deg, rgba(59,130,246,0.08), rgba(139,92,246,0.04)); }
+    .class-attrs { padding: 8px 12px; font-size: 11px; font-family: var(--font-mono); color: var(--text-muted); border-bottom: 1px solid var(--border); line-height: 1.8; }
+    .class-methods { padding: 8px 12px; font-size: 11px; font-family: var(--font-mono); color: var(--text); line-height: 1.8; }
+
+    /* Sequence */
+    .seq-participant {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); padding: 8px 12px; font-size: 11px; font-weight: 700;
+      text-align: center; min-width: 90px; z-index: 2; position: relative;
+    }
+    .seq-lifeline { position: absolute; top: 40px; left: 50%; width: 1px; height: calc(100% - 40px); border-left: 1px dashed var(--text-muted); opacity: 0.4; z-index: 1; }
+    .seq-message { position: absolute; height: 1px; background: var(--text-muted); z-index: 2; }
+    .seq-message::after {
+      content: ''; position: absolute; right: -4px; top: -3px;
+      width: 0; height: 0; border-top: 4px solid transparent;
+      border-bottom: 4px solid transparent; border-left: 6px solid var(--text-muted);
+    }
+    .seq-label { position: absolute; font-size: 9px; color: var(--text-muted); font-family: var(--font-mono); white-space: nowrap; background: var(--bg); padding: 0 4px; }
+    .seq-activation { position: absolute; width: 10px; background: var(--surface-elevated); border: 1px solid var(--border); border-radius: 2px; z-index: 2; }
+
+    /* Activity */
+    .act-node {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); padding: 10px 16px;
+      font-size: 11px; font-weight: 600; text-align: center;
+      box-shadow: var(--shadow-sm); z-index: 2; position: relative;
+    }
+    .act-start, .act-stop {
+      width: 20px; height: 20px; border-radius: 50%;
+      background: var(--primary); margin: 0 auto;
+    }
+    .act-stop { background: var(--error); border: 3px solid var(--error); background: transparent; }
+    .act-diamond {
+      width: 80px; height: 80px; background: var(--surface-elevated);
+      border: 1px solid var(--border); transform: rotate(45deg);
+      display: flex; align-items: center; justify-content: center;
+      margin: 10px auto; box-shadow: var(--shadow-sm);
+    }
+    .act-diamond span { transform: rotate(-45deg); font-size: 10px; font-weight: 700; text-align: center; line-height: 1.2; }
+    .act-arrow { width: 1px; height: 24px; background: var(--text-muted); margin: 0 auto; position: relative; }
+    .act-arrow::after { content: ''; position: absolute; bottom: -4px; left: -3px; width: 0; height: 0; border-left: 4px solid transparent; border-right: 4px solid transparent; border-top: 6px solid var(--text-muted); }
+    .act-fork-line { width: 2px; background: var(--text-muted); position: relative; margin: 0 auto; }
+    .act-fork-line::after { content: ''; position: absolute; bottom: -4px; left: -3px; width: 0; height: 0; border-left: 4px solid transparent; border-right: 4px solid transparent; border-top: 6px solid var(--text-muted); }
+    .act-branch-label { font-size: 9px; color: var(--text-muted); font-weight: 600; text-align: center; margin: 4px 0; }
+
+    /* Component / Package */
+    .package { border: 1px solid var(--border); border-radius: var(--radius-sm); position: relative; padding: 28px 12px 12px; margin-bottom: 16px; background: rgba(255,255,255,0.01); }
+    .package-tab { position: absolute; top: -1px; left: -1px; background: var(--surface-elevated); border: 1px solid var(--border); border-bottom: none; padding: 4px 12px; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; border-radius: var(--radius-sm) 0 var(--radius-sm) 0; color: var(--text-muted); }
+    .component-box {
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm);
+      padding: 8px 12px; font-size: 11px; font-weight: 600; display: flex; align-items: center; gap: 8px;
+      box-shadow: var(--shadow-sm);
+    }
+    .component-box svg { width: 14px; height: 14px; color: var(--primary); flex-shrink: 0; }
+
+    /* Deployment */
+    .deploy-node { border: 1px solid var(--border); border-radius: var(--radius-md); padding: 16px; background: var(--surface); }
+    .deploy-node-title { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 12px; }
+    .db-icon { width: 32px; height: 24px; background: linear-gradient(135deg, var(--primary), var(--primary-hover)); border-radius: 50% 50% 4px 4px; position: relative; margin: 0 auto 4px; }
+    .db-icon::before { content: ''; position: absolute; top: 4px; left: 4px; right: 4px; height: 6px; border: 1px solid rgba(255,255,255,0.4); border-radius: 50%; }
+    .server-icon { width: 28px; height: 32px; border: 2px solid var(--text-muted); border-radius: 4px; margin: 0 auto 4px; position: relative; }
+    .server-icon::before, .server-icon::after { content: ''; position: absolute; left: 4px; right: 4px; height: 2px; background: var(--text-muted); border-radius: 1px; }
+    .server-icon::before { top: 8px; }
+    .server-icon::after { top: 16px; }
+
+    /* Responsive */
+    @media (min-width: 1024px) { .sidebar { display: block; } .main { margin-left: 260px; padding: 48px; } .nav-links { display: flex; } .hamburger { display: none; } .mobile-menu { display: none !important; } }
+    @media (max-width: 640px) { .hero { padding: 40px 16px 32px; } .card { padding: 16px; } }
+
+    .toc-bar { position: sticky; top: 64px; z-index: 50; backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); background: rgba(10,14,39,0.8); border-bottom: 1px solid var(--border); padding: 12px 0; overflow-x: auto; display: flex; gap: 8px; margin-bottom: 24px; }
+    .toc-bar a { white-space: nowrap; padding: 6px 14px; border-radius: 8px; font-size: 12px; font-weight: 600; color: var(--text-muted); text-decoration: none; border: 1px solid var(--border); background: var(--surface); }
+    .toc-bar a:hover { color: var(--text); }
+    @media (min-width: 1024px) { .toc-bar { display: none; } }
+    section[id] { scroll-margin-top: 80px; }
+  </style>
+</head>
+<body>
+  <nav class="topnav">
+    <div class="logo">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="8" fill="url(#logoGrad)"/><defs><linearGradient id="logoGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#3b82f6"/><stop offset="100%" stop-color="#8b5cf6"/></linearGradient></defs><path d="M8 20V12l6-4 6 4v8h-3v-5h-6v5H8z" fill="#fff" opacity="0.9"/></svg>
+      MAROC-LOC
+    </div>
+    <div class="nav-links">
+      <a href="#usecase-global">Use Case</a>
+      <a href="#class">Classe</a>
+      <a href="#activity">Activité</a>
+      <a href="#sequence">Séquence</a>
+      <a href="#component">Composant</a>
+      <a href="#deployment">Déploiement</a>
+    </div>
+    <div class="nav-actions">
+      <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">
+        <svg id="sunIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        <svg id="moonIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#usecase-global" onclick="closeMenu()">Use Case Global</a>
+    <a href="#usecase-owner" onclick="closeMenu()">Use Case Propriétaire</a>
+    <a href="#class" onclick="closeMenu()">Diagramme de Classes</a>
+    <a href="#activity" onclick="closeMenu()">Activité</a>
+    <a href="#sequence" onclick="closeMenu()">Séquence</a>
+    <a href="#component" onclick="closeMenu()">Composants</a>
+    <a href="#deployment" onclick="closeMenu()">Déploiement</a>
+  </div>
+
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-title">Navigation</div>
+      <a href="#usecase-global" class="nav-link">Use Case Global</a>
+      <a href="#usecase-owner" class="nav-link">Use Case Propriétaire</a>
+      <a href="#class" class="nav-link">Diagramme de Classes</a>
+      <a href="#activity" class="nav-link">Activité — Recommandation</a>
+      <a href="#activity-chatbot" class="nav-link">Activité — Chatbot</a>
+      <a href="#sequence" class="nav-link">Diagramme de Séquence</a>
+      <a href="#component" class="nav-link">Diagramme de Composants</a>
+      <a href="#deployment" class="nav-link">Diagramme de Déploiement</a>
+    </aside>
+
+    <main class="main">
+      <!-- Hero -->
+      <div class="hero">
+        <h1>MAROC-LOC — <span class="grad">Diagrammes UML</span></h1>
+        <p>Documentation visuelle complète de l'architecture logicielle : cas d'utilisation, classes, séquences, activités, composants et déploiement.</p>
+        <div class="hero-meta">
+          <span class="badge">v1.0</span>
+          <span class="badge">24 Mai 2026</span>
+          <span class="badge">PlantUML</span>
+        </div>
+      </div>
+
+      <div class="toc-bar">
+        <a href="#usecase-global">Use Case</a>
+        <a href="#class">Classe</a>
+        <a href="#activity">Activité</a>
+        <a href="#sequence">Séquence</a>
+        <a href="#component">Composant</a>
+        <a href="#deployment">Déploiement</a>
+      </div>
+
+      <!-- USE CASE GLOBAL -->
+      <section class="card" id="usecase-global">
+        <div class="card-header">
+          <div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg></div>
+          <h2>Diagramme de Cas d'Utilisation Global <span>Acteurs &amp; UC du système</span></h2>
+        </div>
+        <button class="toggle-btn" onclick="toggleSource('ucg-source', this)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          View PlantUML Source
+        </button>
+        <div class="plantuml-source" id="ucg-source">
+          <pre>@startuml MAROC-LOC_UseCase_Global
+left to right direction
+actor "Visitor" as Visitor
+actor "Locataire" as Locataire
+actor "Proprietaire" as Proprietaire
+actor "Admin" as Admin
+actor "AI Assistant" as AI
+rectangle "MAROC-LOC Platform" {
+    usecase "Browse Properties" as UC1
+    usecase "Search Properties" as UC2
+    usecase "View Property Details" as UC3
+    usecase "Contact Owner" as UC4
+    usecase "Use AI Chatbot" as UC5
+    usecase "Register Account" as UC6
+    usecase "Login" as UC7
+    usecase "Manage Favorites" as UC8
+    usecase "Get Recommendations" as UC9
+    usecase "Send Messages" as UC10
+    usecase "Schedule Visit" as UC11
+    usecase "Leave Review" as UC12
+    usecase "Create Property" as UC13
+    usecase "Edit Property" as UC14
+    usecase "Manage Listings" as UC15
+    usecase "View Analytics" as UC16
+    usecase "Receive Payments" as UC17
+    usecase "Manage Users" as UC18
+    usecase "Moderate Content" as UC19
+    usecase "View Platform Stats" as UC20
+    usecase "Configure AI" as UC21
+    usecase "Manage Ads" as UC22
+}
+Visitor --> UC1
+Visitor --> UC2
+... (22 relations)
+UC5 .-> UC2 : &lt;&lt;include&gt;&gt;
+UC9 .-> UC8 : &lt;&lt;include&gt;&gt;
+UC13 .-> UC14 : &lt;&lt;extend&gt;&gt;
+@enduml</pre>
+        </div>
+        <div class="diagram-wrap" style="padding:20px;">
+          <svg class="diagram-svg" viewBox="0 0 900 520" preserveAspectRatio="xMidYMid meet">
+            <defs>
+              <marker id="arr" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 L2,4 z" fill="var(--text-muted)"/></marker>
+              <marker id="arrExt" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 L2,4 z" fill="var(--text-muted)" stroke="var(--text-muted)" stroke-width="1" fill-opacity="0"/></marker>
+              <marker id="arrInc" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 L2,4 z" fill="var(--text-muted)"/></marker>
+            </defs>
+            <!-- Platform rectangle -->
+            <rect x="140" y="10" width="740" height="500" rx="8" fill="none" stroke="var(--border)" stroke-width="1" stroke-dasharray="4 2"/>
+            <text x="160" y="32" fill="var(--text-muted)" font-size="11" font-weight="700" font-family="var(--font-sans)">MAROC-LOC Platform</text>
+            <!-- Connections -->
+            <line x1="70" y1="50" x2="200" y2="50" stroke="var(--text-muted)" stroke-width="1" marker-end="url(#arr)"/>
+            <line x1="70" y1="50" x2="200" y2="90" stroke="var(--text-muted)" stroke-width="1" marker-end="url(#arr)"/>
+            <line x1="70" y1="50" x2="200" y2="130" stroke="var(--text-muted)" stroke-width="1" marker-end="url(#arr)"/>
+            <line x1="70" y1="50" x2="200" y2="170" stroke="var(--text-muted)" stroke-width="1" marker-end="url(#arr)"/>
+            <line x1="70" y1="50" x2="200" y2="210" stroke="var(--text-muted)" stroke-width="1" marker-end="url(#arr)"/>
+            <line x1="70" y1="50" x2="200" y2="250" stroke="var(--text-muted)" stroke-width="1" marker-end="url(#arr)"/>
+
+            <line x1="70" y1="310" x2="200" y2="50" stroke="var(--text-muted)" stroke-width="1" marker-end="url(#arr)"/>
+            <line x1="70" y1="310" x2="200" y2="90" stroke="var(--text-muted)" stroke-width="1" marker-end="url(#arr)"/>
+            <line x1="70" y1="310" x2="200" y2="130" stroke="var(--text-muted)" stroke-width="1" marker-end="url(#arr)"/>
+            <line x1="70" y1="310" x2="200" y2="170" stroke="var(--text-muted)" stroke-width="1" marker-end="url(#arr)"/>
+            <line x1="70" y1="310" x2="200" y2="210" stroke="var(--text-muted)" stroke-width="1" marker-end="url(#arr)"/>
+            <line x1="70" y1="310" x2="200" y2="250" stroke="var(--text-muted)" stroke-width="1" marker-end="url(#arr)"/>
+            <line x1="70" y1="310" x2="200" y2="290" stroke="var(--text-muted)" stroke-width="1" marker-end="url(#arr)"/>
+            <line x1="70" y1="310" x2="200" y2="330" stroke="var(--text-muted)" stroke-width="1" marker-end="url(#arr)"/>
+            <line x1="70" y1="310" x2="200" y2="370" stroke="var(--text-muted)" stroke-width="1" marker-end="url(#arr)"/>
+            <line x1="70" y1="310" x2="200" y2="410" stroke="var(--text-muted)" stroke-width="1" marker-end="url(#arr)"/>
+            <line x1="70" y1="310" x2="200" y2="450" stroke="var(--text-muted)" stroke-width="1" marker-end="url(#arr)"/>
+
+            <line x1="70" y1="430" x2="200" y2="210" stroke="var(--text-muted)" stroke-width="1" marker-end="url(#arr)"/>
+            <line x1="70" y1="430" x2="200" y2="490" stroke="var(--text-muted)" stroke-width="1" marker-end="url(#arr)"/>
+            <line x1="70" y1="430" x2="520" y2="90" stroke="var(--text-muted)" stroke-width="1" marker-end="url(#arr)"/>
+            <line x1="70" y1="430" x2="520" y2="130" stroke="var(--text-muted)" stroke-width="1" marker-end="url(#arr)"/>
+            <line x1="70" y1="430" x2="520" y2="170" stroke="var(--text-muted)" stroke-width="1" marker-end="url(#arr)"/>
+            <line x1="70" y1="430" x2="520" y2="210" stroke="var(--text-muted)" stroke-width="1" marker-end="url(#arr)"/>
+            <line x1="70" y1="430" x2="520" y2="250" stroke="var(--text-muted)" stroke-width="1" marker-end="url(#arr)"/>
+            <line x1="70" y1="430" x2="520" y2="290" stroke="var(--text-muted)" stroke-width="1" marker-end="url(#arr)"/>
+
+            <line x1="830" y1="90" x2="700" y2="50" stroke="var(--text-muted)" stroke-width="1" marker-end="url(#arr)"/>
+            <line x1="830" y1="90" x2="700" y2="90" stroke="var(--text-muted)" stroke-width="1" marker-end="url(#arr)"/>
+            <line x1="830" y1="90" x2="700" y2="130" stroke="var(--text-muted)" stroke-width="1" marker-end="url(#arr)"/>
+            <line x1="830" y1="90" x2="700" y2="170" stroke="var(--text-muted)" stroke-width="1" marker-end="url(#arr)"/>
+            <line x1="830" y1="90" x2="700" y2="210" stroke="var(--text-muted)" stroke-width="1" marker-end="url(#arr)"/>
+
+            <line x1="830" y1="210" x2="200" y2="170" stroke="var(--text-muted)" stroke-width="1" marker-end="url(#arr)"/>
+            <line x1="830" y1="210" x2="520" y2="370" stroke="var(--text-muted)" stroke-width="1" marker-end="url(#arr)"/>
+
+            <!-- <<include>> dashed -->
+            <line x1="360" y1="185" x2="360" y2="110" stroke="var(--text-muted)" stroke-width="1" stroke-dasharray="4 2" marker-end="url(#arrInc)"/>
+            <text x="365" y="150" fill="var(--text-muted)" font-size="9" font-family="var(--font-mono)">&lt;&lt;include&gt;&gt;</text>
+            <line x1="360" y1="345" x2="360" y2="290" stroke="var(--text-muted)" stroke-width="1" stroke-dasharray="4 2" marker-end="url(#arrInc)"/>
+            <text x="365" y="320" fill="var(--text-muted)" font-size="9" font-family="var(--font-mono)">&lt;&lt;include&gt;&gt;</text>
+            <!-- <<extend>> dashed -->
+            <line x1="620" y1="510" x2="620" y2="470" stroke="var(--text-muted)" stroke-width="1" stroke-dasharray="4 2" marker-end="url(#arrExt)"/>
+            <text x="625" y="495" fill="var(--text-muted)" font-size="9" font-family="var(--font-mono)">&lt;&lt;extend&gt;&gt;</text>
+          </svg>
+          <div class="diagram-layer" style="display:grid;grid-template-columns:90px 1fr 90px;gap:16px;position:relative;min-height:500px;">
+            <!-- Actors Left -->
+            <div style="display:flex;flex-direction:column;justify-content:space-around;align-items:center;padding-top:24px;">
+              <div class="actor"><div class="actor-fig"></div>Visitor</div>
+              <div class="actor"><div class="actor-fig"></div>Locataire</div>
+              <div class="actor"><div class="actor-fig"></div>Proprietaire</div>
+            </div>
+            <!-- Use Cases -->
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:24px 16px;">
+              <div class="usecase-box">Browse Properties</div>
+              <div class="usecase-box">Manage Users</div>
+              <div class="usecase-box">Search Properties</div>
+              <div class="usecase-box">Moderate Content</div>
+              <div class="usecase-box">View Property Details</div>
+              <div class="usecase-box">View Platform Stats</div>
+              <div class="usecase-box">Contact Owner</div>
+              <div class="usecase-box">Configure AI</div>
+              <div class="usecase-box">Use AI Chatbot</div>
+              <div class="usecase-box">Manage Ads</div>
+              <div class="usecase-box">Register Account</div>
+              <div class="usecase-box">Create Property</div>
+              <div class="usecase-box">Login</div>
+              <div class="usecase-box">Edit Property</div>
+              <div class="usecase-box">Manage Favorites</div>
+              <div class="usecase-box">Manage Listings</div>
+              <div class="usecase-box">Get Recommendations</div>
+              <div class="usecase-box">View Analytics</div>
+              <div class="usecase-box">Send Messages</div>
+              <div class="usecase-box">Receive Payments</div>
+              <div class="usecase-box">Schedule Visit</div>
+              <div class="usecase-box" style="opacity:0;"></div>
+              <div class="usecase-box">Leave Review</div>
+              <div class="usecase-box" style="opacity:0;"></div>
+            </div>
+            <!-- Actors Right -->
+            <div style="display:flex;flex-direction:column;justify-content:space-around;align-items:center;padding-top:24px;">
+              <div class="actor"><div class="actor-fig"></div>Admin</div>
+              <div class="actor"><div class="actor-fig"></div>AI Assistant</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- USE CASE OWNER -->
+      <section class="card" id="usecase-owner">
+        <div class="card-header">
+          <div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+          <h2>Use Case — Propriétaire <span>Dashboard Owner</span></h2>
+        </div>
+        <button class="toggle-btn" onclick="toggleSource('uco-source', this)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          View PlantUML Source
+        </button>
+        <div class="plantuml-source" id="uco-source">
+          <pre>@startuml MAROC-LOC_UseCase_Proprietaire
+left to right direction
+title Use Case — Proprietaire (Owner)
+actor "Proprietaire" as P
+rectangle "Owner Dashboard" {
+    usecase "Add Property" as UC1
+    usecase "Upload Photos" as UC2
+    usecase "Set Price" as UC3
+    usecase "Edit Property" as UC4
+    usecase "Delete Property" as UC5
+    usecase "View Inquiries" as UC6
+    usecase "Respond to Messages" as UC7
+    usecase "Schedule Visits" as UC8
+    usecase "View Performance" as UC9
+    usecase "AI Price Suggestion" as UC10
+    usecase "Promote Listing" as UC11
+    usecase "Receive Payment" as UC12
+}
+P --> UC1
+P --> UC4
+P --> UC5
+P --> UC6
+P --> UC7
+P --> UC8
+P --> UC9
+P --> UC10
+P --> UC11
+P --> UC12
+UC1 ..> UC2 : &lt;&lt;include&gt;&gt;
+UC1 ..> UC3 : &lt;&lt;include&gt;&gt;
+UC11 ..> UC12 : &lt;&lt;include&gt;&gt;
+@enduml</pre>
+        </div>
+        <div class="diagram-wrap" style="padding:20px;">
+          <svg class="diagram-svg" viewBox="0 0 600 380" preserveAspectRatio="xMidYMid meet">
+            <defs><marker id="arr2" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 L2,4 z" fill="var(--text-muted)"/></marker></defs>
+            <rect x="120" y="10" width="460" height="360" rx="8" fill="none" stroke="var(--border)" stroke-width="1" stroke-dasharray="4 2"/>
+            <text x="135" y="32" fill="var(--text-muted)" font-size="11" font-weight="700">Owner Dashboard</text>
+            <!-- Actor to UC lines -->
+            <line x1="60" y1="190" x2="170" y2="50" stroke="var(--text-muted)" stroke-width="1" marker-end="url(#arr2)"/>
+            <line x1="60" y1="190" x2="170" y2="90" stroke="var(--text-muted)" stroke-width="1" marker-end="url(#arr2)"/>
+            <line x1="60" y1="190" x2="170" y2="130" stroke="var(--text-muted)" stroke-width="1" marker-end="url(#arr2)"/>
+            <line x1="60" y1="190" x2="170" y2="170" stroke="var(--text-muted)" stroke-width="1" marker-end="url(#arr2)"/>
+            <line x1="60" y1="190" x2="170" y2="210" stroke="var(--text-muted)" stroke-width="1" marker-end="url(#arr2)"/>
+            <line x1="60" y1="190" x2="170" y2="250" stroke="var(--text-muted)" stroke-width="1" marker-end="url(#arr2)"/>
+            <line x1="60" y1="190" x2="170" y2="290" stroke="var(--text-muted)" stroke-width="1" marker-end="url(#arr2)"/>
+            <line x1="60" y1="190" x2="170" y2="330" stroke="var(--text-muted)" stroke-width="1" marker-end="url(#arr2)"/>
+            <line x1="60" y1="190" x2="420" y2="90" stroke="var(--text-muted)" stroke-width="1" marker-end="url(#arr2)"/>
+            <line x1="60" y1="190" x2="420" y2="130" stroke="var(--text-muted)" stroke-width="1" marker-end="url(#arr2)"/>
+            <!-- includes -->
+            <line x1="310" y1="65" x2="310" y2="110" stroke="var(--text-muted)" stroke-width="1" stroke-dasharray="4 2" marker-end="url(#arr2)"/>
+            <text x="315" y="92" fill="var(--text-muted)" font-size="9" font-family="var(--font-mono)">&lt;&lt;include&gt;&gt;</text>
+            <line x1="340" y1="65" x2="340" y2="150" stroke="var(--text-muted)" stroke-width="1" stroke-dasharray="4 2" marker-end="url(#arr2)"/>
+            <text x="345" y="112" fill="var(--text-muted)" font-size="9" font-family="var(--font-mono)">&lt;&lt;include&gt;&gt;</text>
+            <line x1="510" y1="145" x2="510" y2="190" stroke="var(--text-muted)" stroke-width="1" stroke-dasharray="4 2" marker-end="url(#arr2)"/>
+            <text x="450" y="172" fill="var(--text-muted)" font-size="9" font-family="var(--font-mono)">&lt;&lt;include&gt;&gt;</text>
+          </svg>
+          <div class="diagram-layer" style="display:grid;grid-template-columns:90px 1fr;gap:16px;position:relative;min-height:360px;">
+            <div style="display:flex;align-items:center;justify-content:center;">
+              <div class="actor"><div class="actor-fig"></div>Proprietaire</div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:24px 16px;">
+              <div class="usecase-box">Add Property</div>
+              <div class="usecase-box">View Performance</div>
+              <div class="usecase-box">Upload Photos</div>
+              <div class="usecase-box">AI Price Suggestion</div>
+              <div class="usecase-box">Set Price</div>
+              <div class="usecase-box">Promote Listing</div>
+              <div class="usecase-box">Edit Property</div>
+              <div class="usecase-box">Receive Payment</div>
+              <div class="usecase-box">Delete Property</div>
+              <div class="usecase-box" style="opacity:0"></div>
+              <div class="usecase-box">View Inquiries</div>
+              <div class="usecase-box" style="opacity:0"></div>
+              <div class="usecase-box">Respond to Messages</div>
+              <div class="usecase-box" style="opacity:0"></div>
+              <div class="usecase-box">Schedule Visits</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CLASS DIAGRAM -->
+      <section class="card" id="class">
+        <div class="card-header">
+          <div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 12h16M12 4v16"/></svg></div>
+          <h2>Diagramme de Classes <span>Core Domain Model</span></h2>
+        </div>
+        <button class="toggle-btn" onclick="toggleSource('class-source', this)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          View PlantUML Source
+        </button>
+        <div class="plantuml-source" id="class-source">
+          <pre>@startuml MAROC-LOC_ClassDiagram
+skinparam classAttributeIconSize 0
+title MAROC-LOC — Class Diagram (Core Domain)
+class User { -id:Long -name:String -email:String ... }
+class Property { -id:Long -title:String -price:BigDecimal ... }
+class Favorite { -id:Long -createdAt:LocalDateTime }
+class UserBehavior { ... }
+class ViewedProperty { ... }
+class Review { ... }
+class Message { ... }
+class PaymentTransaction { ... }
+class RecommendationEngine { +getRecommendations(...) ... }
+class PropertyQualityScoringService { ... }
+class PropertyQualityScore { ... }
+enum Role { ADMIN PROPRIETAIRE LOCATAIRE }
+enum PropertyType { RENT SALE RAHN }
+enum PropertyCategory { APARTMENT VILLA RIAD STUDIO OFFICE LAND COMMERCIAL }
+enum PropertyStatus { PENDING APPROVED AVAILABLE RENTED SOLD REJECTED }
+User "1" -- "0..*" Property : owns >
+User "1" -- "0..*" Favorite : has >
+User "1" -- "0..*" UserBehavior : generates >
+User "1" -- "0..*" ViewedProperty : views >
+User "1" -- "0..*" Review : writes >
+User "1" -- "0..*" Message : sends >
+User "1" -- "0..*" PaymentTransaction : makes >
+Property "1" -- "0..*" Favorite : favorited_by >
+Property "1" -- "0..*" ViewedProperty : viewed_by >
+Property "1" -- "0..*" Review : has >
+Property "1" -- "0..*" Message : discussed_in >
+User --> Role
+Property --> PropertyType
+Property --> PropertyCategory
+Property --> PropertyStatus
+RecommendationEngine ..> PropertyQualityScoringService : uses >
+PropertyQualityScoringService ..> PropertyQualityScore : produces >
+@enduml</pre>
+        </div>
+        <div class="diagram-wrap" style="padding:20px;overflow-x:auto;">
+          <div style="display:grid;grid-template-columns:repeat(4,minmax(180px,1fr));gap:20px;min-width:780px;">
+            <!-- User -->
+            <div class="class-box">
+              <div class="class-name">User</div>
+              <div class="class-attrs">- id: Long<br/>- name: String<br/>- email: String<br/>- password: String<br/>- role: Role<br/>- phoneNumber: String<br/>- cin: String<br/>- city: String<br/>- isVerified: Boolean<br/>- createdAt: LocalDateTime</div>
+              <div class="class-methods">+ getRole(): Role<br/>+ isVerified(): Boolean</div>
+            </div>
+            <!-- Property -->
+            <div class="class-box">
+              <div class="class-name">Property</div>
+              <div class="class-attrs">- id: Long<br/>- title: String<br/>- description: String<br/>- price: BigDecimal<br/>- city: String<br/>- address: String<br/>- type: PropertyType<br/>- category: PropertyCategory<br/>- status: PropertyStatus<br/>- surface: Double<br/>- rooms: Integer<br/>- bedrooms: Integer<br/>- bathrooms: Integer<br/>- latitude: Double<br/>- longitude: Double<br/>- images: List&lt;String&gt;<br/>- viewCount: Long<br/>- isVerified: Boolean<br/>- createdAt: LocalDateTime</div>
+              <div class="class-methods">+ getFinalPrice(): BigDecimal<br/>+ getPricePerSqm(): Double<br/>+ incrementViewCount(): void<br/>+ isAvailable(): Boolean</div>
+            </div>
+            <!-- Supporting classes -->
+            <div class="class-box">
+              <div class="class-name">Favorite</div>
+              <div class="class-attrs">- id: Long<br/>- createdAt: LocalDateTime</div>
+              <div class="class-methods"></div>
+            </div>
+            <div class="class-box">
+              <div class="class-name">Review</div>
+              <div class="class-attrs">- id: Long<br/>- rating: Integer<br/>- comment: String<br/>- status: ReviewStatus<br/>- createdAt: LocalDateTime</div>
+              <div class="class-methods"></div>
+            </div>
+            <div class="class-box">
+              <div class="class-name">Message</div>
+              <div class="class-attrs">- id: Long<br/>- content: String<br/>- isRead: Boolean<br/>- createdAt: LocalDateTime</div>
+              <div class="class-methods"></div>
+            </div>
+            <div class="class-box">
+              <div class="class-name">PaymentTransaction</div>
+              <div class="class-attrs">- id: Long<br/>- amount: BigDecimal<br/>- currency: String<br/>- status: PaymentStatus<br/>- paymentMethod: PaymentMethod<br/>- createdAt: LocalDateTime</div>
+              <div class="class-methods"></div>
+            </div>
+            <div class="class-box">
+              <div class="class-name">UserBehavior</div>
+              <div class="class-attrs">- id: Long<br/>- behaviorType: String<br/>- entityType: String<br/>- entityId: Long<br/>- metadata: String<br/>- weight: Double<br/>- sessionId: String<br/>- createdAt: LocalDateTime</div>
+              <div class="class-methods"></div>
+            </div>
+            <div class="class-box">
+              <div class="class-name">ViewedProperty</div>
+              <div class="class-attrs">- id: Long<br/>- viewedAt: LocalDateTime<br/>- viewDurationSeconds: Integer</div>
+              <div class="class-methods"></div>
+            </div>
+            <!-- Services -->
+            <div class="class-box" style="border-color:var(--primary);">
+              <div class="class-name" style="background:linear-gradient(180deg,rgba(45,212,191,0.1),rgba(45,212,191,0.04));color:var(--primary);">RecommendationEngine</div>
+              <div class="class-methods" style="color:var(--primary);">+ getRecommendations(userId, limit)<br/>+ getSimilarProperties(...)<br/>+ getTrendingProperties(...)<br/>+ getDiscoverRecommendations(...)<br/>+ recordBehavior(...)<br/>+ recordFeedback(...)</div>
+            </div>
+            <div class="class-box" style="border-color:var(--primary);">
+              <div class="class-name" style="background:linear-gradient(180deg,rgba(45,212,191,0.1),rgba(45,212,191,0.04));color:var(--primary);">PropertyQualityScoringService</div>
+              <div class="class-methods" style="color:var(--primary);">+ computeScore(property)<br/>+ computeScoresBatch(properties)</div>
+            </div>
+            <div class="class-box">
+              <div class="class-name">PropertyQualityScore</div>
+              <div class="class-attrs">- propertyId: Long<br/>- overallScore: double<br/>- listingCompleteness: double<br/>- mediaQuality: double<br/>- descriptionQuality: double<br/>- priceCompetitiveness: double<br/>- engagementVelocity: double<br/>- trustScore: double<br/>- freshness: double<br/>- locationPremium: double</div>
+              <div class="class-methods"></div>
+            </div>
+            <!-- Enums -->
+            <div class="class-box">
+              <div class="class-name" style="background:linear-gradient(180deg,rgba(245,158,11,0.1),rgba(245,158,11,0.04));color:var(--accent);">&lt;&lt;enum&gt;&gt; Role</div>
+              <div class="class-attrs">ADMIN<br/>PROPRIETAIRE<br/>LOCATAIRE</div>
+            </div>
+            <div class="class-box">
+              <div class="class-name" style="background:linear-gradient(180deg,rgba(245,158,11,0.1),rgba(245,158,11,0.04));color:var(--accent);">&lt;&lt;enum&gt;&gt; PropertyType</div>
+              <div class="class-attrs">RENT<br/>SALE<br/>RAHN</div>
+            </div>
+            <div class="class-box">
+              <div class="class-name" style="background:linear-gradient(180deg,rgba(245,158,11,0.1),rgba(245,158,11,0.04));color:var(--accent);">&lt;&lt;enum&gt;&gt; PropertyCategory</div>
+              <div class="class-attrs">APARTMENT<br/>VILLA<br/>RIAD<br/>STUDIO<br/>OFFICE<br/>LAND<br/>COMMERCIAL</div>
+            </div>
+            <div class="class-box">
+              <div class="class-name" style="background:linear-gradient(180deg,rgba(245,158,11,0.1),rgba(245,158,11,0.04));color:var(--accent);">&lt;&lt;enum&gt;&gt; PropertyStatus</div>
+              <div class="class-attrs">PENDING<br/>APPROVED<br/>AVAILABLE<br/>RENTED<br/>SOLD<br/>REJECTED</div>
+            </div>
+          </div>
+          <!-- Relationship annotations -->
+          <div style="margin-top:16px;display:flex;flex-wrap:wrap;gap:12px;font-size:11px;color:var(--text-muted);font-family:var(--font-mono);">
+            <span>User 1 — 0..* Property (owns)</span>
+            <span>User 1 — 0..* Favorite (has)</span>
+            <span>User 1 — 0..* UserBehavior (generates)</span>
+            <span>User 1 — 0..* ViewedProperty (views)</span>
+            <span>User 1 — 0..* Review (writes)</span>
+            <span>User 1 — 0..* Message (sends)</span>
+            <span>User 1 — 0..* PaymentTransaction (makes)</span>
+            <span>Property 1 — 0..* Favorite (favorited_by)</span>
+            <span>Property 1 — 0..* ViewedProperty (viewed_by)</span>
+            <span>Property 1 — 0..* Review (has)</span>
+            <span>Property 1 — 0..* Message (discussed_in)</span>
+            <span>User → Role</span>
+            <span>Property → PropertyType</span>
+            <span>Property → PropertyCategory</span>
+            <span>Property → PropertyStatus</span>
+            <span>RecommendationEngine ..> PropertyQualityScoringService (uses)</span>
+            <span>PropertyQualityScoringService ..> PropertyQualityScore (produces)</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ACTIVITY: Recommendation -->
+      <section class="card" id="activity">
+        <div class="card-header">
+          <div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48 2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48 2.83-2.83"/></svg></div>
+          <h2>Activité — Flux de Recommandation <span>Collaborative filtering &amp; Scoring</span></h2>
+        </div>
+        <button class="toggle-btn" onclick="toggleSource('act1-source', this)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          View PlantUML Source
+        </button>
+        <div class="plantuml-source" id="act1-source">
+          <pre>@startuml MAROC-LOC_Activity_Recommendation
+start
+:User loads homepage;
+if (Authenticated?) then (yes)
+    :Fetch user profile
+    (favorites, views, searches);
+    :Find similar users
+    (Jaccard similarity);
+    :Compute collaborative score;
+else (no)
+    :Fetch session behavior;
+    :Build anonymous profile;
+    :Use trending + geo + quality;
+endif
+:Get candidate properties (150 items);
+:Batch fetch metrics (favorites, reviews, owners);
+:Compute scores: Content(25%) Popularity(20%) Collaborative(25%) Recency(10%) Geo(10%) Trust(10%);
+:Apply MMR diversity re-ranking;
+:Cache result (Redis);
+:Display recommendation cards;
+:Track impressions;
+stop
+@enduml</pre>
+        </div>
+        <div class="diagram-wrap" style="padding:20px;">
+          <div style="max-width:400px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:0;">
+            <div class="act-start"></div>
+            <div class="act-arrow"></div>
+            <div class="act-node">User loads homepage</div>
+            <div class="act-arrow"></div>
+            <div class="act-diamond"><span>Authenticated?</span></div>
+            <div style="display:flex;justify-content:space-between;width:100%;padding:0 20px;margin-top:4px;">
+              <span class="act-branch-label">yes</span>
+              <span class="act-branch-label">no</span>
+            </div>
+            <div style="display:flex;gap:20px;width:100%;justify-content:center;margin-top:4px;">
+              <div style="display:flex;flex-direction:column;align-items:center;">
+                <div class="act-arrow"></div>
+                <div class="act-node">Fetch user profile<br/>(favorites, views, searches)</div>
+                <div class="act-arrow"></div>
+                <div class="act-node">Find similar users<br/>(Jaccard similarity)</div>
+                <div class="act-arrow"></div>
+                <div class="act-node">Compute collaborative score</div>
+                <div class="act-arrow" style="height:40px;"></div>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:center;">
+                <div class="act-arrow"></div>
+                <div class="act-node">Fetch session behavior</div>
+                <div class="act-arrow"></div>
+                <div class="act-node">Build anonymous profile</div>
+                <div class="act-arrow"></div>
+                <div class="act-node">Use trending + geo + quality</div>
+                <div class="act-arrow" style="height:40px;"></div>
+              </div>
+            </div>
+            <div class="act-node">Get candidate properties<br/>(150 items)</div>
+            <div class="act-arrow"></div>
+            <div class="act-node">Batch fetch metrics<br/>(favorites, reviews, owners)</div>
+            <div class="act-arrow"></div>
+            <div class="act-node">Compute scores:<br/>Content 25% · Popularity 20% · Collaborative 25%<br/>Recency 10% · Geo 10% · Trust 10%</div>
+            <div class="act-arrow"></div>
+            <div class="act-node">Apply MMR diversity re-ranking</div>
+            <div class="act-arrow"></div>
+            <div class="act-node">Cache result (Redis)</div>
+            <div class="act-arrow"></div>
+            <div class="act-node">Display recommendation cards</div>
+            <div class="act-arrow"></div>
+            <div class="act-node">Track impressions</div>
+            <div class="act-arrow"></div>
+            <div class="act-stop"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ACTIVITY: Chatbot -->
+      <section class="card" id="activity-chatbot">
+        <div class="card-header">
+          <div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+          <h2>Activité — Flux Chatbot RAG <span>Vector Search + Structured Search</span></h2>
+        </div>
+        <button class="toggle-btn" onclick="toggleSource('act2-source', this)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          View PlantUML Source
+        </button>
+        <div class="plantuml-source" id="act2-source">
+          <pre>@startuml MAROC-LOC_Activity_Chatbot
+start
+:User sends query;
+:Detect language (fr/ar/en/darija);
+:Translate to English (if needed);
+:Classify intent (SEARCH/PRICE/EXPLORE/etc.);
+:Extract entities (city, type, price, rooms);
+fork
+    :Vector Search (ChromaDB, top-k=10);
+fork again
+    :Structured Search (PostgreSQL);
+end fork
+:Merge &amp; deduplicate results;
+:Validate with PostgreSQL (check existence + availability);
+if (Results found?) then (yes)
+    :Generate response (FLAN-T5, multilingual);
+    :Include property cards;
+else (no)
+    :Generate "not found" response;
+    :Suggest alternatives;
+endif
+:Store conversation (Redis session);
+:Display to user;
+stop
+@enduml</pre>
+        </div>
+        <div class="diagram-wrap" style="padding:20px;">
+          <div style="max-width:400px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:0;">
+            <div class="act-start"></div>
+            <div class="act-arrow"></div>
+            <div class="act-node">User sends query</div>
+            <div class="act-arrow"></div>
+            <div class="act-node">Detect language<br/>(fr / ar / en / darija)</div>
+            <div class="act-arrow"></div>
+            <div class="act-node">Translate to English<br/>(if needed)</div>
+            <div class="act-arrow"></div>
+            <div class="act-node">Classify intent<br/>(SEARCH / PRICE / EXPLORE / ...)</div>
+            <div class="act-arrow"></div>
+            <div class="act-node">Extract entities<br/>(city, type, price, rooms)</div>
+            <div class="act-arrow"></div>
+            <!-- Fork -->
+            <div style="width:100%;display:flex;align-items:center;gap:8px;">
+              <div style="flex:1;height:1px;background:var(--text-muted);position:relative;"><div style="position:absolute;right:-4px;top:-3px;width:0;height:0;border-top:4px solid transparent;border-bottom:4px solid transparent;border-left:6px solid var(--text-muted);"></div></div>
+              <span style="font-size:9px;color:var(--text-muted);font-weight:700;white-space:nowrap;">FORK</span>
+              <div style="flex:1;height:1px;background:var(--text-muted);position:relative;"><div style="position:absolute;right:-4px;top:-3px;width:0;height:0;border-top:4px solid transparent;border-bottom:4px solid transparent;border-left:6px solid var(--text-muted);"></div></div>
+            </div>
+            <div style="display:flex;gap:20px;width:100%;justify-content:center;margin-top:8px;">
+              <div style="display:flex;flex-direction:column;align-items:center;">
+                <div class="act-node">Vector Search<br/>(ChromaDB, top-k=10)</div>
+                <div class="act-arrow" style="height:40px;"></div>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:center;">
+                <div class="act-node">Structured Search<br/>(PostgreSQL)</div>
+                <div class="act-arrow" style="height:40px;"></div>
+              </div>
+            </div>
+            <!-- Join -->
+            <div style="width:100%;display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+              <div style="flex:1;height:1px;background:var(--text-muted);position:relative;"><div style="position:absolute;right:-4px;top:-3px;width:0;height:0;border-top:4px solid transparent;border-bottom:4px solid transparent;border-left:6px solid var(--text-muted);"></div></div>
+              <span style="font-size:9px;color:var(--text-muted);font-weight:700;white-space:nowrap;">JOIN</span>
+              <div style="flex:1;height:1px;background:var(--text-muted);position:relative;"><div style="position:absolute;right:-4px;top:-3px;width:0;height:0;border-top:4px solid transparent;border-bottom:4px solid transparent;border-left:6px solid var(--text-muted);"></div></div>
+            </div>
+            <div class="act-node">Merge &amp; deduplicate results</div>
+            <div class="act-arrow"></div>
+            <div class="act-node">Validate with PostgreSQL<br/>(check existence + availability)</div>
+            <div class="act-arrow"></div>
+            <div class="act-diamond"><span>Results<br/>found?</span></div>
+            <div style="display:flex;justify-content:space-between;width:100%;padding:0 20px;margin-top:4px;">
+              <span class="act-branch-label">yes</span>
+              <span class="act-branch-label">no</span>
+            </div>
+            <div style="display:flex;gap:20px;width:100%;justify-content:center;margin-top:4px;">
+              <div style="display:flex;flex-direction:column;align-items:center;">
+                <div class="act-arrow"></div>
+                <div class="act-node">Generate response<br/>(FLAN-T5, multilingual)</div>
+                <div class="act-arrow"></div>
+                <div class="act-node">Include property cards</div>
+                <div class="act-arrow" style="height:40px;"></div>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:center;">
+                <div class="act-arrow"></div>
+                <div class="act-node">Generate "not found" response</div>
+                <div class="act-arrow"></div>
+                <div class="act-node">Suggest alternatives</div>
+                <div class="act-arrow" style="height:40px;"></div>
+              </div>
+            </div>
+            <div class="act-node">Store conversation<br/>(Redis session)</div>
+            <div class="act-arrow"></div>
+            <div class="act-node">Display to user</div>
+            <div class="act-arrow"></div>
+            <div class="act-stop"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SEQUENCE DIAGRAM -->
+      <section class="card" id="sequence">
+        <div class="card-header">
+          <div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16M4 12l4-4m-4 4 4 4"/></svg></div>
+          <h2>Diagramme de Séquence — Appel API <span>Property Search with AI</span></h2>
+        </div>
+        <button class="toggle-btn" onclick="toggleSource('seq-source', this)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          View PlantUML Source
+        </button>
+        <div class="plantuml-source" id="seq-source">
+          <pre>@startuml MAROC-LOC_Sequence_API
+actor User
+participant "Frontend\n(React)" as FE
+participant "Nginx\n(Gateway)" as GW
+participant "Backend\n(Spring Boot)" as BE
+participant "AI Service\n(FastAPI)" as AI
+participant "PostgreSQL" as PG
+participant "ChromaDB" as CH
+participant "Redis" as RD
+
+User -> FE : Enter search query
+activate FE
+FE -> GW : POST /v2/properties/search
+activate GW
+GW -> BE : Route request
+activate BE
+BE -> RD : Check cache
+activate RD
+RD --> BE : Cache miss
+deactivate RD
+BE -> AI : POST /ai/search
+activate AI
+AI -> AI : Detect language
+AI -> AI : Extract entities
+par Semantic Search
+    AI -> CH : Vector search
+    activate CH
+    CH --> AI : Top-k results
+    deactivate CH
+and Structured Search
+    AI -> PG : SQL query
+    activate PG
+    PG --> AI : Matching properties
+    deactivate PG
+end
+AI -> AI : Merge + validate results
+AI -> AI : Generate response
+AI --> BE : Search results + AI summary
+deactivate AI
+BE -> PG : Fetch full property details
+activate PG
+PG --> BE : Property data
+deactivate PG
+BE -> RD : Cache results (5 min)
+activate RD
+RD --> BE : OK
+deactivate RD
+BE --> GW : HTTP 200 + results
+deactivate BE
+GW --> FE : Response
+deactivate GW
+FE -> FE : Render results + property cards
+FE --> User : Display search results
+deactivate FE
+@enduml</pre>
+        </div>
+        <div class="diagram-wrap" style="padding:20px;overflow-x:auto;">
+          <div style="min-width:720px;position:relative;">
+            <!-- Participants -->
+            <div style="display:flex;justify-content:space-between;padding-bottom:8px;">
+              <div class="seq-participant">User</div>
+              <div class="seq-participant">Frontend<br/>(React)</div>
+              <div class="seq-participant">Nginx<br/>(Gateway)</div>
+              <div class="seq-participant">Backend<br/>(Spring Boot)</div>
+              <div class="seq-participant">AI Service<br/>(FastAPI)</div>
+              <div class="seq-participant">PostgreSQL</div>
+              <div class="seq-participant">ChromaDB</div>
+              <div class="seq-participant">Redis</div>
+            </div>
+            <!-- Lifelines -->
+            <div style="display:flex;justify-content:space-between;position:relative;height:560px;">
+              <div class="seq-lifeline" style="left:6.25%;"></div>
+              <div class="seq-lifeline" style="left:18.75%;"></div>
+              <div class="seq-lifeline" style="left:31.25%;"></div>
+              <div class="seq-lifeline" style="left:43.75%;"></div>
+              <div class="seq-lifeline" style="left:56.25%;"></div>
+              <div class="seq-lifeline" style="left:68.75%;"></div>
+              <div class="seq-lifeline" style="left:81.25%;"></div>
+              <div class="seq-lifeline" style="left:93.75%;"></div>
+
+              <!-- Messages -->
+              <div class="seq-message" style="top:16px;left:6.25%;width:12.5%;"><span class="seq-label" style="top:-10px;left:0;">Enter search query</span></div>
+              <div class="seq-message" style="top:40px;left:18.75%;width:12.5%;"><span class="seq-label" style="top:-10px;left:0;">POST /v2/properties/search</span></div>
+              <div class="seq-message" style="top:64px;left:31.25%;width:12.5%;"><span class="seq-label" style="top:-10px;left:0;">Route request</span></div>
+              <div class="seq-message" style="top:88px;left:43.75%;width:37.5%;"><span class="seq-label" style="top:-10px;left:0;">POST /ai/search</span></div>
+              <!-- Self message -->
+              <div style="position:absolute;top:112px;left:56.25%;width:1px;height:24px;background:var(--text-muted);z-index:2;"><span class="seq-label" style="top:4px;left:6px;">Detect language</span></div>
+              <div style="position:absolute;top:120px;left:56.25%;width:8px;height:8px;border-top:1px solid var(--text-muted);border-right:1px solid var(--text-muted);transform:rotate(135deg);transform-origin:top right;"></div>
+              <div style="position:absolute;top:140px;left:56.25%;width:1px;height:24px;background:var(--text-muted);z-index:2;"><span class="seq-label" style="top:4px;left:6px;">Extract entities</span></div>
+              <div style="position:absolute;top:148px;left:56.25%;width:8px;height:8px;border-top:1px solid var(--text-muted);border-right:1px solid var(--text-muted);transform:rotate(135deg);transform-origin:top right;"></div>
+
+              <div class="seq-message" style="top:180px;left:56.25%;width:12.5%;"><span class="seq-label" style="top:-10px;left:0;">Vector search</span></div>
+              <div class="seq-message" style="top:180px;left:68.75%;width:12.5%;background:none;">
+                <div style="position:absolute;right:0;top:0;width:1px;height:24px;background:var(--text-muted);"><div style="position:absolute;bottom:-3px;left:-3px;width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-top:6px solid var(--text-muted);"></div></div>
+                <span class="seq-label" style="top:4px;right:4px;">Top-k results</span>
+              </div>
+
+              <div class="seq-message" style="top:220px;left:56.25%;width:12.5%;"><span class="seq-label" style="top:-10px;left:0;">SQL query</span></div>
+              <div class="seq-message" style="top:220px;left:68.75%;width:12.5%;background:none;">
+                <div style="position:absolute;right:0;top:0;width:1px;height:24px;background:var(--text-muted);"><div style="position:absolute;bottom:-3px;left:-3px;width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-top:6px solid var(--text-muted);"></div></div>
+                <span class="seq-label" style="top:4px;right:4px;">Matching properties</span>
+              </div>
+
+              <!-- Self messages -->
+              <div style="position:absolute;top:260px;left:56.25%;width:1px;height:24px;background:var(--text-muted);z-index:2;"><span class="seq-label" style="top:4px;left:6px;">Merge + validate</span></div>
+              <div style="position:absolute;top:268px;left:56.25%;width:8px;height:8px;border-top:1px solid var(--text-muted);border-right:1px solid var(--text-muted);transform:rotate(135deg);transform-origin:top right;"></div>
+              <div style="position:absolute;top:288px;left:56.25%;width:1px;height:24px;background:var(--text-muted);z-index:2;"><span class="seq-label" style="top:4px;left:6px;">Generate response</span></div>
+              <div style="position:absolute;top:296px;left:56.25%;width:8px;height:8px;border-top:1px solid var(--text-muted);border-right:1px solid var(--text-muted);transform:rotate(135deg);transform-origin:top right;"></div>
+
+              <!-- Return -->
+              <div class="seq-message" style="top:328px;left:43.75%;width:12.5%;background:none;">
+                <div style="position:absolute;right:0;top:0;width:1px;height:24px;background:var(--text-muted);"><div style="position:absolute;bottom:-3px;left:-3px;width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-top:6px solid var(--text-muted);"></div></div>
+                <span class="seq-label" style="top:4px;right:4px;">Results + AI summary</span>
+              </div>
+
+              <div class="seq-message" style="top:368px;left:43.75%;width:25%;"><span class="seq-label" style="top:-10px;left:0;">Fetch full property details</span></div>
+              <div class="seq-message" style="top:368px;left:68.75%;width:12.5%;background:none;">
+                <div style="position:absolute;right:0;top:0;width:1px;height:24px;background:var(--text-muted);"><div style="position:absolute;bottom:-3px;left:-3px;width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-top:6px solid var(--text-muted);"></div></div>
+                <span class="seq-label" style="top:4px;right:4px;">Property data</span>
+              </div>
+
+              <div class="seq-message" style="top:408px;left:43.75%;width:37.5%;"><span class="seq-label" style="top:-10px;left:0;">Cache results (5 min)</span></div>
+              <div class="seq-message" style="top:408px;left:81.25%;width:12.5%;background:none;">
+                <div style="position:absolute;right:0;top:0;width:1px;height:24px;background:var(--text-muted);"><div style="position:absolute;bottom:-3px;left:-3px;width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-top:6px solid var(--text-muted);"></div></div>
+                <span class="seq-label" style="top:4px;right:4px;">OK</span>
+              </div>
+
+              <div class="seq-message" style="top:448px;left:31.25%;width:12.5%;background:none;">
+                <div style="position:absolute;right:0;top:0;width:1px;height:24px;background:var(--text-muted);"><div style="position:absolute;bottom:-3px;left:-3px;width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-top:6px solid var(--text-muted);"></div></div>
+                <span class="seq-label" style="top:4px;right:4px;">HTTP 200 + results</span>
+              </div>
+              <div class="seq-message" style="top:448px;left:18.75%;width:12.5%;background:none;">
+                <div style="position:absolute;right:0;top:0;width:1px;height:24px;background:var(--text-muted);"><div style="position:absolute;bottom:-3px;left:-3px;width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-top:6px solid var(--text-muted);"></div></div>
+                <span class="seq-label" style="top:4px;right:4px;">Response</span>
+              </div>
+
+              <div style="position:absolute;top:488px;left:18.75%;width:1px;height:24px;background:var(--text-muted);z-index:2;"><span class="seq-label" style="top:4px;left:6px;">Render results</span></div>
+              <div style="position:absolute;top:496px;left:18.75%;width:8px;height:8px;border-top:1px solid var(--text-muted);border-right:1px solid var(--text-muted);transform:rotate(135deg);transform-origin:top right;"></div>
+
+              <div class="seq-message" style="top:528px;left:6.25%;width:12.5%;background:none;">
+                <div style="position:absolute;right:0;top:0;width:1px;height:24px;background:var(--text-muted);"><div style="position:absolute;bottom:-3px;left:-3px;width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-top:6px solid var(--text-muted);"></div></div>
+                <span class="seq-label" style="top:4px;right:4px;">Display search results</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- COMPONENT DIAGRAM -->
+      <section class="card" id="component">
+        <div class="card-header">
+          <div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
+          <h2>Diagramme de Composants <span>Couches &amp; Dépendances</span></h2>
+        </div>
+        <button class="toggle-btn" onclick="toggleSource('comp-source', this)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          View PlantUML Source
+        </button>
+        <div class="plantuml-source" id="comp-source">
+          <pre>@startuml MAROC-LOC_ComponentDiagram
+title Component Diagram — MAROC-LOC System
+package "Frontend" { [React Web App] [Flutter Mobile App] [AI Chat Widget] }
+package "API Gateway" { [Nginx Reverse Proxy] }
+package "Backend Services" { [Auth Controller] [Property Controller] [Recommendation Controller] [Message Controller] [Payment Controller] [Analytics Controller] [Auth Service] [Property Service] [Recommendation Service] [Property Quality Scoring] [Payment Service] }
+package "AI Services" { [RAG Pipeline] [Smart Chat] [Voice Engine] [Embedding Service] }
+package "Data Layer" { [PostgreSQL] [Redis] [ChromaDB] [ClickHouse] [Kafka] [MinIO/S3] }
+Web --> Nginx : HTTPS
+... (connexions)
+@enduml</pre>
+        </div>
+        <div class="diagram-wrap" style="padding:20px;">
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;">
+            <div class="package">
+              <div class="package-tab">Frontend</div>
+              <div style="display:flex;flex-direction:column;gap:8px;">
+                <div class="component-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8m-4-4v4"/></svg>React Web App</div>
+                <div class="component-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>Flutter Mobile App</div>
+                <div class="component-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>AI Chat Widget</div>
+              </div>
+            </div>
+            <div class="package">
+              <div class="package-tab">API Gateway</div>
+              <div style="display:flex;flex-direction:column;gap:8px;">
+                <div class="component-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>Nginx Reverse Proxy</div>
+              </div>
+            </div>
+            <div class="package">
+              <div class="package-tab">Backend Services</div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+                <div class="component-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 12h16"/></svg>Auth Controller</div>
+                <div class="component-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 12h16"/></svg>Property Controller</div>
+                <div class="component-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 12h16"/></svg>Rec Controller</div>
+                <div class="component-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 12h16"/></svg>Message Controller</div>
+                <div class="component-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 12h16"/></svg>Payment Controller</div>
+                <div class="component-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 12h16"/></svg>Analytics Controller</div>
+                <div class="component-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 12h16"/></svg>Auth Service</div>
+                <div class="component-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 12h16"/></svg>Property Service</div>
+                <div class="component-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 12h16"/></svg>Rec Service</div>
+                <div class="component-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 12h16"/></svg>Quality Scoring</div>
+                <div class="component-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 12h16"/></svg>Payment Service</div>
+              </div>
+            </div>
+            <div class="package">
+              <div class="package-tab">AI Services</div>
+              <div style="display:flex;flex-direction:column;gap:8px;">
+                <div class="component-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10H12V2z"/></svg>RAG Pipeline</div>
+                <div class="component-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Smart Chat</div>
+                <div class="component-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>Voice Engine</div>
+                <div class="component-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>Embedding Service</div>
+              </div>
+            </div>
+            <div class="package">
+              <div class="package-tab">Data Layer</div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+                <div class="component-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>PostgreSQL</div>
+                <div class="component-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10H12V2z"/></svg>Redis</div>
+                <div class="component-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>ChromaDB</div>
+                <div class="component-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10H12V2z"/></svg>ClickHouse</div>
+                <div class="component-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10h3v10H4zM10 10h3v10h-3zM16 10h3v10h-3z"/></svg>Kafka</div>
+                <div class="component-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>MinIO/S3</div>
+              </div>
+            </div>
+          </div>
+          <!-- Legend -->
+          <div style="margin-top:16px;font-size:11px;color:var(--text-muted);display:flex;flex-wrap:wrap;gap:12px;">
+            <span>Frontend &rarr; Nginx (HTTPS)</span>
+            <span>Nginx &rarr; Controllers (/v1/*, /v2/*)</span>
+            <span>Controllers &rarr; Services</span>
+            <span>Rec Service &rarr; AI Services (HTTP)</span>
+            <span>Services &rarr; PostgreSQL (JDBC)</span>
+            <span>Services &rarr; Redis (cache/tokens)</span>
+            <span>Analytics &rarr; Kafka &rarr; ClickHouse</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- DEPLOYMENT DIAGRAM -->
+      <section class="card" id="deployment">
+        <div class="card-header">
+          <div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><path d="M6 6h.01M10 6h.01M14 6h.01"/><rect x="2" y="14" width="20" height="8" rx="2"/><path d="M6 18h.01M10 18h.01M14 18h.01"/></svg></div>
+          <h2>Diagramme de Déploiement <span>Infrastructure Kubernetes</span></h2>
+        </div>
+        <button class="toggle-btn" onclick="toggleSource('dep-source', this)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          View PlantUML Source
+        </button>
+        <div class="plantuml-source" id="dep-source">
+          <pre>@startuml MAROC-LOC_DeploymentDiagram
+title Deployment Diagram — MAROC-LOC Infrastructure
+node "Client Devices" { [Browser] [iOS App] [Android App] }
+node "CDN" { [CloudFront/CloudFlare] }
+node "Kubernetes Cluster" {
+    node "Ingress Layer" { [Nginx Ingress] [Cert Manager] }
+    node "Frontend Pods" { [React Pod] [React Pod] }
+    node "Backend Pods" { [Spring Boot Pod] [Spring Boot Pod] }
+    node "AI Service Pods" { [FastAPI Pod] [FastAPI Pod] }
+    node "Monitoring Pods" { [Prometheus] [Grafana] [Loki] }
+}
+node "Database Cluster" { database "PostgreSQL Primary" database "PostgreSQL Replica" database "Redis Cluster" database "ChromaDB Server" database "ClickHouse" }
+node "Message Queue" { [Kafka Broker 1] [Kafka Broker 2] [Kafka Broker 3] }
+node "Object Storage" { [MinIO/S3 Bucket] }
+... (connexions)
+@enduml</pre>
+        </div>
+        <div class="diagram-wrap" style="padding:20px;">
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;">
+            <div class="deploy-node">
+              <div class="deploy-node-title">Client Devices</div>
+              <div style="display:flex;gap:12px;justify-content:center;">
+                <div style="text-align:center;"><div class="server-icon"></div><div style="font-size:10px;color:var(--text-muted);margin-top:4px;">Browser</div></div>
+                <div style="text-align:center;"><div class="server-icon"></div><div style="font-size:10px;color:var(--text-muted);margin-top:4px;">iOS</div></div>
+                <div style="text-align:center;"><div class="server-icon"></div><div style="font-size:10px;color:var(--text-muted);margin-top:4px;">Android</div></div>
+              </div>
+            </div>
+            <div class="deploy-node">
+              <div class="deploy-node-title">CDN</div>
+              <div style="text-align:center;"><div class="server-icon"></div><div style="font-size:10px;color:var(--text-muted);margin-top:4px;">CloudFront / CloudFlare</div></div>
+            </div>
+            <div class="deploy-node" style="grid-column:1 / -1;">
+              <div class="deploy-node-title">Kubernetes Cluster</div>
+              <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;">
+                <div class="deploy-node" style="padding:12px;">
+                  <div class="deploy-node-title" style="font-size:10px;">Ingress Layer</div>
+                  <div style="display:flex;flex-direction:column;gap:8px;">
+                    <div class="component-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>Nginx Ingress</div>
+                    <div class="component-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Cert Manager</div>
+                  </div>
+                </div>
+                <div class="deploy-node" style="padding:12px;">
+                  <div class="deploy-node-title" style="font-size:10px;">Frontend Pods</div>
+                  <div style="display:flex;gap:8px;justify-content:center;">
+                    <div style="text-align:center;"><div class="server-icon"></div><div style="font-size:9px;color:var(--text-muted);margin-top:4px;">React Pod</div></div>
+                    <div style="text-align:center;"><div class="server-icon"></div><div style="font-size:9px;color:var(--text-muted);margin-top:4px;">React Pod</div></div>
+                  </div>
+                </div>
+                <div class="deploy-node" style="padding:12px;">
+                  <div class="deploy-node-title" style="font-size:10px;">Backend Pods</div>
+                  <div style="display:flex;gap:8px;justify-content:center;">
+                    <div style="text-align:center;"><div class="server-icon"></div><div style="font-size:9px;color:var(--text-muted);margin-top:4px;">Spring Boot</div></div>
+                    <div style="text-align:center;"><div class="server-icon"></div><div style="font-size:9px;color:var(--text-muted);margin-top:4px;">Spring Boot</div></div>
+                  </div>
+                </div>
+                <div class="deploy-node" style="padding:12px;">
+                  <div class="deploy-node-title" style="font-size:10px;">AI Service Pods</div>
+                  <div style="display:flex;gap:8px;justify-content:center;">
+                    <div style="text-align:center;"><div class="server-icon"></div><div style="font-size:9px;color:var(--text-muted);margin-top:4px;">FastAPI</div></div>
+                    <div style="text-align:center;"><div class="server-icon"></div><div style="font-size:9px;color:var(--text-muted);margin-top:4px;">FastAPI</div></div>
+                  </div>
+                </div>
+                <div class="deploy-node" style="padding:12px;">
+                  <div class="deploy-node-title" style="font-size:10px;">Monitoring Pods</div>
+                  <div style="display:flex;gap:8px;justify-content:center;">
+                    <div style="text-align:center;"><div class="server-icon"></div><div style="font-size:9px;color:var(--text-muted);margin-top:4px;">Prometheus</div></div>
+                    <div style="text-align:center;"><div class="server-icon"></div><div style="font-size:9px;color:var(--text-muted);margin-top:4px;">Grafana</div></div>
+                    <div style="text-align:center;"><div class="server-icon"></div><div style="font-size:9px;color:var(--text-muted);margin-top:4px;">Loki</div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="deploy-node">
+              <div class="deploy-node-title">Database Cluster</div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+                <div style="text-align:center;"><div class="db-icon"></div><div style="font-size:9px;color:var(--text-muted);margin-top:4px;">PostgreSQL Primary</div></div>
+                <div style="text-align:center;"><div class="db-icon"></div><div style="font-size:9px;color:var(--text-muted);margin-top:4px;">PostgreSQL Replica</div></div>
+                <div style="text-align:center;"><div class="db-icon"></div><div style="font-size:9px;color:var(--text-muted);margin-top:4px;">Redis Cluster</div></div>
+                <div style="text-align:center;"><div class="db-icon"></div><div style="font-size:9px;color:var(--text-muted);margin-top:4px;">ChromaDB</div></div>
+                <div style="text-align:center;"><div class="db-icon"></div><div style="font-size:9px;color:var(--text-muted);margin-top:4px;">ClickHouse</div></div>
+              </div>
+            </div>
+            <div class="deploy-node">
+              <div class="deploy-node-title">Message Queue</div>
+              <div style="display:flex;gap:8px;justify-content:center;">
+                <div style="text-align:center;"><div class="server-icon"></div><div style="font-size:9px;color:var(--text-muted);margin-top:4px;">Kafka 1</div></div>
+                <div style="text-align:center;"><div class="server-icon"></div><div style="font-size:9px;color:var(--text-muted);margin-top:4px;">Kafka 2</div></div>
+                <div style="text-align:center;"><div class="server-icon"></div><div style="font-size:9px;color:var(--text-muted);margin-top:4px;">Kafka 3</div></div>
+              </div>
+            </div>
+            <div class="deploy-node">
+              <div class="deploy-node-title">Object Storage</div>
+              <div style="text-align:center;"><div class="server-icon"></div><div style="font-size:10px;color:var(--text-muted);margin-top:4px;">MinIO / S3 Bucket</div></div>
+            </div>
+          </div>
+          <!-- Connections legend -->
+          <div style="margin-top:16px;font-size:11px;color:var(--text-muted);display:flex;flex-wrap:wrap;gap:12px;">
+            <span>Browser &rarr; CDN (HTTPS)</span>
+            <span>Mobile &rarr; Ingress (HTTPS)</span>
+            <span>CDN &rarr; Frontend Pods (static)</span>
+            <span>Ingress &rarr; Backend Pods (/api/*)</span>
+            <span>Ingress &rarr; AI Pods (/ai/*)</span>
+            <span>Backend &rarr; PostgreSQL (JDBC)</span>
+            <span>Backend &rarr; Redis (Lettuce)</span>
+            <span>Backend &rarr; Kafka (Producer)</span>
+            <span>Kafka &rarr; ClickHouse (Consumer)</span>
+            <span>Backend &rarr; S3 (upload)</span>
+            <span>Prometheus &rarr; Pods (scrape)</span>
+          </div>
+        </div>
+      </section>
+
+      <footer style="text-align:center; padding: 40px 0; color: var(--text-muted); font-size: 12px;">
+        Document généré le 24 Mai 2026 — Version 1.0 — MAROC-LOC UML Documentation
+      </footer>
+    </main>
+  </div>
+
+  <script>
+    function toggleSource(id, btn) {
+      const el = document.getElementById(id);
+      el.classList.toggle('open');
+      const svg = btn.querySelector('svg');
+      svg.style.transform = el.classList.contains('open') ? 'rotate(180deg)' : '';
+    }
+
+    const themeToggle = document.getElementById('themeToggle');
+    const sunIcon = document.getElementById('sunIcon');
+    const moonIcon = document.getElementById('moonIcon');
+    const html = document.documentElement;
+    function updateIcons() {
+      if (html.classList.contains('dark')) { sunIcon.style.display = 'none'; moonIcon.style.display = 'block'; }
+      else { sunIcon.style.display = 'block'; moonIcon.style.display = 'none'; }
+    }
+    updateIcons();
+    themeToggle.addEventListener('click', () => { html.classList.toggle('dark'); updateIcons(); });
+
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => { hamburger.classList.toggle('active'); mobileMenu.classList.toggle('open'); });
+    function closeMenu() { hamburger.classList.remove('active'); mobileMenu.classList.remove('open'); }
+
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-link, .nav-links a');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => { if (scrollY >= section.offsetTop - 120) current = section.getAttribute('id'); });
+      navLinks.forEach(link => { link.classList.remove('active'); if (link.getAttribute('href') === '#' + current) link.classList.add('active'); });
+    });
+  </script>
+</body>
+</html>

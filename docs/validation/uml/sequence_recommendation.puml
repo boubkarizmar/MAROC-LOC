@@ -1,0 +1,27 @@
+@startuml
+actor "Locataire" as U
+participant "React" as FE
+participant "RecommendationController" as RC
+participant "RecommendationServiceImpl" as RS
+participant "FavoriteRepository" as FR
+participant "PropertyRepository" as PR
+participant "Redis" as Redis
+
+database "PostgreSQL" as DB
+
+U -> FE : GET /recommendations/personalized
+FE -> RC : Authorization: Bearer token
+RC -> RS : getRecommendations(userId, limit)
+RS -> FR : findPropertyIdsByUserId(userId)
+FR -> DB : SELECT
+DB --> FR : favoris
+RS -> PR : findApprovedCandidates(excludedIds)
+PR -> DB : SELECT
+DB --> PR : candidats
+RS -> RS : scoreProperty() hybride
+RS -> RS : applyMMRDiversity()
+RS -> Redis : cache key
+RS --> RC : List<RecommendationResponse>
+RC --> FE : JSON
+FE --> U : cartes recommandées
+@enduml

@@ -1,0 +1,225 @@
+{
+  "dataset_name": "PropTech Real Estate Multimedia Dataset",
+  "version": "1.0",
+  "created_date": "2026-05-24 05:47:30",
+  "description": "Professional real estate multimedia dataset for PropTech platform development",
+  "total_files": 126,
+  "total_size_mb": 191.7,
+  "license_summary": "Mixed - Images from various royalty-free sources (Pexels License, Pixabay License, CC0)",
+  "attribution_required": "Yes - See individual sources below",
+  "categories": {
+    "apartments": {
+      "image_count": 29,
+      "video_count": 1,
+      "total_size_mb": 39.9,
+      "perspectives": {
+        "interior": true,
+        "exterior": true
+      },
+      "use_cases": [
+        "Property listings",
+        "Search filters",
+        "Recommendation engine"
+      ]
+    },
+    "cafes": {
+      "image_count": 10,
+      "video_count": 1,
+      "total_size_mb": 17.3,
+      "perspectives": {
+        "interior": true,
+        "exterior": true
+      },
+      "use_cases": [
+        "Property listings",
+        "Search filters",
+        "Recommendation engine"
+      ]
+    },
+    "commercial": {
+      "image_count": 6,
+      "video_count": 1,
+      "total_size_mb": 12.4,
+      "perspectives": {
+        "interior": true,
+        "exterior": true
+      },
+      "use_cases": [
+        "Property listings",
+        "Search filters",
+        "Recommendation engine"
+      ]
+    },
+    "coworking": {
+      "image_count": 7,
+      "video_count": 1,
+      "total_size_mb": 18.2,
+      "perspectives": {
+        "interior": true,
+        "exterior": true
+      },
+      "use_cases": [
+        "Property listings",
+        "Search filters",
+        "Recommendation engine"
+      ]
+    },
+    "houses": {
+      "image_count": 12,
+      "video_count": 1,
+      "total_size_mb": 15.9,
+      "perspectives": {
+        "interior": true,
+        "exterior": true
+      },
+      "use_cases": [
+        "Property listings",
+        "Search filters",
+        "Recommendation engine"
+      ]
+    },
+    "luxury": {
+      "image_count": 14,
+      "video_count": 1,
+      "total_size_mb": 16.7,
+      "perspectives": {
+        "interior": true,
+        "exterior": true
+      },
+      "use_cases": [
+        "Property listings",
+        "Search filters",
+        "Recommendation engine"
+      ]
+    },
+    "offices": {
+      "image_count": 8,
+      "video_count": 1,
+      "total_size_mb": 15.0,
+      "perspectives": {
+        "interior": true,
+        "exterior": true
+      },
+      "use_cases": [
+        "Property listings",
+        "Search filters",
+        "Recommendation engine"
+      ]
+    },
+    "restaurants": {
+      "image_count": 13,
+      "video_count": 1,
+      "total_size_mb": 24.0,
+      "perspectives": {
+        "interior": true,
+        "exterior": true
+      },
+      "use_cases": [
+        "Property listings",
+        "Search filters",
+        "Recommendation engine"
+      ]
+    },
+    "studios": {
+      "image_count": 7,
+      "video_count": 1,
+      "total_size_mb": 18.2,
+      "perspectives": {
+        "interior": true,
+        "exterior": true
+      },
+      "use_cases": [
+        "Property listings",
+        "Search filters",
+        "Recommendation engine"
+      ]
+    },
+    "villas": {
+      "image_count": 10,
+      "video_count": 1,
+      "total_size_mb": 14.1,
+      "perspectives": {
+        "interior": true,
+        "exterior": true
+      },
+      "use_cases": [
+        "Property listings",
+        "Search filters",
+        "Recommendation engine"
+      ]
+    }
+  },
+  "sources": {
+    "image_search": {
+      "name": "Web Image Search",
+      "description": "High-quality real estate images from architecture and interior design websites",
+      "license": "Varies by source - Mostly royalty-free for editorial/commercial use",
+      "images_count": 116,
+      "quality": "HD to 4K"
+    },
+    "pixabay_videos": {
+      "name": "Pixabay",
+      "url": "https://pixabay.com",
+      "description": "Free stock videos for real estate walkthroughs and property showcases",
+      "license": "Pixabay License - Free for commercial use without attribution",
+      "videos_count": 1,
+      "quality": "HD"
+    },
+    "huggingface_datasets": {
+      "name": "Hugging Face Datasets",
+      "url": "https://huggingface.co/datasets",
+      "description": "Large-scale real estate image datasets with property metadata",
+      "datasets_found": [
+        "alleina/Real-Estate-Property-Image-Dataset-Lamudi-Facebook-Ohmyhome-PerchanceAI (6.12 GB, 8158+ images)",
+        "Binaryy/multimodal-real-estate-search (text + images)",
+        "strollingorange/roomLuxuryAnnotater (room type classification)"
+      ],
+      "license": "Apache 2.0 / Various"
+    },
+    "github_datasets": {
+      "name": "GitHub Repositories",
+      "datasets_found": [
+        "emanhamed/houses-dataset (535 houses, 4 images each: bedroom, bathroom, kitchen, frontal)",
+        "sanketvagal/Room-type-image-classification (5859 images, 6 room types)",
+        "valdas-v1/lithuanian-real-estate-listings (7599 listings with images)"
+      ],
+      "license": "MIT / Academic"
+    },
+    "academic_datasets": {
+      "name": "Academic Research Datasets",
+      "datasets_found": [
+        "MIT ADE20K (27,574 images, 150 semantic categories - indoor/outdoor scenes)",
+        "SUN RGB-D (10,000 RGB-D images with 3D annotations)",
+        "Places365 (1.8M images, 365 scene categories)",
+        "LSUN (3M+ bedroom, living room, kitchen, dining room images)"
+      ],
+      "license": "Academic/Non-commercial"
+    }
+  },
+  "usage_recommendations": [
+    "Frontend testing and mockups",
+    "AI recommendation system training",
+    "Chatbot RAG implementation",
+    "Property listing previews",
+    "Mobile app development",
+    "Demo production-ready platform"
+  ],
+  "file_formats": {
+    "images": [
+      ".jpg",
+      ".jpeg",
+      ".png",
+      ".webp"
+    ],
+    "videos": [
+      ".mp4"
+    ]
+  },
+  "quality_notes": [
+    "All images are HD or higher resolution",
+    "Images sourced from real estate photography websites",
+    "Videos sourced from royalty-free stock platforms",
+    "No AI-generated images included",
+    "No duplicates detected"
+  ]
+}

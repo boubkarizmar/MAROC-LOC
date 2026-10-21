@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: marocloc
+  labels:
+    app.kubernetes.io/name: marocloc
+    app.kubernetes.io/environment: production

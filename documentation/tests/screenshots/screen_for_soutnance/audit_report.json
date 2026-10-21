@@ -1,0 +1,746 @@
+{
+  "timestamp": "2026-06-02T21:30:41.372Z",
+  "baseUrl": "http://localhost:3000",
+  "responsive": [
+    {
+      "viewport": "Desktop",
+      "dimensions": "1920x1080",
+      "page": "Homepage",
+      "url": "http://localhost:3000/",
+      "screenshot": "c:\\Users\\HP\\Desktop\\pfe\\pricipaux\\MAROC-LOC\\audit_20260602_221346\\screenshots\\responsive_Desktop_Homepage.png",
+      "overflow": {
+        "scrollWidth": 1920,
+        "clientWidth": 1920,
+        "innerWidth": 1920,
+        "hasHorizontalScrollbar": false,
+        "overflowPixels": 0
+      },
+      "layoutIssues": [
+        {
+          "type": "wide_elements",
+          "count": 0
+        },
+        {
+          "type": "navbar_issues",
+          "count": 0
+        },
+        {
+          "type": "card_overflows",
+          "count": 0
+        },
+        {
+          "type": "filter_overflows",
+          "count": 0
+        },
+        {
+          "type": "hamburger_found",
+          "present": true
+        }
+      ],
+      "status": "ok"
+    },
+    {
+      "viewport": "Desktop",
+      "dimensions": "1920x1080",
+      "page": "PropertyDetails",
+      "url": "http://localhost:3000/property/1",
+      "screenshot": "c:\\Users\\HP\\Desktop\\pfe\\pricipaux\\MAROC-LOC\\audit_20260602_221346\\screenshots\\responsive_Desktop_PropertyDetails.png",
+      "overflow": {
+        "scrollWidth": 1920,
+        "clientWidth": 1920,
+        "innerWidth": 1920,
+        "hasHorizontalScrollbar": false,
+        "overflowPixels": 0
+      },
+      "layoutIssues": [
+        {
+          "type": "wide_elements",
+          "count": 0
+        },
+        {
+          "type": "navbar_issues",
+          "count": 11
+        },
+        {
+          "type": "card_overflows",
+          "count": 0
+        },
+        {
+          "type": "filter_overflows",
+          "count": 0
+        },
+        {
+          "type": "hamburger_found",
+          "present": true
+        }
+      ],
+      "status": "ok"
+    },
+    {
+      "viewport": "Desktop",
+      "dimensions": "1920x1080",
+      "page": "SearchResults",
+      "url": "http://localhost:3000/search",
+      "screenshot": "c:\\Users\\HP\\Desktop\\pfe\\pricipaux\\MAROC-LOC\\audit_20260602_221346\\screenshots\\responsive_Desktop_SearchResults.png",
+      "overflow": {
+        "scrollWidth": 1920,
+        "clientWidth": 1920,
+        "innerWidth": 1920,
+        "hasHorizontalScrollbar": false,
+        "overflowPixels": 0
+      },
+      "layoutIssues": [
+        {
+          "type": "wide_elements",
+          "count": 1
+        },
+        {
+          "type": "navbar_issues",
+          "count": 11
+        },
+        {
+          "type": "card_overflows",
+          "count": 0
+        },
+        {
+          "type": "filter_overflows",
+          "count": 0
+        },
+        {
+          "type": "hamburger_found",
+          "present": true
+        }
+      ],
+      "status": "ok"
+    },
+    {
+      "viewport": "Desktop",
+      "dimensions": "1920x1080",
+      "page": "Login",
+      "url": "http://localhost:3000/login",
+      "screenshot": "c:\\Users\\HP\\Desktop\\pfe\\pricipaux\\MAROC-LOC\\audit_20260602_221346\\screenshots\\responsive_Desktop_Login.png",
+      "overflow": {
+        "scrollWidth": 1920,
+        "clientWidth": 1920,
+        "innerWidth": 1920,
+        "hasHorizontalScrollbar": false,
+        "overflowPixels": 0
+      },
+      "layoutIssues": [
+        {
+          "type": "wide_elements",
+          "count": 0
+        },
+        {
+          "type": "navbar_issues",
+          "count": 11
+        },
+        {
+          "type": "card_overflows",
+          "count": 0
+        },
+        {
+          "type": "filter_overflows",
+          "count": 0
+        },
+        {
+          "type": "hamburger_found",
+          "present": true
+        }
+      ],
+      "status": "ok"
+    },
+    {
+      "viewport": "Laptop",
+      "dimensions": "1366x768",
+      "page": "Homepage",
+      "url": "http://localhost:3000/",
+      "screenshot": "c:\\Users\\HP\\Desktop\\pfe\\pricipaux\\MAROC-LOC\\audit_20260602_221346\\screenshots\\responsive_Laptop_Homepage.png",
+      "overflow": {
+        "scrollWidth": 1366,
+        "clientWidth": 1366,
+        "innerWidth": 1366,
+        "hasHorizontalScrollbar": false,
+        "overflowPixels": 0
+      },
+      "layoutIssues": [
+        {
+          "type": "wide_elements",
+          "count": 0
+        },
+        {
+          "type": "navbar_issues",
+          "count": 0
+        },
+        {
+          "type": "card_overflows",
+          "count": 0
+        },
+        {
+          "type": "filter_overflows",
+          "count": 0
+        },
+        {
+          "type": "hamburger_found",
+          "present": true
+        }
+      ],
+      "status": "ok"
+    },
+    {
+      "viewport": "Laptop",
+      "dimensions": "1366x768",
+      "page": "PropertyDetails",
+      "url": "http://localhost:3000/property/1",
+      "screenshot": "c:\\Users\\HP\\Desktop\\pfe\\pricipaux\\MAROC-LOC\\audit_20260602_221346\\screenshots\\responsive_Laptop_PropertyDetails.png",
+      "overflow": {
+        "scrollWidth": 1366,
+        "clientWidth": 1366,
+        "innerWidth": 1366,
+        "hasHorizontalScrollbar": false,
+        "overflowPixels": 0
+      },
+      "layoutIssues": [
+        {
+          "type": "wide_elements",
+          "count": 0
+        },
+        {
+          "type": "navbar_issues",
+          "count": 11
+        },
+        {
+          "type": "card_overflows",
+          "count": 0
+        },
+        {
+          "type": "filter_overflows",
+          "count": 0
+        },
+        {
+          "type": "hamburger_found",
+          "present": true
+        }
+      ],
+      "status": "ok"
+    },
+    {
+      "viewport": "Laptop",
+      "dimensions": "1366x768",
+      "page": "SearchResults",
+      "url": "http://localhost:3000/search",
+      "screenshot": "c:\\Users\\HP\\Desktop\\pfe\\pricipaux\\MAROC-LOC\\audit_20260602_221346\\screenshots\\responsive_Laptop_SearchResults.png",
+      "overflow": {
+        "scrollWidth": 1366,
+        "clientWidth": 1366,
+        "innerWidth": 1366,
+        "hasHorizontalScrollbar": false,
+        "overflowPixels": 0
+      },
+      "layoutIssues": [
+        {
+          "type": "wide_elements",
+          "count": 1
+        },
+        {
+          "type": "navbar_issues",
+          "count": 11
+        },
+        {
+          "type": "card_overflows",
+          "count": 0
+        },
+        {
+          "type": "filter_overflows",
+          "count": 0
+        },
+        {
+          "type": "hamburger_found",
+          "present": true
+        }
+      ],
+      "status": "ok"
+    },
+    {
+      "viewport": "Laptop",
+      "dimensions": "1366x768",
+      "page": "Login",
+      "url": "http://localhost:3000/login",
+      "screenshot": "c:\\Users\\HP\\Desktop\\pfe\\pricipaux\\MAROC-LOC\\audit_20260602_221346\\screenshots\\responsive_Laptop_Login.png",
+      "overflow": {
+        "scrollWidth": 1366,
+        "clientWidth": 1366,
+        "innerWidth": 1366,
+        "hasHorizontalScrollbar": false,
+        "overflowPixels": 0
+      },
+      "layoutIssues": [
+        {
+          "type": "wide_elements",
+          "count": 0
+        },
+        {
+          "type": "navbar_issues",
+          "count": 11
+        },
+        {
+          "type": "card_overflows",
+          "count": 0
+        },
+        {
+          "type": "filter_overflows",
+          "count": 0
+        },
+        {
+          "type": "hamburger_found",
+          "present": true
+        }
+      ],
+      "status": "ok"
+    },
+    {
+      "viewport": "Tablet",
+      "dimensions": "768x1024",
+      "page": "Homepage",
+      "url": "http://localhost:3000/",
+      "screenshot": "c:\\Users\\HP\\Desktop\\pfe\\pricipaux\\MAROC-LOC\\audit_20260602_221346\\screenshots\\responsive_Tablet_Homepage.png",
+      "overflow": {
+        "scrollWidth": 768,
+        "clientWidth": 768,
+        "innerWidth": 768,
+        "hasHorizontalScrollbar": false,
+        "overflowPixels": 0
+      },
+      "layoutIssues": [
+        {
+          "type": "wide_elements",
+          "count": 0
+        },
+        {
+          "type": "navbar_issues",
+          "count": 0
+        },
+        {
+          "type": "card_overflows",
+          "count": 0
+        },
+        {
+          "type": "filter_overflows",
+          "count": 0
+        },
+        {
+          "type": "hamburger_found",
+          "present": true
+        }
+      ],
+      "status": "ok"
+    },
+    {
+      "viewport": "Tablet",
+      "dimensions": "768x1024",
+      "page": "PropertyDetails",
+      "url": "http://localhost:3000/property/1",
+      "screenshot": "c:\\Users\\HP\\Desktop\\pfe\\pricipaux\\MAROC-LOC\\audit_20260602_221346\\screenshots\\responsive_Tablet_PropertyDetails.png",
+      "overflow": {
+        "scrollWidth": 768,
+        "clientWidth": 768,
+        "innerWidth": 768,
+        "hasHorizontalScrollbar": false,
+        "overflowPixels": 0
+      },
+      "layoutIssues": [
+        {
+          "type": "wide_elements",
+          "count": 0
+        },
+        {
+          "type": "navbar_issues",
+          "count": 10
+        },
+        {
+          "type": "card_overflows",
+          "count": 0
+        },
+        {
+          "type": "filter_overflows",
+          "count": 0
+        },
+        {
+          "type": "hamburger_found",
+          "present": true
+        }
+      ],
+      "status": "ok"
+    },
+    {
+      "viewport": "Tablet",
+      "dimensions": "768x1024",
+      "page": "SearchResults",
+      "url": "http://localhost:3000/search",
+      "screenshot": "c:\\Users\\HP\\Desktop\\pfe\\pricipaux\\MAROC-LOC\\audit_20260602_221346\\screenshots\\responsive_Tablet_SearchResults.png",
+      "overflow": {
+        "scrollWidth": 768,
+        "clientWidth": 768,
+        "innerWidth": 768,
+        "hasHorizontalScrollbar": false,
+        "overflowPixels": 0
+      },
+      "layoutIssues": [
+        {
+          "type": "wide_elements",
+          "count": 1
+        },
+        {
+          "type": "navbar_issues",
+          "count": 11
+        },
+        {
+          "type": "card_overflows",
+          "count": 0
+        },
+        {
+          "type": "filter_overflows",
+          "count": 0
+        },
+        {
+          "type": "hamburger_found",
+          "present": true
+        }
+      ],
+      "status": "ok"
+    },
+    {
+      "viewport": "Tablet",
+      "dimensions": "768x1024",
+      "page": "Login",
+      "url": "http://localhost:3000/login",
+      "screenshot": "c:\\Users\\HP\\Desktop\\pfe\\pricipaux\\MAROC-LOC\\audit_20260602_221346\\screenshots\\responsive_Tablet_Login.png",
+      "overflow": {
+        "scrollWidth": 768,
+        "clientWidth": 768,
+        "innerWidth": 768,
+        "hasHorizontalScrollbar": false,
+        "overflowPixels": 0
+      },
+      "layoutIssues": [
+        {
+          "type": "wide_elements",
+          "count": 0
+        },
+        {
+          "type": "navbar_issues",
+          "count": 10
+        },
+        {
+          "type": "card_overflows",
+          "count": 0
+        },
+        {
+          "type": "filter_overflows",
+          "count": 0
+        },
+        {
+          "type": "hamburger_found",
+          "present": true
+        }
+      ],
+      "status": "ok"
+    },
+    {
+      "viewport": "Mobile",
+      "dimensions": "375x667",
+      "page": "Homepage",
+      "url": "http://localhost:3000/",
+      "screenshot": "c:\\Users\\HP\\Desktop\\pfe\\pricipaux\\MAROC-LOC\\audit_20260602_221346\\screenshots\\responsive_Mobile_Homepage.png",
+      "overflow": {
+        "scrollWidth": 375,
+        "clientWidth": 375,
+        "innerWidth": 375,
+        "hasHorizontalScrollbar": false,
+        "overflowPixels": 0
+      },
+      "layoutIssues": [
+        {
+          "type": "wide_elements",
+          "count": 0
+        },
+        {
+          "type": "navbar_issues",
+          "count": 0
+        },
+        {
+          "type": "card_overflows",
+          "count": 0
+        },
+        {
+          "type": "filter_overflows",
+          "count": 0
+        },
+        {
+          "type": "hamburger_found",
+          "present": true
+        }
+      ],
+      "status": "ok"
+    },
+    {
+      "viewport": "Mobile",
+      "dimensions": "375x667",
+      "page": "PropertyDetails",
+      "url": "http://localhost:3000/property/1",
+      "screenshot": "c:\\Users\\HP\\Desktop\\pfe\\pricipaux\\MAROC-LOC\\audit_20260602_221346\\screenshots\\responsive_Mobile_PropertyDetails.png",
+      "overflow": {
+        "scrollWidth": 375,
+        "clientWidth": 375,
+        "innerWidth": 375,
+        "hasHorizontalScrollbar": false,
+        "overflowPixels": 0
+      },
+      "layoutIssues": [
+        {
+          "type": "wide_elements",
+          "count": 0
+        },
+        {
+          "type": "navbar_issues",
+          "count": 11
+        },
+        {
+          "type": "card_overflows",
+          "count": 0
+        },
+        {
+          "type": "filter_overflows",
+          "count": 0
+        },
+        {
+          "type": "hamburger_found",
+          "present": true
+        }
+      ],
+      "status": "ok"
+    },
+    {
+      "viewport": "Mobile",
+      "dimensions": "375x667",
+      "page": "SearchResults",
+      "url": "http://localhost:3000/search",
+      "screenshot": "c:\\Users\\HP\\Desktop\\pfe\\pricipaux\\MAROC-LOC\\audit_20260602_221346\\screenshots\\responsive_Mobile_SearchResults.png",
+      "overflow": {
+        "scrollWidth": 375,
+        "clientWidth": 375,
+        "innerWidth": 375,
+        "hasHorizontalScrollbar": false,
+        "overflowPixels": 0
+      },
+      "layoutIssues": [
+        {
+          "type": "wide_elements",
+          "count": 2
+        },
+        {
+          "type": "navbar_issues",
+          "count": 12
+        },
+        {
+          "type": "card_overflows",
+          "count": 0
+        },
+        {
+          "type": "filter_overflows",
+          "count": 0
+        },
+        {
+          "type": "hamburger_found",
+          "present": true
+        }
+      ],
+      "status": "ok"
+    },
+    {
+      "viewport": "Mobile",
+      "dimensions": "375x667",
+      "page": "Login",
+      "url": "http://localhost:3000/login",
+      "screenshot": "c:\\Users\\HP\\Desktop\\pfe\\pricipaux\\MAROC-LOC\\audit_20260602_221346\\screenshots\\responsive_Mobile_Login.png",
+      "overflow": {
+        "scrollWidth": 375,
+        "clientWidth": 375,
+        "innerWidth": 375,
+        "hasHorizontalScrollbar": false,
+        "overflowPixels": 0
+      },
+      "layoutIssues": [
+        {
+          "type": "wide_elements",
+          "count": 0
+        },
+        {
+          "type": "navbar_issues",
+          "count": 11
+        },
+        {
+          "type": "card_overflows",
+          "count": 0
+        },
+        {
+          "type": "filter_overflows",
+          "count": 0
+        },
+        {
+          "type": "hamburger_found",
+          "present": true
+        }
+      ],
+      "status": "ok"
+    }
+  ],
+  "dashboard": {
+    "registration": {
+      "screenshot": "c:\\Users\\HP\\Desktop\\pfe\\pricipaux\\MAROC-LOC\\audit_20260602_221346\\screenshots\\dashboard_registration_attempt.png",
+      "url": "http://localhost:3000/register"
+    },
+    "login": {
+      "screenshot": "c:\\Users\\HP\\Desktop\\pfe\\pricipaux\\MAROC-LOC\\audit_20260602_221346\\screenshots\\dashboard_login.png",
+      "url": "http://localhost:3000/login"
+    },
+    "dashboard": {
+      "screenshot": "c:\\Users\\HP\\Desktop\\pfe\\pricipaux\\MAROC-LOC\\audit_20260602_221346\\screenshots\\dashboard_main.png",
+      "url": "http://localhost:3000/login"
+    },
+    "charts": {
+      "canvasCount": 0,
+      "svgCount": 25,
+      "chartDivCount": 0,
+      "canvasDetails": []
+    },
+    "cardMetrics": [],
+    "uiNumbers": [
+      {
+        "text": "Aller au contenu principalMAROC-LOCTROUVEZ. LOUEZ. VIVEZ.AccueilRechercherFavorisMessagesFRConnexionCréer le compteBon retourConnectez-vous à votre compteAdresse e-mailMot de passeConnexionVous n'avez pas de compte ? Créer un compteMAROC-LOCTROUVEZ. LOUEZ. VIVEZ.Plateforme PropTech marocaine pour louer, acheter et valoriser des biens haut de gamme avec une expérience rapide, claire et internationale.ExplorerAccueilRechercherFavorisMessagesEspace propriétaireVillesCasablancaRabatMarrakechTangerFèsAgadirContact+212 5XX-XXXXXXcontact@maroc-loc.maConditions d'utilisationConfidentialitéCookies© 2026 MAROC-LOC. Tous droits réservés.Conçu avec fierté au MarocAccueilRechercheFavorisMessagesProfil",
+        "tag": "DIV",
+        "className": ""
+      },
+      {
+        "text": "MAROC-LOCTROUVEZ. LOUEZ. VIVEZ.AccueilRechercherFavorisMessagesFRConnexionCréer le compteBon retourConnectez-vous à votre compteAdresse e-mailMot de passeConnexionVous n'avez pas de compte ? Créer un compteMAROC-LOCTROUVEZ. LOUEZ. VIVEZ.Plateforme PropTech marocaine pour louer, acheter et valoriser des biens haut de gamme avec une expérience rapide, claire et internationale.ExplorerAccueilRechercherFavorisMessagesEspace propriétaireVillesCasablancaRabatMarrakechTangerFèsAgadirContact+212 5XX-XXXXXXcontact@maroc-loc.maConditions d'utilisationConfidentialitéCookies© 2026 MAROC-LOC. Tous droits réservés.Conçu avec fierté au Maroc",
+        "tag": "DIV",
+        "className": "premium-page"
+      },
+      {
+        "text": "MAROC-LOCTROUVEZ. LOUEZ. VIVEZ.AccueilRechercherFavorisMessagesFRConnexionCréer le compte",
+        "tag": "DIV",
+        "className": "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+      },
+      {
+        "text": "MAROC-LOCTROUVEZ. LOUEZ. VIVEZ.AccueilRechercherFavorisMessagesFRConnexionCréer le compte",
+        "tag": "DIV",
+        "className": "flex items-center justify-between h-16 lg:h-20"
+      },
+      {
+        "text": "MAROC-LOCTROUVEZ. LOUEZ. VIVEZ.",
+        "tag": "DIV",
+        "className": "hidden sm:flex flex-col"
+      },
+      {
+        "text": "TROUVEZ. LOUEZ. VIVEZ.",
+        "tag": "SPAN",
+        "className": "text-[10px] font-medium tracking-[0.2em] leading-none mt-0.5 text-[color:var(--c"
+      },
+      {
+        "text": "MAROC-LOCTROUVEZ. LOUEZ. VIVEZ.Plateforme PropTech marocaine pour louer, acheter et valoriser des biens haut de gamme avec une expérience rapide, claire et internationale.ExplorerAccueilRechercherFavorisMessagesEspace propriétaireVillesCasablancaRabatMarrakechTangerFèsAgadirContact+212 5XX-XXXXXXcontact@maroc-loc.maConditions d'utilisationConfidentialitéCookies© 2026 MAROC-LOC. Tous droits réservés.Conçu avec fierté au Maroc",
+        "tag": "DIV",
+        "className": "relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16"
+      },
+      {
+        "text": "MAROC-LOCTROUVEZ. LOUEZ. VIVEZ.Plateforme PropTech marocaine pour louer, acheter et valoriser des biens haut de gamme avec une expérience rapide, claire et internationale.ExplorerAccueilRechercherFavorisMessagesEspace propriétaireVillesCasablancaRabatMarrakechTangerFèsAgadirContact+212 5XX-XXXXXXcontact@maroc-loc.maConditions d'utilisationConfidentialitéCookies",
+        "tag": "DIV",
+        "className": "grid gap-12 md:grid-cols-2 lg:grid-cols-4"
+      },
+      {
+        "text": "MAROC-LOCTROUVEZ. LOUEZ. VIVEZ.Plateforme PropTech marocaine pour louer, acheter et valoriser des biens haut de gamme avec une expérience rapide, claire et internationale.",
+        "tag": "DIV",
+        "className": "lg:col-span-1"
+      },
+      {
+        "text": "MAROC-LOCTROUVEZ. LOUEZ. VIVEZ.",
+        "tag": "DIV",
+        "className": "flex items-center gap-3"
+      },
+      {
+        "text": "MAROC-LOCTROUVEZ. LOUEZ. VIVEZ.",
+        "tag": "DIV",
+        "className": ""
+      },
+      {
+        "text": "TROUVEZ. LOUEZ. VIVEZ.",
+        "tag": "SPAN",
+        "className": "block text-[10px] font-medium tracking-[0.2em] text-gold-500"
+      },
+      {
+        "text": "Plateforme PropTech marocaine pour louer, acheter et valoriser des biens haut de gamme avec une expérience rapide, claire et internationale.",
+        "tag": "P",
+        "className": "mt-5 text-sm leading-7 text-[color:var(--color-text-secondary)]"
+      },
+      {
+        "text": "Contact+212 5XX-XXXXXXcontact@maroc-loc.maConditions d'utilisationConfidentialitéCookies",
+        "tag": "DIV",
+        "className": ""
+      },
+      {
+        "text": "+212 5XX-XXXXXXcontact@maroc-loc.ma",
+        "tag": "DIV",
+        "className": "mt-5 grid gap-4"
+      },
+      {
+        "text": "© 2026 MAROC-LOC. Tous droits réservés.Conçu avec fierté au Maroc",
+        "tag": "DIV",
+        "className": "mt-12 pt-8 border-t border-[color:var(--color-border)] flex flex-col sm:flex-row"
+      },
+      {
+        "text": "© 2026 MAROC-LOC. Tous droits réservés.",
+        "tag": "P",
+        "className": "text-xs text-[color:var(--color-text-tertiary)]"
+      }
+    ],
+    "sections": {
+      "analytics": false,
+      "statistics": false,
+      "overview": false,
+      "properties": false,
+      "bookings": false,
+      "revenue": false,
+      "messages": true,
+      "profile": false,
+      "settings": false
+    },
+    "apiData": {
+      "/api/dashboard": {
+        "status": 401,
+        "error": "{\"success\":false,\"message\":\"Authentification requise\",\"errorCode\":\"AUTH_REQUIRED\"}"
+      },
+      "/api/analytics": {
+        "status": 401,
+        "error": "{\"success\":false,\"message\":\"Authentification requise\",\"errorCode\":\"AUTH_REQUIRED\"}"
+      },
+      "/api/stats": {
+        "status": 401,
+        "error": "{\"success\":false,\"message\":\"Authentification requise\",\"errorCode\":\"AUTH_REQUIRED\"}"
+      },
+      "/api/properties/my": {
+        "status": 401,
+        "error": "{\"success\":false,\"message\":\"Authentification requise\",\"errorCode\":\"AUTH_REQUIRED\"}"
+      },
+      "/api/bookings": {
+        "status": 401,
+        "error": "{\"success\":false,\"message\":\"Authentification requise\",\"errorCode\":\"AUTH_REQUIRED\"}"
+      }
+    },
+    "overflow": {
+      "scrollWidth": 1920,
+      "clientWidth": 1920,
+      "innerWidth": 1920,
+      "hasHorizontalScrollbar": false,
+      "overflowPixels": 0
+    }
+  }
+}

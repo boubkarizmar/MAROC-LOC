@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"><title>Confirmation de paiement</title></head>
+<body style="margin:0;padding:0;background:#f5f5f0;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;">
+    <table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td align="center" style="padding:24px 0;">
+    <table width="600" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;width:100%;background:#fff;border-radius:12px;overflow:hidden;">
+        <tr>
+            <td style="background:linear-gradient(135deg,#27ae60 0%,#00695C 100%);padding:40px 24px;text-align:center;">
+                <h1 style="color:#fff;margin:0;font-size:26px;letter-spacing:2px;">✅ Paiement confirmé</h1>
+                <p style="color:rgba(255,255,255,0.9);margin:8px 0 0;">MAROC-LOC</p>
+            </td>
+        </tr>
+        <tr><td style="padding:32px 24px;">
+            <h2 style="color:#00695C;margin-top:0;">Merci pour votre paiement !</h2>
+            <p style="color:#444;line-height:1.7;">
+                Votre transaction a été traitée avec succès. Voici les détails de votre paiement :
+            </p>
+            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f8f9fa;border-radius:8px;margin:20px 0;">
+                <tr><td style="padding:16px 20px;border-bottom:1px solid #e0e0e0;">
+                    <span style="color:#888;font-size:13px;">N° de commande</span>
+                    <p style="margin:4px 0 0;font-weight:600;color:#333;" th:text="${orderId}">ORD-123</p>
+                </td></tr>
+                <tr><td style="padding:16px 20px;border-bottom:1px solid #e0e0e0;">
+                    <span style="color:#888;font-size:13px;">Montant payé</span>
+                    <p style="margin:4px 0 0;font-weight:600;color:#27ae60;font-size:18px;" th:text="${amount} + ' MAD'">500 MAD</p>
+                </td></tr>
+                <tr><td style="padding:16px 20px;border-bottom:1px solid #e0e0e0;">
+                    <span style="color:#888;font-size:13px;">Date</span>
+                    <p style="margin:4px 0 0;font-weight:600;color:#333;" th:text="${paymentDate}">01/01/2026</p>
+                </td></tr>
+                <tr><td style="padding:16px 20px;">
+                    <span style="color:#888;font-size:13px;">Méthode</span>
+                    <p style="margin:4px 0 0;font-weight:600;color:#333;">CMI / Carte bancaire</p>
+                </td></tr>
+            </table>
+            <div style="background:#e8f5e9;border-left:4px solid #27ae60;padding:16px 20px;margin:20px 0;border-radius:0 8px 8px 0;">
+                <p style="margin:0;color:#2e7d32;font-size:14px;">
+                    ✅ Votre annonce sera boostée dans les prochaines minutes. Vous pouvez suivre ses performances depuis votre tableau de bord.
+                </p>
+            </div>
+            <table cellpadding="0" cellspacing="0" border="0" style="margin:24px 0;"><tr><td>
+                <a th:href="${frontendUrl} + '/dashboard'" style="display:inline-block;padding:14px 32px;background:linear-gradient(135deg,#00695C 0%,#004D40 100%);color:#fff;text-decoration:none;border-radius:8px;font-weight:600;">Voir mon tableau de bord</a>
+            </td></tr></table>
+            <p style="font-size:12px;color:#888;">
+                Une facture détaillée est disponible dans votre espace client. Pour toute question, contactez notre service financier.
+            </p>
+        </td></tr>
+        <tr><td style="background:#f0f0eb;padding:24px;text-align:center;font-size:12px;color:#666;">
+            <p style="margin:0;">© 2026 MAROC-LOC · Casablanca, Maroc</p>
+        </td></tr>
+    </table>
+    </td></tr></table>
+</body>
+</html>

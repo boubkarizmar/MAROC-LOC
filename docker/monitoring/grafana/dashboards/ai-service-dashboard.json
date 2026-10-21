@@ -1,0 +1,128 @@
+{
+  "dashboard": {
+    "id": null,
+    "title": "MAROC-LOC AI Service",
+    "tags": ["ai", "ml", "production"],
+    "timezone": "Africa/Casablanca",
+    "panels": [
+      {
+        "id": 1,
+        "title": "AI Request Rate",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "rate(ai_requests_total[5m])",
+            "legendFormat": "{{endpoint}}"
+          }
+        ],
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 0}
+      },
+      {
+        "id": 2,
+        "title": "AI Response Latency P99",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.99, rate(ai_request_duration_seconds_bucket[5m]))",
+            "legendFormat": "p99 {{endpoint}}"
+          },
+          {
+            "expr": "histogram_quantile(0.95, rate(ai_request_duration_seconds_bucket[5m]))",
+            "legendFormat": "p95 {{endpoint}}"
+          }
+        ],
+        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 0}
+      },
+      {
+        "id": 3,
+        "title": "Recommendation CTR",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "rate(recommendation_clicks_total[1h]) / rate(recommendation_shown_total[1h])",
+            "legendFormat": "CTR"
+          }
+        ],
+        "gridPos": {"h": 4, "w": 6, "x": 0, "y": 8}
+      },
+      {
+        "id": 4,
+        "title": "Fraud Detection Precision",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "fraud_precision",
+            "legendFormat": "Precision"
+          },
+          {
+            "expr": "fraud_recall",
+            "legendFormat": "Recall"
+          }
+        ],
+        "gridPos": {"h": 4, "w": 6, "x": 6, "y": 8}
+      },
+      {
+        "id": 5,
+        "title": "Chatbot Hallucination Rate",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "rate(chatbot_hallucination_total[1h]) / rate(chatbot_responses_total[1h])",
+            "legendFormat": "Hallucination %"
+          }
+        ],
+        "gridPos": {"h": 4, "w": 6, "x": 12, "y": 8}
+      },
+      {
+        "id": 6,
+        "title": "Embedding Sync Lag",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "embedding_sync_lag_seconds",
+            "legendFormat": "Lag (s)"
+          }
+        ],
+        "gridPos": {"h": 4, "w": 6, "x": 18, "y": 8}
+      },
+      {
+        "id": 7,
+        "title": "Model Versions",
+        "type": "table",
+        "targets": [
+          {
+            "expr": "model_version_info",
+            "format": "table"
+          }
+        ],
+        "gridPos": {"h": 8, "w": 24, "x": 0, "y": 12}
+      },
+      {
+        "id": 8,
+        "title": "GPU Utilization (if applicable)",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "nvidia_gpu_utilization_gpu",
+            "legendFormat": "GPU {{gpu}}"
+          }
+        ],
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 20}
+      },
+      {
+        "id": 9,
+        "title": "Vector Search Latency",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.99, rate(vector_search_duration_seconds_bucket[5m]))",
+            "legendFormat": "p99"
+          }
+        ],
+        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 20}
+      }
+    ],
+    "time": {"from": "now-1h", "to": "now"},
+    "refresh": "10s"
+  }
+}

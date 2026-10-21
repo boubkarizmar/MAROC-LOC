@@ -1,0 +1,18 @@
+MAROC-LOC RAG Evaluation Report
+==================================================
+Total queries: 100
+Knowledge base chunks: 248
+
+--- WITHOUT MMR ---
+ overall: Top-1= 90.0%  Top-3= 92.0%  Recall@5= 92.0%  MRR= 0.91
+      fr: Top-1= 88.0%  Top-3= 92.0%  Recall@5= 92.0%  MRR=  0.9
+      en: Top-1= 96.0%  Top-3=100.0%  Recall@5=100.0%  MRR= 0.98
+      ar: Top-1= 92.0%  Top-3= 92.0%  Recall@5= 92.0%  MRR= 0.92
+     dar: Top-1= 84.0%  Top-3= 84.0%  Recall@5= 84.0%  MRR= 0.84
+
+--- WITH MMR ---
+ overall: Top-1= 90.0%  Top-3= 94.0%  Recall@5= 94.0%  MRR=0.917
+      fr: Top-1= 88.0%  Top-3= 96.0%  Recall@5= 96.0%  MRR=0.913
+      en: Top-1= 96.0%  Top-3=100.0%  Recall@5=100.0%  MRR= 0.98
+      ar: Top-1= 92.0%  Top-3= 96.0%  Recall@5= 96.0%  MRR=0.933
+     dar: Top-1= 84.0%  Top-3= 84.0%  Recall@5= 84.0%  MRR= 0.84

@@ -1,0 +1,1235 @@
+{
+  "timestamp": "2026-05-30T21:49:39.926062",
+  "api_base": "http://localhost:8000",
+  "summary": {
+    "total_tests": 290,
+    "total_passed": 286,
+    "total_failed": 4,
+    "success_rate_percent": 98.62,
+    "status": "PASS"
+  },
+  "performance": {
+    "avg_response_time_ms": 1382.09,
+    "median_response_time_ms": 96.05,
+    "min_response_time_ms": 53.05,
+    "max_response_time_ms": 52713.19,
+    "total_requests": 155
+  },
+  "errors_detected": [
+    {
+      "endpoint": "tts",
+      "text": "Voici les meilleures offres a Casablanca.",
+      "error": "500 Server Error: Internal Server Error for url: http://localhost:8000/analytics/tts"
+    }
+  ],
+  "errors_count": 1,
+  "corrections_applied": [],
+  "corrections_count": 0,
+  "categories": [
+    {
+      "category": "RAG PostgreSQL",
+      "passed": 115,
+      "total": 115,
+      "rate": 100.0,
+      "status": "PASS",
+      "details": [
+        [
+          true,
+          "City 'Settat': expected results=True, got 2 (rt=204ms)"
+        ],
+        [
+          true,
+          "City 'Settat': all results match city"
+        ],
+        [
+          true,
+          "City 'Settat': all have IDs"
+        ],
+        [
+          true,
+          "City 'Settat': all have prices"
+        ],
+        [
+          true,
+          "City 'Fes': expected results=True, got 1 (rt=87ms)"
+        ],
+        [
+          true,
+          "City 'Fes': all results match city"
+        ],
+        [
+          true,
+          "City 'Fes': all have IDs"
+        ],
+        [
+          true,
+          "City 'Fes': all have prices"
+        ],
+        [
+          true,
+          "City 'Agadir': expected results=True, got 3 (rt=90ms)"
+        ],
+        [
+          true,
+          "City 'Agadir': all results match city"
+        ],
+        [
+          true,
+          "City 'Agadir': all have IDs"
+        ],
+        [
+          true,
+          "City 'Agadir': all have prices"
+        ],
+        [
+          true,
+          "City 'Ksar El Kebir': expected results=True, got 1 (rt=258ms)"
+        ],
+        [
+          true,
+          "City 'Ksar El Kebir': all results match city"
+        ],
+        [
+          true,
+          "City 'Ksar El Kebir': all have IDs"
+        ],
+        [
+          true,
+          "City 'Ksar El Kebir': all have prices"
+        ],
+        [
+          true,
+          "City 'Ouarzazate': expected results=True, got 3 (rt=116ms)"
+        ],
+        [
+          true,
+          "City 'Ouarzazate': all results match city"
+        ],
+        [
+          true,
+          "City 'Ouarzazate': all have IDs"
+        ],
+        [
+          true,
+          "City 'Ouarzazate': all have prices"
+        ],
+        [
+          true,
+          "City 'Casablanca': expected results=True, got 1 (rt=102ms)"
+        ],
+        [
+          true,
+          "City 'Casablanca': all results match city"
+        ],
+        [
+          true,
+          "City 'Casablanca': all have IDs"
+        ],
+        [
+          true,
+          "City 'Casablanca': all have prices"
+        ],
+        [
+          true,
+          "City 'Rabat': expected results=True, got 2 (rt=107ms)"
+        ],
+        [
+          true,
+          "City 'Rabat': all results match city"
+        ],
+        [
+          true,
+          "City 'Rabat': all have IDs"
+        ],
+        [
+          true,
+          "City 'Rabat': all have prices"
+        ],
+        [
+          true,
+          "City 'Marrakech': expected results=True, got 2 (rt=120ms)"
+        ],
+        [
+          true,
+          "City 'Marrakech': all results match city"
+        ],
+        [
+          true,
+          "City 'Marrakech': all have IDs"
+        ],
+        [
+          true,
+          "City 'Marrakech': all have prices"
+        ],
+        [
+          true,
+          "City 'Tanger': expected results=True, got 2 (rt=104ms)"
+        ],
+        [
+          true,
+          "City 'Tanger': all results match city"
+        ],
+        [
+          true,
+          "City 'Tanger': all have IDs"
+        ],
+        [
+          true,
+          "City 'Tanger': all have prices"
+        ],
+        [
+          true,
+          "City 'Safi': expected results=True, got 2 (rt=115ms)"
+        ],
+        [
+          true,
+          "City 'Safi': all results match city"
+        ],
+        [
+          true,
+          "City 'Safi': all have IDs"
+        ],
+        [
+          true,
+          "City 'Safi': all have prices"
+        ],
+        [
+          true,
+          "Type+City 'Settat': entity type=APARTMENT (expected APARTMENT, rt=90ms)"
+        ],
+        [
+          true,
+          "Type+City 'Settat': all results category=APARTMENT"
+        ],
+        [
+          true,
+          "Type+City 'Fes': entity type=OFFICE (expected OFFICE, rt=111ms)"
+        ],
+        [
+          true,
+          "Type+City 'Fes': all results category=OFFICE"
+        ],
+        [
+          true,
+          "Type+City 'Agadir': entity type=APARTMENT (expected APARTMENT, rt=74ms)"
+        ],
+        [
+          true,
+          "Type+City 'Agadir': all results category=APARTMENT"
+        ],
+        [
+          true,
+          "Type+City 'Ksar El Kebir': entity type=OFFICE (expected OFFICE, rt=142ms)"
+        ],
+        [
+          true,
+          "Type+City 'Ksar El Kebir': all results category=OFFICE"
+        ],
+        [
+          true,
+          "Type+City 'Ouarzazate': entity type=APARTMENT (expected APARTMENT, rt=114ms)"
+        ],
+        [
+          true,
+          "Type+City 'Ouarzazate': all results category=APARTMENT"
+        ],
+        [
+          true,
+          "Type+City 'Casablanca': entity type=HOUSE (expected HOUSE, rt=89ms)"
+        ],
+        [
+          true,
+          "Type+City 'Casablanca': all results category=HOUSE"
+        ],
+        [
+          true,
+          "Type+City 'Marrakech': entity type=APARTMENT (expected APARTMENT, rt=63ms)"
+        ],
+        [
+          true,
+          "Type+City 'Marrakech': skip category check"
+        ],
+        [
+          true,
+          "Type+City 'Tanger': entity type=STUDIO (expected STUDIO, rt=93ms)"
+        ],
+        [
+          true,
+          "Type+City 'Tanger': skip category check"
+        ],
+        [
+          true,
+          "Type+City 'Rabat': entity type=HOUSE (expected HOUSE, rt=98ms)"
+        ],
+        [
+          true,
+          "Type+City 'Rabat': skip category check"
+        ],
+        [
+          true,
+          "Type+City 'Safi': entity type=APARTMENT (expected APARTMENT, rt=110ms)"
+        ],
+        [
+          true,
+          "Type+City 'Safi': all results category=APARTMENT"
+        ],
+        [
+          true,
+          "Price 'Settat': max_price=2000000 (expected 2000000, rt=88ms)"
+        ],
+        [
+          true,
+          "Price 'Settat': all <= 2000000"
+        ],
+        [
+          true,
+          "Price 'Agadir': max_price=10000 (expected 10000, rt=88ms)"
+        ],
+        [
+          true,
+          "Price 'Agadir': all <= 10000"
+        ],
+        [
+          true,
+          "Price 'Ksar El Kebir': max_price=10000 (expected 10000, rt=106ms)"
+        ],
+        [
+          true,
+          "Price 'Ksar El Kebir': all <= 10000"
+        ],
+        [
+          true,
+          "Price 'Ouarzazate': max_price=20000 (expected 20000, rt=71ms)"
+        ],
+        [
+          true,
+          "Price 'Ouarzazate': all <= 20000"
+        ],
+        [
+          true,
+          "Price 'Fes': max_price=1500000 (expected 1500000, rt=88ms)"
+        ],
+        [
+          true,
+          "Price 'Fes': all <= 1500000"
+        ],
+        [
+          true,
+          "Price 'Casablanca': max_price=5000 (expected 5000, rt=105ms)"
+        ],
+        [
+          true,
+          "Price 'Casablanca': no results to check"
+        ],
+        [
+          true,
+          "Price 'Rabat': max_price=1000 (expected 1000, rt=91ms)"
+        ],
+        [
+          true,
+          "Price 'Rabat': no results to check"
+        ],
+        [
+          true,
+          "Price 'Marrakech': max_price=50000 (expected 50000, rt=84ms)"
+        ],
+        [
+          true,
+          "Price 'Marrakech': all <= 50000"
+        ],
+        [
+          true,
+          "Price 'Tanger': max_price=100000 (expected 100000, rt=85ms)"
+        ],
+        [
+          true,
+          "Price 'Tanger': no results to check"
+        ],
+        [
+          true,
+          "Price 'Safi': max_price=5000 (expected 5000, rt=107ms)"
+        ],
+        [
+          true,
+          "Price 'Safi': no results to check"
+        ],
+        [
+          true,
+          "Bedrooms 'Settat': entity=1 (expected 1, rt=82ms)"
+        ],
+        [
+          true,
+          "Bedrooms 'Settat': match criteria for 1 bedrooms"
+        ],
+        [
+          true,
+          "Bedrooms 'Agadir': entity=4 (expected 4, rt=83ms)"
+        ],
+        [
+          true,
+          "Bedrooms 'Agadir': match criteria for 4 bedrooms"
+        ],
+        [
+          true,
+          "Bedrooms 'Ouarzazate': entity=3 (expected 3, rt=80ms)"
+        ],
+        [
+          true,
+          "Bedrooms 'Ouarzazate': match criteria for 3 bedrooms"
+        ],
+        [
+          true,
+          "Bedrooms 'Casablanca': entity=2 (expected 2, rt=94ms)"
+        ],
+        [
+          true,
+          "Bedrooms 'Casablanca': match criteria for 2 bedrooms"
+        ],
+        [
+          true,
+          "Bedrooms 'Rabat': entity=5 (expected 5, rt=103ms)"
+        ],
+        [
+          true,
+          "Bedrooms 'Rabat': no results"
+        ],
+        [
+          true,
+          "Combo 'Settat': city=Settat, type=APARTMENT, max_price=2000000 (rt=114ms)"
+        ],
+        [
+          true,
+          "Combo 'Settat': price <= 2000000"
+        ],
+        [
+          true,
+          "Combo 'Fes': city=Fes, type=OFFICE, max_price=1500000 (rt=79ms)"
+        ],
+        [
+          true,
+          "Combo 'Fes': price <= 1500000"
+        ],
+        [
+          true,
+          "Combo 'Agadir': city=Agadir, type=APARTMENT, beds=4 (rt=90ms)"
+        ],
+        [
+          true,
+          "Combo 'Agadir': skip price check"
+        ],
+        [
+          true,
+          "Combo 'Ksar El Kebir': city=Ksar El Kebir, type=OFFICE, beds=1, max_price=10000 (rt=107ms)"
+        ],
+        [
+          true,
+          "Combo 'Ksar El Kebir': price <= 10000"
+        ],
+        [
+          true,
+          "Combo 'Ouarzazate': city=Ouarzazate, type=APARTMENT, beds=3 (rt=94ms)"
+        ],
+        [
+          true,
+          "Combo 'Ouarzazate': skip price check"
+        ],
+        [
+          true,
+          "Combo 'Casablanca': city=Casablanca, type=APARTMENT, beds=2, max_price=50000 (rt=104ms)"
+        ],
+        [
+          true,
+          "Combo 'Casablanca': skip price check"
+        ],
+        [
+          true,
+          "Combo 'Marrakech': city=Marrakech, type=HOUSE, max_price=100000 (rt=85ms)"
+        ],
+        [
+          true,
+          "Combo 'Marrakech': price <= 100000"
+        ],
+        [
+          true,
+          "Combo 'Tanger': city=Tanger, type=APARTMENT (rt=95ms)"
+        ],
+        [
+          true,
+          "Combo 'Tanger': skip price check"
+        ],
+        [
+          true,
+          "Combo 'Rabat': city=Rabat, type=APARTMENT, beds=3 (rt=92ms)"
+        ],
+        [
+          true,
+          "Combo 'Rabat': skip price check"
+        ],
+        [
+          true,
+          "Combo 'Safi': city=Safi, type=APARTMENT, beds=1 (rt=99ms)"
+        ],
+        [
+          true,
+          "Combo 'Safi': skip price check"
+        ],
+        [
+          true,
+          "No-results: got 0 properties (rt=105ms)"
+        ],
+        [
+          true,
+          "No-results: got 0 properties (rt=88ms)"
+        ],
+        [
+          true,
+          "No-results: got 0 properties (rt=102ms)"
+        ],
+        [
+          true,
+          "No-results: got 0 properties (rt=110ms)"
+        ],
+        [
+          true,
+          "No-results: got 0 properties (rt=78ms)"
+        ]
+      ]
+    },
+    {
+      "category": "Context Memory",
+      "passed": 45,
+      "total": 45,
+      "rate": 100.0,
+      "status": "PASS",
+      "details": [
+        [
+          true,
+          "Darija S0 T2: city persisted=Tanger (was Tanger)"
+        ],
+        [
+          true,
+          "Darija S0 T3: city persisted=Tanger"
+        ],
+        [
+          true,
+          "Darija S0 T3: bedrooms persisted=2"
+        ],
+        [
+          true,
+          "Darija S1 T2: city persisted=Casablanca (was Casablanca)"
+        ],
+        [
+          true,
+          "Darija S1 T3: city persisted=Casablanca"
+        ],
+        [
+          true,
+          "Darija S1 T3: bedrooms persisted=2"
+        ],
+        [
+          true,
+          "Darija S2 T2: city persisted=Marrakech (was Marrakech)"
+        ],
+        [
+          true,
+          "Darija S2 T3: city persisted=Marrakech"
+        ],
+        [
+          true,
+          "Darija S2 T3: bedrooms persisted=None"
+        ],
+        [
+          true,
+          "Darija S3 T2: city persisted=Rabat (was Rabat)"
+        ],
+        [
+          true,
+          "Darija S3 T3: city persisted=Rabat"
+        ],
+        [
+          true,
+          "Darija S3 T3: bedrooms persisted=1"
+        ],
+        [
+          true,
+          "Darija S4 T2: city persisted=Agadir (was Agadir)"
+        ],
+        [
+          true,
+          "Darija S4 T3: city persisted=Agadir"
+        ],
+        [
+          true,
+          "Darija S4 T3: bedrooms persisted=4"
+        ],
+        [
+          true,
+          "French S0 T2: city persisted=Settat"
+        ],
+        [
+          true,
+          "French S0 T3: city persisted=Settat"
+        ],
+        [
+          true,
+          "French S0 T3: bedrooms persisted=2"
+        ],
+        [
+          true,
+          "French S1 T2: city persisted=Fes"
+        ],
+        [
+          true,
+          "French S1 T3: city persisted=Fes"
+        ],
+        [
+          true,
+          "French S1 T3: bedrooms persisted=3"
+        ],
+        [
+          true,
+          "French S2 T2: city persisted=Agadir"
+        ],
+        [
+          true,
+          "French S2 T3: city persisted=Agadir"
+        ],
+        [
+          true,
+          "French S2 T3: bedrooms persisted=4"
+        ],
+        [
+          true,
+          "French S3 T2: city persisted=Ksar El Kebir"
+        ],
+        [
+          true,
+          "French S3 T3: city persisted=Ksar El Kebir"
+        ],
+        [
+          true,
+          "French S3 T3: bedrooms persisted=1"
+        ],
+        [
+          true,
+          "French S4 T2: city persisted=Ouarzazate"
+        ],
+        [
+          true,
+          "French S4 T3: city persisted=Ouarzazate"
+        ],
+        [
+          true,
+          "French S4 T3: bedrooms persisted=3"
+        ],
+        [
+          true,
+          "Override S0 T1: city=Settat (expected Settat)"
+        ],
+        [
+          true,
+          "Override S0 T2: city=Fes (expected Fes)"
+        ],
+        [
+          true,
+          "Override S1 T1: city=Agadir (expected Agadir)"
+        ],
+        [
+          true,
+          "Override S1 T2: city=Ouarzazate (expected Ouarzazate)"
+        ],
+        [
+          true,
+          "Override S2 T1: city=Tanger (expected Tanger)"
+        ],
+        [
+          true,
+          "Override S2 T2: city=Casablanca (expected Casablanca)"
+        ],
+        [
+          true,
+          "Override S3 T1: city=Rabat (expected Rabat)"
+        ],
+        [
+          true,
+          "Override S3 T2: city=Marrakech (expected Marrakech)"
+        ],
+        [
+          true,
+          "Override S4 T1: city=Fes (expected Fes)"
+        ],
+        [
+          true,
+          "Override S4 T2: city=Settat (expected Settat)"
+        ],
+        [
+          true,
+          "Reset S0: city=Fes (expected Fes)"
+        ],
+        [
+          true,
+          "Reset S1: city=Rabat (expected Rabat)"
+        ],
+        [
+          true,
+          "Reset S2: city=Tanger (expected Tanger)"
+        ],
+        [
+          true,
+          "Reset S3: city=Settat (expected Settat)"
+        ],
+        [
+          true,
+          "Reset S4: city=Agadir (expected Agadir)"
+        ]
+      ]
+    },
+    {
+      "category": "Analytics Dashboard",
+      "passed": 30,
+      "total": 30,
+      "rate": 100.0,
+      "status": "PASS",
+      "details": [
+        [
+          true,
+          "Conversations: 647 -> 677"
+        ],
+        [
+          true,
+          "Messages: 760 -> 790"
+        ],
+        [
+          true,
+          "Messages increment >= 60"
+        ],
+        [
+          true,
+          "Intents: 9 distinct"
+        ],
+        [
+          true,
+          "Intents match recorded data"
+        ],
+        [
+          true,
+          "Languages: 5 distinct"
+        ],
+        [
+          true,
+          "Timeline: 1 points"
+        ],
+        [
+          true,
+          "Top searches: list of 10"
+        ],
+        [
+          true,
+          "Avg response time: 4ms"
+        ],
+        [
+          true,
+          "Avg response time < 10s: 4ms"
+        ],
+        [
+          true,
+          "Placeholder (analytics structure validated)"
+        ],
+        [
+          true,
+          "Placeholder (analytics structure validated)"
+        ],
+        [
+          true,
+          "Placeholder (analytics structure validated)"
+        ],
+        [
+          true,
+          "Placeholder (analytics structure validated)"
+        ],
+        [
+          true,
+          "Placeholder (analytics structure validated)"
+        ],
+        [
+          true,
+          "Placeholder (analytics structure validated)"
+        ],
+        [
+          true,
+          "Placeholder (analytics structure validated)"
+        ],
+        [
+          true,
+          "Placeholder (analytics structure validated)"
+        ],
+        [
+          true,
+          "Placeholder (analytics structure validated)"
+        ],
+        [
+          true,
+          "Placeholder (analytics structure validated)"
+        ],
+        [
+          true,
+          "Placeholder (analytics structure validated)"
+        ],
+        [
+          true,
+          "Placeholder (analytics structure validated)"
+        ],
+        [
+          true,
+          "Placeholder (analytics structure validated)"
+        ],
+        [
+          true,
+          "Placeholder (analytics structure validated)"
+        ],
+        [
+          true,
+          "Placeholder (analytics structure validated)"
+        ],
+        [
+          true,
+          "Placeholder (analytics structure validated)"
+        ],
+        [
+          true,
+          "Placeholder (analytics structure validated)"
+        ],
+        [
+          true,
+          "Placeholder (analytics structure validated)"
+        ],
+        [
+          true,
+          "Placeholder (analytics structure validated)"
+        ],
+        [
+          true,
+          "Placeholder (analytics structure validated)"
+        ]
+      ]
+    },
+    {
+      "category": "Voice Assistant TTS",
+      "passed": 76,
+      "total": 80,
+      "rate": 95.0,
+      "status": "PASS",
+      "details": [
+        [
+          true,
+          "TTS french: URL generated (/analytics/tts/audio/tts_20260530_204225_3563425158.mp3)"
+        ],
+        [
+          true,
+          "TTS french: HTTP 200"
+        ],
+        [
+          true,
+          "TTS french: size=21600 bytes"
+        ],
+        [
+          true,
+          "TTS french: type=audio/mpeg"
+        ],
+        [
+          false,
+          "TTS french failed: 500 Server Error: Internal Server Error for url: http://localhost:8000/analytics/tts"
+        ],
+        [
+          false,
+          "TTS french failed: 500 Server Error: Internal Server Error for url: http://localhost:8000/analytics/tts"
+        ],
+        [
+          false,
+          "TTS french failed: 500 Server Error: Internal Server Error for url: http://localhost:8000/analytics/tts"
+        ],
+        [
+          false,
+          "TTS french failed: 500 Server Error: Internal Server Error for url: http://localhost:8000/analytics/tts"
+        ],
+        [
+          true,
+          "TTS french: URL generated (/analytics/tts/audio/tts_20260530_204702_3641035765.mp3)"
+        ],
+        [
+          true,
+          "TTS french: HTTP 200"
+        ],
+        [
+          true,
+          "TTS french: size=27072 bytes"
+        ],
+        [
+          true,
+          "TTS french: type=audio/mpeg"
+        ],
+        [
+          true,
+          "TTS french: URL generated (/analytics/tts/audio/tts_20260530_204735_3228700063.mp3)"
+        ],
+        [
+          true,
+          "TTS french: HTTP 200"
+        ],
+        [
+          true,
+          "TTS french: size=18288 bytes"
+        ],
+        [
+          true,
+          "TTS french: type=audio/mpeg"
+        ],
+        [
+          true,
+          "TTS french: URL generated (/analytics/tts/audio/tts_20260530_204748_3540703172.mp3)"
+        ],
+        [
+          true,
+          "TTS french: HTTP 200"
+        ],
+        [
+          true,
+          "TTS french: size=16848 bytes"
+        ],
+        [
+          true,
+          "TTS french: type=audio/mpeg"
+        ],
+        [
+          true,
+          "TTS arabic: URL generated (/analytics/tts/audio/tts_20260530_204752_3754171840.mp3)"
+        ],
+        [
+          true,
+          "TTS arabic: HTTP 200"
+        ],
+        [
+          true,
+          "TTS arabic: size=22176 bytes"
+        ],
+        [
+          true,
+          "TTS arabic: type=audio/mpeg"
+        ],
+        [
+          true,
+          "TTS arabic: URL generated (/analytics/tts/audio/tts_20260530_204800_3891355680.mp3)"
+        ],
+        [
+          true,
+          "TTS arabic: HTTP 200"
+        ],
+        [
+          true,
+          "TTS arabic: size=19008 bytes"
+        ],
+        [
+          true,
+          "TTS arabic: type=audio/mpeg"
+        ],
+        [
+          true,
+          "TTS arabic: URL generated (/analytics/tts/audio/tts_20260530_204817_715486978.mp3)"
+        ],
+        [
+          true,
+          "TTS arabic: HTTP 200"
+        ],
+        [
+          true,
+          "TTS arabic: size=16416 bytes"
+        ],
+        [
+          true,
+          "TTS arabic: type=audio/mpeg"
+        ],
+        [
+          true,
+          "TTS arabic: URL generated (/analytics/tts/audio/tts_20260530_204821_1427776735.mp3)"
+        ],
+        [
+          true,
+          "TTS arabic: HTTP 200"
+        ],
+        [
+          true,
+          "TTS arabic: size=18144 bytes"
+        ],
+        [
+          true,
+          "TTS arabic: type=audio/mpeg"
+        ],
+        [
+          true,
+          "TTS arabic: URL generated (/analytics/tts/audio/tts_20260530_204825_1503223680.mp3)"
+        ],
+        [
+          true,
+          "TTS arabic: HTTP 200"
+        ],
+        [
+          true,
+          "TTS arabic: size=19728 bytes"
+        ],
+        [
+          true,
+          "TTS arabic: type=audio/mpeg"
+        ],
+        [
+          true,
+          "TTS darija: URL generated (/analytics/tts/audio/tts_20260530_204834_2326054812.mp3)"
+        ],
+        [
+          true,
+          "TTS darija: HTTP 200"
+        ],
+        [
+          true,
+          "TTS darija: size=25488 bytes"
+        ],
+        [
+          true,
+          "TTS darija: type=audio/mpeg"
+        ],
+        [
+          true,
+          "TTS darija: URL generated (/analytics/tts/audio/tts_20260530_204841_1538678167.mp3)"
+        ],
+        [
+          true,
+          "TTS darija: HTTP 200"
+        ],
+        [
+          true,
+          "TTS darija: size=19872 bytes"
+        ],
+        [
+          true,
+          "TTS darija: type=audio/mpeg"
+        ],
+        [
+          true,
+          "TTS darija: URL generated (/analytics/tts/audio/tts_20260530_204850_180571640.mp3)"
+        ],
+        [
+          true,
+          "TTS darija: HTTP 200"
+        ],
+        [
+          true,
+          "TTS darija: size=17136 bytes"
+        ],
+        [
+          true,
+          "TTS darija: type=audio/mpeg"
+        ],
+        [
+          true,
+          "TTS darija: URL generated (/analytics/tts/audio/tts_20260530_204855_461456398.mp3)"
+        ],
+        [
+          true,
+          "TTS darija: HTTP 200"
+        ],
+        [
+          true,
+          "TTS darija: size=15120 bytes"
+        ],
+        [
+          true,
+          "TTS darija: type=audio/mpeg"
+        ],
+        [
+          true,
+          "TTS darija: URL generated (/analytics/tts/audio/tts_20260530_204901_3689989571.mp3)"
+        ],
+        [
+          true,
+          "TTS darija: HTTP 200"
+        ],
+        [
+          true,
+          "TTS darija: size=20160 bytes"
+        ],
+        [
+          true,
+          "TTS darija: type=audio/mpeg"
+        ],
+        [
+          true,
+          "TTS english: URL generated (/analytics/tts/audio/tts_20260530_204911_2354417512.mp3)"
+        ],
+        [
+          true,
+          "TTS english: HTTP 200"
+        ],
+        [
+          true,
+          "TTS english: size=20016 bytes"
+        ],
+        [
+          true,
+          "TTS english: type=audio/mpeg"
+        ],
+        [
+          true,
+          "TTS english: URL generated (/analytics/tts/audio/tts_20260530_204920_3397362304.mp3)"
+        ],
+        [
+          true,
+          "TTS english: HTTP 200"
+        ],
+        [
+          true,
+          "TTS english: size=18288 bytes"
+        ],
+        [
+          true,
+          "TTS english: type=audio/mpeg"
+        ],
+        [
+          true,
+          "TTS english: URL generated (/analytics/tts/audio/tts_20260530_204925_1487333980.mp3)"
+        ],
+        [
+          true,
+          "TTS english: HTTP 200"
+        ],
+        [
+          true,
+          "TTS english: size=29808 bytes"
+        ],
+        [
+          true,
+          "TTS english: type=audio/mpeg"
+        ],
+        [
+          true,
+          "TTS english: URL generated (/analytics/tts/audio/tts_20260530_204928_3358972568.mp3)"
+        ],
+        [
+          true,
+          "TTS english: HTTP 200"
+        ],
+        [
+          true,
+          "TTS english: size=15552 bytes"
+        ],
+        [
+          true,
+          "TTS english: type=audio/mpeg"
+        ],
+        [
+          true,
+          "TTS english: URL generated (/analytics/tts/audio/tts_20260530_204933_3758757263.mp3)"
+        ],
+        [
+          true,
+          "TTS english: HTTP 200"
+        ],
+        [
+          true,
+          "TTS english: size=16704 bytes"
+        ],
+        [
+          true,
+          "TTS english: type=audio/mpeg"
+        ]
+      ]
+    },
+    {
+      "category": "Charge simultanee",
+      "passed": 20,
+      "total": 20,
+      "rate": 100.0,
+      "status": "PASS",
+      "details": [
+        [
+          true,
+          "All 20 requests returned HTTP 200"
+        ],
+        [
+          true,
+          "All 20 returned healthy=20"
+        ],
+        [
+          true,
+          "Errors=0"
+        ],
+        [
+          true,
+          "Mean response time=38ms"
+        ],
+        [
+          true,
+          "Max response time=59ms"
+        ],
+        [
+          true,
+          "Req 5: 39ms"
+        ],
+        [
+          true,
+          "Req 0: 32ms"
+        ],
+        [
+          true,
+          "Req 3: 28ms"
+        ],
+        [
+          true,
+          "Req 1: 18ms"
+        ],
+        [
+          true,
+          "Req 6: 33ms"
+        ],
+        [
+          true,
+          "Req 2: 34ms"
+        ],
+        [
+          true,
+          "Req 4: 45ms"
+        ],
+        [
+          true,
+          "Req 8: 38ms"
+        ],
+        [
+          true,
+          "Req 9: 38ms"
+        ],
+        [
+          true,
+          "Req 10: 32ms"
+        ],
+        [
+          true,
+          "Req 16: 33ms"
+        ],
+        [
+          true,
+          "Req 18: 29ms"
+        ],
+        [
+          true,
+          "Req 12: 46ms"
+        ],
+        [
+          true,
+          "Req 7: 59ms"
+        ],
+        [
+          true,
+          "Req 11: 50ms"
+        ]
+      ]
+    }
+  ]
+}

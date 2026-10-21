@@ -1,0 +1,5 @@
+8. [GET] http://localhost:3000/images/logo.png => [200] OK
+38. [GET] http://localhost:3000/api/uploads/property_0_1.jpg => [200]
+39. [GET] http://localhost:3000/api/uploads/property_118_1.jpg => [200]
+40. [GET] http://localhost:3000/api/uploads/property_99_1.jpg => [200]
+41. [GET] http://localhost:3000/api/uploads/property_65_1.jpg => [200]

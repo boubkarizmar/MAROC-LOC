@@ -1,0 +1,232 @@
+{
+  "timestamp": "2026-05-30T19:19:32.923890",
+  "api_base": "http://localhost:8000",
+  "summary": {
+    "total_tests": 42,
+    "total_passed": 40,
+    "total_failed": 2,
+    "success_rate_percent": 95.24
+  },
+  "categories": [
+    {
+      "name": "RAG PostgreSQL",
+      "passed": 7,
+      "total": 7,
+      "details": [
+        [
+          true,
+          "Search Casablanca returned 1 properties with IDs"
+        ],
+        [
+          true,
+          "Properties have city=Casablanca"
+        ],
+        [
+          true,
+          "All properties have a price"
+        ],
+        [
+          true,
+          "Price-filtered search returned 1 properties"
+        ],
+        [
+          true,
+          "All properties respect max_price <= 50000"
+        ],
+        [
+          true,
+          "Bedroom search returned 4 properties"
+        ],
+        [
+          true,
+          "Tanger search returned 0 properties (0 OK if none in DB)"
+        ]
+      ]
+    },
+    {
+      "name": "Context Memory",
+      "passed": 7,
+      "total": 7,
+      "details": [
+        [
+          true,
+          "T1: city=Tanger (got Tanger)"
+        ],
+        [
+          true,
+          "T2: city preserved=Tanger (got Tanger)"
+        ],
+        [
+          true,
+          "T2: bedrooms=2 (got 2)"
+        ],
+        [
+          true,
+          "T3: city preserved=Tanger (got Tanger)"
+        ],
+        [
+          true,
+          "T3: bedrooms preserved=2 (got 2)"
+        ],
+        [
+          true,
+          "T3: max_price=4000 (got 4000)"
+        ],
+        [
+          true,
+          "T3: returned 0 properties with merged criteria"
+        ]
+      ]
+    },
+    {
+      "name": "Analytics Dashboard",
+      "passed": 6,
+      "total": 6,
+      "details": [
+        [
+          true,
+          "Conversations increased: 333 -> 356"
+        ],
+        [
+          true,
+          "Messages increased: 341 -> 364"
+        ],
+        [
+          true,
+          "Intent distribution has 9 distinct intents"
+        ],
+        [
+          true,
+          "Language distribution has 3 distinct languages"
+        ],
+        [
+          true,
+          "Timeline has 1 data points"
+        ],
+        [
+          true,
+          "Top searches returned list (10 items)"
+        ]
+      ],
+      "intent_counts": {
+        "EXPLORE": 3,
+        "SEARCH": 5,
+        "PRICE_CHECK": 4,
+        "SUPPORT": 4,
+        "NEIGHBORHOOD_INFO": 2,
+        "FAVORITES": 1,
+        "CREATE_LISTING": 1,
+        "MORTGAGE": 2,
+        "OUT_OF_SCOPE": 1
+      },
+      "lang_counts": {
+        "english": 12,
+        "french": 6,
+        "arabic": 5
+      }
+    },
+    {
+      "name": "Voice Assistant TTS",
+      "passed": 16,
+      "total": 16,
+      "details": [
+        [
+          true,
+          "TTS french: audio_url generated (/analytics/tts/audio/tts_20260530_181926_3951731587.mp3)"
+        ],
+        [
+          true,
+          "TTS french: audio file accessible (HTTP 200)"
+        ],
+        [
+          true,
+          "TTS french: audio file >1KB (26064 bytes)"
+        ],
+        [
+          true,
+          "TTS french: content-type is audio (audio/mpeg)"
+        ],
+        [
+          true,
+          "TTS arabic: audio_url generated (/analytics/tts/audio/tts_20260530_181928_1331861273.mp3)"
+        ],
+        [
+          true,
+          "TTS arabic: audio file accessible (HTTP 200)"
+        ],
+        [
+          true,
+          "TTS arabic: audio file >1KB (29088 bytes)"
+        ],
+        [
+          true,
+          "TTS arabic: content-type is audio (audio/mpeg)"
+        ],
+        [
+          true,
+          "TTS english: audio_url generated (/analytics/tts/audio/tts_20260530_181929_2483870317.mp3)"
+        ],
+        [
+          true,
+          "TTS english: audio file accessible (HTTP 200)"
+        ],
+        [
+          true,
+          "TTS english: audio file >1KB (24912 bytes)"
+        ],
+        [
+          true,
+          "TTS english: content-type is audio (audio/mpeg)"
+        ],
+        [
+          true,
+          "TTS darija: audio_url generated (/analytics/tts/audio/tts_20260530_181931_2999107161.mp3)"
+        ],
+        [
+          true,
+          "TTS darija: audio file accessible (HTTP 200)"
+        ],
+        [
+          true,
+          "TTS darija: audio file >1KB (25488 bytes)"
+        ],
+        [
+          true,
+          "TTS darija: content-type is audio (audio/mpeg)"
+        ]
+      ]
+    },
+    {
+      "name": "End-to-End",
+      "passed": 4,
+      "total": 6,
+      "details": [
+        [
+          true,
+          "Health check: status=healthy"
+        ],
+        [
+          true,
+          "Health check: tts in features"
+        ],
+        [
+          true,
+          "Health check: analytics in features"
+        ],
+        [
+          false,
+          "PostgreSQL connection failed: 429 Client Error: Too Many Requests for url: http://localhost:8000/smart/chat"
+        ],
+        [
+          false,
+          "Redis session failed: 429 Client Error: Too Many Requests for url: http://localhost:8000/smart/chat"
+        ],
+        [
+          true,
+          "Docker container: Up 30 minutes (healthy)"
+        ]
+      ]
+    }
+  ],
+  "status": "PASS"
+}

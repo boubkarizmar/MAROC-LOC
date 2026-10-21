@@ -1,0 +1,37 @@
+@startuml
+node "Docker Host" as Host {
+  node "Frontend Container" as FE {
+    artifact "Nginx + React build"
+  }
+  node "Backend Container" as BE {
+    artifact "Spring Boot JAR"
+  }
+  node "AI Container" as AI {
+    artifact "FastAPI + modèles"
+  }
+  node "Database Container" as DB {
+    artifact "PostgreSQL + PostGIS"
+  }
+  node "Cache Container" as Cache {
+    artifact "Redis"
+  }
+  node "Kafka Containers" as K {
+    artifact "Zookeeper"
+    artifact "Kafka Broker"
+    artifact "Kafka UI"
+  }
+}
+
+node "Client Browser" as Browser
+node "Mobile Device" as Mobile
+
+Browser --> FE : HTTPS :3000
+Mobile --> FE : HTTPS :3000
+FE --> BE : /api
+Mobile --> BE : /api
+BE --> DB : JDBC :5432
+BE --> Cache : Redis :6379
+AI --> DB : SQLAlchemy :5432
+AI --> Cache : Redis :6379
+BE --> K : Kafka :9092 (profil docker = no-op)
+@enduml

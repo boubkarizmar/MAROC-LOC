@@ -1,0 +1,96 @@
+{
+  "dashboard": {
+    "id": null,
+    "title": "MAROC-LOC Business Metrics",
+    "tags": ["business", "revenue", "saas"],
+    "timezone": "Africa/Casablanca",
+    "panels": [
+      {
+        "id": 1,
+        "title": "MRR (Monthly Recurring Revenue)",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "mrr_mad",
+            "legendFormat": "MRR MAD"
+          }
+        ],
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 0}
+      },
+      {
+        "id": 2,
+        "title": "Churn Rate",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "churn_rate",
+            "legendFormat": "Churn %"
+          }
+        ],
+        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 0}
+      },
+      {
+        "id": 3,
+        "title": "ARPU",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "arpu_mad",
+            "legendFormat": "ARPU MAD"
+          }
+        ],
+        "gridPos": {"h": 4, "w": 6, "x": 0, "y": 8}
+      },
+      {
+        "id": 4,
+        "title": "LTV",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "ltv_mad",
+            "legendFormat": "LTV MAD"
+          }
+        ],
+        "gridPos": {"h": 4, "w": 6, "x": 6, "y": 8}
+      },
+      {
+        "id": 5,
+        "title": "Active Subscriptions by Tier",
+        "type": "piechart",
+        "targets": [
+          {
+            "expr": "subscriptions_by_tier",
+            "legendFormat": "{{tier}}"
+          }
+        ],
+        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 8}
+      },
+      {
+        "id": 6,
+        "title": "Conversion Funnel",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "users_by_stage",
+            "legendFormat": "{{stage}}"
+          }
+        ],
+        "gridPos": {"h": 8, "w": 24, "x": 0, "y": 16}
+      },
+      {
+        "id": 7,
+        "title": "A/B Test Results",
+        "type": "table",
+        "targets": [
+          {
+            "expr": "ab_test_conversion_rate",
+            "format": "table"
+          }
+        ],
+        "gridPos": {"h": 8, "w": 24, "x": 0, "y": 24}
+      }
+    ],
+    "time": {"from": "now-7d", "to": "now"},
+    "refresh": "1m"
+  }
+}

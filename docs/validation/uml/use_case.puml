@@ -1,0 +1,42 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+actor "Visiteur" as V
+actor "Locataire" as L
+actor "Propriétaire" as P
+actor "Administrateur" as A
+
+rectangle "MAROC-LOC" {
+  usecase "Rechercher un bien" as UC1
+  usecase "Consulter détails" as UC2
+  usecase "Créer un compte" as UC3
+  usecase "Se connecter" as UC4
+  usecase "Ajouter aux favoris" as UC5
+  usecase "Planifier une visite" as UC6
+  usecase "Envoyer un message" as UC7
+  usecase "Publier une annonce" as UC8
+  usecase "Payer via CMI" as UC9
+  usecase "Voir analytics" as UC10
+  usecase "Modérer contenu" as UC11
+  usecase "Obtenir recommandations" as UC12
+  usecase "Utiliser le chatbot IA" as UC13
+}
+
+V --> UC1
+V --> UC2
+V --> UC3
+V --> UC4
+L --> UC5
+L --> UC6
+L --> UC7
+L --> UC12
+L --> UC13
+P --> UC8
+P --> UC9
+P --> UC10
+P --> UC7
+A --> UC11
+A --> UC8
+A --> UC9
+@enduml

@@ -1,0 +1,283 @@
+groups:
+  - name: marocloc_alerts
+    interval: 30s
+    rules:
+      # ================= BACKEND SERVICE ALERTS =================
+      - alert: BackendServiceDown
+        expr: up{job="marocloc-backend"} == 0
+        for: 2m
+        labels:
+          severity: critical
+          service: backend
+          component: api
+        annotations:
+          summary: "Backend service is down"
+          description: "MarocLoc backend service has been unavailable for more than 2 minutes"
+
+      - alert: HighErrorRate
+        expr: (rate(http_server_requests_seconds_count{status=~"5.."}[5m]) / rate(http_server_requests_seconds_count[5m])) > 0.05
+        for: 5m
+        labels:
+          severity: warning
+          service: backend
+          component: api
+        annotations:
+          summary: "High error rate detected"
+          description: "Backend error rate is above 5% (current: {{ $value | humanizePercentage }})"
+
+      - alert: HighResponseTime
+        expr: histogram_quantile(0.99, sum(rate(http_server_requests_seconds_bucket[5m])) by (le, uri, method)) > 1
+        for: 5m
+        labels:
+          severity: warning
+          service: backend
+          component: api
+        annotations:
+          summary: "High response time detected"
+          description: "P99 response time is above 1 second (current: {{ $value }}s)"
+
+      # ================= JVM ALERTS =================
+      - alert: HighMemoryUsage
+        expr: (sum(jvm_memory_used_bytes{area="heap"}) / sum(jvm_memory_max_bytes{area="heap"})) * 100 > 85
+        for: 5m
+        labels:
+          severity: warning
+          service: backend
+          component: jvm
+        annotations:
+          summary: "High JVM memory usage"
+          description: "JVM heap memory usage is above 85% (current: {{ $value | humanize }}%)"
+
+      - alert: CriticalMemoryUsage
+        expr: (sum(jvm_memory_used_bytes{area="heap"}) / sum(jvm_memory_max_bytes{area="heap"})) * 100 > 95
+        for: 2m
+        labels:
+          severity: critical
+          service: backend
+          component: jvm
+        annotations:
+          summary: "Critical JVM memory usage"
+          description: "JVM heap memory usage is above 95% (current: {{ $value | humanize }}%)"
+
+      - alert: HighGCTime
+        expr: rate(jvm_gc_pause_seconds_sum[5m]) / rate(jvm_gc_pause_seconds_count[5m]) > 1
+        for: 5m
+        labels:
+          severity: warning
+          service: backend
+          component: jvm
+        annotations:
+          summary: "High GC time detected"
+          description: "Average GC pause time is above 1 second"
+
+      - alert: TooManyThreads
+        expr: jvm_threads_live_threads > 500
+        for: 5m
+        labels:
+          severity: warning
+          service: backend
+        annotations:
+          summary: "Too many threads"
+          description: "Application has more than 500 live threads (current: {{ $value }})"
+
+      # ================= DATABASE ALERTS =================
+      - alert: PostgresServiceDown
+        expr: up{job="marocloc-postgres"} == 0
+        for: 2m
+        labels:
+          severity: critical
+          service: database
+          component: postgresql
+        annotations:
+          summary: "PostgreSQL service is down"
+          description: "PostgreSQL database has been unavailable for more than 2 minutes"
+
+      - alert: DatabaseConnectionPoolExhausted
+        expr: (hikaricp_connections_active / hikaricp_connections_max) > 0.9
+        for: 5m
+        labels:
+          severity: warning
+          service: database
+          component: connection-pool
+        annotations:
+          summary: "Database connection pool nearly exhausted"
+          description: "Database connection pool usage is above 90% (current: {{ $value | humanizePercentage }})"
+
+      - alert: DatabaseConnectionLeak
+        expr: hikaricp_connections_active > (hikaricp_connections_max * 0.75)
+        for: 15m
+        labels:
+          severity: warning
+          service: database
+        annotations:
+          summary: "Possible database connection leak"
+          description: "Active connections remain high for 15 minutes"
+
+      # ================= REDIS ALERTS =================
+      - alert: RedisServiceDown
+        expr: up{job="marocloc-redis"} == 0
+        for: 2m
+        labels:
+          severity: critical
+          service: cache
+          component: redis
+        annotations:
+          summary: "Redis service is down"
+          description: "Redis cache service has been unavailable for more than 2 minutes"
+
+      - alert: RedisHighMemory
+        expr: (redis_memory_used_bytes / redis_memory_max_bytes) * 100 > 85
+        for: 5m
+        labels:
+          severity: warning
+          service: cache
+        annotations:
+          summary: "Redis memory usage is high"
+          description: "Redis memory usage is above 85% (current: {{ $value | humanize }}%)"
+
+      - alert: RedisHighCPU
+        expr: rate(redis_cpu_sys_seconds_total[5m]) + rate(redis_cpu_user_seconds_total[5m]) > 0.7
+        for: 5m
+        labels:
+          severity: warning
+          service: cache
+        annotations:
+          summary: "Redis high CPU usage"
+          description: "Redis CPU usage is above 70%"
+
+      - alert: RedisKeyEviction
+        expr: rate(redis_evicted_keys_total[5m]) > 10
+        for: 5m
+        labels:
+          severity: warning
+          service: cache
+        annotations:
+          summary: "Redis key eviction happening"
+          description: "Redis is evicting more than 10 keys per second"
+
+      # ================= AI SERVICE ALERTS =================
+      - alert: AIServiceDown
+        expr: up{job="marocloc-ai"} == 0
+        for: 2m
+        labels:
+          severity: warning
+          service: ai
+          component: ml
+        annotations:
+          summary: "AI service is down"
+          description: "AI microservice has been unavailable for more than 2 minutes"
+
+      - alert: AIHighLatency
+        expr: histogram_quantile(0.95, rate(http_request_duration_seconds_bucket{job="marocloc-ai"}[5m])) > 5
+        for: 5m
+        labels:
+          severity: warning
+          service: ai
+        annotations:
+          summary: "AI service high latency"
+          description: "AI service response time above 5 seconds"
+
+      # ================= CONTAINER ALERTS =================
+      - alert: HighContainerCPU
+        expr: (rate(container_cpu_usage_seconds_total{name!=""}[5m]) * 100) > 80
+        for: 5m
+        labels:
+          severity: warning
+          service: infrastructure
+          component: container
+        annotations:
+          summary: "High container CPU usage"
+          description: "Container {{ $labels.name }} CPU usage is above 80%"
+
+      - alert: CriticalContainerCPU
+        expr: (rate(container_cpu_usage_seconds_total{name!=""}[5m]) * 100) > 95
+        for: 3m
+        labels:
+          severity: critical
+          service: infrastructure
+        annotations:
+          summary: "Critical container CPU usage"
+          description: "Container {{ $labels.name }} CPU usage is above 95%"
+
+      - alert: HighContainerMemory
+        expr: (container_memory_usage_bytes{name!=""} / container_spec_memory_limit_bytes{name!=""}) * 100 > 85
+        for: 5m
+        labels:
+          severity: warning
+          service: infrastructure
+        annotations:
+          summary: "High container memory usage"
+          description: "Container {{ $labels.name }} memory usage is above 85%"
+
+      - alert: ContainerRestarting
+        expr: rate(container_last_seen[5m]) < 1
+        for: 2m
+        labels:
+          severity: warning
+          service: infrastructure
+        annotations:
+          summary: "Container restarting"
+          description: "Container {{ $labels.name }} appears to be restarting frequently"
+
+      - alert: ContainerNotRunning
+        expr: count(container_last_seen{name!=""}) by (name) < 1
+        for: 1m
+        labels:
+          severity: critical
+          service: infrastructure
+        annotations:
+          summary: "Container not running"
+          description: "Container {{ $labels.name }} is not running"
+
+      # ================= APPLICATION BUSINESS ALERTS =================
+      - alert: LowPropertyCreation
+        expr: sum(rate(property_created_total[1h])) < 1
+        for: 1h
+        labels:
+          severity: info
+          service: business
+        annotations:
+          summary: "Low property creation rate"
+          description: "Less than 1 property created per hour in the last hour"
+
+      - alert: HighLoginFailures
+        expr: rate(login_failure_total[5m]) > 0.1
+        for: 5m
+        labels:
+          severity: warning
+          service: security
+        annotations:
+          summary: "High login failure rate"
+          description: "More than 0.1 login failures per second"
+
+      # ================= DISK AND SYSTEM ALERTS =================
+      - alert: HighDiskUsage
+        expr: (node_filesystem_avail_bytes{mountpoint="/app/uploads"} / node_filesystem_size_bytes) * 100 < 15
+        for: 5m
+        labels:
+          severity: warning
+          service: storage
+        annotations:
+          summary: "Low disk space for uploads"
+          description: "Upload directory has less than 15% free space"
+
+      - alert: NoDiskSpace
+        expr: (node_filesystem_avail_bytes{mountpoint="/app/uploads"} / node_filesystem_size_bytes) * 100 < 5
+        for: 2m
+        labels:
+          severity: critical
+          service: storage
+        annotations:
+          summary: "Critical low disk space"
+          description: "Upload directory has less than 5% free space"
+
+      # ================= THRESHOLD SUMMARIES =================
+      - alert: MultipleAlertsFiring
+        expr: count(ALERTS{alertstate="firing"}) > 5
+        for: 5m
+        labels:
+          severity: warning
+          service: monitoring
+        annotations:
+          summary: "Multiple alerts firing"
+          description: "More than 5 alerts are currently firing (total: {{ $value }})"

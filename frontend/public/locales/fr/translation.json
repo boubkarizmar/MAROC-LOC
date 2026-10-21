@@ -1,0 +1,1100 @@
+{
+  "common": {
+    "appName": "MAROC-LOC",
+    "loading": "Chargement...",
+    "error": "Une erreur est survenue",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "create": "Créer",
+    "search": "Rechercher",
+    "submit": "Envoyer",
+    "close": "Fermer",
+    "yes": "Oui",
+    "no": "Non",
+    "confirm": "Confirmer",
+    "back": "Retour",
+    "next": "Suivant",
+    "previous": "Précédent",
+    "of": "sur",
+    "results": "résultats",
+    "noResults": "Aucun résultat trouvé",
+    "required": "Ce champ est requis",
+    "optional": "Optionnel",
+    "more": "Voir plus",
+    "less": "Voir moins",
+    "price": "Prix",
+    "location": "Localisation",
+    "type": "Type",
+    "category": "Catégorie",
+    "city": "Ville",
+    "description": "Description",
+    "features": "Caractéristiques",
+    "contact": "Contact",
+    "viewDetails": "Voir les détails",
+    "addToFavorites": "Ajouter aux favoris",
+    "removeFromFavorites": "Retirer des favoris",
+    "share": "Partager",
+    "report": "Signaler",
+    "availability": "Disponibilité",
+    "negotiable": "Négociable",
+    "immediate": "Immédiat",
+    "from": "À partir de",
+    "to": "Jusqu'à",
+    "perMonth": "par mois",
+    "perYear": "par an",
+    "currency": "DH",
+    "surface": "Surface",
+    "rooms": "pièces",
+    "bedrooms": "Chambres",
+    "bathrooms": "Salles de bain",
+    "constructionYear": "Année de construction",
+    "condition": "État",
+    "furnished": "Meublé",
+    "unfurnished": "Non meublé",
+    "pricePerSquareMeter": "Prix au m²",
+    "squareMeter": "m²",
+    "fromOwner": "Direct propriétaire",
+    "add": "Ajouter",
+    "retry": "Réessayer",
+    "all": "Tous",
+    "allFeminine": "Toutes",
+    "unlimited": "Illimité",
+    "linkCopied": "Lien copié",
+    "deleteError": "Erreur lors de la suppression"
+  },
+  "nav": {
+    "main": "Navigation principale",
+    "home": "Accueil",
+    "properties": "Biens",
+    "cities": "Villes",
+    "contact": "Contact",
+    "account": "Compte",
+    "menu": "Menu",
+    "postListing": "Publier une annonce",
+    "tagline": "PropTech Maroc",
+    "search": "Rechercher",
+    "favorites": "Favoris",
+    "messages": "Messages"
+  },
+  "auth": {
+    "logout": "Se déconnecter",
+    "login": {
+      "title": "Bon retour",
+      "subtitle": "Connectez-vous à votre compte",
+      "email": "Adresse e-mail",
+      "emailPlaceholder": "Entrez votre e-mail",
+      "password": "Mot de passe",
+      "passwordPlaceholder": "Entrez votre mot de passe",
+      "loading": "Connexion...",
+      "submit": "Connexion",
+      "noAccount": "Vous n'avez pas de compte ?",
+      "registerLink": "Créer un compte",
+      "error": "Échec de connexion"
+    },
+    "sessionExpiredTitle": "Session expirée",
+    "sessionExpiredMessage": "Votre session a expiré ou vous n’êtes pas authentifié. Veuillez vous reconnecter."
+  },
+  "register": {
+    "title": "Créer votre compte",
+    "subtitle": "Rejoignez MAROC-LOC et commencez votre parcours",
+    "firstName": "Prénom",
+    "firstNamePlaceholder": "Mohammed",
+    "lastName": "Nom",
+    "lastNamePlaceholder": "Ali",
+    "fullName": "Nom complet",
+    "fullNamePlaceholder": "Mohammed Ali",
+    "fullNameHint": "Généré automatiquement depuis le prénom et le nom, modifiable si besoin",
+    "city": "Ville",
+    "selectCity": "Choisir une ville",
+    "enterCity": "Entrez votre ville",
+    "userType": "Type d'utilisateur",
+    "locataire": "Locataire",
+    "proprietaire": "Propriétaire",
+    "phone": "Téléphone",
+    "phonePlaceholder": "+2126XXXXXXXX ou 06XXXXXXXX",
+    "email": "E-mail",
+    "emailPlaceholder": "vous@example.com",
+    "password": "Mot de passe",
+    "passwordPlaceholder": "Créez un mot de passe fort",
+    "hidePassword": "Masquer le mot de passe",
+    "showPassword": "Afficher le mot de passe",
+    "loading": "Création du compte...",
+    "submit": "Créer le compte",
+    "hasAccount": "Vous avez déjà un compte ?",
+    "loginLink": "Se connecter",
+    "fix_errors": "Veuillez corriger les champs indiqués",
+    "success": "Inscription réussie. Redirection...",
+    "network_error": "Erreur réseau. Vérifiez votre connexion.",
+    "correct_fields": "Veuillez corriger les champs du formulaire",
+    "failed": "Inscription échouée. Réessayez."
+  },
+  "validation": {
+    "required": "Ce champ est requis",
+    "email": "Veuillez saisir une adresse e-mail valide",
+    "email_invalid": "Saisissez une adresse e-mail valide",
+    "email_disposable": "Les adresses e-mail temporaires ne sont pas autorisées",
+    "password_min": "Le mot de passe doit contenir au moins 6 caractères",
+    "password_weak": "Le mot de passe doit contenir majuscule, minuscule, chiffre et caractère spécial",
+    "firstName_min": "Le prénom doit contenir au moins 2 lettres",
+    "firstName_invalid": "Le prénom ne peut contenir que des lettres, espaces, apostrophes ou tirets",
+    "lastName_min": "Le nom doit contenir au moins 2 lettres",
+    "lastName_invalid": "Le nom ne peut contenir que des lettres, espaces, apostrophes ou tirets",
+    "fullName_min": "Le nom complet doit contenir au moins 5 caractères",
+    "fullName_mismatch": "Le nom complet doit inclure le prénom et le nom",
+    "city_invalid": "Veuillez saisir un nom de ville valide",
+    "phone_invalid": "Le téléphone doit être un numéro marocain valide (+2126 ou 06...)"
+  },
+  "password": {
+    "strength": "Force du mot de passe",
+    "weak": "Faible",
+    "fair": "Moyen",
+    "strong": "Fort",
+    "chars": "8+ caractères",
+    "uppercase": "Majuscule",
+    "lowercase": "Minuscule",
+    "number": "Chiffre",
+    "special": "Spécial"
+  },
+  "property": {
+    "types": {
+      "RENT": "Location",
+      "BUY": "Achat",
+      "MORTGAGE": "Rahn"
+    },
+    "categories": {
+      "CAFE": "Café",
+      "GYM": "Salle de sport",
+      "SHOP": "Magasin",
+      "OFFICE": "Bureau",
+      "HOUSE": "Maison",
+      "APARTMENT": "Appartement",
+      "OTHER": "Autre",
+      "LAND": "Terrain",
+      "RIAD": "Riad traditionnel"
+    },
+    "status": {
+      "PENDING": "En attente",
+      "APPROVED": "Approuvé",
+      "AVAILABLE": "Disponible",
+      "REJECTED": "Rejeté",
+      "RESERVED": "Réservé",
+      "RENTED": "Loué",
+      "VERIFIED": "Vérifié"
+    },
+    "conditions": {
+      "NEW": "Neuf",
+      "GOOD": "Bon état",
+      "RENOVATION_NEEDED": "À rénover",
+      "TO_RENOVATE": "À rénover"
+    },
+    "features": {
+      "elevator": "Ascenseur",
+      "parking": "Parking",
+      "pool": "Piscine",
+      "garden": "Jardin",
+      "airConditioning": "Climatisation",
+      "internet": "Internet",
+      "security": "Sécurité",
+      "furnished": "Meublé"
+    },
+    "title": "Biens immobiliers",
+    "subtitle": "Trouvez votre logement idéal",
+    "verified": "Vérifié",
+    "basePrice": "Prix de base",
+    "fees": "Frais supplémentaires",
+    "discount": "Réduction",
+    "finalPrice": "Prix total",
+    "image": "Image",
+    "publishedAt": "Publié le",
+    "owner": "Propriétaire",
+    "search": {
+      "title": "Rechercher un bien",
+      "city": "Ville",
+      "cityPlaceholder": "Toutes les villes",
+      "minPrice": "Prix min (DH)",
+      "maxPrice": "Prix max (DH)",
+      "keyword": "Mots-clés",
+      "keywordPlaceholder": "Appartement, villa, riad moderne...",
+      "submit": "Rechercher",
+      "filters": "Filtres",
+      "clear": "Effacer les filtres",
+      "propertyType": "Type de bien",
+      "propertyTypeAny": "Tout type",
+      "propertyTypeApartment": "Appartement",
+      "propertyTypeVilla": "Villa",
+      "propertyTypeStudio": "Studio",
+      "propertyTypeCommercial": "Commercial",
+      "minSurface": "Surface min (m²)",
+      "maxSurface": "Surface max (m²)",
+      "minRooms": "Pièces min",
+      "maxRooms": "Pièces max",
+      "furnished": "Meublé",
+      "parking": "Parking",
+      "pool": "Piscine",
+      "elevator": "Ascenseur",
+      "airConditioning": "Climatisation",
+      "error": "Recherche indisponible",
+      "advancedTitle": "Recherche avancée",
+      "allCities": "Toutes les villes",
+      "majorCities": "Grandes villes",
+      "otherCities": "Autres villes",
+      "otherCity": "Autre ville...",
+      "otherCityPlaceholder": "Entrez le nom de la ville",
+      "availableCities": "{{count}} ville disponible",
+      "availableCities_plural": "{{count}} villes disponibles",
+      "transactionType": "Type de transaction",
+      "showAdvanced": "Afficher les filtres avancés",
+      "hideAdvanced": "Masquer les filtres avancés",
+      "searching": "Recherche en cours..."
+    },
+    "card": {
+      "surface": "Surface",
+      "rooms": "Pièces",
+      "pricePerM2": "DH/m²",
+      "perMonth": "/mois",
+      "viewDetails": "Voir détails",
+      "owner": "Propriétaire",
+      "location": "Localisation",
+      "previewUnavailable": "Aperçu non disponible",
+      "bedroomsShort": "ch."
+    },
+    "details": {
+      "title": "Détails du bien",
+      "description": "Description",
+      "price": "Prix",
+      "location": "Localisation",
+      "address": "Adresse",
+      "city": "Ville",
+      "owner": "Propriétaire",
+      "publishedAt": "Publié le",
+      "contactOwner": "Contacter le propriétaire",
+      "addToFavorites": "Ajouter aux favoris",
+      "removeFromFavorites": "Retirer des favoris",
+      "reviews": "Avis",
+      "noReviews": "Aucun avis",
+      "writeReview": "Écrire un avis",
+      "similarProperties": "Biens similaires",
+      "characteristics": "Caractéristiques",
+      "equipments": "Équipements",
+      "viewDetails": "Voir détails",
+      "alreadyInComparison": "Déjà dans la comparaison",
+      "maxComparison": "Maximum 3 biens à comparer",
+      "addedToComparison": "Ajouté à la comparaison",
+      "inComparison": "Dans la comparaison",
+      "compare": "Comparer"
+    },
+    "create": {
+      "title": "Nouveau bien",
+      "subtitle": "Ajoutez votre bien immobilier",
+      "titleLabel": "Titre de l'annonce",
+      "description": "Description",
+      "price": "Prix (DH)",
+      "city": "Ville",
+      "address": "Adresse complète",
+      "coordinates": "Coordonnées GPS",
+      "latitude": "Latitude",
+      "longitude": "Longitude",
+      "images": "images",
+      "submit": "Créer l'annonce",
+      "success": "Bien créé avec succès",
+      "error": "Erreur lors de la création",
+      "propertyType": "Type de transaction",
+      "category": "Catégorie",
+      "surface": "Surface (m²)",
+      "rooms": "Nombre de pièces",
+      "bedrooms": "Chambres",
+      "bathrooms": "Salles de bain",
+      "constructionYear": "Année de construction",
+      "condition": "État général",
+      "furnished": "Meublé",
+      "equipments": "Équipements",
+      "parking": "Parking",
+      "pool": "Piscine",
+      "elevator": "Ascenseur",
+      "garden": "Jardin",
+      "airConditioning": "Climatisation",
+      "internet": "Internet",
+      "security": "Sécurité",
+      "contactInfo": "Informations de contact",
+      "phoneNumber": "Téléphone",
+      "whatsappNumber": "WhatsApp",
+      "step": {
+        "info": "Informations",
+        "features": "Caractéristiques",
+        "equipments": "Équipements",
+        "environment": "Environnement",
+        "views": "Quartier & Vues",
+        "payment": "Paiement",
+        "media": "Médias"
+      },
+      "fixErrors": "Veuillez corriger les erreurs",
+      "ownerRequired": "Vous devez être connecté en tant que propriétaire",
+      "paymentMethod": "Mode de paiement",
+      "discount": "Remise (%)",
+      "geocoding": "Récupération en cours...",
+      "geocodingBtn": "Géocodage...",
+      "refreshCoords": "Rafraîchir les coordonnées",
+      "videoOptional": "Vidéo (optionnel)",
+      "videoHint": "Cliquez pour ajouter une vidéo (MP4, max 50MB)",
+      "firstNameArabic": "Prénom (Arabe)",
+      "lastNameArabic": "Nom (Arabe)",
+      "firstNameLatin": "Prénom (Latin)",
+      "lastNameLatin": "Nom (Latin)",
+      "cin": "CIN",
+      "publishing": "Publication {{progress}}%",
+      "validationErrors": "Erreurs de validation",
+      "cityAdded": "Ville \"{{city}}\" ajoutée avec succès",
+      "enterCityFirst": "Veuillez d'abord saisir une ville",
+      "geoError": "Impossible de localiser \"{{city}}\". Veuillez vérifier le nom ou saisir manuellement les coordonnées.",
+      "gpsSuccess": "Coordonnées GPS récupérées automatiquement",
+      "gpsHint": "💡 Les coordonnées GPS se mettent à jour automatiquement",
+      "noCityFound": "Aucune ville trouvée pour \"{{city}}\"",
+      "addCity": "Ajouter \"{{city}}\"",
+      "cityPlaceholder": "Recherchez ou saisissez une ville...",
+      "titlePlaceholder": "Ex: Villa moderne avec piscine",
+      "descPlaceholder": "Décrivez votre propriété en détails (min 50 caractères)",
+      "addressPlaceholder": "Ex: Boulevard Zerktouni",
+      "south": "Sud",
+      "north": "Nord",
+      "east": "Est",
+      "west": "Ouest",
+      "bankTransfer": "Virement bancaire",
+      "cash": "Espèces",
+      "mapLocation": "Localisation sur carte",
+      "basedOn": "Basé sur :",
+      "gpsManual": "Les coordonnées n'ont pas pu être récupérées automatiquement. Cliquez sur la carte ou saisissez manuellement.",
+      "errTitleRequired": "Titre requis",
+      "errDescMin": "Description: minimum 50 caractères",
+      "errPriceMin": "Prix minimum 1000 DH",
+      "errCityRequired": "Ville requise",
+      "errAddressRequired": "Adresse requise",
+      "errSurfaceMin": "Surface minimum 10 m²",
+      "errRoomsRequired": "Nombre de pièces requis",
+      "errPhoneRequired": "Téléphone requis",
+      "errGpsRequired": "Coordonnées GPS requises - Veuillez vérifier la ville saisie",
+      "errImageRequired": "Au moins 1 image requise",
+      "errFirstNameArRequired": "Prénom arabe requis",
+      "errLastNameArRequired": "Nom arabe requis",
+      "errFirstNameLatRequired": "Prénom latin requis",
+      "errLastNameLatRequired": "Nom latin requis",
+      "errCinRequired": "CIN requis",
+      "dropImages": "Déposez les images ici",
+      "dragOrClick": "Glissez-déposez ou cliquez pour ajouter",
+      "max": "Max",
+      "tooLarge": "Trop volumineux",
+      "ready": "Prêt",
+      "processing": "Traitement...",
+      "setPrimary": "Définir comme principale",
+      "primaryHint": "L'image avec l'étoile est la photo principale. Faites glisser pour réorganiser.",
+      "equip": {
+        "ac": "Climatisation",
+        "balcony": "Balcon / Terrasse"
+      },
+      "env": {
+        "cityCenter": "Centre-ville",
+        "school": "École à proximité",
+        "university": "Université proche",
+        "mosque": "Mosquée proche",
+        "hospital": "Hôpital proche",
+        "market": "Marché / Souk",
+        "bus": "Arrêt de bus",
+        "tram": "Tramway",
+        "train": "Gare ferroviaire"
+      },
+      "area": {
+        "popular": "Quartier populaire",
+        "modern": "Quartier moderne",
+        "quiet": "Zone calme",
+        "family": "Quartier familial",
+        "gardenView": "Vue jardin",
+        "streetView": "Vue rue",
+        "seaView": "Vue mer"
+      },
+      "orientation": "Orientation",
+      "card": "Carte bancaire",
+      "check": "Chèque",
+      "videoTypeError": "Le fichier doit être une vidéo.",
+      "videoSizeError": "La vidéo est trop volumineuse (max 50MB).",
+      "networkError": "Erreur réseau"
+    },
+    "edit": {
+      "title": "Modifier le bien",
+      "submit": "Enregistrer",
+      "success": "Bien mis à jour",
+      "error": "Erreur de mise à jour"
+    },
+    "delete": {
+      "confirm": "Voulez-vous vraiment supprimer ce bien ?",
+      "success": "Bien supprimé",
+      "error": "Erreur de suppression"
+    },
+    "errors": {
+      "notFound": "Bien introuvable",
+      "unauthorized": "Non autorisé",
+      "invalidPrice": "Prix invalide",
+      "requiredField": "Champ obligatoire",
+      "invalidSurface": "La surface doit être supérieure à 0",
+      "invalidRooms": "Le nombre de pièces doit être entre 1 et 20"
+    },
+    "priceBasedOnFinal": "Basé sur le prix final",
+    "new": "Nouveau"
+  },
+  "dashboard": {
+    "title": "Mon tableau de bord",
+    "subtitle": "Gérez vos biens immobiliers",
+    "stats": {
+      "totalProperties": "Total des biens",
+      "totalViews": "Vues totales",
+      "totalInquiries": "Demandes reçues",
+      "favorites": "Favoris",
+      "avgPrice": "Prix moyen"
+    },
+    "actions": {
+      "addProperty": "Ajouter un bien"
+    },
+    "properties": {
+      "title": "Mes biens",
+      "empty": "Vous n'avez pas encore de biens.",
+      "emptyMessage": "Ajoutez votre premier bien pour commencer.",
+      "addFirst": "Ajouter mon premier bien",
+      "edit": "Modifier",
+      "delete": "Supprimer",
+      "view": "Voir",
+      "totalCount": "{{count}} propriété au total",
+      "totalCount_plural": "{{count}} propriétés au total"
+    },
+    "checklist": {
+      "addProperty": "Ajouter votre première propriété"
+    }
+  },
+  "admin": {
+    "title": "Administration",
+    "subtitle": "Gestion de la plateforme",
+    "stats": {
+      "messages": "Messages",
+      "favorites": "Favoris",
+      "visits": "Visites",
+      "totalRevenue": "Revenu total",
+      "revenueThisMonth": "Ce mois",
+      "paid": "Payés",
+      "failed": "Échoués",
+      "newUsers": "Nouveaux utilisateurs",
+      "newProperties": "Nouvelles propriétés",
+      "activeAds": "Annonces actives",
+      "avgRating": "Note moyenne",
+      "uniqueUsers": "Utilisateurs uniques (7j)",
+      "totalEvents": "Événements (7j)",
+      "sessions": "Sessions (7j)",
+      "revenue": "Revenu",
+      "reviews": "Avis"
+    },
+    "users": {
+      "title": "Utilisateurs",
+      "id": "ID",
+      "name": "Nom",
+      "email": "E-mail",
+      "role": "Rôle",
+      "actions": "Actions",
+      "delete": "Supprimer",
+      "confirmDelete": "Supprimer cet utilisateur ?",
+      "roles": {
+        "ADMIN": "Admin",
+        "LOCATAIRE": "Locataire",
+        "PROPRIETAIRE": "Propriétaire"
+      },
+      "deleteError": "Erreur lors de la suppression de l’utilisateur"
+    },
+    "recentActivity": "Activité récente",
+    "tab": {
+      "dashboard": "Tableau de bord",
+      "properties": "Propriétés",
+      "ads": "Annonces",
+      "users": "Utilisateurs",
+      "reviews": "Avis",
+      "transactions": "Transactions",
+      "analytics": "Analytics",
+      "trust": "Trust & Sécurité",
+      "settings": "Paramètres"
+    },
+    "header": {
+      "properties": "Gestion des propriétés",
+      "ads": "Gestion des annonces",
+      "users": "Gestion des utilisateurs",
+      "reviews": "Modération des avis",
+      "transactions": "Transactions",
+      "analytics": "Analytics avancées",
+      "trust": "Trust & Sécurité",
+      "settings": "Paramètres système"
+    },
+    "status": {
+      "pending": "En attente",
+      "approved": "Approuvé",
+      "available": "Disponible",
+      "rejected": "Rejeté",
+      "reserved": "Réservé",
+      "rented": "Loué",
+      "active": "Actif",
+      "paused": "En pause",
+      "paid": "Payé",
+      "failed": "Échoué",
+      "refunded": "Remboursé",
+      "flagged": "Signalé"
+    },
+    "chart": {
+      "distribution": "Distribution des propriétés",
+      "topCities": "Top villes",
+      "usersByRole": "Utilisateurs par rôle",
+      "conversion": "Taux de conversion",
+      "conversionLabel": "Visites → Contacts",
+      "dau": "Utilisateurs actifs (30 jours)",
+      "propertyViews": "Vues de propriétés",
+      "revenue": "Revenus",
+      "daily": "Publications par jour (30 jours)",
+      "topViewed": "Propriétés les plus vues (7 jours)",
+      "others": "Autres",
+      "monthly": "Tendances mensuelles",
+      "yearly": "Tendances annuelles"
+    },
+    "table": {
+      "property": "Propriété",
+      "city": "Ville",
+      "price": "Prix",
+      "status": "Statut",
+      "views": "Vues",
+      "owner": "Propriétaire",
+      "actions": "Actions",
+      "title": "Titre",
+      "type": "Type",
+      "plan": "Plan",
+      "budget": "Budget",
+      "clicks": "Clics",
+      "name": "Nom",
+      "role": "Rôle",
+      "verified": "Vérifié",
+      "amount": "Montant",
+      "user": "Utilisateur",
+      "date": "Date",
+      "time": "Heure",
+      "device": "Appareil"
+    },
+    "search": {
+      "property": "Rechercher propriété, ville, propriétaire...",
+      "user": "Rechercher utilisateur..."
+    },
+    "filter": {
+      "all": "Tous les statuts"
+    },
+    "action": {
+      "approve": "Approuver",
+      "reject": "Rejeter",
+      "view": "Voir",
+      "delete": "Supprimer",
+      "verify": "Vérifier",
+      "flag": "Signaler",
+      "refund": "Rembourser"
+    },
+    "empty": {
+      "properties": "Aucune propriété trouvée",
+      "users": "Aucun utilisateur trouvé",
+      "ads": "Aucune annonce",
+      "reviews": "Aucun avis à modérer",
+      "payments": "Aucun paiement",
+      "data": "Aucune donnée"
+    },
+    "reviews": {
+      "pending": "Avis en attente",
+      "flagged": "Avis signalés",
+      "signals": "{{count}} signalements"
+    },
+    "ads": {
+      "pending": "Annonces en attente",
+      "all": "Toutes les annonces"
+    },
+    "payments": {
+      "title": "Paiements"
+    },
+    "error": {
+      "load": "Erreur chargement admin",
+      "generic": "Erreur"
+    },
+    "confirm": {
+      "delete": "Supprimer définitivement ?",
+      "deleteUser": "Supprimer cet utilisateur ?"
+    },
+    "deleted": "Supprimé",
+    "property": {
+      "approved": "Propriété approuvée",
+      "rejectReason": "Motif du rejet ?",
+      "rejected": "Propriété rejetée",
+      "classified": "Classifié"
+    },
+    "user": {
+      "verified": "Utilisateur vérifié",
+      "deleted": "Utilisateur supprimé"
+    },
+    "ad": {
+      "approved": "Annonce approuvée",
+      "rejectReason": "Motif du rejet ?",
+      "rejected": "Annonce rejetée"
+    },
+    "review": {
+      "moderated": "Avis modéré"
+    },
+    "payment": {
+      "refundReason": "Motif du remboursement ?",
+      "refunded": "Remboursé"
+    },
+    "activityLog": "Journal d'activité",
+    "entries": "entrées",
+    "fraud": {
+      "title": "Détection de fraude",
+      "description": "Analysez automatiquement les propriétés suspectes. Le système détecte les prix anormaux, les doublons, et les comptes suspects.",
+      "analyses": "Analyses effectuées",
+      "mediumAlerts": "Alertes moyennes",
+      "highAlerts": "Alertes hautes"
+    },
+    "settings": {
+      "maintenance": "Mode maintenance",
+      "maintenanceDesc": "Rendre le site inaccessible aux visiteurs",
+      "saved": "Paramètres sauvegardés",
+      "saveError": "Erreur sauvegarde",
+      "features": "Fonctionnalités",
+      "aiChat": "Chatbot IA",
+      "aiChatDesc": "Assistant intelligent pour les visiteurs",
+      "voiceSearch": "Recherche vocale",
+      "voiceSearchDesc": "Recherche par commande vocale",
+      "ads": "Système'annonces",
+      "adsDesc": "Publicités et promotions",
+      "reviews": "Système d'avis",
+      "reviewsDesc": "Avis et notation des propriétés",
+      "payments": "Paiements en ligne",
+      "paymentsDesc": "CMI et Stripe",
+      "api": "Configuration API"
+    },
+    "refresh": "Actualiser",
+    "pagination": {
+      "range": "{{start}}-{{end}} sur {{total}} {{label}}",
+      "items": "éléments",
+      "prev": "Précédent",
+      "next": "Suivant",
+      "page": "Page {{page}} / {{total}}"
+    },
+    "trend": {
+      "up": "En hausse",
+      "down": "En baisse",
+      "stable": "Stable"
+    },
+    "badge": {
+      "normal": "Normal"
+    },
+    "topViewed": {
+      "property": "Propriété #{{id}}",
+      "views": "{{count}} vues"
+    },
+    "label": {
+      "properties": "propriétés",
+      "ads": "annonces",
+      "users": "utilisateurs",
+      "reviews": "avis"
+    }
+  },
+  "chatbot": {
+    "title": "Assistant MAROC-LOC",
+    "greeting": "Bonjour ! Je suis votre assistant MAROC-LOC. Comment puis-je vous aider ?",
+    "placeholder": "Écrivez votre message...",
+    "send": "Envoyer",
+    "typing": "L'assistant écrit...",
+    "suggestions": {
+      "search": "Je cherche un appartement",
+      "price": "Quel est le prix moyen ?",
+      "help": "Comment fonctionne le site ?"
+    },
+    "fallback": "Je peux vous aider à chercher un bien, comparer des prix ou comprendre une annonce.",
+    "unavailable": "Assistant momentanément indisponible. Réessayez dans quelques instants.",
+    "open": "Ouvrir l’assistant",
+    "subtitle": "Recherche, prix et recommandations",
+    "quick": {
+      "apartment": "Appartement proche tram",
+      "budget": "Studio économique",
+      "quiet": "Quartier calme"
+    },
+    "messageLabel": "Message",
+    "close": "Fermer",
+    "newConversation": "Nouvelle conversation",
+    "voiceSearch": "Recherche vocale",
+    "role": {
+      "guest": "Visiteur",
+      "buyer": "Acheteur",
+      "locataire": "Locataire",
+      "proprietaire": "Propriétaire",
+      "admin": "Admin"
+    },
+    "welcomeTitle": "Comment puis-je vous aider ?",
+    "welcomeSubtitle": "Je parle français, arabe et darija. Posez-moi vos questions sur l'immobilier au Maroc.",
+    "placeholderDarija": "كتب شي حاجة...",
+    "placeholderArabic": "اكتب رسالتك...",
+    "disclaimer": "L'IA peut parfois se tromper. Vérifiez les informations importantes.",
+    "propertiesFound": "{{count}} propriétés trouvées",
+    "propertyFound": "{{count}} propriété trouvée",
+    "copy": "Copier",
+    "copied": "Copié !",
+    "useful": "Utile",
+    "notUseful": "Pas utile",
+    "microphoneDenied": "Veuillez autoriser l'accès au microphone",
+    "microphoneNotFound": "Aucun microphone détecté",
+    "recordingFailed": "Erreur d'enregistrement",
+    "quickPrompts": {
+      "search": "Trouve un appartement à Casablanca",
+      "price": "Quel est le prix moyen à Marrakech ?",
+      "neighborhood": "Meilleurs quartiers à Rabat",
+      "contact": "Comment contacter un propriétaire ?"
+    },
+    "quickReplies": {
+      "search": "Rechercher un bien",
+      "mortgage": "Simuler un crédit",
+      "explore": "Explorer les biens"
+    }
+  },
+  "home": {
+    "hero": {
+      "title": "Trouvez le bien de vos rêves",
+      "subtitle": "La plateforme immobilière premium du Maroc",
+      "searchPlaceholder": "Rechercher des biens...",
+      "searchButton": "Rechercher",
+      "description": "Explorez des villas, appartements, riads et espaces professionnels soigneusement sélectionnés avec une expérience digitale inspirée du luxe marocain contemporain.",
+      "featured": "Sélection du moment",
+      "featuredFallback": "Riad moderne, Marrakech",
+      "featuredDesc": "Architecture artisanale, confort hôtelier, gestion digitale.",
+      "badge": "L'immobilier intelligent pour une nouvelle génération."
+    },
+    "filter": {
+      "title": "Filtrer les biens",
+      "keyword": "Mot-clé",
+      "keywordPlaceholder": "Appartement, villa, bureau...",
+      "category": "Catégorie",
+      "categoryPlaceholder": "Choisir une catégorie",
+      "customCategory": "Catégorie personnalisée",
+      "customCategoryPlaceholder": "Précisez votre catégorie",
+      "transactionType": "Type de transaction",
+      "transactionTypePlaceholder": "Location, achat, rahn",
+      "city": "Ville",
+      "cityPlaceholder": "Casablanca, Rabat, Marrakech...",
+      "priceRange": "Fourchette de prix",
+      "minPrice": "Prix min",
+      "maxPrice": "Prix max",
+      "clearFilters": "Effacer les filtres",
+      "searching": "Recherche...",
+      "noResults": "Aucun bien trouvé",
+      "noResultsMessage": "Essayez d'ajuster vos filtres",
+      "surface": "Surface (m²)",
+      "rooms": "Pièces",
+      "equipments": "Équipements"
+    },
+    "categories": {
+      "title": "Explorer par catégorie",
+      "subtitle": "Trouvez des biens dans votre catégorie préférée",
+      "loading": "Chargement des catégories...",
+      "listings": "{{count}} annonce",
+      "listings_plural": "{{count}} annonces",
+      "addCustom": "Ajouter",
+      "addCustomTitle": "Ajouter une catégorie personnalisée",
+      "customPlaceholder": "ex. Studio, entrepôt, penthouse...",
+      "adding": "Ajout...",
+      "addCustomDesc": "Créez une catégorie personnalisée pour votre bien"
+    },
+    "properties": {
+      "title": "Biens disponibles",
+      "loading": "Chargement des biens...",
+      "empty": "Aucun bien trouvé",
+      "emptyMessage": "Aucun bien ne correspond à vos critères.",
+      "featured": "En vedette"
+    },
+    "results": {
+      "title": "résultat",
+      "title_plural": "résultats",
+      "subtitle": "Biens sélectionnés avec soin",
+      "page": "Page"
+    },
+    "footer": {
+      "brand": {
+        "name": "MAROC-LOC",
+        "description": "La plateforme immobilière moderne du Maroc."
+      },
+      "navigation": {
+        "title": "Navigation",
+        "about": "À propos",
+        "blog": "Blog",
+        "terms": "Conditions",
+        "privacy": "Confidentialité"
+      },
+      "cities": {
+        "title": "Villes",
+        "casablanca": "Casablanca",
+        "rabat": "Rabat",
+        "marrakech": "Marrakech",
+        "fes": "Fès"
+      },
+      "newsletter": {
+        "title": "Newsletter",
+        "placeholder": "Adresse e-mail",
+        "subscribe": "S'abonner"
+      }
+    },
+    "aiSearch": {
+      "title": "Recherche intelligente",
+      "placeholder": "Décrivez votre bien idéal..."
+    },
+    "map": {
+      "list": "Liste",
+      "map": "Carte"
+    }
+  },
+  "market_insights": {
+    "title": "Analyse du marché immobilier marocain",
+    "select_city": "Choisir une ville",
+    "total_cities": "Nombre de villes",
+    "avg_price": "Prix moyen/m²",
+    "market_status": "État du marché",
+    "city_insights": "Informations ville",
+    "city_info": "Informations générales",
+    "population": "Population",
+    "location_score": "Score localisation",
+    "market_trend": "Tendance du marché",
+    "attractions": "Attractions",
+    "market_analysis": "Analyse du marché",
+    "current_price": "Prix actuel",
+    "price_trend": "Tendance des prix",
+    "market_demand": "Demande du marché",
+    "investment_potential": "Potentiel d'investissement",
+    "recommendations": "Recommandations"
+  },
+  "language": {
+    "title": "Langue",
+    "fr": "Français",
+    "en": "English",
+    "ar": "العربية",
+    "switch": "Changer de langue"
+  },
+  "ads": {
+    "sponsored": "Sponsorisé",
+    "sponsoredListings": "Annonces sponsorisées",
+    "promotedProperties": "Biens promus",
+    "promotedSubtitle": "Placements premium sélectionnés pour des locations pertinentes.",
+    "subtitle": "Sponsorisé",
+    "title": "Annonces partenaires"
+  },
+  "splash": {
+    "tagline": "Votre porte d’entrée vers l’immobilier marocain",
+    "descriptionPrefix": "Découvrez votre chez-vous idéal au Maroc avec facilité —",
+    "descriptionSearch": "recherche élégante",
+    "descriptionListings": "annonces sélectionnées",
+    "and": "et",
+    "descriptionNavigation": "navigation intelligente",
+    "badges": {
+      "geolocation": "Géolocalisation",
+      "premium": "Annonces premium",
+      "ai": "IA intelligente"
+    },
+    "explore": "Explorer les annonces",
+    "instantAccess": "Accès instantané aux locations premium",
+    "redirecting": "Redirection automatique...",
+    "footer": "© 2026 MAROC-LOC — L’immobilier réinventé",
+    "feature1": "Biens premium",
+    "feature2": "IA intégrée",
+    "feature3": "Vérifié",
+    "feature4": "Partout au Maroc",
+    "unmute": "Activer le son",
+    "mute": "Couper le son",
+    "skip": "Passer"
+  },
+  "footer": {
+    "privacy": "Confidentialité",
+    "description": "Plateforme PropTech marocaine pour louer, acheter et valoriser des biens haut de gamme avec une expérience rapide, claire et internationale.",
+    "explore": "Explorer",
+    "legal": "Légal",
+    "rights": "Tous droits réservés."
+  },
+  "cities": {
+    "subtitle": "Maroc premium",
+    "title": "Villes signature",
+    "description": "Une sélection inspirée par les plus belles villes du Maroc."
+  },
+  "feed": {
+    "subtitle": "Marketplace",
+    "title": "biens disponibles",
+    "description": "Sélection responsive avec filtres, cartes rapides et informations essentielles pour comparer sans friction.",
+    "noResults": "Aucun bien trouvé"
+  },
+  "recommendations": {
+    "subtitle": "Pour vous",
+    "title": "Recommandations personnalisées",
+    "seeAll": "Voir tout",
+    "discoverTitle": "Découvrez nos biens",
+    "discoverSubtitle": "Sélectionnés pour vous"
+  },
+  "rec": {
+    "collaborative": "Similaire",
+    "content": "Vos critères",
+    "trending": "Tendance",
+    "geo": "Proche",
+    "trust": "Confiance",
+    "hybrid": "Recommandé",
+    "discover": "Découverte",
+    "recent": "Nouveau",
+    "explore": "Explorer",
+    "match": "match"
+  },
+  "topRanked": {
+    "subtitle": "Classement",
+    "title": "Top propriétés",
+    "description": "Les biens les mieux notés selon notre algorithme de scoring."
+  },
+  "trust": {
+    "verified": "Biens vérifiés",
+    "verifiedDesc": "Contrôle qualité et propriétaires validés",
+    "premium": "Sélection premium",
+    "premiumDesc": "Riads, villas et appartements haut standing",
+    "support": "Support local",
+    "supportDesc": "Accompagnement humain au Maroc",
+    "ai": "Recherche IA",
+    "aiDesc": "Filtres rapides et recommandations utiles"
+  },
+  "empty": {
+    "action": {
+      "explore": "Explorer",
+      "retry": "Réessayer",
+      "browse": "Parcourir les annonces",
+      "addProperty": "Ajouter une propriété",
+      "clearSearch": "Voir tous les biens"
+    },
+    "properties": {
+      "title": "Aucune propriété",
+      "description": "Aucun bien ne correspond à votre recherche."
+    },
+    "search": {
+      "title": "Aucun résultat",
+      "description": "Essayez d'autres mots-clés, une ville différente, ou laissez notre IA vous aider à trouver."
+    },
+    "favorites": {
+      "title": "Votre sélection est vide",
+      "description": "Sauvegardez les biens qui vous plaisent en tapant sur le cœur. Retrouvez-les ici à tout moment."
+    },
+    "messages": {
+      "title": "Pas encore de messages",
+      "description": "Contactez un propriétaire depuis une fiche bien. Vos conversations apparaîtront ici."
+    },
+    "dashboard": {
+      "title": "Commencez à publier",
+      "description": "Vos propriétés apparaîtront ici. Ajoutez votre première annonce et touchez des milliers de locataires et acheteurs."
+    },
+    "notifications": {
+      "title": "Aucune notification",
+      "description": "Vous serez notifié des nouvelles annonces et messages."
+    },
+    "map": {
+      "title": "Aucune localisation",
+      "description": "Les informations de localisation ne sont pas disponibles pour ce bien."
+    },
+    "reviews": {
+      "title": "Aucun avis",
+      "description": "Soyez le premier à partager votre expérience."
+    },
+    "generic": {
+      "title": "Rien à afficher",
+      "description": "Revenez plus tard."
+    },
+    "aiSuggestion": {
+      "search": "Essayez : 'Villa avec piscine à Marrakech' ou 'Appartement moderne Casablanca'",
+      "favorites": "L'IA peut vous suggérer des biens similaires à ceux que vous avez consultés",
+      "dashboard": "Les annonces avec photos professionnelles reçoivent 5x plus de contacts"
+    }
+  },
+  "notifications": {
+    "title": "Notifications",
+    "adminTitle": "Centre de notifications",
+    "markAllRead": "Tout marquer comme lu",
+    "searchPlaceholder": "Rechercher une notification...",
+    "status": {
+      "all": "Tous",
+      "unread": "Non lus",
+      "read": "Lus",
+      "archived": "Archivés"
+    },
+    "types": {
+      "ALL": "Tous les types",
+      "NEW_MESSAGE": "Nouveau message",
+      "RESERVATION_CREATED": "Réservation créée",
+      "PURCHASE_CREATED": "Achat créé",
+      "PROPERTY_APPROVED": "Propriété approuvée",
+      "PROPERTY_REJECTED": "Propriété rejetée",
+      "VISIT_SCHEDULED": "Visite planifiée",
+      "VISIT_CONFIRMED": "Visite confirmée",
+      "ADVERTISEMENT_APPROVED": "Annonce approuvée",
+      "PAYMENT_CMI_SUCCESS": "Paiement CMI réussi",
+      "PAYMENT_STRIPE_SUCCESS": "Paiement Stripe réussi",
+      "PAYMENT_FAILED": "Paiement échoué",
+      "AI_RECOMMENDATION": "Recommandation IA",
+      "SYSTEM_ANNOUNCEMENT": "Annonce système"
+    },
+    "total": "Total",
+    "unread": "Non lus",
+    "read": "Lus",
+    "empty": "Aucune notification",
+    "loadMore": "Charger plus",
+    "markAsRead": "Marquer comme lu",
+    "delete": "Supprimer",
+    "seeAll": "Voir tout",
+    "disconnected": "Déconnecté"
+  },
+  "search": {
+    "noResultsFor": "Aucun résultat pour \"{{term}}\"",
+    "placeholder": "Rechercher un bien, une ville, un quartier...",
+    "recent": "Récent",
+    "trending": "Tendance",
+    "city": "Ville",
+    "neighborhood": "Quartier",
+    "type": "Type",
+    "aiSearch": "Recherche IA : \"{{query}}\"",
+    "aiPowered": "Propulsé par IA",
+    "recentSearches": "Recherches récentes",
+    "clear": "Effacer",
+    "noSuggestions": "Aucune suggestion. Appuyez sur Entrée pour rechercher.",
+    "keyboardNav": "Appuyez sur",
+    "keyboardNavSuffix": "pour naviguer",
+    "enter": "Entrée",
+    "keyboardSelect": "pour sélectionner",
+    "aiResultsFor": "Résultats IA pour \"{{query}}\"",
+    "noResults": "Aucun résultat trouvé. Essayez d'autres mots-clés.",
+    "bedroomsShort": "ch."
+  },
+  "inbox": {
+    "title": "Messages",
+    "online": "En ligne",
+    "offline": "Hors ligne",
+    "reconnecting": "Reconnexion...",
+    "pollingMode": "Mode hors ligne : les messages seront synchronisés à la reconnexion",
+    "selectConversation": "Sélectionnez une conversation",
+    "selectContact": "Choisissez un contact pour commencer à discuter",
+    "searchPlaceholder": "Rechercher une conversation...",
+    "messagePlaceholder": "Écrire un message...",
+    "typing": "{{name}} écrit...",
+    "loadMore": "Faites défiler pour voir plus",
+    "roleAdmin": "Admin",
+    "roleOwner": "Propriétaire",
+    "roleTenant": "Locataire",
+    "reTo": "Re : {{title}}",
+    "today": "Aujourd'hui",
+    "yesterday": "Hier",
+    "messageSent": "Message envoyé avec succès",
+    "sendError": "Erreur lors de l'envoi",
+    "deleteSuccess": "Message supprimé",
+    "deleteError": "Erreur de suppression",
+    "confirmDelete": "Supprimer ce message ?"
+  },
+  "reviews": {
+    "published": "Avis publié",
+    "publishError": "Erreur lors de la publication"
+  }
+}

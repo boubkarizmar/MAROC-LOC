@@ -1,0 +1,50 @@
+# Core framework
+setuptools>=70.0.0
+
+fastapi==0.109.0
+prometheus-fastapi-instrumentator==7.0.0
+uvicorn[standard]==0.27.0
+python-multipart==0.0.6
+pydantic==2.5.3
+pydantic-settings==2.1.0
+slowapi==0.1.9
+
+# PyTorch CPU-only (prevent massive CUDA packages)
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch==2.1.2+cpu
+torchvision==0.16.2+cpu
+
+# ML / NLP
+transformers==4.30.2
+sentence-transformers==2.2.2
+huggingface_hub==0.16.4
+accelerate==0.25.0
+sentencepiece==0.1.99
+protobuf==3.20.3
+
+# Vector DB
+chromadb==0.4.22
+faiss-cpu==1.7.4
+
+# Data processing
+numpy==1.26.3
+pandas==2.1.4
+scipy==1.11.4
+
+# Voice
+librosa==0.10.1
+soundfile==0.12.1
+
+# Caching / Sessions
+redis==5.0.1
+
+# Database
+sqlalchemy>=2.0.20
+psycopg2-binary>=2.9.9
+
+# MLOps
+mlflow==2.9.2
+
+# Environment
+python-dotenv==1.0.0
+edge-tts>=6.1.0

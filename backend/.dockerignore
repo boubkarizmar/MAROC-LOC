@@ -1,0 +1,22 @@
+# Security
+*.pem
+*.key
+*.crt
+
+# Backups
+*.bak
+*.backup
+*.old
+
+# Kubernetes
+k8s/
+helm/
+
+# Terraform
+*.tfstate
+*.tfstate.*
+.terraform/
+
+# Secrets
+secrets/
+*.secret

@@ -1,0 +1,41 @@
+@startuml
+package "Frontend" {
+  [React Web App]
+  [Flutter Mobile/Web]
+}
+
+package "Backend" {
+  [Auth Service]
+  [Property Service]
+  [Recommendation Service]
+  [Payment Service]
+  [Messaging Service]
+  [WebSocket/STOMP]
+  [Kafka No-Op Config]
+}
+
+package "AI Service" {
+  [Smart Chat Router]
+  [RAG Pipeline]
+  [Vector Store (ChromaDB)]
+  [Whisper]
+  [Recommendation Engine]
+}
+
+package "Data" {
+  [PostgreSQL]
+  [Redis]
+  [Kafka (optionnel)]
+}
+
+[React Web App] --> [Auth Service] : REST
+[Flutter Mobile/Web] --> [Auth Service] : REST
+[React Web App] --> [WebSocket/STOMP] : STOMP
+[Flutter Mobile/Web] --> [WebSocket/STOMP] : STOMP
+[Recommendation Service] --> [PostgreSQL]
+[Payment Service] --> [PostgreSQL]
+[Recommendation Service] --> [Redis]
+[Smart Chat Router] --> [PostgreSQL]
+[RAG Pipeline] --> [Vector Store (ChromaDB)]
+[Backend] --> [Kafka (optionnel)] : non actif
+@enduml

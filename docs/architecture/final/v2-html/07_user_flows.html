@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MAROC-LOC — Flux Utilisateurs</title>
+<style>
+  :root {
+    --bg: #0a0e27;
+    --bg-elevated: #0f1635;
+    --bg-card: rgba(255,255,255,0.03);
+    --border: rgba(255,255,255,0.08);
+    --text: #e2e8f0;
+    --text-secondary: #94a3b8;
+    --accent-blue: #3b82f6;
+    --accent-purple: #8b5cf6;
+    --accent-gradient: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    --font-body: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    --radius: 12px;
+    --shadow: 0 4px 24px rgba(0,0,0,0.3);
+    --shadow-hover: 0 12px 40px rgba(0,0,0,0.4);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  [data-theme="light"] {
+    --bg: #f8fafc;
+    --bg-elevated: #ffffff;
+    --bg-card: rgba(255,255,255,0.7);
+    --border: rgba(0,0,0,0.08);
+    --text: #0f172a;
+    --text-secondary: #64748b;
+    --shadow: 0 4px 24px rgba(0,0,0,0.08);
+    --shadow-hover: 0 12px 40px rgba(0,0,0,0.12);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    transition: background 0.3s, color 0.3s;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3 { font-weight: 700; letter-spacing: -0.02em; }
+  h1 { font-size: clamp(2rem, 5vw, 3.5rem); }
+  h2 { font-size: clamp(1.25rem, 3vw, 1.75rem); margin-top: 2.5rem; margin-bottom: 1rem; display:flex; align-items:center; gap:0.5rem; }
+  h2 .num { background: var(--accent-gradient); color:#fff; width:32px; height:32px; border-radius:8px; display:inline-flex; align-items:center; justify-content:center; font-size:0.875rem; font-family:var(--font-mono); flex-shrink:0; }
+  h3 { font-size: 1.125rem; margin-top: 1.5rem; margin-bottom: 0.75rem; }
+  p { margin-bottom: 1rem; color: var(--text-secondary); font-size: 0.9375rem; }
+  ul { margin-bottom: 1rem; padding-left: 1.25rem; color: var(--text-secondary); }
+  li { margin-bottom: 0.35rem; }
+  a { color: var(--accent-blue); text-decoration: none; }
+  code, pre { font-family: var(--font-mono); font-size: 0.875rem; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+  .main-grid { display: grid; grid-template-columns: 220px 1fr; gap: 2rem; padding: 2rem 1.5rem; max-width: 1200px; margin: 0 auto; }
+  @media (max-width: 900px) { .main-grid { grid-template-columns: 1fr; padding: 1rem; } }
+  .sidebar { position: sticky; top: 80px; height: calc(100vh - 100px); overflow-y: auto; display: none; }
+  @media (min-width: 900px) { .sidebar { display: block; } }
+  .sidebar-title { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-secondary); margin-bottom: 1rem; font-weight: 700; }
+  .sidebar ul { list-style: none; }
+  .sidebar li { margin-bottom: 0.25rem; }
+  .sidebar a { display: block; padding: 0.4rem 0.6rem; border-radius: 6px; color: var(--text-secondary); font-size: 0.8125rem; transition: var(--transition); border: 1px solid transparent; }
+  .sidebar a:hover, .sidebar a.active { background: var(--bg-card); color: var(--text); border-color: var(--border); }
+  .header { position: sticky; top: 0; z-index: 50; background: rgba(10,14,39,0.8); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+  [data-theme="light"] .header { background: rgba(248,250,252,0.8); }
+  .header-inner { display: flex; align-items: center; justify-content: space-between; max-width: 1200px; margin: 0 auto; padding: 0.875rem 1.5rem; }
+  .logo { font-weight: 800; background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 1.125rem; letter-spacing: -0.02em; }
+  .nav-links { display: none; gap: 1.25rem; }
+  @media (min-width: 900px) { .nav-links { display: flex; } }
+  .nav-links a { color: var(--text-secondary); font-size: 0.875rem; font-weight: 500; }
+  .nav-links a:hover { color: var(--text); }
+  .hamburger { display: block; background: none; border: none; color: var(--text); cursor: pointer; padding: 0.25rem; }
+  @media (min-width: 900px) { .hamburger { display: none; } }
+  .mobile-nav { display: none; position: fixed; inset: 0; background: var(--bg); z-index: 40; padding: 5rem 1.5rem; flex-direction: column; gap: 0; }
+  .mobile-nav.open { display: flex; }
+  .mobile-nav a { display: block; padding: 1rem 0; font-size: 1.25rem; border-bottom: 1px solid var(--border); color: var(--text); }
+  .hero { padding: 4rem 1.5rem 3rem; text-align: center; border-bottom: 1px solid var(--border); }
+  .hero h1 { background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 0.75rem; }
+  .hero p { max-width: 640px; margin: 0 auto; font-size: 1.125rem; }
+  .toc-bar { position: sticky; top: 57px; z-index: 30; background: var(--bg-elevated); border-bottom: 1px solid var(--border); overflow-x: auto; }
+  .toc-bar-inner { display: flex; gap: 1rem; padding: 0.75rem 1.5rem; max-width: 1200px; margin: 0 auto; white-space: nowrap; }
+  .toc-bar a { font-size: 0.8125rem; color: var(--text-secondary); font-weight: 500; }
+  .toc-bar a:hover { color: var(--text); }
+  .card {
+    background: var(--bg-card);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+  }
+  .card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); border-color: rgba(255,255,255,0.15); }
+  [data-theme="light"] .card:hover { border-color: rgba(0,0,0,0.15); }
+  .card h3 { margin-top: 0; }
+  .badge { display: inline-block; padding: 0.2rem 0.5rem; border-radius: 6px; background: rgba(59,130,246,0.12); color: var(--accent-blue); font-size: 0.6875rem; font-weight: 700; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
+  .badge-purple { background: rgba(139,92,246,0.12); color: var(--accent-purple); }
+  .badge-green { background: rgba(34,197,94,0.12); color: #22c55e; }
+  .flow-container { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0.5rem; margin: 1.5rem 0; }
+  .flow-step {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1rem 1.25rem;
+    min-width: 140px;
+    max-width: 260px;
+    text-align: center;
+    font-size: 0.875rem;
+    font-weight: 600;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+  }
+  .flow-step:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); border-color: var(--accent-blue); }
+  .flow-step .step-meta { font-family: var(--font-mono); font-size: 0.6875rem; color: var(--text-secondary); margin-bottom: 0.25rem; text-transform: uppercase; letter-spacing: 0.05em; }
+  .flow-step ul { list-style: none; padding: 0; margin: 0.5rem 0 0; text-align: left; font-size: 0.75rem; color: var(--text-secondary); font-weight: 400; }
+  .flow-step ul li { margin-bottom: 0.2rem; padding-left: 0.75rem; position: relative; }
+  .flow-step ul li::before { content: '•'; position: absolute; left: 0; color: var(--accent-blue); }
+  .arrow { display: flex; align-items: center; justify-content: center; color: var(--accent-blue); flex-shrink: 0; }
+  .arrow svg { width: 22px; height: 22px; }
+  .flow-vertical { flex-direction: column; }
+  .flow-vertical .arrow { transform: rotate(90deg); margin: 0.25rem 0; }
+  .search-flow { display: flex; flex-direction: column; align-items: center; gap: 0.75rem; margin: 1.5rem 0; }
+  .search-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0.5rem; }
+  .search-branches { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; width: 100%; }
+  .branch { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+  .auth-flow { display: flex; flex-direction: column; align-items: center; gap: 1rem; margin: 1.5rem 0; }
+  .auth-branches { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; width: 100%; }
+  @media (max-width: 640px) { .auth-branches { grid-template-columns: 1fr; } }
+  .auth-converge { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; width: 100%; }
+  .table-wrap { overflow-x: auto; border-radius: var(--radius); border: 1px solid var(--border); margin-bottom: 1.5rem; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
+  th, td { padding: 0.65rem 0.875rem; text-align: left; border-bottom: 1px solid var(--border); }
+  th { background: var(--accent-gradient); color: #fff; font-weight: 600; text-transform: uppercase; font-size: 0.6875rem; letter-spacing: 0.08em; white-space: nowrap; }
+  tr:last-child td { border-bottom: none; }
+  tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+  [data-theme="light"] tr:nth-child(even) { background: rgba(0,0,0,0.02); }
+  td svg { display: block; margin: 0 auto; }
+  .theme-toggle { background: var(--bg-card); border: 1px solid var(--border); color: var(--text); border-radius: 8px; padding: 0.5rem; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+  .footer { text-align: center; padding: 3rem 1.5rem; color: var(--text-secondary); font-size: 0.8125rem; border-top: 1px solid var(--border); margin-top: 2rem; }
+  .skip-card { border-style: dashed; border-color: rgba(255,255,255,0.2); color: var(--text-secondary); font-size: 0.8125rem; }
+  [data-theme="light"] .skip-card { border-color: rgba(0,0,0,0.2); }
+</style>
+</head>
+<body>
+<svg style="display:none;">
+  <defs>
+    <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-arrow-down" viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke="#22c55e" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12" stroke="#ef4444" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2" fill="none"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  </defs>
+</svg>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="logo">MAROC-LOC</div>
+    <nav class="nav-links">
+      <a href="#onboarding">Onboarding</a>
+      <a href="#search">Recherche</a>
+      <a href="#recommendation">Recommandation</a>
+      <a href="#chatbot">Chatbot</a>
+      <a href="#creation">Création</a>
+      <a href="#payment">Paiement</a>
+      <a href="#auth">Authentification</a>
+      <a href="#matrix">Matrice</a>
+    </nav>
+    <div style="display:flex; gap:0.5rem; align-items:center;">
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+        <svg width="20" height="20"><use href="#i-sun"/></svg>
+      </button>
+      <button class="hamburger" id="menu-btn" aria-label="Menu">
+        <svg width="24" height="24"><use href="#i-menu"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-nav" id="mobile-nav">
+  <button class="hamburger" id="close-nav" style="position:absolute; top:1rem; right:1.5rem;" aria-label="Close menu">
+    <svg width="24" height="24"><use href="#i-close"/></svg>
+  </button>
+  <a href="#onboarding">Onboarding</a>
+  <a href="#search">Recherche</a>
+  <a href="#recommendation">Recommandation</a>
+  <a href="#chatbot">Chatbot</a>
+  <a href="#creation">Création</a>
+  <a href="#payment">Paiement</a>
+  <a href="#auth">Authentification</a>
+  <a href="#matrix">Matrice des Rôles</a>
+</div>
+
+<section class="hero">
+  <h1>MAROC-LOC — Flux Utilisateurs</h1>
+  <p>Parcours utilisateurs complets de la plateforme PropTech MAROC-LOC — de l'onboarding au paiement, en passant par l'IA et la recommandation.</p>
+</section>
+
+<div class="toc-bar">
+  <div class="toc-bar-inner">
+    <a href="#onboarding">1. Onboarding</a>
+    <a href="#search">2. Recherche</a>
+    <a href="#recommendation">3. Recommandation</a>
+    <a href="#chatbot">4. Chatbot</a>
+    <a href="#creation">5. Création</a>
+    <a href="#payment">6. Paiement</a>
+    <a href="#auth">7. Auth</a>
+    <a href="#matrix">Matrice</a>
+  </div>
+</div>
+
+<div class="main-grid">
+  <aside class="sidebar">
+    <div class="sidebar-title">Navigation</div>
+    <ul>
+      <li><a href="#onboarding">1. Onboarding</a></li>
+      <li><a href="#search">2. Property Search</a></li>
+      <li><a href="#recommendation">3. Recommendation</a></li>
+      <li><a href="#chatbot">4. Chatbot</a></li>
+      <li><a href="#creation">5. Property Creation</a></li>
+      <li><a href="#payment">6. Payment Flow</a></li>
+      <li><a href="#auth">7. Authentication</a></li>
+      <li><a href="#matrix">Matrice des Rôles</a></li>
+    </ul>
+  </aside>
+
+  <main>
+    <section id="onboarding" class="card">
+      <h2><span class="num">1</span> Onboarding Flow</h2>
+      <div class="flow-container">
+        <div class="flow-step">
+          <div class="step-meta">Splash</div>
+          <div>Splash Screen</div>
+          <div style="font-size:0.75rem; color:var(--text-secondary); margin-top:0.25rem;">(15s)</div>
+        </div>
+        <div class="arrow"><svg><use href="#i-arrow-right"/></svg></div>
+        <div class="flow-step">
+          <div class="step-meta">Langue</div>
+          <div>Language Select</div>
+          <div style="font-size:0.75rem; color:var(--text-secondary); margin-top:0.25rem;">fr / ar</div>
+        </div>
+        <div class="arrow"><svg><use href="#i-arrow-right"/></svg></div>
+        <div style="display:flex; flex-direction:column; align-items:center; gap:0.5rem;">
+          <div class="flow-step">
+            <div class="step-meta">Rôle</div>
+            <div>Role Select</div>
+            <div style="font-size:0.75rem; color:var(--text-secondary); margin-top:0.25rem;">locataire / propriétaire</div>
+          </div>
+          <div class="arrow" style="transform:rotate(90deg);"><svg><use href="#i-arrow-right"/></svg></div>
+          <div class="flow-step skip-card">
+            <div class="step-meta">Skip</div>
+            <div>Skip Button</div>
+            <div style="font-size:0.75rem; margin-top:0.25rem;">(after 5s)</div>
+          </div>
+        </div>
+        <div class="arrow"><svg><use href="#i-arrow-right"/></svg></div>
+        <div class="flow-step">
+          <div class="step-meta">Ville</div>
+          <div>City Select</div>
+          <div style="font-size:0.75rem; color:var(--text-secondary); margin-top:0.25rem;">optional</div>
+        </div>
+        <div class="arrow"><svg><use href="#i-arrow-right"/></svg></div>
+        <div class="flow-step">
+          <div class="step-meta">Accueil</div>
+          <div>Home Feed</div>
+        </div>
+      </div>
+      <h3>Détails</h3>
+      <ul>
+        <li><strong>Splash Screen</strong> : Vidéo de fond + logo animé + 3 features pills</li>
+        <li><strong>Language Select</strong> : Français / العربية (avec preview RTL)</li>
+        <li><strong>Role Select</strong> : Locataire (recherche) / Propriétaire (annonce)</li>
+        <li><strong>City Select</strong> : Casablanca, Rabat, Marrakech, Tanger, Agadir (géolocalisation optionnelle)</li>
+        <li><strong>Home Feed</strong> : Recommendations personnalisées basées sur le rôle</li>
+      </ul>
+    </section>
+
+    <section id="search" class="card">
+      <h2><span class="num">2</span> Property Search Flow</h2>
+      <div class="search-flow">
+        <div class="search-row">
+          <div class="flow-step"><div class="step-meta">Accueil</div><div>Home</div></div>
+          <div class="arrow"><svg><use href="#i-arrow-right"/></svg></div>
+          <div class="flow-step"><div class="step-meta">IA</div><div>Predictive Search</div></div>
+          <div class="arrow"><svg><use href="#i-arrow-right"/></svg></div>
+          <div class="flow-step"><div class="step-meta">Page</div><div>Search Page</div></div>
+          <div class="arrow"><svg><use href="#i-arrow-right"/></svg></div>
+          <div class="flow-step"><div class="step-meta">Filtres</div><div>Filter Panel</div></div>
+          <div class="arrow"><svg><use href="#i-arrow-right"/></svg></div>
+          <div class="flow-step"><div class="step-meta">Résultats</div><div>Results Page</div></div>
+        </div>
+        <div class="arrow" style="transform:rotate(90deg);"><svg><use href="#i-arrow-right"/></svg></div>
+        <div class="flow-step" style="max-width:200px;"><div class="step-meta">Détail</div><div>Property Detail</div></div>
+        <div class="arrow" style="transform:rotate(90deg);"><svg><use href="#i-arrow-right"/></svg></div>
+        <div class="search-branches">
+          <div class="branch">
+            <div class="flow-step"><div class="step-meta">Contact</div><div>Contact Owner</div></div>
+            <div class="arrow" style="transform:rotate(90deg);"><svg><use href="#i-arrow-right"/></svg></div>
+            <div class="flow-step"><div class="step-meta">Envoyé</div><div>Message Sent</div></div>
+          </div>
+          <div class="branch">
+            <div class="flow-step"><div class="step-meta">Favoris</div><div>Add to Favorite</div></div>
+            <div class="arrow" style="transform:rotate(90deg);"><svg><use href="#i-arrow-right"/></svg></div>
+            <div class="flow-step"><div class="step-meta">Sauvé</div><div>Favorite Saved</div></div>
+          </div>
+          <div class="branch">
+            <div class="flow-step"><div class="step-meta">Visite</div><div>Schedule Visit</div></div>
+            <div class="arrow" style="transform:rotate(90deg);"><svg><use href="#i-arrow-right"/></svg></div>
+            <div class="flow-step"><div class="step-meta">Réservé</div><div>Visit Booked</div></div>
+          </div>
+        </div>
+      </div>
+      <h3>Détails</h3>
+      <ul>
+        <li><strong>Predictive Search</strong> : Suggestions AI avec historique récent + trending</li>
+        <li><strong>Filter Panel</strong> : Ville, prix min/max, type, surface, chambres, équipements</li>
+        <li><strong>Results</strong> : Grille 2-3 colonnes + carte interactive (Leaflet)</li>
+        <li><strong>Property Detail</strong> : Galerie photos, info propriétaire, avis, calculatrice crédit</li>
+        <li><strong>Contact Owner</strong> : Formulaire pré-rempli ou chat direct</li>
+      </ul>
+    </section>
+    <section id="recommendation" class="card">
+      <h2><span class="num">3</span> Recommendation Flow</h2>
+      <p style="margin-bottom:1rem;">Flux de recommandation personnalisée orchestré par le backend avec feedback loop.</p>
+      <div class="flow-container flow-vertical">
+        <div class="flow-step" style="width:100%; max-width:480px;">
+          <span class="badge badge-green">User</span>
+          <div>Load Homepage</div>
+        </div>
+        <div class="arrow"><svg><use href="#i-arrow-right"/></svg></div>
+        <div class="flow-step" style="width:100%; max-width:480px;">
+          <span class="badge">Backend</span>
+          <div>Check Auth</div>
+        </div>
+        <div class="arrow"><svg><use href="#i-arrow-right"/></svg></div>
+        <div class="flow-step" style="width:100%; max-width:480px;">
+          <span class="badge">Backend</span>
+          <div>Build Profile (favorites / views)</div>
+        </div>
+        <div class="arrow"><svg><use href="#i-arrow-right"/></svg></div>
+        <div class="flow-step" style="width:100%; max-width:480px;">
+          <span class="badge">Backend</span>
+          <div>Find Similar Users (Jaccard sim)</div>
+        </div>
+        <div class="arrow"><svg><use href="#i-arrow-right"/></svg></div>
+        <div class="flow-step" style="width:100%; max-width:480px;">
+          <span class="badge">Backend</span>
+          <div>Score Candidates (hybrid formula)</div>
+        </div>
+        <div class="arrow"><svg><use href="#i-arrow-right"/></svg></div>
+        <div class="flow-step" style="width:100%; max-width:480px;">
+          <span class="badge">Backend</span>
+          <div>Apply MMR Diversity</div>
+        </div>
+        <div class="arrow"><svg><use href="#i-arrow-right"/></svg></div>
+        <div class="flow-step" style="width:100%; max-width:480px;">
+          <span class="badge">Backend</span>
+          <div>Cache (Redis)</div>
+        </div>
+        <div class="arrow"><svg><use href="#i-arrow-right"/></svg></div>
+        <div class="flow-step" style="width:100%; max-width:480px;">
+          <span class="badge badge-purple">Frontend</span>
+          <div>Display Recommendations</div>
+          <ul>
+            <li>Property Cards</li>
+            <li>+ Score</li>
+            <li>+ Reasons</li>
+          </ul>
+        </div>
+        <div class="arrow"><svg><use href="#i-arrow-right"/></svg></div>
+        <div class="flow-step" style="width:100%; max-width:480px;">
+          <span class="badge">Backend</span>
+          <div>Track Impressions (IntersectionObserver)</div>
+        </div>
+        <div class="arrow"><svg><use href="#i-arrow-right"/></svg></div>
+        <div class="flow-step" style="width:100%; max-width:480px;">
+          <span class="badge badge-green">User</span>
+          <div>Click Property</div>
+        </div>
+        <div class="arrow"><svg><use href="#i-arrow-right"/></svg></div>
+        <div class="flow-step" style="width:100%; max-width:480px;">
+          <span class="badge">Backend</span>
+          <div>Track Click (feedback loop)</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="chatbot" class="card">
+      <h2><span class="num">4</span> Chatbot Flow</h2>
+      <div class="flow-container">
+        <div class="flow-step"><div class="step-meta">Utilisateur</div><div>User Input</div></div>
+        <div class="arrow"><svg><use href="#i-arrow-right"/></svg></div>
+        <div class="flow-step"><div class="step-meta">Widget</div><div>Chat Widget</div></div>
+        <div class="arrow"><svg><use href="#i-arrow-right"/></svg></div>
+        <div class="flow-step"><div class="step-meta">IA</div><div>AI Engine</div></div>
+        <div class="arrow"><svg><use href="#i-arrow-right"/></svg></div>
+        <div class="flow-step"><div class="step-meta">Affichage</div><div>Response Display</div></div>
+      </div>
+      <h3>Pipeline Interne AI</h3>
+      <div class="flow-container flow-vertical" style="margin-top:1rem;">
+        <div class="flow-step" style="width:100%; max-width:480px;"><span class="badge">Input</span><div>Text Input</div></div>
+        <div class="arrow"><svg><use href="#i-arrow-right"/></svg></div>
+        <div class="flow-step" style="width:100%; max-width:480px;"><span class="badge">Input</span><div>Voice Input</div></div>
+        <div class="arrow"><svg><use href="#i-arrow-right"/></svg></div>
+        <div class="flow-step" style="width:100%; max-width:480px;"><span class="badge">NLP</span><div>Language Detection (fr / ar / en / darija)</div></div>
+        <div class="arrow"><svg><use href="#i-arrow-right"/></svg></div>
+        <div class="flow-step" style="width:100%; max-width:480px;"><span class="badge">NLP</span><div>Intent Classification (SEARCH / PRICE / HELP)</div></div>
+        <div class="arrow"><svg><use href="#i-arrow-right"/></svg></div>
+        <div class="flow-step" style="width:100%; max-width:480px;"><span class="badge">RAG</span><div>Vector Search (ChromaDB)</div></div>
+        <div class="arrow"><svg><use href="#i-arrow-right"/></svg></div>
+        <div class="flow-step" style="width:100%; max-width:480px;"><span class="badge">DB</span><div>PostgreSQL Validation</div></div>
+        <div class="arrow"><svg><use href="#i-arrow-right"/></svg></div>
+        <div class="flow-step" style="width:100%; max-width:480px;"><span class="badge">Gen</span><div>Response Generation (FLAN-T5)</div></div>
+        <div class="arrow"><svg><use href="#i-arrow-right"/></svg></div>
+        <div class="flow-step" style="width:100%; max-width:480px;"><span class="badge">Output</span><div>Multilingual Response</div></div>
+        <div class="arrow"><svg><use href="#i-arrow-right"/></svg></div>
+        <div class="flow-step" style="width:100%; max-width:480px;"><span class="badge">UI</span><div>Property Cards (if results)</div></div>
+        <div class="arrow"><svg><use href="#i-arrow-right"/></svg></div>
+        <div class="flow-step" style="width:100%; max-width:480px;"><span class="badge">UI</span><div>Quick Reply Buttons</div></div>
+        <div class="arrow"><svg><use href="#i-arrow-right"/></svg></div>
+        <div class="flow-step" style="width:100%; max-width:480px;"><span class="badge">Feedback</span><div>Feedback (👍 / 👎)</div></div>
+      </div>
+    </section>
+    <section id="creation" class="card">
+      <h2><span class="num">5</span> Property Creation Flow (Propriétaire)</h2>
+      <div class="flow-container" style="align-items:stretch;">
+        <div class="flow-step" style="flex:1 1 140px; max-width:200px;">
+          <div class="step-meta">Départ</div>
+          <div>Dashboard</div>
+        </div>
+        <div class="arrow"><svg><use href="#i-arrow-right"/></svg></div>
+        <div class="flow-step" style="flex:1 1 140px; max-width:200px;">
+          <div class="step-meta">Step 1</div>
+          <div>Basic Info</div>
+          <ul>
+            <li>Title</li>
+            <li>Category</li>
+            <li>Type</li>
+            <li>Price</li>
+            <li>Description</li>
+          </ul>
+        </div>
+        <div class="arrow"><svg><use href="#i-arrow-right"/></svg></div>
+        <div class="flow-step" style="flex:1 1 140px; max-width:200px;">
+          <div class="step-meta">Step 2</div>
+          <div>Features &amp; Amenities</div>
+          <ul>
+            <li>Surface</li>
+            <li>Rooms</li>
+            <li>Bedrooms</li>
+            <li>Bathrooms</li>
+            <li>Amenities</li>
+          </ul>
+        </div>
+        <div class="arrow"><svg><use href="#i-arrow-right"/></svg></div>
+        <div class="flow-step" style="flex:1 1 140px; max-width:200px;">
+          <div class="step-meta">Step 3</div>
+          <div>Location &amp; Contact</div>
+          <ul>
+            <li>Address</li>
+            <li>City</li>
+            <li>Lat / Lng</li>
+            <li>Phone</li>
+            <li>WhatsApp</li>
+          </ul>
+        </div>
+        <div class="arrow"><svg><use href="#i-arrow-right"/></svg></div>
+        <div class="flow-step" style="flex:1 1 140px; max-width:200px;">
+          <div class="step-meta">Step 4</div>
+          <div>Media Upload</div>
+          <ul>
+            <li>Images (drag &amp; drop)</li>
+            <li>Video (optional)</li>
+          </ul>
+        </div>
+      </div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:0.5rem; margin-top:1rem;">
+        <div class="arrow" style="transform:rotate(90deg);"><svg><use href="#i-arrow-right"/></svg></div>
+        <div class="flow-step" style="max-width:320px; width:100%;">
+          <div class="step-meta">IA</div>
+          <div>AI Price Suggestion (optional)</div>
+        </div>
+        <div class="arrow" style="transform:rotate(90deg);"><svg><use href="#i-arrow-right"/></svg></div>
+        <div class="flow-step" style="max-width:320px; width:100%;">
+          <div class="step-meta">Validation</div>
+          <div>Preview &amp; Submit</div>
+        </div>
+        <div class="arrow" style="transform:rotate(90deg);"><svg><use href="#i-arrow-right"/></svg></div>
+        <div class="flow-step" style="max-width:320px; width:100%;">
+          <div class="step-meta">Admin</div>
+          <div>Pending Approval (Admin)</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="payment" class="card">
+      <h2><span class="num">6</span> Payment Flow (CMI Integration)</h2>
+      <div class="flow-container" style="align-items:stretch;">
+        <div class="flow-step" style="flex:1 1 140px; max-width:200px;">
+          <div class="step-meta">Plan</div>
+          <div>Select Plan</div>
+        </div>
+        <div class="arrow"><svg><use href="#i-arrow-right"/></svg></div>
+        <div class="flow-step" style="flex:1 1 140px; max-width:200px;">
+          <div class="step-meta">Formulaire</div>
+          <div>Payment Form</div>
+          <ul>
+            <li>Card Info</li>
+            <li>Amount</li>
+            <li>Currency</li>
+          </ul>
+        </div>
+        <div class="arrow"><svg><use href="#i-arrow-right"/></svg></div>
+        <div class="flow-step" style="flex:1 1 140px; max-width:200px;">
+          <div class="step-meta">Gateway</div>
+          <div>CMI Gateway</div>
+          <div style="font-size:0.75rem; color:var(--text-secondary); margin-top:0.25rem;">(3D Secure)</div>
+          <ul>
+            <li>Bank Auth</li>
+            <li>SMS Code</li>
+          </ul>
+        </div>
+        <div class="arrow"><svg><use href="#i-arrow-right"/></svg></div>
+        <div class="flow-step" style="flex:1 1 140px; max-width:200px;">
+          <div class="step-meta">Résultat</div>
+          <div>Payment Result</div>
+          <ul>
+            <li>Webhook Callback</li>
+            <li>Async</li>
+          </ul>
+        </div>
+        <div class="arrow"><svg><use href="#i-arrow-right"/></svg></div>
+        <div class="flow-step" style="flex:1 1 140px; max-width:200px;">
+          <div class="step-meta">Succès</div>
+          <div>Success Page</div>
+        </div>
+      </div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:0.5rem; margin-top:1rem;">
+        <div class="arrow" style="transform:rotate(90deg);"><svg><use href="#i-arrow-right"/></svg></div>
+        <div class="flow-step" style="max-width:320px; width:100%;">
+          <div class="step-meta">Reçu</div>
+          <div>Receipt / Email / Invoice</div>
+        </div>
+      </div>
+    </section>
+    <section id="auth" class="card">
+      <h2><span class="num">7</span> Authentication Flow</h2>
+      <div class="auth-flow">
+        <div class="search-row">
+          <div class="flow-step"><div class="step-meta">État</div><div>Guest State</div></div>
+          <div class="arrow"><svg><use href="#i-arrow-right"/></svg></div>
+          <div class="flow-step"><div class="step-meta">Flux</div><div>Login Flow</div></div>
+        </div>
+        <div class="auth-branches">
+          <div class="branch">
+            <div class="flow-step" style="width:100%;"><div class="step-meta">Méthode 1</div><div>Email / Password</div></div>
+            <div class="arrow" style="transform:rotate(90deg);"><svg><use href="#i-arrow-right"/></svg></div>
+            <div class="flow-step" style="width:100%;"><div class="step-meta">Validation</div><div>Validate JWT</div></div>
+          </div>
+          <div class="branch">
+            <div class="flow-step" style="width:100%;"><div class="step-meta">Méthode 2</div><div>Google OAuth</div></div>
+            <div class="arrow" style="transform:rotate(90deg);"><svg><use href="#i-arrow-right"/></svg></div>
+            <div class="flow-step" style="width:100%;"><div class="step-meta">Validation</div><div>Validate Token</div></div>
+          </div>
+          <div class="branch">
+            <div class="flow-step" style="width:100%;"><div class="step-meta">Méthode 3</div><div>Phone OTP</div></div>
+            <div class="arrow" style="transform:rotate(90deg);"><svg><use href="#i-arrow-right"/></svg></div>
+            <div class="flow-step" style="width:100%;"><div class="step-meta">Validation</div><div>Validate OTP</div></div>
+          </div>
+        </div>
+        <div class="auth-converge">
+          <div class="arrow" style="transform:rotate(90deg);"><svg><use href="#i-arrow-right"/></svg></div>
+          <div class="flow-step" style="max-width:360px; width:100%;">
+            <div class="step-meta">Stockage</div>
+            <div>Store Tokens</div>
+            <div style="font-size:0.75rem; color:var(--text-secondary); margin-top:0.25rem;">localStorage + httpOnly cookie</div>
+          </div>
+          <div class="arrow" style="transform:rotate(90deg);"><svg><use href="#i-arrow-right"/></svg></div>
+          <div class="flow-step" style="max-width:360px; width:100%;">
+            <div class="step-meta">Profil</div>
+            <div>Fetch Profile</div>
+          </div>
+          <div class="arrow" style="transform:rotate(90deg);"><svg><use href="#i-arrow-right"/></svg></div>
+          <div class="flow-step" style="max-width:360px; width:100%;">
+            <div class="step-meta">Redirection</div>
+            <div>Redirect to Role Dashboard</div>
+          </div>
+          <div class="arrow" style="transform:rotate(90deg);"><svg><use href="#i-arrow-right"/></svg></div>
+          <div class="flow-step" style="max-width:360px; width:100%;">
+            <div class="step-meta">Final</div>
+            <div>Logged In</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="matrix" class="card">
+      <h2><span class="num">8</span> Matrice des Flux par Rôle</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Flow</th>
+              <th style="text-align:center;">Visitor</th>
+              <th style="text-align:center;">Locataire</th>
+              <th style="text-align:center;">Propriétaire</th>
+              <th style="text-align:center;">Admin</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Browse properties</td><td style="text-align:center;"><svg width="20" height="20"><use href="#i-check"/></svg></td><td style="text-align:center;"><svg width="20" height="20"><use href="#i-check"/></svg></td><td style="text-align:center;"><svg width="20" height="20"><use href="#i-check"/></svg></td><td style="text-align:center;"><svg width="20" height="20"><use href="#i-check"/></svg></td></tr>
+            <tr><td>Search with filters</td><td style="text-align:center;"><svg width="20" height="20"><use href="#i-check"/></svg></td><td style="text-align:center;"><svg width="20" height="20"><use href="#i-check"/></svg></td><td style="text-align:center;"><svg width="20" height="20"><use href="#i-check"/></svg></td><td style="text-align:center;"><svg width="20" height="20"><use href="#i-check"/></svg></td></tr>
+            <tr><td>View property details</td><td style="text-align:center;"><svg width="20" height="20"><use href="#i-check"/></svg></td><td style="text-align:center;"><svg width="20" height="20"><use href="#i-check"/></svg></td><td style="text-align:center;"><svg width="20" height="20"><use href="#i-check"/></svg></td><td style="text-align:center;"><svg width="20" height="20"><use href="#i-check"/></svg></td></tr>
+            <tr><td>AI Chatbot</td><td style="text-align:center;"><svg width="20" height="20"><use href="#i-check"/></svg></td><td style="text-align:center;"><svg width="20" height="20"><use href="#i-check"/></svg></td><td style="text-align:center;"><svg width="20" height="20"><use href="#i-check"/></svg></td><td style="text-align:center;"><svg width="20" height="20"><use href="#i-check"/></svg></td></tr>
+            <tr><td>Save favorites</td><td style="text-align:center;"><svg width="20" height="20"><use href="#i-x"/></svg></td><td style="text-align:center;"><svg width="20" height="20"><use href="#i-check"/></svg></td><td style="text-align:center;"><svg width="20" height="20"><use href="#i-check"/></svg></td><td style="text-align:center;"><svg width="20" height="20"><use href="#i-check"/></svg></td></tr>
+            <tr><td>Get recommendations</td><td style="text-align:center;"><svg width="20" height="20"><use href="#i-check"/></svg></td><td style="text-align:center;"><svg width="20" height="20"><use href="#i-check"/></svg></td><td style="text-align:center;"><svg width="20" height="20"><use href="#i-check"/></svg></td><td style="text-align:center;"><svg width="20" height="20"><use href="#i-check"/></svg></td></tr>
+            <tr><td>Contact owner</td><td style="text-align:center;"><svg width="20" height="20"><use href="#i-x"/></svg></td><td style="text-align:center;"><svg width="20" height="20"><use href="#i-check"/></svg></td><td style="text-align:center;"><svg width="20" height="20"><use href="#i-check"/></svg></td><td style="text-align:center;"><svg width="20" height="20"><use href="#i-check"/></svg></td></tr>
+            <tr><td>Send messages</td><td style="text-align:center;"><svg width="20" height="20"><use href="#i-x"/></svg></td><td style="text-align:center;"><svg width="20" height="20"><use href="#i-check"/></svg></td><td style="text-align:center;"><svg width="20" height="20"><use href="#i-check"/></svg></td><td style="text-align:center;"><svg width="20" height="20"><use href="#i-check"/></svg></td></tr>
+            <tr><td>Schedule visit</td><td style="text-align:center;"><svg width="20" height="20"><use href="#i-x"/></svg></td><td style="text-align:center;"><svg width="20" height="20"><use href="#i-check"/></svg></td><td style="text-align:center;"><svg width="20" height="20"><use href="#i-x"/></svg></td><td style="text-align:center;"><svg width="20" height="20"><use href="#i-check"/></svg></td></tr>
+            <tr><td>Leave review</td><td style="text-align:center;"><svg width="20" height="20"><use href="#i-x"/></svg></td><td style="text-align:center;"><svg width="20" height="20"><use href="#i-check"/></svg></td><td style="text-align:center;"><svg width="20" height="20"><use href="#i-x"/></svg></td><td style="text-align:center;"><svg width="20" height="20"><use href="#i-check"/></svg></td></tr>
+            <tr><td>Create property</td><td style="text-align:center;"><svg width="20" height="20"><use href="#i-x"/></svg></td><td style="text-align:center;"><svg width="20" height="20"><use href="#i-x"/></svg></td><td style="text-align:center;"><svg width="20" height="20"><use href="#i-check"/></svg></td><td style="text-align:center;"><svg width="20" height="20"><use href="#i-check"/></svg></td></tr>
+            <tr><td>Manage listings</td><td style="text-align:center;"><svg width="20" height="20"><use href="#i-x"/></svg></td><td style="text-align:center;"><svg width="20" height="20"><use href="#i-x"/></svg></td><td style="text-align:center;"><svg width="20" height="20"><use href="#i-check"/></svg></td><td style="text-align:center;"><svg width="20" height="20"><use href="#i-check"/></svg></td></tr>
+            <tr><td>View analytics</td><td style="text-align:center;"><svg width="20" height="20"><use href="#i-x"/></svg></td><td style="text-align:center;"><svg width="20" height="20"><use href="#i-x"/></svg></td><td style="text-align:center;"><svg width="20" height="20"><use href="#i-check"/></svg></td><td style="text-align:center;"><svg width="20" height="20"><use href="#i-check"/></svg></td></tr>
+            <tr><td>Receive payments</td><td style="text-align:center;"><svg width="20" height="20"><use href="#i-x"/></svg></td><td style="text-align:center;"><svg width="20" height="20"><use href="#i-x"/></svg></td><td style="text-align:center;"><svg width="20" height="20"><use href="#i-check"/></svg></td><td style="text-align:center;"><svg width="20" height="20"><use href="#i-check"/></svg></td></tr>
+            <tr><td>Moderate users</td><td style="text-align:center;"><svg width="20" height="20"><use href="#i-x"/></svg></td><td style="text-align:center;"><svg width="20" height="20"><use href="#i-x"/></svg></td><td style="text-align:center;"><svg width="20" height="20"><use href="#i-x"/></svg></td><td style="text-align:center;"><svg width="20" height="20"><use href="#i-check"/></svg></td></tr>
+            <tr><td>Moderate content</td><td style="text-align:center;"><svg width="20" height="20"><use href="#i-x"/></svg></td><td style="text-align:center;"><svg width="20" height="20"><use href="#i-x"/></svg></td><td style="text-align:center;"><svg width="20" height="20"><use href="#i-x"/></svg></td><td style="text-align:center;"><svg width="20" height="20"><use href="#i-check"/></svg></td></tr>
+            <tr><td>Manage ads</td><td style="text-align:center;"><svg width="20" height="20"><use href="#i-x"/></svg></td><td style="text-align:center;"><svg width="20" height="20"><use href="#i-x"/></svg></td><td style="text-align:center;"><svg width="20" height="20"><use href="#i-x"/></svg></td><td style="text-align:center;"><svg width="20" height="20"><use href="#i-check"/></svg></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer class="footer">
+  Document généré le 24 Mai 2026 — Version 1.0
+</footer>
+
+<script>
+(function() {
+  const html = document.documentElement;
+  const toggle = document.getElementById('theme-toggle');
+  const saved = localStorage.getItem('theme');
+  if (saved === 'light') html.setAttribute('data-theme', 'light');
+  toggle.addEventListener('click', () => {
+    const isLight = html.getAttribute('data-theme') === 'light';
+    if (isLight) { html.removeAttribute('data-theme'); localStorage.setItem('theme', 'dark'); }
+    else { html.setAttribute('data-theme', 'light'); localStorage.setItem('theme', 'light'); }
+  });
+
+  const menuBtn = document.getElementById('menu-btn');
+  const mobileNav = document.getElementById('mobile-nav');
+  const closeNav = document.getElementById('close-nav');
+  menuBtn.addEventListener('click', () => mobileNav.classList.add('open'));
+  closeNav.addEventListener('click', () => mobileNav.classList.remove('open'));
+  mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileNav.classList.remove('open')));
+
+  const sections = document.querySelectorAll('section[id]');
+  const links = document.querySelectorAll('.sidebar a, .toc-bar a');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        links.forEach(l => {
+          l.classList.toggle('active', l.getAttribute('href') === '#' + entry.target.id);
+        });
+      }
+    });
+  }, { rootMargin: '-20% 0px -80% 0px' });
+  sections.forEach(s => observer.observe(s));
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+@startuml
+start
+:Recevoir question;
+:Détecter langue / rôle / intention;
+:Extraire entités (regex);
+if (Endpoint principal /smart/chat?) then (oui)
+  :Requête SQL directe PostgreSQL;
+  :Sélectionner template réponse;
+else (non)
+  :Traduire (Helsinki-NLP);
+  :Recherche vectorielle ChromaDB/FAISS;
+  note right
+    Collections vides → aucun résultat
+  end note
+  :Rerank cross-encoder;
+  :Génération FLAN-T5 / fallback;
+endif
+:Retourner réponse JSON;
+stop
+@enduml

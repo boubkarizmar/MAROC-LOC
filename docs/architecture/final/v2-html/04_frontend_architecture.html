@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MAROC-LOC — Architecture Frontend</title>
+<style>
+  :root {
+    --bg: #0a0e27;
+    --surface: rgba(255,255,255,0.03);
+    --surface-hover: rgba(255,255,255,0.06);
+    --text: #f1f5f9;
+    --text-muted: #94a3b8;
+    --border: rgba(255,255,255,0.08);
+    --border-strong: rgba(255,255,255,0.14);
+    --accent-blue: #3b82f6;
+    --accent-purple: #8b5cf6;
+    --accent-teal: #2dd4bf;
+    --accent-amber: #fbbf24;
+    --accent-rose: #f472b6;
+    --accent-green: #34d399;
+    --card-shadow: 0 8px 32px rgba(0,0,0,0.35);
+    --font-body: system-ui, -apple-system, Segoe UI, Roboto, Inter, sans-serif;
+    --font-mono: "JetBrains Mono", "Fira Code", Consolas, monospace;
+  }
+  [data-theme="light"] {
+    --bg: #f8fafc;
+    --surface: rgba(255,255,255,0.65);
+    --surface-hover: rgba(255,255,255,0.9);
+    --text: #0f172a;
+    --text-muted: #64748b;
+    --border: rgba(15,23,42,0.10);
+    --border-strong: rgba(15,23,42,0.18);
+    --card-shadow: 0 8px 32px rgba(0,0,0,0.08);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    transition: background .3s, color .3s;
+  }
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: rgba(139,92,246,0.35); border-radius: 4px; }
+  .app { display: grid; grid-template-columns: 260px 1fr; min-height: 100vh; }
+  @media (max-width: 900px) { .app { grid-template-columns: 1fr; } }
+  .sidebar {
+    position: sticky; top: 0; height: 100vh;
+    border-right: 1px solid var(--border);
+    background: linear-gradient(180deg, rgba(59,130,246,0.06), transparent 60%);
+    padding: 24px 16px;
+    overflow-y: auto;
+    z-index: 50;
+  }
+  .sidebar-header {
+    display: flex; align-items: center; gap: 10px;
+    font-weight: 700; font-size: 1.05rem;
+    margin-bottom: 20px;
+    background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .nav { list-style: none; }
+  .nav li { margin-bottom: 4px; }
+  .nav a {
+    display: block; padding: 8px 12px; border-radius: 8px;
+    color: var(--text-muted); text-decoration: none; font-size: .88rem;
+    transition: all .2s;
+  }
+  .nav a:hover, .nav a.active { background: var(--surface-hover); color: var(--text); }
+  .theme-btn {
+    margin-top: 18px; width: 100%; padding: 10px;
+    border-radius: 10px; border: 1px solid var(--border);
+    background: var(--surface); color: var(--text);
+    cursor: pointer; font-family: var(--font-body); font-size: .85rem;
+    backdrop-filter: blur(8px); transition: all .2s;
+  }
+  .theme-btn:hover { background: var(--surface-hover); }
+  .mobile-bar {
+    display: none; align-items: center; justify-content: space-between;
+    padding: 14px 18px; border-bottom: 1px solid var(--border);
+    background: var(--bg); position: sticky; top: 0; z-index: 60;
+  }
+  .mobile-bar .logo {
+    font-weight: 800; font-size: 1.1rem;
+    background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .hamburger {
+    width: 32px; height: 32px; display: flex; flex-direction: column; justify-content: center; gap: 5px;
+    background: none; border: none; cursor: pointer;
+  }
+  .hamburger span { display: block; height: 2px; background: var(--text); border-radius: 2px; transition: .3s; }
+  .hamburger span:nth-child(1) { width: 20px; }
+  .hamburger span:nth-child(2) { width: 14px; }
+  .hamburger span:nth-child(3) { width: 20px; }
+  @media (max-width: 900px) {
+    .sidebar { position: fixed; left: -280px; top: 0; width: 260px; transition: left .3s; background: var(--bg); }
+    .sidebar.open { left: 0; }
+    .mobile-bar { display: flex; }
+    .overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 40; }
+    .overlay.open { display: block; }
+  }
+  .main { padding: 32px 28px; max-width: 1100px; margin: 0 auto; }
+  @media (max-width: 600px) { .main { padding: 20px 16px; } }
+  .hero {
+    text-align: center; padding: 56px 20px 44px;
+    border-bottom: 1px solid var(--border); margin-bottom: 36px;
+  }
+  .hero h1 {
+    font-size: clamp(1.6rem, 4vw, 2.6rem); font-weight: 800; line-height: 1.15;
+    background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple), var(--accent-rose));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    margin-bottom: 12px;
+  }
+  .hero p { color: var(--text-muted); font-size: 1.05rem; max-width: 640px; margin: 0 auto; }
+  .card {
+    background: var(--surface);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 24px;
+    box-shadow: var(--card-shadow);
+    transition: transform .25s, box-shadow .25s, border-color .25s;
+  }
+  .card:hover { transform: translateY(-3px); box-shadow: 0 16px 48px rgba(0,0,0,0.45); border-color: var(--border-strong); }
+  [data-theme="light"] .card:hover { box-shadow: 0 16px 48px rgba(0,0,0,0.12); }
+  .card-title {
+    font-size: 1.15rem; font-weight: 700; margin-bottom: 16px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .card-title .icon { width: 22px; height: 22px; flex-shrink: 0; }
+  .section-label {
+    display: inline-block; padding: 4px 12px; border-radius: 20px;
+    font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em;
+    background: linear-gradient(90deg, rgba(59,130,246,0.15), rgba(139,92,246,0.15));
+    color: var(--accent-blue); border: 1px solid rgba(59,130,246,0.25);
+    margin-bottom: 10px;
+  }
+  /* Tables */
+  table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+  th, td { padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--border); }
+  th {
+    background: linear-gradient(90deg, rgba(59,130,246,0.12), rgba(139,92,246,0.12));
+    font-weight: 700; font-size: .82rem; text-transform: uppercase; letter-spacing: .04em;
+  }
+  tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+  [data-theme="light"] tr:nth-child(even) { background: rgba(15,23,42,0.03); }
+  tr:hover { background: rgba(255,255,255,0.04); }
+  /* Code block */
+  pre {
+    background: rgba(0,0,0,0.25); border: 1px solid var(--border); border-radius: 10px;
+    padding: 16px; overflow-x: auto; font-family: var(--font-mono); font-size: .82rem;
+    line-height: 1.6; color: #c7d2fe;
+  }
+  [data-theme="light"] pre { background: #0f172a; color: #c7d2fe; }
+  /* File tree */
+  .tree { font-family: var(--font-mono); font-size: .82rem; line-height: 1.9; }
+  .tree ul { list-style: none; padding-left: 18px; border-left: 1px solid var(--border); margin-left: 6px; }
+  .tree li { position: relative; padding-left: 14px; color: var(--text-muted); }
+  .tree li::before {
+    content: ''; position: absolute; left: -1px; top: 0; width: 10px; height: 14px;
+    border-bottom: 1px solid var(--border); border-left: 1px solid var(--border);
+  }
+  .tree .dir { color: var(--accent-blue); font-weight: 600; }
+  .tree .file { color: var(--text); }
+  /* Component hierarchy */
+  .hierarchy { display: flex; flex-direction: column; gap: 10px; align-items: center; }
+  .h-box {
+    border: 1px solid var(--border); border-radius: 10px; padding: 12px 20px;
+    background: linear-gradient(135deg, rgba(59,130,246,0.10), rgba(139,92,246,0.10));
+    text-align: center; font-weight: 600; font-size: .9rem; min-width: 140px;
+    transition: transform .2s, border-color .2s;
+  }
+  .h-box:hover { transform: scale(1.03); border-color: var(--accent-purple); }
+  .h-children { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-top: 6px; }
+  .h-child {
+    border: 1px solid var(--border); border-radius: 8px; padding: 8px 14px;
+    background: var(--surface-hover); font-size: .82rem; font-weight: 500;
+  }
+  .h-connector {
+    width: 1px; height: 14px; background: var(--border-strong); margin: 2px 0;
+  }
+  /* Network graph */
+  .network { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; position: relative; padding: 10px 0; }
+  .node {
+    border: 1px solid var(--border); border-radius: 10px; padding: 10px 16px;
+    background: var(--surface-hover); font-size: .82rem; font-weight: 600;
+    position: relative; z-index: 2; transition: transform .2s, border-color .2s;
+  }
+  .node:hover { transform: translateY(-3px); border-color: var(--accent-purple); }
+  .node.root { background: linear-gradient(135deg, rgba(59,130,246,0.15), rgba(139,92,246,0.15)); border-color: rgba(139,92,246,0.3); }
+  .node.auth { border-color: rgba(251,191,36,0.4); }
+  .node.admin { border-color: rgba(244,114,182,0.4); }
+  /* State cards */
+  .state-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 640px) { .state-grid { grid-template-columns: 1fr; } }
+  .state-card {
+    border: 1px solid var(--border); border-radius: 10px; padding: 16px;
+    background: linear-gradient(180deg, rgba(59,130,246,0.06), transparent);
+    transition: transform .2s, border-color .2s;
+  }
+  .state-card:hover { transform: translateY(-3px); border-color: var(--accent-blue); }
+  .state-card h4 { font-size: .92rem; margin-bottom: 10px; color: var(--accent-blue); }
+  .state-card ul { font-size: .85rem; color: var(--text-muted); padding-left: 16px; line-height: 1.8; }
+  /* i18n flow */
+  .i18n-flow { display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap; margin: 16px 0; }
+  .i18n-card {
+    width: 130px; height: 130px; border-radius: 14px;
+    border: 1px solid var(--border); background: var(--surface-hover);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+    transition: transform .25s, border-color .25s;
+  }
+  .i18n-card:hover { transform: translateY(-4px); border-color: var(--accent-teal); }
+  .i18n-card svg { width: 32px; height: 32px; }
+  .i18n-card span { font-size: .78rem; font-weight: 600; text-align: center; }
+  .i18n-arrow { color: var(--accent-teal); opacity: .7; }
+  /* Metric cards */
+  .metric-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
+  .metric-card {
+    border: 1px solid var(--border); border-radius: 10px; padding: 18px;
+    background: var(--surface-hover);
+    transition: transform .2s, border-color .2s;
+    position: relative; overflow: hidden;
+  }
+  .metric-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+  }
+  .metric-card:hover { transform: translateY(-3px); border-color: var(--accent-purple); }
+  .metric-card h4 { font-size: .88rem; margin-bottom: 6px; }
+  .metric-card .impact {
+    font-size: 1.4rem; font-weight: 800;
+    background: linear-gradient(90deg, var(--accent-green), var(--accent-teal));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .metric-card p { font-size: .82rem; color: var(--text-muted); margin-top: 4px; }
+  /* Clean arch layers */
+  .clean-layer {
+    border: 1px solid var(--border); border-radius: 10px; padding: 18px;
+    margin-bottom: 10px; position: relative;
+    transition: transform .2s;
+  }
+  .clean-layer:hover { transform: translateX(6px); }
+  .clean-layer.pres { background: linear-gradient(90deg, rgba(59,130,246,0.08), rgba(139,92,246,0.08)); }
+  .clean-layer.dom { background: linear-gradient(90deg, rgba(139,92,246,0.08), rgba(45,212,191,0.08)); }
+  .clean-layer.data { background: linear-gradient(90deg, rgba(45,212,191,0.08), rgba(251,191,36,0.08)); }
+  .clean-layer .label { font-weight: 700; font-size: .92rem; }
+  .clean-layer .desc { font-size: .85rem; color: var(--text-muted); margin-top: 4px; }
+  .clean-arrow {
+    text-align: center; font-size: .75rem; color: var(--text-muted);
+    margin: 4px 0; font-family: var(--font-mono);
+  }
+  /* Footer */
+  .doc-footer { text-align: center; padding: 30px; color: var(--text-muted); font-size: .82rem; border-top: 1px solid var(--border); margin-top: 20px; }
+  /* Stack badges inline */
+  .stack-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .stack-badge {
+    padding: 4px 12px; border-radius: 20px; font-size: .78rem;
+    border: 1px solid var(--border); background: rgba(255,255,255,0.04);
+    font-family: var(--font-mono);
+  }
+</style>
+</head>
+<body>
+<div class="overlay" id="overlay" onclick="toggleNav()"></div>
+<div class="app">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+      MAROC-LOC
+    </div>
+    <ul class="nav">
+      <li><a href="#overview" class="active">Vue d'ensemble</a></li>
+      <li><a href="#web">Architecture Web</a></li>
+      <li><a href="#components">Composants</a></li>
+      <li><a href="#routing">Routage</a></li>
+      <li><a href="#state">State Management</a></li>
+      <li><a href="#mobile">Mobile Flutter</a></li>
+      <li><a href="#clean">Clean Architecture</a></li>
+      <li><a href="#api">Intégration API</a></li>
+      <li><a href="#theme">Thème</a></li>
+      <li><a href="#i18n">i18n</a></li>
+      <li><a href="#perf">Performance</a></li>
+    </ul>
+    <button class="theme-btn" onclick="toggleTheme()" id="themeBtn">🌙 Mode sombre</button>
+  </aside>
+
+  <div>
+    <div class="mobile-bar">
+      <div class="logo">MAROC-LOC</div>
+      <button class="hamburger" onclick="toggleNav()" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+    <main class="main">
+      <section class="hero">
+        <h1>MAROC-LOC — Architecture Frontend</h1>
+        <p>Architecture Web (React 18 + Vite) et Mobile (Flutter 3) unifiées sous une conception UX cohérente.</p>
+      </section>
+
+      <section id="overview" class="card">
+        <div class="section-label">Vue d'ensemble</div>
+        <div class="card-title">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          Deux Applications Distinctes
+        </div>
+        <table>
+          <thead>
+            <tr><th>Application</th><th>Technologie</th><th>Usage</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Web App</strong></td><td>React 18 + Vite 5 + Tailwind CSS 3</td><td>Navigation desktop/mobile responsive</td></tr>
+            <tr><td><strong>Mobile App</strong></td><td>Flutter 3.x (Dart)</td><td>Application native iOS/Android</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="web" class="card">
+        <div class="section-label">Web</div>
+        <div class="card-title">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          Architecture Frontend Web
+        </div>
+        <p style="font-weight:700; margin-bottom:10px; font-size:.95rem;">Stack Technique</p>
+        <div class="stack-row">
+          <span class="stack-badge">Vite 5</span>
+          <span class="stack-badge">Tailwind CSS 3</span>
+          <span class="stack-badge">Framer Motion 11</span>
+          <span class="stack-badge">TanStack Query 5</span>
+          <span class="stack-badge">React Router 7</span>
+          <span class="stack-badge">i18next 23</span>
+          <span class="stack-badge">React Hook Form + Zod</span>
+          <span class="stack-badge">Leaflet</span>
+          <span class="stack-badge">Recharts</span>
+          <span class="stack-badge">Lucide React</span>
+        </div>
+
+        <p style="font-weight:700; margin:24px 0 10px; font-size:.95rem;">Structure des Dossiers</p>
+        <div class="tree">
+          <ul>
+            <li><span class="dir">frontend/src/</span>
+              <ul>
+                <li><span class="dir">api/</span>
+                  <ul>
+                    <li><span class="file">axiosConfig.ts</span></li>
+                    <li><span class="file">moroccanAIApi.ts</span></li>
+                    <li><span class="file">propertyApi.ts</span></li>
+                  </ul>
+                </li>
+                <li><span class="dir">components/</span>
+                  <ul>
+                    <li><span class="dir">ai/</span> <span class="file">AIChatInterface.tsx</span></li>
+                    <li><span class="dir">auth/</span></li>
+                    <li><span class="dir">home/</span></li>
+                    <li><span class="dir">property/</span></li>
+                    <li><span class="dir">search/</span></li>
+                    <li><span class="dir">ux/</span></li>
+                  </ul>
+                </li>
+                <li><span class="dir">context/</span>
+                  <ul>
+                    <li><span class="file">AuthContext.tsx</span></li>
+                    <li><span class="file">ThemeContext.tsx</span></li>
+                  </ul>
+                </li>
+                <li><span class="dir">hooks/</span>
+                  <ul>
+                    <li><span class="file">useAIChat.ts</span></li>
+                    <li><span class="file">useVoiceRecorder.ts</span></li>
+                    <li><span class="file">useRecommendations.ts</span></li>
+                    <li><span class="file">useBehavioralTracking.ts</span></li>
+                    <li><span class="file">usePropertyView.ts</span></li>
+                  </ul>
+                </li>
+                <li><span class="dir">pages/</span>
+                  <ul>
+                    <li><span class="file">Home.tsx</span></li>
+                    <li><span class="file">PropertyDetails.tsx</span></li>
+                    <li><span class="file">Search.tsx</span></li>
+                    <li><span class="file">CreateProperty.tsx</span></li>
+                    <li><span class="file">Dashboard.tsx</span></li>
+                    <li><span class="file">Login.tsx</span></li>
+                    <li><span class="file">Register.tsx</span></li>
+                    <li><span class="file">Admin.tsx</span></li>
+                  </ul>
+                </li>
+                <li><span class="dir">types/</span> <span class="file">ai.ts · property.ts · user.ts</span></li>
+                <li><span class="dir">i18n/</span> <span class="file">config.ts + locales/fr/en/ar</span></li>
+                <li><span class="dir">utils/</span> <span class="file">imageUtils.ts · formatters.ts · accessibility.ts</span></li>
+                <li><span class="file">App.tsx</span></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="components" class="card">
+        <div class="section-label">Composants</div>
+        <div class="card-title">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          Hiérarchie des Composants
+        </div>
+        <div class="hierarchy">
+          <div class="h-box">App.tsx</div>
+          <div class="h-connector"></div>
+          <div class="h-children">
+            <div class="h-child">Navbar (fixed)</div>
+            <div class="h-child">Routes (lazy)</div>
+            <div class="h-child">Footer (bottom)</div>
+            <div class="h-child">Chatbot Widget (floating)</div>
+          </div>
+          <div class="h-connector"></div>
+          <div class="h-box">Layout Switcher</div>
+          <div class="h-connector"></div>
+          <div class="h-box">Pages (lazy-load)</div>
+          <div class="h-connector"></div>
+          <div class="h-children">
+            <div class="h-child">Home</div>
+            <div class="h-child">Search</div>
+            <div class="h-child">PropertyDetails</div>
+            <div class="h-child">Dashboard</div>
+            <div class="h-child">Login / Register</div>
+            <div class="h-child">Admin</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="routing" class="card">
+        <div class="section-label">Routage</div>
+        <div class="card-title">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+          Système de Routage — React Router 7
+        </div>
+        <div class="network">
+          <div class="node root">/</div>
+          <div class="node">/home</div>
+          <div class="node">/search</div>
+          <div class="node">/property/:id</div>
+          <div class="node auth">/login</div>
+          <div class="node auth">/register</div>
+          <div class="node admin">/dashboard</div>
+          <div class="node admin">/admin</div>
+        </div>
+        <pre style="margin-top:18px">const routes = [
+  { path: '/', element: &lt;SplashScreen /&gt;, layout: 'none' },
+  { path: '/home', element: &lt;Home /&gt;, layout: 'default' },
+  { path: '/search', element: &lt;Search /&gt;, layout: 'default' },
+  { path: '/property/:id', element: &lt;PropertyDetails /&gt;, layout: 'default' },
+  { path: '/login', element: &lt;Login /&gt;, layout: 'auth' },
+  { path: '/register', element: &lt;Register /&gt;, layout: 'auth' },
+  { path: '/dashboard', element: &lt;Dashboard /&gt;, layout: 'default', auth: true, role: 'PROPRIETAIRE' },
+  { path: '/admin', element: &lt;Admin /&gt;, layout: 'default', auth: true, role: 'ADMIN' },
+];</pre>
+      </section>
+
+      <section id="state" class="card">
+        <div class="section-label">State</div>
+        <div class="card-title">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+          State Management
+        </div>
+        <div class="state-grid">
+          <div class="state-card">
+            <h4>Server State</h4>
+            <p style="font-size:.8rem; color:var(--text-muted); margin-bottom:8px;">TanStack Query 5 + Cache</p>
+            <ul>
+              <li>Properties</li>
+              <li>Recommendations</li>
+              <li>Favorites</li>
+              <li>Messages</li>
+              <li>Search Results</li>
+            </ul>
+          </div>
+          <div class="state-card">
+            <h4>Client State</h4>
+            <p style="font-size:.8rem; color:var(--text-muted); margin-bottom:8px;">React Context + useState</p>
+            <ul>
+              <li>Auth (JWT)</li>
+              <li>Theme (dark)</li>
+              <li>Chatbot (open)</li>
+              <li>Filters</li>
+              <li>UI (toast)</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="mobile" class="card">
+        <div class="section-label">Mobile</div>
+        <div class="card-title">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+          Architecture Mobile — Flutter 3
+        </div>
+        <div class="stack-row">
+          <span class="stack-badge">Flutter 3.x</span>
+          <span class="stack-badge">Dart 3</span>
+          <span class="stack-badge">Provider + Riverpod</span>
+          <span class="stack-badge">Dio + Retrofit</span>
+          <span class="stack-badge">Hive + SharedPreferences</span>
+          <span class="stack-badge">Google Maps Flutter</span>
+          <span class="stack-badge">CachedNetworkImage</span>
+          <span class="stack-badge">flutter_secure_storage</span>
+          <span class="stack-badge">firebase_messaging</span>
+        </div>
+
+        <p style="font-weight:700; margin:24px 0 10px; font-size:.95rem;">Structure mobile-app/lib/</p>
+        <div class="tree">
+          <ul>
+            <li><span class="dir">mobile-app/lib/</span>
+              <ul>
+                <li><span class="file">main.dart</span> — Entry point</li>
+                <li><span class="file">app.dart</span> — MaterialApp + routing</li>
+                <li><span class="dir">core/</span> <span class="file">constants · theme · utils · errors</span></li>
+                <li><span class="dir">data/</span>
+                  <ul>
+                    <li><span class="dir">models/</span></li>
+                    <li><span class="dir">repositories/</span></li>
+                    <li><span class="dir">datasources/</span> <span class="file">remote/ + local/</span></li>
+                  </ul>
+                </li>
+                <li><span class="dir">domain/</span> <span class="file">entities · repos · usecases</span></li>
+                <li><span class="dir">presentation/</span>
+                  <ul>
+                    <li><span class="dir">pages/</span> <span class="file">home · property_detail · search · login · register</span></li>
+                    <li><span class="dir">widgets/</span> <span class="file">property_card · recommendation_list · chatbot_widget · loading_shimmer</span></li>
+                    <li><span class="dir">providers/</span> <span class="file">auth · property · chat</span></li>
+                  </ul>
+                </li>
+                <li><span class="dir">l10n/</span> <span class="file">app_fr.arb · app_en.arb · app_ar.arb</span></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="clean" class="card">
+        <div class="section-label">Clean Arch</div>
+        <div class="card-title">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          Clean Architecture Flutter
+        </div>
+        <div class="clean-layer pres">
+          <div class="label">Presentation</div>
+          <div class="desc">Pages → Widgets → Providers → Bloc/State</div>
+        </div>
+        <div class="clean-arrow">▼ depends on</div>
+        <div class="clean-layer dom">
+          <div class="label">Domain</div>
+          <div class="desc">Entities → Repository Interfaces → Use Cases</div>
+        </div>
+        <div class="clean-arrow">▼ depends on</div>
+        <div class="clean-layer data">
+          <div class="label">Data</div>
+          <div class="desc">Models → Repository Impl → Remote/Local Sources</div>
+        </div>
+        <p style="margin-top:14px; font-size:.85rem; color:var(--text-muted);">Règle: les couches internes ne dépendent PAS des couches externes.</p>
+      </section>
+
+      <section id="api" class="card">
+        <div class="section-label">API</div>
+        <div class="card-title">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          Intégration API — Axios &amp; TanStack Query
+        </div>
+        <p style="font-weight:700; margin-bottom:10px; font-size:.9rem;">Axios Config</p>
+        <pre>const api = axios.create({ baseURL: '/api', timeout: 30000 });
+
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem('token');
+  if (token) config.headers.Authorization = `Bearer ${token}`;
+  return config;
+});
+
+api.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    if (error.response?.status === 401) {
+      const refreshToken = localStorage.getItem('refreshToken');
+      const { data } = await axios.post('/api/v1/auth/refresh', { refreshToken });
+      localStorage.setItem('token', data.accessToken);
+      return api.request(error.config);
+    }
+    return Promise.reject(error);
+  }
+);</pre>
+        <p style="font-weight:700; margin:18px 0 10px; font-size:.9rem;">TanStack Query Pattern</p>
+        <pre>export const useRecommendations = (limit: number = 8) => {
+  const token = localStorage.getItem('token');
+  return useQuery&lt;RecommendationItem[]&gt;({
+    queryKey: ['recommendations', limit],
+    queryFn: async () => {
+      const endpoint = token
+        ? `/v1/recommendations/personalized?limit=${limit}`
+        : `/v1/recommendations/discover?limit=${limit}`;
+      const { data } = await api.get(endpoint);
+      return data;
+    },
+    staleTime: 5 * 60 * 1000,
+  });
+};</pre>
+      </section>
+
+      <section id="theme" class="card">
+        <div class="section-label">Thème</div>
+        <div class="card-title">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2"/><path d="M12 21v2"/><path d="M4.22 4.22l1.42 1.42"/><path d="M18.36 18.36l1.42 1.42"/><path d="M1 12h2"/><path d="M21 12h2"/><path d="M4.22 19.78l1.42-1.42"/><path d="M18.36 5.64l1.42-1.42"/></svg>
+          Gestion du Thème — Dark Mode
+        </div>
+        <div class="dual-grid">
+          <div class="state-card" style="background:rgba(59,130,246,0.06);">
+            <h4 style="color:var(--accent-blue)">Light</h4>
+            <ul>
+              <li>bg: #ffffff</li>
+              <li>surface: #f8fafc</li>
+              <li>text: #0f172a</li>
+              <li>primary: #0d9488</li>
+              <li>accent: #f59e0b</li>
+            </ul>
+          </div>
+          <div class="state-card" style="background:rgba(139,92,246,0.06);">
+            <h4 style="color:var(--accent-purple)">Dark</h4>
+            <ul>
+              <li>bg: #0f172a</li>
+              <li>surface: #1e293b</li>
+              <li>text: #f1f5f9</li>
+              <li>primary: #2dd4bf</li>
+              <li>accent: #fbbf24</li>
+            </ul>
+          </div>
+        </div>
+        <pre style="margin-top:14px">&lt;html dir={i18n.language === 'ar' ? 'rtl' : 'ltr'}&gt;
+  &lt;body&gt;
+    &lt;div className="flex flex-row rtl:flex-row-reverse"&gt;
+      {/* Icons and text align correctly */}
+    &lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</pre>
+      </section>
+
+      <section id="i18n" class="card">
+        <div class="section-label">i18n</div>
+        <div class="card-title">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          Internationalization (i18n)
+        </div>
+        <div class="i18n-flow">
+          <div class="i18n-card">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            <span>User Selection</span>
+          </div>
+          <svg class="i18n-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          <div class="i18n-card">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            <span>i18next + Detector</span>
+          </div>
+          <svg class="i18n-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          <div class="i18n-card">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            <span>Resource Load (lazy JSON)</span>
+          </div>
+        </div>
+        <div class="i18n-flow" style="margin-top:10px;">
+          <div class="i18n-card" style="border-color:rgba(59,130,246,0.35);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            <span>Français (fr-MA)<br><small style="color:var(--text-muted)">LTR</small></span>
+          </div>
+          <div class="i18n-card" style="border-color:rgba(139,92,246,0.35);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            <span>English (en)<br><small style="color:var(--text-muted)">LTR</small></span>
+          </div>
+          <div class="i18n-card" style="border-color:rgba(45,212,191,0.35);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            <span>العربية (ar-MA)<br><small style="color:var(--text-muted)">RTL</small></span>
+          </div>
+        </div>
+        <p style="margin-top:14px; font-size:.85rem; color:var(--text-muted);">Keys organisés par namespace: <code>auth.*</code>, <code>property.*</code>, <code>chatbot.*</code>, <code>nav.*</code>, <code>validation.*</code></p>
+      </section>
+
+      <section id="perf" class="card">
+        <div class="section-label">Performance</div>
+        <div class="card-title">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          Optimisations — Tableau de Bord
+        </div>
+        <div class="metric-grid">
+          <div class="metric-card">
+            <h4>Code Splitting</h4>
+            <div class="impact">-40%</div>
+            <p>React.lazy() + dynamic imports</p>
+          </div>
+          <div class="metric-card">
+            <h4>Image Optimization</h4>
+            <div class="impact">-60%</div>
+            <p>WebP + lazy loading + blur placeholder</p>
+          </div>
+          <div class="metric-card">
+            <h4>API Caching</h4>
+            <div class="impact">-80%</div>
+            <p>TanStack Query staleTime + cacheTime</p>
+          </div>
+          <div class="metric-card">
+            <h4>Virtual Scrolling</h4>
+            <div class="impact">10k+</div>
+            <p>react-window for long lists</p>
+          </div>
+          <div class="metric-card">
+            <h4>Prefetching</h4>
+            <div class="impact">Instant</div>
+            <p>Hover-based route prefetch</p>
+          </div>
+          <div class="metric-card">
+            <h4>Service Worker</h4>
+            <div class="impact">Offline</div>
+            <p>Vite PWA plugin</p>
+          </div>
+          <div class="metric-card">
+            <h4>Bundle Analysis</h4>
+            <div class="impact">&lt;200KB</div>
+            <p>rollup-plugin-visualizer</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="doc-footer">
+        Document généré le 24 Mai 2026 — Version 1.0 · MAROC-LOC Architecture Frontend
+      </div>
+    </main>
+  </div>
+</div>
+
+<script>
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.getElementById('overlay');
+  function toggleNav() {
+    sidebar.classList.toggle('open');
+    overlay.classList.toggle('open');
+  }
+  function toggleTheme() {
+    const root = document.documentElement;
+    const btn = document.getElementById('themeBtn');
+    if (root.getAttribute('data-theme') === 'light') {
+      root.removeAttribute('data-theme');
+      btn.textContent = '🌙 Mode sombre';
+      localStorage.setItem('theme', 'dark');
+    } else {
+      root.setAttribute('data-theme', 'light');
+      btn.textContent = '☀️ Mode clair';
+      localStorage.setItem('theme', 'light');
+    }
+  }
+  (function init() {
+    const saved = localStorage.getItem('theme');
+    if (saved === 'light') { document.documentElement.setAttribute('data-theme','light'); document.getElementById('themeBtn').textContent='☀️ Mode clair'; }
+  })();
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav a');
+  window.addEventListener('scroll', () => {
+    let cur = '';
+    sections.forEach(s => { if (scrollY >= s.offsetTop - 120) cur = s.getAttribute('id'); });
+    navLinks.forEach(a => { a.classList.remove('active'); if (a.getAttribute('href') === '#' + cur) a.classList.add('active'); });
+  });
+</script>
+</body>
+</html>

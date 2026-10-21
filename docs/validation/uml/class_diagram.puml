@@ -1,0 +1,87 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+class User {
+  +Long id
+  +String email
+  +String password
+  +Role role
+  +Boolean isVerified
+  +List<Property> properties
+  +List<Favorite> favorites
+}
+
+class Property {
+  +Long id
+  +String title
+  +String city
+  +BigDecimal price
+  +PropertyType type
+  +PropertyCategory category
+  +Double surface
+  +Integer rooms
+  +Double latitude
+  +Double longitude
+  +PropertyStatus status
+  +User owner
+}
+
+class Favorite {
+  +Long id
+  +User user
+  +Property property
+}
+
+class PropertyVisit {
+  +Long id
+  +Property property
+  +User visitor
+  +User owner
+  +String visitDate
+  +String status
+}
+
+class Message {
+  +Long id
+  +User sender
+  +User receiver
+  +String content
+  +Boolean isRead
+}
+
+class Advertisement {
+  +Long id
+  +String title
+  +AdvertisementPlan plan
+  +AdvertisementStatus status
+  +PaymentStatus paymentStatus
+  +BigDecimal budget
+}
+
+class PaymentTransaction {
+  +Long id
+  +String providerTransactionId
+  +BigDecimal amount
+  +PaymentStatus status
+}
+
+class Review {
+  +Long id
+  +Integer rating
+  +String comment
+  +Property property
+  +User reviewer
+}
+
+User "1" -- "0..*" Property : owns
+User "1" -- "0..*" Favorite : has
+Property "1" -- "0..*" Favorite : favorited
+User "1" -- "0..*" PropertyVisit : visitor
+User "1" -- "0..*" Message : sends
+User "1" -- "0..*" Message : receives
+Property "1" -- "0..*" PropertyVisit : visited
+Property "1" -- "0..*" Review : reviewed
+User "1" -- "0..*" Review : writes
+User "1" -- "0..*" Advertisement : creates
+Advertisement "1" -- "0..*" PaymentTransaction : pays
+@enduml

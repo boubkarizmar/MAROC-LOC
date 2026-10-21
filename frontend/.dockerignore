@@ -1,0 +1,44 @@
+# Dependencies
+node_modules/
+
+# Logs
+npm-debug.log
+yarn-error.log
+
+# Build outputs
+dist/
+build/
+out/
+
+# Git
+.git
+.gitignore
+
+# IDE
+.vscode
+.idea
+
+# OS
+.DS_Store
+
+# Env (local only)
+.env
+.env.local
+.env.*.local
+
+# Test (optional - you can keep tests in docker if needed)
+**/*.test.ts
+**/*.test.tsx
+**/*.spec.ts
+**/*.spec.tsx
+
+# CI/CD
+.github
+.gitlab-ci.yml
+.circleci
+
+# Cache
+.cache
+coverage/
+*.tmp
+*.log

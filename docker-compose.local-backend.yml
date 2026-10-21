@@ -1,0 +1,27 @@
+# ============================================================
+# MAROC-LOC — Local backend override
+# ============================================================
+# Use this override when the Spring Boot backend runs outside Docker
+# (e.g. via ./mvnw spring-boot:run or java -jar) on port 8080.
+# It disables the Docker backend service to avoid the port conflict and
+# removes the frontend container's dependency on the backend container.
+#
+# Usage:
+#   docker compose -f docker-compose.yml -f docker-compose.local-backend.yml up -d
+# Or with the helper script:
+#   ./scripts/start.sh --local-backend
+# ============================================================
+
+services:
+  backend:
+    # Do not start the backend container by default.
+    # To start it explicitly with Docker, use:
+    #   docker compose --profile docker-backend up -d
+    profiles: [docker-backend]
+    ports: []
+
+  frontend:
+    # The frontend is served to the browser on the host; API calls go to
+    # localhost:8080 where the local backend is running, so it does not
+    # need the backend container to be up.
+    depends_on: !reset []

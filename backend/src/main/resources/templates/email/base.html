@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${title}">MAROC-LOC</title>
+    <style>
+        body { margin: 0; padding: 0; background-color: #f5f5f0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .container { max-width: 600px; margin: 0 auto; background-color: #ffffff; }
+        .header { background: linear-gradient(135deg, #00695C 0%, #004D40 100%); padding: 32px 24px; text-align: center; }
+        .header img { max-width: 180px; }
+        .header h1 { color: #ffffff; margin: 12px 0 0; font-size: 24px; font-weight: 700; letter-spacing: 2px; }
+        .header p { color: rgba(255,255,255,0.85); margin: 8px 0 0; font-size: 14px; }
+        .content { padding: 32px 24px; color: #333333; line-height: 1.7; }
+        .content h2 { color: #00695C; font-size: 20px; margin-top: 0; }
+        .btn { display: inline-block; padding: 14px 32px; background: linear-gradient(135deg, #00695C 0%, #004D40 100%); color: #ffffff !important; text-decoration: none; border-radius: 8px; font-weight: 600; margin: 16px 0; }
+        .btn-secondary { background: #D4AF37; color: #1a1a1a !important; }
+        .box { background-color: #f8f9fa; border-left: 4px solid #00695C; padding: 16px 20px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+        .box.warning { border-left-color: #D4AF37; }
+        .box.danger { border-left-color: #c0392b; }
+        .footer { background-color: #f0f0eb; padding: 24px; text-align: center; font-size: 12px; color: #666666; }
+        .footer a { color: #00695C; text-decoration: none; }
+        .social { margin-top: 12px; }
+        .social a { display: inline-block; margin: 0 8px; }
+        .divider { height: 1px; background: #e0e0e0; margin: 24px 0; }
+        .small { font-size: 12px; color: #888888; }
+        @media only screen and (max-width: 600px) {
+            .content { padding: 24px 16px; }
+            .header { padding: 24px 16px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏠 MAROC-LOC</h1>
+            <p>Immobilier au Maroc, simplifié</p>
+        </div>
+        <div class="content" th:insert="~{::content}">
+            <!-- Content fragment inserted here -->
+        </div>
+        <div class="footer">
+            <p>© 2026 MAROC-LOC. Tous droits réservés.</p>
+            <p>Casablanca, Maroc</p>
+            <p class="small">
+                Si vous avez des questions, contactez-nous à
+                <a href="mailto:support@marocloc.ma">support@marocloc.ma</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

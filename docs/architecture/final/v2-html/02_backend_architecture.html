@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MAROC-LOC - Architecture Backend</title>
+<style>
+  :root {
+    --bg-deep: #0a0e27;
+    --bg-card: rgba(255,255,255,0.03);
+    --bg-card-hover: rgba(255,255,255,0.06);
+    --border: rgba(255,255,255,0.08);
+    --text-primary: #f1f5f9;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    --accent-blue: #3b82f6;
+    --accent-purple: #8b5cf6;
+    --accent-cyan: #06b6d4;
+    --accent-green: #10b981;
+    --accent-amber: #f59e0b;
+    --accent-red: #ef4444;
+    --accent-pink: #ec4899;
+    --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+    --shadow: 0 4px 24px rgba(0,0,0,0.35);
+    --shadow-hover: 0 12px 40px rgba(0,0,0,0.5);
+    --glass: rgba(255,255,255,0.03);
+    --glass-border: rgba(255,255,255,0.08);
+  }
+  [data-theme="light"] {
+    --bg-deep: #f8fafc;
+    --bg-card: rgba(255,255,255,0.7);
+    --bg-card-hover: rgba(255,255,255,0.9);
+    --border: rgba(15,23,42,0.1);
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-muted: #94a3b8;
+    --shadow: 0 4px 24px rgba(0,0,0,0.08);
+    --shadow-hover: 0 12px 40px rgba(0,0,0,0.12);
+    --glass: rgba(255,255,255,0.6);
+    --glass-border: rgba(15,23,42,0.1);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body {
+    font-family: var(--font-body);
+    background: var(--bg-deep);
+    color: var(--text-primary);
+    line-height:1.6;
+    transition: background .3s, color .3s;
+  }
+  ::-webkit-scrollbar { width:8px; }
+  ::-webkit-scrollbar-track { background:transparent; }
+  ::-webkit-scrollbar-thumb { background:rgba(255,255,255,0.15); border-radius:4px; }
+  [data-theme="light"] ::-webkit-scrollbar-thumb { background:rgba(0,0,0,0.15); }
+
+  .theme-toggle {
+    position:fixed; top:20px; right:20px; z-index:1000;
+    width:44px; height:44px; border-radius:12px;
+    background:var(--glass); border:1px solid var(--glass-border);
+    backdrop-filter:blur(12px); cursor:pointer; display:flex; align-items:center; justify-content:center;
+    transition:all .3s; box-shadow:var(--shadow);
+  }
+  .theme-toggle:hover { transform:translateY(-2px); box-shadow:var(--shadow-hover); }
+  .theme-toggle svg { width:20px; height:20px; fill:none; stroke:var(--text-primary); stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+
+  .layout { display:flex; max-width:1400px; margin:0 auto; padding:0 24px; gap:32px; }
+  .sidebar {
+    position:sticky; top:24px; width:260px; height:fit-content; flex-shrink:0;
+    display:none;
+  }
+  @media(min-width:1024px){ .sidebar{display:block;} }
+  .sidebar-inner {
+    background:var(--glass); border:1px solid var(--glass-border); border-radius:16px;
+    backdrop-filter:blur(16px); padding:20px; box-shadow:var(--shadow);
+  }
+  .sidebar h3 { font-size:12px; text-transform:uppercase; letter-spacing:1px; color:var(--text-muted); margin-bottom:12px; }
+  .sidebar a {
+    display:block; padding:8px 12px; border-radius:8px; color:var(--text-secondary);
+    text-decoration:none; font-size:13px; transition:all .2s; margin-bottom:2px;
+  }
+  .sidebar a:hover, .sidebar a.active { background:rgba(59,130,246,0.12); color:var(--accent-blue); }
+
+  .mobile-nav { display:none; }
+  @media(max-width:1023px){
+    .mobile-nav {
+      display:flex; align-items:center; justify-content:space-between;
+      padding:16px 20px; position:sticky; top:0; z-index:900;
+      background:var(--bg-deep); border-bottom:1px solid var(--border);
+    }
+    .mobile-nav .logo { font-weight:700; font-size:16px; background:linear-gradient(135deg,var(--accent-blue),var(--accent-purple)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+    .hamburger { width:36px; height:36px; border-radius:8px; background:var(--glass); border:1px solid var(--glass-border); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; cursor:pointer; }
+    .hamburger span { display:block; width:16px; height:2px; background:var(--text-primary); border-radius:1px; transition:.3s; }
+    .mobile-menu {
+      position:fixed; top:0; left:0; width:100%; height:100vh; z-index:950;
+      background:var(--bg-deep); padding:80px 24px 24px; transform:translateX(-100%); transition:.3s;
+    }
+    .mobile-menu.open { transform:translateX(0); }
+    .mobile-menu a { display:block; padding:14px 0; border-bottom:1px solid var(--border); color:var(--text-primary); text-decoration:none; font-size:15px; }
+    .mobile-menu .close { position:absolute; top:20px; right:20px; width:36px; height:36px; border-radius:8px; background:var(--glass); border:1px solid var(--glass-border); display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:20px; color:var(--text-primary); }
+  }
+
+  main { flex:1; min-width:0; padding-bottom:80px; }
+
+  .hero {
+    text-align:center; padding:80px 20px 60px;
+    position:relative; overflow:hidden;
+  }
+  .hero::before {
+    content:''; position:absolute; top:-50%; left:50%; transform:translateX(-50%);
+    width:800px; height:800px; border-radius:50%;
+    background:radial-gradient(circle, rgba(139,92,246,0.12) 0%, transparent 70%);
+    pointer-events:none;
+  }
+  .hero h1 {
+    font-size:clamp(28px,5vw,52px); font-weight:800; line-height:1.1; margin-bottom:16px;
+    background:linear-gradient(135deg, #a78bfa, #60a5fa, #22d3ee);
+    -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+    position:relative; z-index:1;
+  }
+  .hero p { font-size:clamp(14px,2vw,18px); color:var(--text-secondary); max-width:600px; margin:0 auto; position:relative; z-index:1; }
+  .hero-badge {
+    display:inline-flex; align-items:center; gap:8px; padding:6px 16px; border-radius:999px;
+    background:rgba(139,92,246,0.1); border:1px solid rgba(139,92,246,0.2);
+    color:var(--accent-purple); font-size:12px; font-weight:600; letter-spacing:.5px;
+    margin-bottom:20px; position:relative; z-index:1;
+  }
+
+  .card {
+    background:var(--bg-card); border:1px solid var(--border); border-radius:16px;
+    backdrop-filter:blur(12px); padding:28px; margin-bottom:28px;
+    box-shadow:var(--shadow); transition:all .35s cubic-bezier(.4,0,.2,1);
+    position:relative; overflow:hidden;
+  }
+  .card::before {
+    content:''; position:absolute; top:0; left:0; right:0; height:1px;
+    background:linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  }
+  .card:hover { transform:translateY(-4px); box-shadow:var(--shadow-hover); background:var(--bg-card-hover); }
+  .card-header { display:flex; align-items:center; gap:12px; margin-bottom:20px; }
+  .card-icon {
+    width:40px; height:40px; border-radius:10px; display:flex; align-items:center; justify-content:center;
+    background:linear-gradient(135deg, rgba(59,130,246,0.2), rgba(139,92,246,0.2));
+    border:1px solid rgba(59,130,246,0.15); flex-shrink:0;
+  }
+  .card-icon svg { width:20px; height:20px; }
+  .card h2 { font-size:20px; font-weight:700; }
+  .card h3 { font-size:16px; font-weight:600; margin:20px 0 10px; color:var(--text-primary); }
+  .card p, .card li { color:var(--text-secondary); font-size:14px; }
+  .card ul { padding-left:18px; }
+  .card li { margin-bottom:6px; }
+
+  .section-title {
+    font-size:clamp(20px,3vw,28px); font-weight:700; margin:48px 0 24px;
+    display:flex; align-items:center; gap:12px;
+  }
+  .section-title .line {
+    flex:1; height:1px; background:linear-gradient(90deg, var(--border), transparent);
+  }
+
+  .module-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:16px; margin-top:16px; }
+  .module-card {
+    background:var(--glass); border:1px solid var(--glass-border); border-radius:14px;
+    padding:20px; text-align:center; transition:all .3s; position:relative;
+  }
+  .module-card:hover { transform:translateY(-4px); border-color:rgba(59,130,246,0.3); background:rgba(59,130,246,0.05); }
+  .module-card .icon {
+    width:44px; height:44px; border-radius:12px; margin:0 auto 12px;
+    display:flex; align-items:center; justify-content:center;
+    background:linear-gradient(135deg, rgba(59,130,246,0.15), rgba(139,92,246,0.15));
+    border:1px solid rgba(59,130,246,0.2);
+  }
+  .module-card .icon svg { width:22px; height:22px; }
+  .module-card .name { font-size:14px; font-weight:700; color:var(--text-primary); }
+  .module-card .desc { font-size:12px; color:var(--text-muted); margin-top:4px; font-family:var(--font-mono); }
+
+  .pkg-tree { font-family:var(--font-mono); font-size:13px; line-height:1.8; }
+  .pkg-tree .root { color:var(--accent-cyan); font-weight:700; }
+  .pkg-tree .dir { color:var(--accent-blue); }
+  .pkg-tree .file { color:var(--text-secondary); }
+  .pkg-tree .comment { color:var(--text-muted); font-style:italic; }
+  .pkg-tree .indent { display:inline-block; width:24px; border-left:1px solid var(--border); margin-right:8px; }
+
+  .schema-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:16px; margin-top:16px; }
+  .entity-card2 {
+    background:var(--glass); border:1px solid var(--glass-border); border-radius:14px;
+    padding:20px; transition:all .3s;
+  }
+  .entity-card2:hover { border-color:rgba(139,92,246,0.3); }
+  .entity-header {
+    display:flex; align-items:center; gap:10px; margin-bottom:14px; padding-bottom:12px;
+    border-bottom:1px solid var(--border);
+  }
+  .entity-badge {
+    width:28px; height:28px; border-radius:8px; display:flex; align-items:center; justify-content:center;
+    background:linear-gradient(135deg, rgba(139,92,246,0.15), rgba(236,72,153,0.15));
+    border:1px solid rgba(139,92,246,0.2); flex-shrink:0;
+  }
+  .entity-badge svg { width:14px; height:14px; }
+  .entity-name { font-size:14px; font-weight:700; color:var(--text-primary); font-family:var(--font-mono); }
+  .entity-field { display:flex; align-items:center; gap:8px; font-size:12px; padding:4px 0; }
+  .entity-field .fname { color:var(--text-secondary); font-family:var(--font-mono); min-width:110px; }
+  .entity-field .ftype { color:var(--text-muted); font-size:11px; }
+  .entity-field .fkey { color:var(--accent-amber); font-size:10px; font-weight:700; text-transform:uppercase; }
+  .entity-field .fpk { color:var(--accent-green); font-size:10px; font-weight:700; text-transform:uppercase; }
+  .rel-lines { display:flex; flex-wrap:wrap; gap:8px; margin-top:16px; }
+  .rel-line {
+    background:rgba(139,92,246,0.08); border:1px solid rgba(139,92,246,0.2);
+    border-radius:8px; padding:6px 12px; font-size:11px; color:var(--text-secondary); font-family:var(--font-mono);
+  }
+
+  .flow { display:flex; flex-direction:column; gap:0; margin:20px 0; }
+  .flow-step {
+    display:flex; align-items:center; gap:16px; padding:16px 20px;
+    background:var(--glass); border:1px solid var(--glass-border); border-radius:12px;
+    margin-bottom:12px; position:relative; transition:all .3s;
+  }
+  .flow-step:hover { background:rgba(59,130,246,0.05); }
+  .flow-step .num {
+    width:32px; height:32px; border-radius:50%; flex-shrink:0;
+    background:linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+    color:#fff; font-size:13px; font-weight:700; display:flex; align-items:center; justify-content:center;
+  }
+  .flow-step .body { flex:1; }
+  .flow-step .label { font-size:13px; font-weight:600; color:var(--text-primary); }
+  .flow-step .desc { font-size:12px; color:var(--text-muted); font-family:var(--font-mono); }
+  .flow-connector {
+    width:2px; height:16px; background:linear-gradient(180deg, var(--accent-blue), var(--accent-purple));
+    margin-left:35px; margin-top:-12px; margin-bottom:4px; opacity:.5;
+  }
+
+  .data-table { width:100%; border-collapse:collapse; font-size:13px; margin-top:12px; }
+  .data-table thead th {
+    background:linear-gradient(135deg, rgba(59,130,246,0.15), rgba(139,92,246,0.15));
+    color:var(--text-primary); font-weight:600; text-align:left; padding:12px 16px;
+    border-bottom:1px solid var(--border); font-size:12px; text-transform:uppercase; letter-spacing:.5px;
+  }
+  .data-table tbody td { padding:12px 16px; border-bottom:1px solid var(--border); color:var(--text-secondary); }
+  .data-table tbody tr:nth-child(even){ background:rgba(255,255,255,0.02); }
+  [data-theme="light"] .data-table tbody tr:nth-child(even){ background:rgba(0,0,0,0.02); }
+  .data-table tbody tr:hover { background:rgba(59,130,246,0.05); }
+
+  .badge { display:inline-flex; align-items:center; padding:3px 10px; border-radius:6px; font-size:11px; font-weight:700; font-family:var(--font-mono); letter-spacing:.3px; }
+  .badge-get { background:rgba(16,185,129,0.15); color:var(--accent-green); }
+  .badge-post { background:rgba(59,130,246,0.15); color:var(--accent-blue); }
+  .badge-put { background:rgba(245,158,11,0.15); color:var(--accent-amber); }
+  .badge-delete { background:rgba(239,68,68,0.15); color:var(--accent-red); }
+
+  .cache-stack { display:flex; flex-direction:column; gap:12px; max-width:400px; margin:20px auto; }
+  .cache-layer {
+    background:var(--glass); border:1px solid var(--glass-border); border-radius:12px;
+    padding:18px; text-align:center; transition:all .3s; position:relative;
+  }
+  .cache-layer:hover { border-color:rgba(59,130,246,0.3); }
+  .cache-layer.l1 { border-color:rgba(245,158,11,0.3); background:rgba(245,158,11,0.04); }
+  .cache-layer.l2 { border-color:rgba(59,130,246,0.3); background:rgba(59,130,246,0.04); }
+  .cache-layer.l3 { border-color:rgba(16,185,129,0.3); background:rgba(16,185,129,0.04); }
+  .cache-arrow { display:flex; justify-content:center; }
+  .cache-arrow svg { width:20px; height:20px; stroke:var(--text-muted); stroke-width:2; fill:none; }
+
+  .code-block {
+    background:#0d1117; border:1px solid var(--border); border-radius:12px; padding:20px;
+    font-family:var(--font-mono); font-size:12px; color:var(--text-secondary); overflow-x:auto; white-space:pre;
+    line-height:1.8;
+  }
+  [data-theme="light"] .code-block { background:#f1f5f9; color:#334155; }
+  .code-block .k { color:#c678dd; }
+  .code-block .n { color:#e5c07b; }
+  .code-block .o { color:#56b6c2; }
+  .code-block .c { color:#5c6370; font-style:italic; }
+  .code-block .s { color:#98c379; }
+
+  .doc-footer { text-align:center; padding:40px 20px; color:var(--text-muted); font-size:12px; }
+
+  @media(max-width:640px){
+    .module-grid { grid-template-columns:1fr 1fr; }
+    .schema-grid { grid-template-columns:1fr; }
+    .card { padding:20px; }
+  }
+</style>
+</head>
+<body>
+
+<button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+  <svg id="sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+  <svg id="moon" viewBox="0 0 24 24" style="display:none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+</button>
+
+<div class="mobile-nav">
+  <div class="logo">MAROC-LOC</div>
+  <div class="hamburger" onclick="document.querySelector('.mobile-menu').classList.add('open')">
+    <span></span><span></span><span></span>
+  </div>
+</div>
+<div class="mobile-menu" id="mobileMenu">
+  <div class="close" onclick="document.querySelector('.mobile-menu').classList.remove('open')">&times;</div>
+  <a href="#paradigm" onclick="closeMenu()">Paradigme</a>
+  <a href="#packages" onclick="closeMenu()">Structure Packages</a>
+  <a href="#schema" onclick="closeMenu()">Schema BDD</a>
+  <a href="#auth" onclick="closeMenu()">Authentification</a>
+  <a href="#services" onclick="closeMenu()">Services</a>
+  <a href="#api" onclick="closeMenu()">API Endpoints</a>
+  <a href="#docker" onclick="closeMenu()">Deploiement</a>
+</div>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+      <h3>Sommaire</h3>
+      <a href="#paradigm" class="nav-link">Paradigme</a>
+      <a href="#packages" class="nav-link">Structure Packages</a>
+      <a href="#schema" class="nav-link">Schema BDD</a>
+      <a href="#auth" class="nav-link">Authentification</a>
+      <a href="#services" class="nav-link">Services</a>
+      <a href="#api" class="nav-link">API Endpoints</a>
+      <a href="#docker" class="nav-link">Deploiement</a>
+    </div>
+  </aside>
+
+  <main>
+    <section class="hero">
+      <div class="hero-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        Backend Documentation v1.0
+      </div>
+      <h1>MAROC-LOC - Architecture Backend</h1>
+      <p>Monolithe Modulaire Spring Boot 3.2.4 - Java 17/21 - Architecture en couches avec separation des modules metiers prete pour l'extraction microservices.</p>
+    </section>
+
+    <section id="paradigm" class="card">
+      <div class="card-header">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+        </div>
+        <h2>Paradigme : Monolithe Modulaire</h2>
+      </div>
+      <p>MAROC-LOC adopte une architecture <strong>Monolithe Modulaire</strong> (Modular Monolith) plutot que des microservices distribues. Ce choix est justifie par :</p>
+      <ul style="margin-top:12px;">
+        <li><strong>Taille d'equipe</strong> : Equipe de developpement limitee (&lt; 10 developpeurs)</li>
+        <li><strong>Complexite operationnelle</strong> : Un seul deploiement a gerer</li>
+        <li><strong>Transactions ACID</strong> : Besoin de coherence forte entre entites</li>
+        <li><strong>Latence</strong> : Communication inter-modules en memoire (pas de reseau)</li>
+        <li><strong>Evolutivite</strong> : Decoupage en modules prets pour future extraction en microservices</li>
+      </ul>
+
+      <h3>Modules du Monolithe</h3>
+      <div class="module-grid">
+        <div class="module-card">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <div class="name">Security</div>
+          <div class="desc">JWT / OAuth2</div>
+        </div>
+        <div class="module-card">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+          <div class="name">Config</div>
+          <div class="desc">Spring Profiles</div>
+        </div>
+        <div class="module-card">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+          <div class="name">Web / API</div>
+          <div class="desc">Controllers</div>
+        </div>
+        <div class="module-card">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div>
+          <div class="name">Service Layer</div>
+          <div class="desc">Business Logic</div>
+        </div>
+        <div class="module-card">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></div>
+          <div class="name">Repository</div>
+          <div class="desc">JPA / Data Access</div>
+        </div>
+        <div class="module-card">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#ec4899" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></div>
+          <div class="name">PostgreSQL</div>
+          <div class="desc">Primary Database</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-title" id="packages">
+      <span>Structure des Packages</span>
+      <span class="line"></span>
+    </div>
+
+    <section class="card">
+      <div class="card-header">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <h2>Organisation du Code Source</h2>
+      </div>
+      <div class="code-block">
+<span class="root">com.marocloc.marocloc_backend</span>
+├── <span class="dir">config/</span>                    <span class="comment"># Configuration Spring</span>
+│   ├── <span class="file">SecurityConfig.java</span>    <span class="comment"># JWT, CORS, CSRF</span>
+│   ├── <span class="file">CacheConfig.java</span>       <span class="comment"># Redis, Caffeine</span>
+│   ├── <span class="file">WebSocketConfig.java</span>   <span class="comment"># STOMP messaging</span>
+│   └── <span class="file">ApiRoutes.java</span>         <span class="comment"># Centralized route constants</span>
+│
+├── <span class="dir">controller/</span>                <span class="comment"># REST Controllers</span>
+│   ├── <span class="file">AuthController.java</span>
+│   ├── <span class="file">PropertyController.java</span>
+│   ├── <span class="file">RecommendationController.java</span>
+│   ├── <span class="file">FavoriteController.java</span>
+│   ├── <span class="file">MessageController.java</span>
+│   ├── <span class="file">ReviewController.java</span>
+│   ├── <span class="file">PaymentController.java</span>
+│   └── <span class="file">RecommendationEventController.java</span>  <span class="comment"># NEW</span>
+│
+├── <span class="dir">service/</span>                   <span class="comment"># Business Logic</span>
+│   ├── <span class="file">RecommendationService.java</span>
+│   ├── <span class="file">RecommendationServiceImpl.java</span>      <span class="comment"># Hybrid AI Engine</span>
+│   ├── <span class="file">PropertyScoringService.java</span>         <span class="comment"># Interface</span>
+│   ├── <span class="file">PropertyScoringServiceImpl.java</span>     <span class="comment"># Top-ranked</span>
+│   ├── <span class="file">PropertyQualityScoringService.java</span>  <span class="comment"># NEW - Quality</span>
+│   ├── <span class="file">PropertyService.java</span>
+│   ├── <span class="file">UserService.java</span>
+│   ├── <span class="file">FavoriteService.java</span>
+│   ├── <span class="file">MessageService.java</span>
+│   └── <span class="file">PaymentService.java</span>
+│
+├── <span class="dir">repository/</span>                <span class="comment"># Data Access (JPA)</span>
+│   ├── <span class="file">PropertyRepository.java</span>
+│   ├── <span class="file">UserRepository.java</span>
+│   ├── <span class="file">FavoriteRepository.java</span>
+│   ├── <span class="file">UserBehaviorRepository.java</span>
+│   ├── <span class="file">ReviewRepository.java</span>
+│   └── <span class="file">...</span>
+│
+├── <span class="dir">model/</span>                     <span class="comment"># JPA Entities</span>
+│   ├── <span class="file">Property.java</span>           <span class="comment"># 40+ fields, PostGIS</span>
+│   ├── <span class="file">User.java</span>               <span class="comment"># Auth + Trust</span>
+│   ├── <span class="file">Favorite.java</span>
+│   ├── <span class="file">UserBehavior.java</span>       <span class="comment"># ML tracking</span>
+│   ├── <span class="file">ViewedProperty.java</span>
+│   ├── <span class="file">Review.java</span>
+│   └── <span class="file">...</span>
+│
+├── <span class="dir">dto/</span>                       <span class="comment"># Data Transfer Objects</span>
+│   ├── <span class="file">RecommendationResponse.java</span>
+│   ├── <span class="file">RecommendationEventRequest.java</span>   <span class="comment"># NEW</span>
+│   ├── <span class="file">PropertyRankedDTO.java</span>
+│   └── <span class="file">ScoreBreakdownDTO.java</span>
+│
+├── <span class="dir">security/</span>                  <span class="comment"># Security Components</span>
+│   ├── <span class="file">JwtTokenProvider.java</span>
+│   ├── <span class="file">JwtAuthenticationFilter.java</span>
+│   ├── <span class="file">CustomUserDetailsService.java</span>
+│   └── <span class="file">StringEncryptor.java</span>   <span class="comment"># CIN/Phone encryption</span>
+│
+├── <span class="dir">analytics/</span>                 <span class="comment"># Analytics Module</span>
+│   ├── <span class="file">controller/</span>
+│   ├── <span class="file">service/</span>
+│   └── <span class="file">dto/</span>
+│
+└── <span class="dir">exception/</span>                 <span class="comment"># Global Exception Handling</span>
+    ├── <span class="file">GlobalExceptionHandler.java</span>
+    └── <span class="file">BusinessException.java</span></div>
+    </section>
+
+    <div class="section-title" id="schema">
+      <span>Schema de Base de Donnees</span>
+      <span class="line"></span>
+    </div>
+
+    <section class="card">
+      <div class="card-header">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#ec4899" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+        </div>
+        <h2>Entites &amp; Relations</h2>
+      </div>
+
+      <div class="schema-grid">
+        <div class="entity-card2">
+          <div class="entity-header">
+            <div class="entity-badge"><svg viewBox="0 0 24 24" fill="none" stroke="#ec4899" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg></div>
+            <div class="entity-name">Property</div>
+          </div>
+          <div class="entity-field"><span class="fname"><span class="fpk">PK</span> id</span><span class="ftype">BIGINT</span></div>
+          <div class="entity-field"><span class="fname">title</span><span class="ftype">VARCHAR(255)</span></div>
+          <div class="entity-field"><span class="fname">description</span><span class="ftype">TEXT</span></div>
+          <div class="entity-field"><span class="fname">price</span><span class="ftype">DECIMAL(15,2)</span></div>
+          <div class="entity-field"><span class="fname">city</span><span class="ftype">VARCHAR(100)</span></div>
+          <div class="entity-field"><span class="fname">type</span><span class="ftype">ENUM(RENT,SALE,RAHN)</span></div>
+          <div class="entity-field"><span class="fname">category</span><span class="ftype">ENUM(APARTMENT,...)</span></div>
+          <div class="entity-field"><span class="fname">status</span><span class="ftype">ENUM(PENDING,...)</span></div>
+          <div class="entity-field"><span class="fname">surface</span><span class="ftype">DOUBLE</span></div>
+          <div class="entity-field"><span class="fname">rooms</span><span class="ftype">INT</span></div>
+          <div class="entity-field"><span class="fname">bedrooms</span><span class="ftype">INT</span></div>
+          <div class="entity-field"><span class="fname">bathrooms</span><span class="ftype">INT</span></div>
+          <div class="entity-field"><span class="fname">location</span><span class="ftype">GEOMETRY(Point,4326)</span></div>
+          <div class="entity-field"><span class="fname">images</span><span class="ftype">JSONB</span></div>
+          <div class="entity-field"><span class="fname">view_count</span><span class="ftype">BIGINT</span></div>
+          <div class="entity-field"><span class="fname">is_verified</span><span class="ftype">BOOLEAN</span></div>
+          <div class="entity-field"><span class="fname"><span class="fkey">FK</span> owner_id</span><span class="ftype">BIGINT - User</span></div>
+        </div>
+
+        <div class="entity-card2">
+          <div class="entity-header">
+            <div class="entity-badge"><svg viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+            <div class="entity-name">User</div>
+          </div>
+          <div class="entity-field"><span class="fname"><span class="fpk">PK</span> id</span><span class="ftype">BIGINT</span></div>
+          <div class="entity-field"><span class="fname">name</span><span class="ftype">VARCHAR(255)</span></div>
+          <div class="entity-field"><span class="fname">email</span><span class="ftype">VARCHAR(255)</span></div>
+          <div class="entity-field"><span class="fname">password</span><span class="ftype">VARCHAR(255)</span></div>
+          <div class="entity-field"><span class="fname">role</span><span class="ftype">ENUM(ADMIN,PROPRIETAIRE,LOCATAIRE)</span></div>
+          <div class="entity-field"><span class="fname">phone_number</span><span class="ftype">VARCHAR(20) [encrypted]</span></div>
+          <div class="entity-field"><span class="fname">cin</span><span class="ftype">VARCHAR(20) [encrypted]</span></div>
+          <div class="entity-field"><span class="fname">city</span><span class="ftype">VARCHAR(100)</span></div>
+          <div class="entity-field"><span class="fname">is_verified</span><span class="ftype">BOOLEAN</span></div>
+          <div class="entity-field"><span class="fname">created_at</span><span class="ftype">TIMESTAMP</span></div>
+        </div>
+
+        <div class="entity-card2">
+          <div class="entity-header">
+            <div class="entity-badge"><svg viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+            <div class="entity-name">Favorite</div>
+          </div>
+          <div class="entity-field"><span class="fname"><span class="fpk">PK</span> id</span><span class="ftype">BIGINT</span></div>
+          <div class="entity-field"><span class="fname"><span class="fkey">FK</span> user_id</span><span class="ftype">BIGINT - User</span></div>
+          <div class="entity-field"><span class="fname"><span class="fkey">FK</span> property_id</span><span class="ftype">BIGINT - Property</span></div>
+          <div class="entity-field"><span class="fname">created_at</span><span class="ftype">TIMESTAMP</span></div>
+        </div>
+
+        <div class="entity-card2">
+          <div class="entity-header">
+            <div class="entity-badge"><svg viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
+            <div class="entity-name">UserBehavior</div>
+          </div>
+          <div class="entity-field"><span class="fname"><span class="fpk">PK</span> id</span><span class="ftype">BIGINT</span></div>
+          <div class="entity-field"><span class="fname"><span class="fkey">FK</span> user_id</span><span class="ftype">BIGINT - User</span></div>
+          <div class="entity-field"><span class="fname">behavior_type</span><span class="ftype">VARCHAR(50)</span></div>
+          <div class="entity-field"><span class="fname">entity_type</span><span class="ftype">VARCHAR(50)</span></div>
+          <div class="entity-field"><span class="fname">entity_id</span><span class="ftype">BIGINT</span></div>
+          <div class="entity-field"><span class="fname">metadata</span><span class="ftype">TEXT</span></div>
+          <div class="entity-field"><span class="fname">weight</span><span class="ftype">DOUBLE</span></div>
+          <div class="entity-field"><span class="fname">session_id</span><span class="ftype">VARCHAR(100)</span></div>
+          <div class="entity-field"><span class="fname">ip_address</span><span class="ftype">VARCHAR(45)</span></div>
+          <div class="entity-field"><span class="fname">created_at</span><span class="ftype">TIMESTAMP</span></div>
+        </div>
+
+        <div class="entity-card2">
+          <div class="entity-header">
+            <div class="entity-badge"><svg viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div>
+            <div class="entity-name">ViewedProperty</div>
+          </div>
+          <div class="entity-field"><span class="fname"><span class="fpk">PK</span> id</span><span class="ftype">BIGINT</span></div>
+          <div class="entity-field"><span class="fname"><span class="fkey">FK</span> user_id</span><span class="ftype">BIGINT - User</span></div>
+          <div class="entity-field"><span class="fname"><span class="fkey">FK</span> property_id</span><span class="ftype">BIGINT - Property</span></div>
+          <div class="entity-field"><span class="fname">viewed_at</span><span class="ftype">TIMESTAMP</span></div>
+          <div class="entity-field"><span class="fname">view_duration_seconds</span><span class="ftype">INT</span></div>
+        </div>
+
+        <div class="entity-card2">
+          <div class="entity-header">
+            <div class="entity-badge"><svg viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></div>
+            <div class="entity-name">Review</div>
+          </div>
+          <div class="entity-field"><span class="fname"><span class="fpk">PK</span> id</span><span class="ftype">BIGINT</span></div>
+          <div class="entity-field"><span class="fname"><span class="fkey">FK</span> user_id</span><span class="ftype">BIGINT - User</span></div>
+          <div class="entity-field"><span class="fname"><span class="fkey">FK</span> property_id</span><span class="ftype">BIGINT - Property</span></div>
+          <div class="entity-field"><span class="fname">rating</span><span class="ftype">INT</span></div>
+          <div class="entity-field"><span class="fname">comment</span><span class="ftype">TEXT</span></div>
+          <div class="entity-field"><span class="fname">status</span><span class="ftype">ENUM(PENDING,APPROVED,REJECTED)</span></div>
+          <div class="entity-field"><span class="fname">created_at</span><span class="ftype">TIMESTAMP</span></div>
+        </div>
+
+        <div class="entity-card2">
+          <div class="entity-header">
+            <div class="entity-badge"><svg viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+            <div class="entity-name">Message</div>
+          </div>
+          <div class="entity-field"><span class="fname"><span class="fpk">PK</span> id</span><span class="ftype">BIGINT</span></div>
+          <div class="entity-field"><span class="fname"><span class="fkey">FK</span> sender_id</span><span class="ftype">BIGINT - User</span></div>
+          <div class="entity-field"><span class="fname"><span class="fkey">FK</span> receiver_id</span><span class="ftype">BIGINT - User</span></div>
+          <div class="entity-field"><span class="fname"><span class="fkey">FK</span> property_id</span><span class="ftype">BIGINT - Property</span></div>
+          <div class="entity-field"><span class="fname">content</span><span class="ftype">TEXT</span></div>
+          <div class="entity-field"><span class="fname">is_read</span><span class="ftype">BOOLEAN</span></div>
+          <div class="entity-field"><span class="fname">created_at</span><span class="ftype">TIMESTAMP</span></div>
+        </div>
+
+        <div class="entity-card2">
+          <div class="entity-header">
+            <div class="entity-badge"><svg viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
+            <div class="entity-name">PaymentTransaction</div>
+          </div>
+          <div class="entity-field"><span class="fname"><span class="fpk">PK</span> id</span><span class="ftype">BIGINT</span></div>
+          <div class="entity-field"><span class="fname"><span class="fkey">FK</span> user_id</span><span class="ftype">BIGINT - User</span></div>
+          <div class="entity-field"><span class="fname">amount</span><span class="ftype">DECIMAL(15,2)</span></div>
+          <div class="entity-field"><span class="fname">currency</span><span class="ftype">VARCHAR(3)</span></div>
+          <div class="entity-field"><span class="fname">status</span><span class="ftype">ENUM(PENDING,COMPLETED,FAILED)</span></div>
+          <div class="entity-field"><span class="fname">payment_method</span><span class="ftype">ENUM(CASH,BANK_TRANSFER,CMI)</span></div>
+          <div class="entity-field"><span class="fname">created_at</span><span class="ftype">TIMESTAMP</span></div>
+        </div>
+      </div>
+
+      <h3 style="margin-top:24px;">Relations Cles</h3>
+      <div class="rel-lines">
+        <div class="rel-line">User ||--o{ Property : owns</div>
+        <div class="rel-line">User ||--o{ Favorite : has</div>
+        <div class="rel-line">User ||--o{ UserBehavior : generates</div>
+        <div class="rel-line">User ||--o{ ViewedProperty : views</div>
+        <div class="rel-line">User ||--o{ Review : writes</div>
+        <div class="rel-line">User ||--o{ Message : sends</div>
+        <div class="rel-line">User ||--o{ PaymentTransaction : makes</div>
+        <div class="rel-line">Property ||--o{ Favorite : favorited_by</div>
+        <div class="rel-line">Property ||--o{ ViewedProperty : viewed_by</div>
+        <div class="rel-line">Property ||--o{ Review : has</div>
+        <div class="rel-line">Property ||--o{ Message : discussed_in</div>
+      </div>
+    </section>
+
+    <div class="section-title" id="auth">
+      <span>Systeme d'Authentification</span>
+      <span class="line"></span>
+    </div>
+
+    <section class="card">
+      <div class="card-header">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </div>
+        <h2>JWT Architecture</h2>
+      </div>
+      <div class="flow">
+        <div class="flow-step"><div class="num">1</div><div class="body"><div class="label">Client (Browser) - Spring Security</div><div class="desc">Login with credentials</div></div></div>
+        <div class="flow-connector"></div>
+        <div class="flow-step"><div class="num">2</div><div class="body"><div class="label">Validate credentials</div><div class="desc">BCrypt password match</div></div></div>
+        <div class="flow-connector"></div>
+        <div class="flow-step"><div class="num">3</div><div class="body"><div class="label">Generate JWT</div><div class="desc">Access Token (15 min) + Refresh Token (7d)</div></div></div>
+        <div class="flow-connector"></div>
+        <div class="flow-step"><div class="num">4</div><div class="body"><div class="label">Store in Redis</div><div class="desc">Token rotation tracking</div></div></div>
+        <div class="flow-connector"></div>
+        <div class="flow-step"><div class="num">5</div><div class="body"><div class="label">API Request + Bearer</div><div class="desc">Axios interceptor auto-attach</div></div></div>
+        <div class="flow-connector"></div>
+        <div class="flow-step"><div class="num">6</div><div class="body"><div class="label">Validate JWT</div><div class="desc">Signature + expiration check</div></div></div>
+        <div class="flow-connector"></div>
+        <div class="flow-step"><div class="num">7</div><div class="body"><div class="label">Check @PreAuthorize</div><div class="desc">Role-based access control</div></div></div>
+        <div class="flow-connector"></div>
+        <div class="flow-step"><div class="num">8</div><div class="body"><div class="label">Token Expired</div><div class="desc">POST /auth/refresh - rotate tokens</div></div></div>
+      </div>
+
+      <h3 style="margin-top:28px;">Security Layers</h3>
+      <div style="overflow-x:auto;">
+        <table class="data-table">
+          <thead><tr><th>Layer</th><th>Implementation</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td>Transport</td><td><span class="badge badge-get">TLS 1.3</span></td><td>HTTPS everywhere</td></tr>
+            <tr><td>Authentication</td><td><span class="badge badge-post">JWT (RS256)</span></td><td>Access + Refresh tokens</td></tr>
+            <tr><td>Authorization</td><td><span class="badge badge-put">Spring Security</span></td><td>Role-based (@PreAuthorize)</td></tr>
+            <tr><td>Input Validation</td><td><span class="badge badge-get">Jakarta Validation</span></td><td>@Valid, @NotNull, etc.</td></tr>
+            <tr><td>Encryption</td><td><span class="badge badge-post">JPA AttributeConverter</span></td><td>CIN, Phone AES encryption</td></tr>
+            <tr><td>Rate Limiting</td><td><span class="badge badge-put">Bucket4j / Nginx</span></td><td>API throttling</td></tr>
+            <tr><td>CORS</td><td><span class="badge badge-delete">Spring CORS</span></td><td>Whitelist origins</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <div class="section-title" id="services">
+      <span>Architecture des Services</span>
+      <span class="line"></span>
+    </div>
+
+    <section class="card">
+      <div class="card-header">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <h2>Recommendation Engine (Enhanced)</h2>
+      </div>
+      <div class="code-block">
+<span class="c">// Hybrid Scoring Formula</span>
+TotalScore <span class="o">=</span>
+    Collaborative <span class="o">*</span> <span class="s">0.25</span> <span class="o">+</span>    <span class="c">// Jaccard similarity on favorites</span>
+    Content <span class="o">*</span> <span class="s">0.25</span> <span class="o">+</span>          <span class="c">// City, category, type, price, surface</span>
+    Popularity <span class="o">*</span> <span class="s">0.20</span> <span class="o">+</span>       <span class="c">// Views, favorites, reviews</span>
+    Recency <span class="o">*</span> <span class="s">0.10</span> <span class="o">+</span>          <span class="c">// Listing freshness (time-decayed)</span>
+    Geo <span class="o">*</span> <span class="s">0.10</span> <span class="o">+</span>              <span class="c">// Distance-based scoring</span>
+    Trust <span class="o">*</span> <span class="s">0.10</span> <span class="o">+</span>            <span class="c">// Owner verification</span>
+    Quality <span class="o">*</span> <span class="s">0.10</span>             <span class="c">// NEW: Listing completeness</span></div>
+
+      <h3 style="margin-top:24px;">Caching Strategy</h3>
+      <div class="cache-stack">
+        <div class="cache-layer l1">
+          <div style="font-weight:700; color:var(--accent-amber);">Client Cache</div>
+          <div style="color:var(--text-muted); font-size:12px;">Browser / App local storage</div>
+        </div>
+        <div class="cache-arrow"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M12 19l-4-4"/><path d="M12 19l4-4"/></svg></div>
+        <div class="cache-layer l2">
+          <div style="font-weight:700; color:var(--accent-blue);">L1 - Caffeine (In-Memory)</div>
+          <div style="color:var(--text-muted); font-size:12px;">Fast local JVM cache</div>
+        </div>
+        <div class="cache-arrow"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M12 19l-4-4"/><path d="M12 19l4-4"/></svg></div>
+        <div class="cache-layer l2">
+          <div style="font-weight:700; color:var(--accent-blue);">L2 - Redis (Distributed)</div>
+          <div style="color:var(--text-muted); font-size:12px;">Shared cache across instances</div>
+        </div>
+        <div class="cache-arrow"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M12 19l-4-4"/><path d="M12 19l4-4"/></svg></div>
+        <div class="cache-layer l3">
+          <div style="font-weight:700; color:var(--accent-green);">PostgreSQL (Source of Truth)</div>
+          <div style="color:var(--text-muted); font-size:12px;">Primary persistent datastore</div>
+        </div>
+      </div>
+
+      <h3 style="margin-top:24px;">Cache TTL Configuration</h3>
+      <div style="overflow-x:auto;">
+        <table class="data-table">
+          <thead><tr><th>Cache Key Pattern</th><th>TTL</th><th>Usage</th></tr></thead>
+          <tbody>
+            <tr><td><code>recommendations::user:*</code></td><td><span class="badge badge-get">5 min</span></td><td>Personalized recommendations</td></tr>
+            <tr><td><code>recommendations::similar:*</code></td><td><span class="badge badge-get">10 min</span></td><td>Similar properties</td></tr>
+            <tr><td><code>recommendations::trending:*</code></td><td><span class="badge badge-get">5 min</span></td><td>Trending properties</td></tr>
+            <tr><td><code>propertyScores::score:*</code></td><td><span class="badge badge-get">10 min</span></td><td>Quality scores</td></tr>
+            <tr><td><code>properties::*</code></td><td><span class="badge badge-get">2 min</span></td><td>Property details</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <div class="section-title" id="api">
+      <span>API Structure</span>
+      <span class="line"></span>
+    </div>
+
+    <section class="card">
+      <div class="card-header">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        </div>
+        <h2>REST Endpoints (v1 / v2)</h2>
+      </div>
+      <div style="overflow-x:auto;">
+        <table class="data-table">
+          <thead><tr><th>Method</th><th>Endpoint</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td><span class="badge badge-post">POST</span></td><td><code>/v1/auth/login</code></td><td>JWT tokens</td></tr>
+            <tr><td><span class="badge badge-post">POST</span></td><td><code>/v1/auth/register</code></td><td>Create account</td></tr>
+            <tr><td><span class="badge badge-post">POST</span></td><td><code>/v1/auth/refresh</code></td><td>Rotate tokens</td></tr>
+            <tr><td><span class="badge badge-get">GET</span></td><td><code>/v1/auth/me</code></td><td>Current user</td></tr>
+            <tr><td><span class="badge badge-get">GET</span></td><td><code>/v2/properties</code></td><td>List/search properties</td></tr>
+            <tr><td><span class="badge badge-get">GET</span></td><td><code>/v2/properties/{id}</code></td><td>Property details</td></tr>
+            <tr><td><span class="badge badge-post">POST</span></td><td><code>/v2/properties</code></td><td>Create property (OWNER)</td></tr>
+            <tr><td><span class="badge badge-put">PUT</span></td><td><code>/v2/properties/{id}</code></td><td>Update property (OWNER)</td></tr>
+            <tr><td><span class="badge badge-delete">DELETE</span></td><td><code>/v2/properties/{id}</code></td><td>Delete property (OWNER)</td></tr>
+            <tr><td><span class="badge badge-get">GET</span></td><td><code>/v1/recommendations/personalized</code></td><td>Auth users</td></tr>
+            <tr><td><span class="badge badge-get">GET</span></td><td><code>/v1/recommendations/discover</code></td><td>Anonymous users <span class="badge badge-put">NEW</span></td></tr>
+            <tr><td><span class="badge badge-get">GET</span></td><td><code>/v1/recommendations/similar/{id}</code></td><td>Similar properties</td></tr>
+            <tr><td><span class="badge badge-get">GET</span></td><td><code>/v1/recommendations/trending</code></td><td>Trending</td></tr>
+            <tr><td><span class="badge badge-get">GET</span></td><td><code>/v1/recommendations/nearby</code></td><td>Geo-based</td></tr>
+            <tr><td><span class="badge badge-post">POST</span></td><td><code>/v1/recommendations/feedback</code></td><td>Feedback loop</td></tr>
+            <tr><td><span class="badge badge-post">POST</span></td><td><code>/v1/recommendations/events</code></td><td>Event tracking <span class="badge badge-put">NEW</span></td></tr>
+            <tr><td><span class="badge badge-post">POST</span></td><td><code>/v1/recommendations/events/batch</code></td><td>Batch events <span class="badge badge-put">NEW</span></td></tr>
+            <tr><td><span class="badge badge-get">GET</span></td><td><code>/v1/favorites</code></td><td>User favorites</td></tr>
+            <tr><td><span class="badge badge-post">POST</span></td><td><code>/v1/favorites/{propertyId}</code></td><td>Add favorite</td></tr>
+            <tr><td><span class="badge badge-delete">DELETE</span></td><td><code>/v1/favorites/{propertyId}</code></td><td>Remove favorite</td></tr>
+            <tr><td><span class="badge badge-get">GET</span></td><td><code>/v1/messages</code></td><td>Conversations</td></tr>
+            <tr><td><span class="badge badge-post">POST</span></td><td><code>/v1/messages</code></td><td>Send message</td></tr>
+            <tr><td><span class="badge badge-get">GET</span></td><td><code>/v1/messages/unread-count</code></td><td>Notification badge</td></tr>
+            <tr><td><span class="badge badge-post">POST</span></td><td><code>/v1/payments/initiate</code></td><td>Start payment (CMI)</td></tr>
+            <tr><td><span class="badge badge-post">POST</span></td><td><code>/v1/payments/callback</code></td><td>CMI callback</td></tr>
+            <tr><td><span class="badge badge-post">POST</span></td><td><code>/v1/payments/webhook</code></td><td>Async confirmation</td></tr>
+            <tr><td><span class="badge badge-get">GET</span></td><td><code>/v1/ai/chat</code></td><td>Smart chat</td></tr>
+            <tr><td><span class="badge badge-post">POST</span></td><td><code>/v1/ai/rag/chat</code></td><td>RAG chat</td></tr>
+            <tr><td><span class="badge badge-post">POST</span></td><td><code>/v1/ai/voice/transcribe</code></td><td>STT</td></tr>
+            <tr><td><span class="badge badge-post">POST</span></td><td><code>/v1/ai/voice/chat</code></td><td>Voice chat</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <div class="section-title" id="docker">
+      <span>Deploiement Docker</span>
+      <span class="line"></span>
+    </div>
+
+    <section class="card">
+      <div class="card-header">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        </div>
+        <h2>docker-compose.microservices.yml</h2>
+      </div>
+      <div class="code-block">
+<span class="c"># docker-compose.microservices.yml</span>
+<span class="k">version</span><span class="o">:</span> <span class="s">'3.8'</span>
+<span class="k">services</span><span class="o">:</span>
+  <span class="k">nginx</span><span class="o">:</span>
+    <span class="k">image</span><span class="o">:</span> <span class="s">nginx:alpine</span>
+    <span class="k">ports</span><span class="o">:</span> <span class="s">["80:80", "443:443"]</span>
+    <span class="k">volumes</span><span class="o">:</span> <span class="s">["./docker/nginx:/etc/nginx/conf.d"]</span>
+
+  <span class="k">backend</span><span class="o">:</span>
+    <span class="k">build</span><span class="o">:</span> <span class="s">./backend</span>
+    <span class="k">environment</span><span class="o">:</span>
+      <span class="o">-</span> <span class="s">SPRING_PROFILES_ACTIVE=prod</span>
+      <span class="o">-</span> <span class="s">DB_URL=jdbc:postgresql://postgres:5432/marocloc</span>
+      <span class="o">-</span> <span class="s">REDIS_URL=redis://redis:6379</span>
+    <span class="k">depends_on</span><span class="o">:</span> <span class="s">[postgres, redis]</span>
+
+  <span class="k">ai-service</span><span class="o">:</span>
+    <span class="k">build</span><span class="o">:</span> <span class="s">./ai-service</span>
+    <span class="k">environment</span><span class="o">:</span>
+      <span class="o">-</span> <span class="s">DATABASE_URL=postgresql://postgres:5432/marocloc</span>
+      <span class="o">-</span> <span class="s">REDIS_URL=redis://redis:6379</span>
+    <span class="k">depends_on</span><span class="o">:</span> <span class="s">[postgres, redis]</span>
+
+  <span class="k">postgres</span><span class="o">:</span>
+    <span class="k">image</span><span class="o">:</span> <span class="s">postgis/postgis:15-3.3</span>
+    <span class="k">volumes</span><span class="o">:</span> <span class="s">["postgres_data:/var/lib/postgresql/data"]</span>
+
+  <span class="k">redis</span><span class="o">:</span>
+    <span class="k">image</span><span class="o">:</span> <span class="s">redis:7-alpine</span>
+    <span class="k">volumes</span><span class="o">:</span> <span class="s">["redis_data:/data"]</span>
+
+  <span class="k">chromadb</span><span class="o">:</span>
+    <span class="k">image</span><span class="o">:</span> <span class="s">chromadb/chroma:latest</span>
+    <span class="k">volumes</span><span class="o">:</span> <span class="s">["chroma_data:/chroma/chroma"]</span></div>
+    </section>
+
+    <div class="doc-footer">
+      Document genere le 24 Mai 2026 - Version 1.0 - MAROC-LOC Architecture Backend
+    </div>
+  </main>
+</div>
+
+<script>
+  function toggleTheme(){
+    const html = document.documentElement;
+    const current = html.getAttribute('data-theme');
+    const next = current === 'light' ? 'dark' : 'light';
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+    document.getElementById('sun').style.display = next === 'light' ? 'block' : 'none';
+    document.getElementById('moon').style.display = next === 'light' ? 'none' : 'block';
+  }
+  (function(){
+    const saved = localStorage.getItem('theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', saved);
+    document.getElementById('sun').style.display = saved === 'light' ? 'block' : 'none';
+    document.getElementById('moon').style.display = saved === 'light' ? 'none' : 'block';
+  })();
+  function closeMenu(){ document.querySelector('.mobile-menu').classList.remove('open'); }
+  const sections = document.querySelectorAll('section[id], .section-title[id]');
+  const navLinks = document.querySelectorAll('.nav-link');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(sec => { if(scrollY >= sec.offsetTop - 120) current = sec.getAttribute('id'); });
+    navLinks.forEach(link => {
+      link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+    });
+  });
+</script>
+</body>
+</html>

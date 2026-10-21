@@ -1,0 +1,36 @@
+# Development overrides
+# Usage: docker compose -f docker-compose.yml -f docker/docker-compose.override.yml up
+
+services:
+  backend:
+    environment:
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_PROFILES_ACTIVE: dev
+    volumes:
+      - ./backend:/app:ro
+
+  frontend:
+    build:
+      target: builder
+    command: ["npm", "run", "dev", "--", "--host"]
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    ports:
+      - "5173:5173"
+
+  ai-service:
+    environment:
+      DEBUG: "true"
+    volumes:
+      - ./ai-service:/app
+      - ai_mlflow_data:/app/mlflow
+      - ai_data:/app/data
+      - ai_chroma_data:/app/chroma_db
+      - ai_tts_outputs:/app/tts_outputs
+
+volumes:
+  ai_mlflow_data:
+  ai_data:
+  ai_chroma_data:
+  ai_tts_outputs:

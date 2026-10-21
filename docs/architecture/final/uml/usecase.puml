@@ -1,0 +1,81 @@
+@startuml MAROC-LOC_UseCase_Global
+left to right direction
+skinparam packageStyle rectangle
+
+title MAROC-LOC — Use Case Diagram (Global)
+
+actor "Visitor" as Visitor
+actor "Locataire" as Locataire
+actor "Proprietaire" as Proprietaire
+actor "Admin" as Admin
+actor "AI Assistant" as AI
+
+rectangle "MAROC-LOC Platform" {
+    usecase "Browse Properties" as UC1
+    usecase "Search Properties" as UC2
+    usecase "View Property Details" as UC3
+    usecase "Contact Owner" as UC4
+    usecase "Use AI Chatbot" as UC5
+    usecase "Register Account" as UC6
+    usecase "Login" as UC7
+
+    usecase "Manage Favorites" as UC8
+    usecase "Get Recommendations" as UC9
+    usecase "Send Messages" as UC10
+    usecase "Schedule Visit" as UC11
+    usecase "Leave Review" as UC12
+
+    usecase "Create Property" as UC13
+    usecase "Edit Property" as UC14
+    usecase "Manage Listings" as UC15
+    usecase "View Analytics" as UC16
+    usecase "Receive Payments" as UC17
+
+    usecase "Manage Users" as UC18
+    usecase "Moderate Content" as UC19
+    usecase "View Platform Stats" as UC20
+    usecase "Configure AI" as UC21
+    usecase "Manage Ads" as UC22
+}
+
+Visitor --> UC1
+Visitor --> UC2
+Visitor --> UC3
+Visitor --> UC5
+Visitor --> UC6
+Visitor --> UC7
+
+Locataire --> UC1
+Locataire --> UC2
+Locataire --> UC3
+Locataire --> UC4
+Locataire --> UC5
+Locataire --> UC7
+Locataire --> UC8
+Locataire --> UC9
+Locataire --> UC10
+Locataire --> UC11
+Locataire --> UC12
+
+Proprietaire --> UC7
+Proprietaire --> UC13
+Proprietaire --> UC14
+Proprietaire --> UC15
+Proprietaire --> UC16
+Proprietaire --> UC17
+Proprietaire --> UC10
+
+Admin --> UC18
+Admin --> UC19
+Admin --> UC20
+Admin --> UC21
+Admin --> UC22
+
+AI --> UC5
+AI --> UC9
+
+UC5 .-> UC2 : <<include>>
+UC9 .-> UC8 : <<include>>
+UC13 .-> UC14 : <<extend>>
+
+@enduml
